@@ -1,0 +1,77 @@
+0:00:00.000,0:00:01.650
+
+0:00:01.650,0:00:03.600
+DAN KLEIN: So what do people actually
+use these things for?
+
+0:00:03.600,0:00:07.600
+There's a limited industry for
+Sudoku solvers, but CSPs are
+
+0:00:07.600,0:00:09.070
+used much more widely.
+
+0:00:09.070,0:00:11.810
+A big class of algorithms that people
+use CSPs for are things like
+
+0:00:11.810,0:00:12.840
+assignment problems.
+
+0:00:12.840,0:00:15.780
+For example, if we wanted to figure out
+who should teach what class based
+
+0:00:15.780,0:00:17.610
+on what classes they can teach.
+
+0:00:17.610,0:00:19.040
+Or a time tabling problem.
+
+0:00:19.040,0:00:21.110
+Which class should be offered
+when and where.
+
+0:00:21.110,0:00:24.630
+You're all familiar with this problem
+with your course scheduling.
+
+0:00:24.630,0:00:27.450
+Hardware configuration, layout,
+things like that.
+
+0:00:27.450,0:00:29.980
+Factory scheduling, transportation
+scheduling, fault
+
+0:00:29.980,0:00:31.770
+diagnosis in certain cases.
+
+0:00:31.770,0:00:35.580
+There are a lot of places where CSPs
+are used in the real world, but the
+
+0:00:35.580,0:00:38.520
+machinery that solves them is going to
+be the same general purpose stuff that
+
+0:00:38.520,0:00:41.830
+we're going to be talking about
+today and next lecture.
+
+0:00:41.830,0:00:43.940
+Of course, in the real world, there
+are lots of problems that involve
+
+0:00:43.940,0:00:45.030
+real-valued variables.
+
+0:00:45.030,0:00:48.300
+That either uses other techniques like
+linear programming, or is discretized
+
+0:00:48.300,0:00:49.550
+before it's solved.
+
+0:00:49.550,0:00:50.410
+

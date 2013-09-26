@@ -1,0 +1,58 @@
+0:00:00.000,0:00:00.450
+
+0:00:00.450,0:00:04.640
+PROFESSOR: OK today we're going to
+be talking about informed search.
+
+0:00:04.640,0:00:08.540
+And informed search is about taking the
+kinds of search problems we had
+
+0:00:08.540,0:00:14.470
+from last lecture and injecting into
+them information about where the goals
+
+0:00:14.470,0:00:19.940
+might be so that we can find optimal
+solutions while exploring less of the
+
+0:00:19.940,0:00:22.310
+search tree.
+
+0:00:22.310,0:00:25.760
+So the outline for today is we're going
+to talk about the key ingredient
+
+0:00:25.760,0:00:29.080
+of informed search, which is
+the idea of a heuristic.
+
+0:00:29.080,0:00:32.439
+We're going to use this heuristics in
+a simple way for greedy search and
+
+0:00:32.439,0:00:35.700
+then we're going to put all of these
+ideas we have together for the kind of
+
+0:00:35.700,0:00:39.100
+pinnacle of our search unit,
+which is a star search.
+
+0:00:39.100,0:00:42.610
+Then we're going to go back and talk
+about a small but very important
+
+0:00:42.610,0:00:45.960
+change to how we do search,
+called graph search.
+
+0:00:45.960,0:00:50.240
+Which makes the tree search we have
+already much more efficient by
+
+0:00:50.240,0:00:51.610
+avoiding duplicated work.
+
+0:00:51.610,0:00:52.860
+

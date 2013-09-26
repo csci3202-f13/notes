@@ -1,0 +1,877 @@
+0:00:00.000,0:00:00.560
+
+0:00:00.560,0:00:05.120
+PROFESSOR: OK, so we've just found out
+ways to upgrade our planning agents
+
+0:00:05.120,0:00:06.780
+with heuristics.
+
+0:00:06.780,0:00:10.000
+Now we got to figure out how
+to do it in practice.
+
+0:00:10.000,0:00:13.520
+Not just, how does the math work, but
+given a problem, how do I give my
+
+0:00:13.520,0:00:14.820
+agent this heuristic upgrade?
+
+0:00:14.820,0:00:19.010
+
+0:00:19.010,0:00:23.140
+Most of the work involved in solving
+hard search problems is actually
+
+0:00:23.140,0:00:26.820
+coming up with a heuristic
+in the first place.
+
+0:00:26.820,0:00:31.220
+So for the example of Romania here, the
+admissible heuristics come from
+
+0:00:31.220,0:00:32.729
+what are called relaxed problems.
+
+0:00:32.729,0:00:34.740
+What's a relaxed problem?
+
+0:00:34.740,0:00:37.820
+What it means is we take our original
+problem, which is hard, and it's
+
+0:00:37.820,0:00:40.790
+difficult to compute how far we
+actually are from the goal.
+
+0:00:40.790,0:00:45.020
+And we change the problem in such a way
+that we have only made things the
+
+0:00:45.020,0:00:46.910
+same or easier.
+
+0:00:46.910,0:00:50.900
+The idea is in this new problem it's
+easy to find cost to the goal.
+
+0:00:50.900,0:00:54.260
+They'll just be cheaper because
+we've made the problem easier.
+
+0:00:54.260,0:00:57.580
+For example, if we imagined in Romania,
+in addition to the roads we
+
+0:00:57.580,0:01:01.190
+actually have, we've also got a straight
+line road straight to the
+
+0:01:01.190,0:01:03.440
+solution, in this case Bucharest.
+
+0:01:03.440,0:01:04.930
+Well, that would be an easier problem.
+
+0:01:04.930,0:01:07.780
+It can't take any longer with the
+presence of these new roads.
+
+0:01:07.780,0:01:10.020
+And in this new problem, we don't
+even have to run search.
+
+0:01:10.020,0:01:12.220
+We just know you always
+take the direct road.
+
+0:01:12.220,0:01:15.540
+It's kind of a convoluted way to come
+up with the straight line distance,
+
+0:01:15.540,0:01:18.360
+but it illustrates this idea that by
+taking our problem and making it
+
+0:01:18.360,0:01:23.420
+easier we get lower bounds on the
+costs in the harder problem.
+
+0:01:23.420,0:01:25.000
+Here's another case that
+you've already seen.
+
+0:01:25.000,0:01:27.330
+Manhattan distance for
+the Pac-Man problem.
+
+0:01:27.330,0:01:28.810
+What is the relaxation here?
+
+0:01:28.810,0:01:32.160
+We say, well, I don't know how far I am
+from the goal given all those walls
+
+0:01:32.160,0:01:34.350
+and the going back and forth.
+
+0:01:34.350,0:01:39.090
+But if I could change the problem so
+that Pac-Man could walk through walls,
+
+0:01:39.090,0:01:41.190
+well, it's easy to figure
+out the quickest way.
+
+0:01:41.190,0:01:43.110
+You just go straight there.
+
+0:01:43.110,0:01:46.540
+And so that's a relaxation of the
+problem, which essentially involves
+
+0:01:46.540,0:01:48.500
+adding new operators.
+
+0:01:48.500,0:01:51.930
+But, in general, though you can then
+solve this new problem with search, in
+
+0:01:51.930,0:01:55.250
+general, you add operators such that you
+know the solution more or less in
+
+0:01:55.250,0:01:58.190
+closed form.
+
+0:01:58.190,0:02:00.730
+Sometimes, we actually use
+inadmissible heuristics.
+
+0:02:00.730,0:02:03.410
+So if you come up with a heuristic and
+it works really well in practice, and
+
+0:02:03.410,0:02:06.690
+you discover every now and then it
+over estimates, well you have no
+
+0:02:06.690,0:02:08.100
+guarantee of optimality.
+
+0:02:08.100,0:02:10.110
+You also don't have a guarantee
+of sub optimality.
+
+0:02:10.110,0:02:14.230
+And for many problems a little bit sub
+optimal sometimes is worth a huge
+
+0:02:14.230,0:02:15.840
+increase in speed.
+
+0:02:15.840,0:02:19.240
+And sometimes, a little bit of
+inadmissibility, not in and of itself,
+
+0:02:19.240,0:02:21.840
+but because it lets you be more
+aggressive with heuristic, is
+
+0:02:21.840,0:02:24.410
+sometimes worth it.
+
+0:02:24.410,0:02:27.310
+But for now, we're going to worry about
+creating admissible heuristics.
+
+0:02:27.310,0:02:29.480
+So we're going to talk through an
+example where we can come up with
+
+0:02:29.480,0:02:30.440
+multiple heuristics.
+
+0:02:30.440,0:02:32.090
+It's the example of the eight puzzle.
+
+0:02:32.090,0:02:33.720
+So here's the eight puzzle.
+
+0:02:33.720,0:02:38.190
+You start with a puzzle, like what's in
+the upper left in some start state.
+
+0:02:38.190,0:02:42.530
+Your actions are you can move a square
+with a number in it into the blank
+
+0:02:42.530,0:02:43.630
+square if its adjacent.
+
+0:02:43.630,0:02:46.690
+So what the robot's doing here, you
+can move the eight rightward if
+
+0:02:46.690,0:02:49.450
+there's no other tile right.
+
+0:02:49.450,0:02:51.790
+The goal is to end up in this
+configuration, where the
+
+0:02:51.790,0:02:53.190
+numbers are in order.
+
+0:02:53.190,0:02:55.720
+How many of you have played
+with an eight puzzle?
+
+0:02:55.720,0:02:59.000
+Yeah, did you like it?
+
+0:02:59.000,0:03:00.530
+These things were a hit once.
+
+0:03:00.530,0:03:06.280
+This is like the Xbox 100 years ago.
+
+0:03:06.280,0:03:06.940
+We have a search problem.
+
+0:03:06.940,0:03:07.520
+We have states.
+
+0:03:07.520,0:03:08.790
+They're configurations of numbers.
+
+0:03:08.790,0:03:11.350
+In fact, they're kind of a list of
+numbers, so it's a permutation.
+
+0:03:11.350,0:03:12.360
+How many of them are there?
+
+0:03:12.360,0:03:13.580
+We could do some combinatorics.
+
+0:03:13.580,0:03:17.620
+It's going to be the number of these
+factorials, so it's a lot of states.
+
+0:03:17.620,0:03:19.030
+What are the actions?
+
+0:03:19.030,0:03:23.330
+Well, the actions are any of
+the adjacent squares to the
+
+0:03:23.330,0:03:24.840
+blank can be moved.
+
+0:03:24.840,0:03:25.970
+What are the successors?
+
+0:03:25.970,0:03:29.170
+Well, you compute the appropriate
+permutation.
+
+0:03:29.170,0:03:30.820
+What's the branching factor like?
+
+0:03:30.820,0:03:35.670
+For example, from the start state here
+how many successors do I have?
+
+0:03:35.670,0:03:36.990
+Well, I can move this one.
+
+0:03:36.990,0:03:37.850
+I can move this one.
+
+0:03:37.850,0:03:38.580
+I can move this one.
+
+0:03:38.580,0:03:39.360
+I can move this one.
+
+0:03:39.360,0:03:41.260
+I've got four successor
+from the start state.
+
+0:03:41.260,0:03:44.780
+So it's not a huge branching factor, but
+it's going to be a pretty big tree
+
+0:03:44.780,0:03:46.000
+before it's all done.
+
+0:03:46.000,0:03:47.330
+What's should our costs be?
+
+0:03:47.330,0:03:47.470
+Well.
+
+0:03:47.470,0:03:50.920
+Maybe it's more expensive to move
+the eight, but probably not.
+
+0:03:50.920,0:03:53.110
+So let's say the costs are all one.
+
+0:03:53.110,0:03:57.260
+So in that case, we're just trying to
+find a solution of minimum cost, which
+
+0:03:57.260,0:03:59.170
+means of fewest steps.
+
+0:03:59.170,0:04:00.650
+So we've got our search problem.
+
+0:04:00.650,0:04:02.090
+And we can point at a breadth
+first search.
+
+0:04:02.090,0:04:03.470
+And breadth first search
+we'll truck away.
+
+0:04:03.470,0:04:04.770
+We can point at Uniform Cost Search.
+
+0:04:04.770,0:04:06.270
+And Uniform Cost Search
+we'll truck away.
+
+0:04:06.270,0:04:10.060
+Because the costs are one, they'll
+do more or less the same thing.
+
+0:04:10.060,0:04:12.610
+We want a heuristic, so we
+can do things faster.
+
+0:04:12.610,0:04:13.980
+So here's one heuristic.
+
+0:04:13.980,0:04:16.399
+Let's count up the number
+of tiles that are not in
+
+0:04:16.399,0:04:18.120
+their destination position.
+
+0:04:18.120,0:04:19.279
+Is this a heuristic?
+
+0:04:19.279,0:04:22.000
+Does it take a state and
+return a real number?
+
+0:04:22.000,0:04:22.730
+Sure.
+
+0:04:22.730,0:04:24.690
+What real number does it return?
+
+0:04:24.690,0:04:30.480
+Well, we can look at the start state
+here, and we can say, well, this one
+
+0:04:30.480,0:04:31.905
+is out of position.
+
+0:04:31.905,0:04:33.510
+And this one's out of position.
+
+0:04:33.510,0:04:35.700
+And they're actually all
+out of position.
+
+0:04:35.700,0:04:40.100
+So this one's going to return eight.
+
+0:04:40.100,0:04:41.070
+Why is that admissible?
+
+0:04:41.070,0:04:45.010
+Why is it the case that I can't possibly
+be closer than eight steps?
+
+0:04:45.010,0:04:48.800
+Why can't I come up with some genius
+brilliant eight puzzle move that gets
+
+0:04:48.800,0:04:51.770
+them all in order in one step?
+
+0:04:51.770,0:04:53.610
+The answer is it's not how
+the eight puzzle works.
+
+0:04:53.610,0:04:55.270
+You move one tile at a time.
+
+0:04:55.270,0:04:58.560
+And when you move that tile, it
+either goes into its final
+
+0:04:58.560,0:04:59.860
+position or it doesn't.
+
+0:04:59.860,0:05:02.970
+There's no move that can fix two squares
+at once, assuming we treat the
+
+0:05:02.970,0:05:04.210
+blank appropriately.
+
+0:05:04.210,0:05:10.320
+And so it's admissible because every
+move in the optimal solution either
+
+0:05:10.320,0:05:14.040
+fixes one of these mistakes,
+or doesn't, but it can't
+
+0:05:14.040,0:05:15.520
+fix more than one.
+
+0:05:15.520,0:05:17.910
+So the heuristic of the
+start is eight.
+
+0:05:17.910,0:05:21.820
+We might in fact be 15 away at the
+start, but we're not more than eight.
+
+0:05:21.820,0:05:24.290
+So there's an admissible heuristic.
+
+0:05:24.290,0:05:24.980
+Does it work?
+
+0:05:24.980,0:05:28.420
+Well, how much work we do is going to
+depend actually on how deep the
+
+0:05:28.420,0:05:30.330
+optimal path is in the tree.
+
+0:05:30.330,0:05:32.600
+If this thing's really scrambled,
+we have to go deep into the
+
+0:05:32.600,0:05:33.570
+tree to find the path.
+
+0:05:33.570,0:05:36.850
+If it's not very scrambled, then lots of
+search techniques are going to work
+
+0:05:36.850,0:05:38.190
+reasonably well.
+
+0:05:38.190,0:05:41.990
+So Uniform Cost Search versus this
+misplaced tiles heuristic is shown.
+
+0:05:41.990,0:05:46.080
+And you can see that at the beginning
+the differences isn't so great, but as
+
+0:05:46.080,0:05:49.400
+we get deeper into the tree in order
+to find our optimal path, this tree
+
+0:05:49.400,0:05:51.280
+grows exponentially.
+
+0:05:51.280,0:05:54.030
+And so you can see that Uniform Cost
+Search just does not keep up with A
+
+0:05:54.030,0:05:56.630
+star using even this simple heuristic.
+
+0:05:56.630,0:06:02.890
+Only 227 versus 3 times
+10 to the sixth.
+
+0:06:02.890,0:06:05.220
+This is a relaxed problem heuristic.
+
+0:06:05.220,0:06:10.700
+It is the exact solution, so eight is
+the exact cost of the exact solution
+
+0:06:10.700,0:06:13.050
+to an easier version of
+the eight puzzle.
+
+0:06:13.050,0:06:15.700
+What is the easier version of the eight
+puzzle that you can actually
+
+0:06:15.700,0:06:18.060
+solve in eight steps?
+
+0:06:18.060,0:06:23.550
+Well, if you could remove the pieces.
+
+0:06:23.550,0:06:29.500
+If you could, in every step, take some
+piece and put in the right place, that
+
+0:06:29.500,0:06:31.870
+can't make this problem
+be any more expensive.
+
+0:06:31.870,0:06:33.730
+And we know how long it's
+going to be to solve it.
+
+0:06:33.730,0:06:35.780
+We know it's going to
+take eight steps.
+
+0:06:35.780,0:06:38.460
+So here's an extreme relaxation
+of the problem.
+
+0:06:38.460,0:06:40.590
+It gives rise to an admissible
+heuristic.
+
+0:06:40.590,0:06:42.760
+But it's a very loose heuristic.
+
+0:06:42.760,0:06:44.270
+It's an extreme relaxation.
+
+0:06:44.270,0:06:46.350
+We're probably a lot
+farther than eight.
+
+0:06:46.350,0:06:49.670
+Can we come up with a
+better heuristic?
+
+0:06:49.670,0:06:51.890
+Well, maybe.
+
+0:06:51.890,0:06:55.910
+What if we had an easier version of
+the eight puzzle, not so easy that
+
+0:06:55.910,0:06:58.510
+you've ripped it apart and you
+can fix each one in one step.
+
+0:06:58.510,0:07:00.385
+But what if each tile was
+simply independent.
+
+0:07:00.385,0:07:02.160
+It was a vertical puzzle.
+
+0:07:02.160,0:07:06.590
+They were all on their own track and
+they could slide past each other.
+
+0:07:06.590,0:07:10.040
+This would be easier because we would
+have all the moves we currently have
+
+0:07:10.040,0:07:13.280
+that are legal, plus some more
+that involve sliding tiles
+
+0:07:13.280,0:07:14.290
+on top of each other.
+
+0:07:14.290,0:07:18.090
+And in this case, how far am I?
+
+0:07:18.090,0:07:20.480
+In this case, all of the
+tiles are independent.
+
+0:07:20.480,0:07:24.440
+So how hard is it to get the one into
+position in this easier problem?
+
+0:07:24.440,0:07:26.040
+I can't do it in one step.
+
+0:07:26.040,0:07:27.370
+How much is it going to take?
+
+0:07:27.370,0:07:29.390
+One to the left, two up,
+it's three away.
+
+0:07:29.390,0:07:31.780
+And so what I could do is I
+could basically add up all
+
+0:07:31.780,0:07:33.300
+the Manhattan distances.
+
+0:07:33.300,0:07:36.950
+Now that doesn't actually solve
+the real problem for me, but
+
+0:07:36.950,0:07:38.470
+it's a lower bounds.
+
+0:07:38.470,0:07:40.610
+And it's probably better
+than the previous one.
+
+0:07:40.610,0:07:41.540
+So let's take a look.
+
+0:07:41.540,0:07:43.190
+This is the total Manhattan distance.
+
+0:07:43.190,0:07:44.440
+We know why it's admissible.
+
+0:07:44.440,0:07:46.830
+
+0:07:46.830,0:07:48.330
+Actually, there's two ways you
+can show it's admissible.
+
+0:07:48.330,0:07:49.330
+This is worth pointing out.
+
+0:07:49.330,0:07:53.150
+One is by illustrating the relaxed
+problem, like I did.
+
+0:07:53.150,0:07:55.870
+And then arguing that it is, in
+fact, a strict relaxation.
+
+0:07:55.870,0:07:59.380
+And the other way is just from first
+principle saying, well, here's why you
+
+0:07:59.380,0:08:00.920
+can't possibly do any
+better than that.
+
+0:08:00.920,0:08:04.880
+And you always have these two routes,
+direct proof or construction of a
+
+0:08:04.880,0:08:06.070
+relaxation.
+
+0:08:06.070,0:08:08.280
+So we already computed would
+the h to the start is.
+
+0:08:08.280,0:08:09.880
+And it turns out to be 18.
+
+0:08:09.880,0:08:11.810
+That's a lot better than eight.
+
+0:08:11.810,0:08:14.520
+It tells us, in fact, we weren't
+even so close as eight.
+
+0:08:14.520,0:08:19.330
+We're at least 18 away, and probably
+further than that.
+
+0:08:19.330,0:08:20.830
+Is it better?
+
+0:08:20.830,0:08:22.770
+For shallow problems, its actually
+not much better.
+
+0:08:22.770,0:08:25.690
+But by the time you get to deeper
+problems, it's substantially better
+
+0:08:25.690,0:08:27.280
+than the tiles heuristic.
+
+0:08:27.280,0:08:31.700
+And this illustrates a general point
+that as your heuristic gets tighter,
+
+0:08:31.700,0:08:35.100
+as it gets closer to the true
+cost, you do less work.
+
+0:08:35.100,0:08:37.080
+And that's actually a deep
+fact about A star.
+
+0:08:37.080,0:08:40.000
+As the heuristic gets closer to the
+true cost, you'll do less work.
+
+0:08:40.000,0:08:44.090
+
+0:08:44.090,0:08:45.660
+Forget all these relaxed problems.
+
+0:08:45.660,0:08:48.150
+I have a heuristic for you.
+
+0:08:48.150,0:08:50.490
+We're going to look at a state and we're
+going to actually figure out how
+
+0:08:50.490,0:08:52.120
+far we are from the solution.
+
+0:08:52.120,0:08:53.100
+It's possible.
+
+0:08:53.100,0:08:55.640
+We have a search problem,
+we can find this number.
+
+0:08:55.640,0:08:57.850
+Is that a heuristic?
+
+0:08:57.850,0:08:59.140
+Yes.
+
+0:08:59.140,0:09:01.600
+Would it be admissible?
+
+0:09:01.600,0:09:03.930
+Yes, trivially admissible.
+
+0:09:03.930,0:09:07.712
+Would we save on the number of nodes
+we expanded in the search?
+
+0:09:07.712,0:09:12.140
+Yeah, you basically go straight
+down optimal paths only.
+
+0:09:12.140,0:09:14.420
+OK, so, why did I tell you about
+these other heuristics?
+
+0:09:14.420,0:09:16.670
+What's wrong with using the actual
+cost as a heuristic?
+
+0:09:16.670,0:09:17.920
+It looks great.
+
+0:09:17.920,0:09:21.430
+
+0:09:21.430,0:09:23.310
+It's kind of expensive to compute.
+
+0:09:23.310,0:09:26.290
+So even though you don't expand many
+nodes, each one launches a search
+
+0:09:26.290,0:09:28.360
+problem that's as hard as the thing
+you were trying to speed up in the
+
+0:09:28.360,0:09:29.870
+first place.
+
+0:09:29.870,0:09:32.290
+So with A star there's
+this general point.
+
+0:09:32.290,0:09:35.220
+In general, there's a trade off between
+the quality of your estimate,
+
+0:09:35.220,0:09:37.643
+the tightness of your heuristic,
+and the amount of work you
+
+0:09:37.643,0:09:38.460
+have to do per node.
+
+0:09:38.460,0:09:43.500
+And the way that looks like is better
+heuristics mean you expand fewer nodes
+
+0:09:43.500,0:09:45.630
+because they tend to be tighter.
+
+0:09:45.630,0:09:48.270
+On the other hand, each node is
+expensive because you have to do the
+
+0:09:48.270,0:09:51.960
+extra work to compute the
+heuristic itself.
+
+0:09:51.960,0:09:53.490
+You'll see this in your project ones.
+
+0:09:53.490,0:09:57.090
+As your heuristics are sufficiently
+good, you may actually see slowdowns
+
+0:09:57.090,0:09:59.760
+in your wall clock time.
+
+0:09:59.760,0:10:02.000
+So basically, there's going to
+be a family of heuristics.
+
+0:10:02.000,0:10:02.980
+Some of them are really bad.
+
+0:10:02.980,0:10:04.590
+That just always tell
+you you're there.
+
+0:10:04.590,0:10:05.570
+And some of them are really good.
+
+0:10:05.570,0:10:07.170
+They know exactly what you should do.
+
+0:10:07.170,0:10:08.380
+And some of them are in between.
+
+0:10:08.380,0:10:10.730
+And usually the sweet
+spot is in between.
+
+0:10:10.730,0:10:12.640
+You don't want your heuristic
+to be clueless, but fast.
+
+0:10:12.640,0:10:15.150
+Because then you're basically
+not exploiting A star.
+
+0:10:15.150,0:10:18.850
+You don't want it to be so good that
+it's solving the problem because then
+
+0:10:18.850,0:10:21.480
+probably you're wasting your time.
+
+0:10:21.480,0:10:23.270
+And somewhere in between is
+usually a good balance.
+
+0:10:23.270,0:10:24.520
+

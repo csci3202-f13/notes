@@ -1,0 +1,370 @@
+0:00:01.829,0:00:05.580
+now we've got the full a start paying
+into my guest star in its name instar
+
+0:00:05.580,0:00:10.440
+usually means optimal so and i built the
+sapa summed giant tortoise plus hair
+
+0:00:10.440,0:00:14.160
+uh... combination and the question is is
+the thing we've just built is even
+
+0:00:14.160,0:00:17.289
+optimal written universe authors with
+optimal greedy was not we get out to
+
+0:00:17.289,0:00:20.320
+tell you what i would just a quick read
+it's simple
+
+0:00:20.320,0:00:24.919
+let's execute a proficiency if anything
+can go wrong
+
+0:00:24.919,0:00:29.289
+our friends our telecast back or call
+zero four qazi roto kozyrev
+
+0:00:29.289,0:00:32.010
+so you cartel profs
+
+0:00:32.010,0:00:34.120
+are at the top that off
+
+0:00:34.120,0:00:36.480
+we get estay
+
+0:00:36.480,0:00:42.470
+an f_a_a_ has backward cross one for
+kasich still cross seven
+
+0:00:42.470,0:00:43.800
+we have have
+
+0:00:43.800,0:00:45.660
+two g
+
+0:00:45.660,0:00:49.100
+which looks like it has backed word cost
+by
+
+0:00:49.100,0:00:50.740
+or cut your
+
+0:00:50.740,0:00:52.300
+about five
+
+0:00:52.300,0:00:53.800
+so what comes off
+
+0:00:53.800,0:00:55.270
+after g comes off
+
+0:00:55.270,0:00:57.450
+we see a possible testing return it
+
+0:00:57.450,0:01:00.680
+autocross five
+
+0:01:00.680,0:01:05.230
+so the problem here is we actually got
+the wrong answer out of a star
+
+0:01:05.230,0:01:10.150
+why didn't we keep traveling down the
+after a packet was gonna turn out well
+
+0:01:10.150,0:01:14.680
+right going to be so cheap one plus
+three widely stop
+
+0:01:14.680,0:01:16.970
+he stopped as this guy
+
+0:01:16.970,0:01:20.780
+the heuristic says like abandon all hope
+you enter here
+
+0:01:20.780,0:01:23.990
+and we say okay you can stay on the
+fringe now we're gonna go do something
+
+0:01:23.990,0:01:24.840
+else
+
+0:01:24.840,0:01:25.930
+as the problem is
+
+0:01:25.930,0:01:28.869
+this year i think it's nice to the
+compassion towards the goal but it's
+
+0:01:28.869,0:01:29.819
+dangerous
+
+0:01:29.819,0:01:33.539
+because of it tells you this is really
+bad news well you want to explore that
+
+0:01:33.539,0:01:35.660
+area of the graph
+
+0:01:35.660,0:01:39.600
+what went wrong here is the actual bad
+goal costs here
+
+0:01:39.600,0:01:42.299
+was less than the estimated google costs
+
+0:01:42.299,0:01:44.130
+pain in particular
+
+0:01:44.130,0:01:46.270
+right this number six
+
+0:01:46.270,0:01:48.850
+overestimated the expense
+
+0:01:48.850,0:01:52.350
+and silly us we listen to the jurors
+
+0:01:52.350,0:01:56.270
+so we need or estimates right are
+heuristic values they need to always be
+
+0:01:56.270,0:02:00.020
+less than the actual costs so if you
+actually cost us three to get to the
+
+0:02:00.020,0:02:00.670
+goal
+
+0:02:00.670,0:02:04.899
+the heuristic a cancer zero a cancer
+three but it better not say six organist
+
+0:02:04.899,0:02:07.810
+are being so often
+
+0:02:07.810,0:02:11.140
+so this is a key idea for getting a star
+search to be correct stadium
+
+0:02:11.140,0:02:12.510
+admissibility
+
+0:02:12.510,0:02:16.199
+nothing to do with whether your it's
+kind of your heuristics outlook on life
+
+0:02:16.199,0:02:17.249
+if you're outlook is
+
+0:02:17.249,0:02:21.279
+is bad if you have a heuristic which is
+pessimistic would call that inadmissible
+
+0:02:21.279,0:02:24.749
+rhianna inadmissible heuristic is one
+that always says your farther the golden
+
+0:02:24.749,0:02:28.729
+you are or maybe there's some good
+happened so fast terrible company lian
+
+0:02:28.729,0:02:30.230
+right we thought that if
+
+0:02:30.230,0:02:34.740
+the heuristic lied to you and says that
+something cost more than actually does
+
+0:02:34.740,0:02:35.939
+we can make mistakes
+
+0:02:35.939,0:02:39.249
+so here's a case where pessimistic
+admissible heuristics they break off
+
+0:02:39.249,0:02:40.419
+malady
+
+0:02:40.419,0:02:42.969
+inadmissible or optimistic here s deck
+
+0:02:42.969,0:02:46.229
+uh... is one that always underestimates
+the true cost
+
+0:02:46.229,0:02:47.999
+but hopefully not by too much
+
+0:02:47.999,0:02:51.689
+and me if you're a six conflict down
+about traffic answer yeah the staff is
+
+0:02:51.689,0:02:54.779
+expensive i'm not sure how spent of not
+more than this but it is going to be
+
+0:02:54.779,0:02:58.109
+pretty expensive and when it tells you
+it's gonna cost at least eight you
+
+0:02:58.109,0:03:01.039
+believe it and you're safe and believing
+it
+
+0:03:01.039,0:03:04.669
+inadmissible heuristic and slow down the
+bad plans on the frantic and keep them
+
+0:03:04.669,0:03:08.569
+on the fringe for longer so you have to
+explore what they lied to
+
+0:03:08.569,0:03:10.039
+but in the end
+
+0:03:10.039,0:03:12.159
+the heuristic never out leisure trip
+costs
+
+0:03:12.159,0:03:15.639
+and that means the cheapest upload
+benchley win until eventually to the
+
+0:03:15.639,0:03:17.919
+right thing
+
+0:03:17.919,0:03:21.199
+in napa heuristic h is admissible or
+optimistic
+
+0:03:21.199,0:03:26.229
+if it's less than eight star an age
+stars uh... defined to be the true
+
+0:03:26.229,0:03:28.819
+optimal cost you in your school
+
+0:03:28.819,0:03:30.900
+so of course we build here six h
+
+0:03:30.900,0:03:34.099
+there it will snippets of code to
+execute the minke imputed to them
+
+0:03:34.099,0:03:38.340
+we don't know how to build each starve
+and right but it's a mathematical thing
+
+0:03:38.340,0:03:41.809
+and so you would do if you would prove
+the ph that you have built
+
+0:03:41.809,0:03:44.249
+is less than eight star which you can
+tell
+
+0:03:44.249,0:03:47.109
+and then you know you're sick
+
+0:03:47.109,0:03:50.119
+so here's an example to admissible
+heuristics very saw one
+
+0:03:50.119,0:03:54.659
+so on this kind of uh... pacman board
+the manhattan distance change in expose
+
+0:03:54.659,0:03:55.899
+change in line
+
+0:03:55.899,0:03:59.249
+is admissible because if they're in a
+while to get there that passed
+
+0:03:59.249,0:04:02.239
+but chances are the walls will make it
+takes in due course
+
+0:04:02.239,0:04:05.709
+admissable on those left on the trip
+costs it may be a lot less mature casa
+
+0:04:05.709,0:04:08.449
+pending on help tricky business
+
+0:04:08.449,0:04:13.859
+here's pancake flipping i said i have to
+at least let in order to get if the
+
+0:04:13.859,0:04:17.239
+fourth and take about a position in or
+get into this afternoon these two a flip
+
+0:04:17.239,0:04:18.440
+of size four
+
+0:04:18.440,0:04:20.250
+but i have to do a lot of other places
+
+0:04:20.250,0:04:24.080
+okay so here's a case where it's
+admissible because a kind of to capital
+
+0:04:24.080,0:04:25.979
+one part of the solution
+
+0:04:25.979,0:04:28.360
+but there may be a lot self to the
+solution that's going to cause you a
+
+0:04:28.360,0:04:31.580
+tinker cross as well
+
+0:04:31.580,0:04:32.819
+in practice
+
+0:04:32.819,0:04:36.050
+it's easy to define what admissibility
+as
+
+0:04:36.050,0:04:40.110
+coming up with admissible heuristics
+right which are lower bounds like this
+
+0:04:40.110,0:04:43.689
+but are still accurate enough to be
+useful in search
+
+0:04:43.689,0:04:46.720
+is a big part of what's involved in
+using a star in practice
+
+0:04:46.720,0:04:50.060
+the people already know this targeting
+our camp up was a paper on the star over
+
+0:04:50.060,0:04:51.300
+them very easily
+
+0:04:51.300,0:04:52.080
+however
+
+0:04:52.080,0:04:54.950
+if you have a task that has an
+interesting heuristic that takes a lot
+
+0:04:54.950,0:04:58.940
+of work to figure out how a star works
+in my case because they start was not on
+
+0:04:58.940,0:04:59.660
+the specific
+
+0:04:59.660,0:05:00.540
+but your students
+

@@ -1,0 +1,1350 @@
+0:00:01.000,0:00:01.530
+PROFESSOR: OK.
+
+0:00:01.530,0:00:06.310
+Let's step through a couple of A
+star examples in this video.
+
+0:00:06.310,0:00:07.600
+Here's our first example.
+
+0:00:07.600,0:00:09.550
+We have a state spacecraft.
+
+0:00:09.550,0:00:13.710
+We have for each state the heuristic
+values listed here.
+
+0:00:13.710,0:00:15.780
+And we're going to do a search-tree
+visualization of
+
+0:00:15.780,0:00:16.990
+the A star tree search.
+
+0:00:16.990,0:00:23.420
+The start state is S and the goal state
+is G. When we start out, we just
+
+0:00:23.420,0:00:27.490
+have the root of the search tree,
+which has the state S in it.
+
+0:00:27.490,0:00:32.480
+And together with the state, we will
+store the f value, which consists of e
+
+0:00:32.480,0:00:35.390
+and h So for S, the g cost is 0.
+
+0:00:35.390,0:00:40.140
+No cost has been incurred yet to reach
+S because that's where we start.
+
+0:00:40.140,0:00:43.490
+And the h value, that's the heuristic
+that we look up in the table.
+
+0:00:43.490,0:00:48.230
+For S, we have 7, so 0
+plus 7, which is 7.
+
+0:00:48.230,0:00:51.430
+An A star search will consider all nodes
+in the tree that have not been
+
+0:00:51.430,0:00:55.330
+expanded yet and expand the one
+that has the lowest f cost.
+
+0:00:55.330,0:00:56.910
+There's only one node in the tree.
+
+0:00:56.910,0:00:59.760
+So that's the one with
+the lowest f cost.
+
+0:00:59.760,0:01:00.880
+We expand it.
+
+0:01:00.880,0:01:07.640
+The successors for S are A and
+B. We have a partial plan SA.
+
+0:01:07.640,0:01:13.740
+And we have an f cost which consists of
+g plus h, which is equal to-- for
+
+0:01:13.740,0:01:18.300
+g, we look up the g cost in the previous
+node, which is 0, and add the
+
+0:01:18.300,0:01:22.370
+cost of making this last transition
+from S to A, which is 1.
+
+0:01:22.370,0:01:26.280
+And then for h, we look up
+in the table here, 6.
+
+0:01:26.280,0:01:32.140
+Second successor of S is B. The
+f cost consists of g and h.
+
+0:01:32.140,0:01:36.170
+For g, we look up at the parent
+node what the g cost was for.
+
+0:01:36.170,0:01:39.780
+Then we add the cost for making
+that last transition here, S
+
+0:01:39.780,0:01:40.980
+to B, which is 4.
+
+0:01:40.980,0:01:44.560
+And then for the heuristic value, we
+look up the heuristic in the table for
+
+0:01:44.560,0:01:45.690
+B, which is 2.
+
+0:01:45.690,0:01:50.510
+So we have a node with f cost of
+7 and a node with f cost of 6.
+
+0:01:50.510,0:01:54.840
+6 is the lowest so that's the next one
+A star consider for expansion.
+
+0:01:54.840,0:01:59.360
+When we expand B, B has only one
+successor, C. So we'll get one child
+
+0:01:59.360,0:02:03.090
+node here, SBC, with f consisting
+of g and h.
+
+0:02:03.090,0:02:07.400
+And to find g, we look at the parent
+node for the g cost to reach the
+
+0:02:07.400,0:02:08.880
+parent, which is 4.
+
+0:02:08.880,0:02:13.300
+And then we add the cost for the last
+transition B to C, which is 2.
+
+0:02:13.300,0:02:17.700
+And then for the h cost, we look up in
+the heuristic table heuristic for C
+
+0:02:17.700,0:02:18.600
+which is 1.
+
+0:02:18.600,0:02:20.170
+So we end up with 7 total.
+
+0:02:20.170,0:02:23.220
+A star search will look at the nodes
+that haven't been expanded yet.
+
+0:02:23.220,0:02:26.040
+There are two of them, SA and SBC.
+
+0:02:26.040,0:02:28.110
+Both of them have an f cost of 7.
+
+0:02:28.110,0:02:30.080
+We're doing alphabetical tie-breaking.
+
+0:02:30.080,0:02:32.780
+SA comes alphabetically before SBC.
+
+0:02:32.780,0:02:34.720
+So we expand SA first.
+
+0:02:34.720,0:02:36.240
+A has three successors.
+
+0:02:36.240,0:02:43.450
+And go to B, to C, and to G. For go to
+B, we have a partial plan SAB with an
+
+0:02:43.450,0:02:48.180
+f cost, which consists of g and h.
+
+0:02:48.180,0:02:53.540
+For g, again, we take the parent's
+g cost which is 1.
+
+0:02:53.540,0:02:59.870
+We add on the cost for this last
+transition from A to B, which is 2.
+
+0:02:59.870,0:03:03.470
+The heuristic value is the one
+for B, which is also 2.
+
+0:03:03.470,0:03:06.290
+So we end up with an f cost of 5.
+
+0:03:06.290,0:03:11.770
+The second successor for
+A is C. So we have SAC.
+
+0:03:14.510,0:03:17.350
+F cost consists of g and h.
+
+0:03:20.710,0:03:26.430
+g consists of the parent's g cost, which
+is 1, plus the g costs for the
+
+0:03:26.430,0:03:30.420
+transition AC, which is 5.
+
+0:03:30.420,0:03:33.300
+And then the heuristic value, we
+look up in the table the entry
+
+0:03:33.300,0:03:35.040
+for C, which is 1.
+
+0:03:35.040,0:03:36.850
+So we end up with 7.
+
+0:03:36.850,0:03:41.630
+And for the third successor of
+A, which is G, we have SAG.
+
+0:03:44.880,0:03:47.750
+f again consists of g and h.
+
+0:03:47.750,0:03:52.620
+For g, we look up the parent g cost and
+add the transition costs for the
+
+0:03:52.620,0:03:56.250
+last transition that we just
+added, A to G, which is 12.
+
+0:03:56.250,0:04:01.130
+And the heuristic value we look up
+in the table for G here is 0.
+
+0:04:01.130,0:04:04.170
+So this one has an f cost of 13.
+
+0:04:04.170,0:04:09.100
+A star proceeds by looking at all the
+nodes that have not been expanded yet
+
+0:04:09.100,0:04:15.750
+and first considering the one with the
+lowest f cost, which is SAB over here.
+
+0:04:15.750,0:04:18.380
+Note that-- and this is really
+important-- that at this point,
+
+0:04:18.380,0:04:21.700
+amongst the nodes we have not expanded
+yet, there are four of those.
+
+0:04:21.700,0:04:26.560
+There is SAB, SAC, SAG, and SBC.
+
+0:04:26.560,0:04:30.670
+One of them, namely SAG,
+ends in the goal state.
+
+0:04:30.670,0:04:34.460
+It's important to keep in mind that
+it's not just because we reach the
+
+0:04:34.460,0:04:36.560
+goal here that we're done.
+
+0:04:36.560,0:04:38.520
+We have to wait till we expand.
+
+0:04:38.520,0:04:43.610
+We are expanding a node that reaches
+the goal state to declare success.
+
+0:04:43.610,0:04:49.200
+So at this point, we are expanding again
+the one with the lowest f cost,
+
+0:04:49.200,0:04:50.860
+which is SAB.
+
+0:04:50.860,0:04:55.790
+Expanding that one, how many successors
+that B had, B has one
+
+0:04:55.790,0:04:58.530
+successor C. So we're going
+to end up with SABC.
+
+0:05:01.360,0:05:04.920
+The f cost for this node
+consists of g and h.
+
+0:05:04.920,0:05:09.370
+g, we look up the parent's g cost, 3.
+
+0:05:09.370,0:05:14.870
+We add the cost for the transition
+B to C, which is 2.
+
+0:05:14.870,0:05:18.510
+And for h, we look up the heuristic
+value for C, which is 1.
+
+0:05:18.510,0:05:22.080
+And we end up with a total of 6.
+
+0:05:22.080,0:05:26.800
+6 is the lowest f cost of all nodes
+that have not been expanded yet.
+
+0:05:26.800,0:05:30.070
+So we're expanding SABC next.
+
+0:05:30.070,0:05:38.390
+C has just one successor, G. So we end
+up with SABCG and f costs, which
+
+0:05:38.390,0:05:43.320
+consist of g and h, where for g, we have
+to look up the parent's g cost,
+
+0:05:43.320,0:05:44.610
+which is 5.
+
+0:05:44.610,0:05:48.680
+Add the cost of the last transition
+C to G, which is 3.
+
+0:05:48.680,0:05:51.960
+And then add the heuristic value of
+the last node G, which is the
+
+0:05:51.960,0:05:54.010
+heuristic value of 0.
+
+0:05:54.010,0:05:55.890
+We end up with 8.
+
+0:05:55.890,0:05:59.270
+We do alphabetical tie-breaking,
+making a start with SAC.
+
+0:05:59.270,0:06:02.150
+C has one successor, G. So
+we end up with SACG.
+
+0:06:04.880,0:06:10.450
+The f cost is consisting of g plus h.
+
+0:06:10.450,0:06:15.430
+g consists of the parent's g cost, which
+is 6, plus the transition C to
+
+0:06:15.430,0:06:17.760
+G's cost, which is 3.
+
+0:06:17.760,0:06:20.120
+And then the heuristic at
+the goal state is 0.
+
+0:06:20.120,0:06:22.250
+So we end up with 9.
+
+0:06:22.250,0:06:27.210
+SBC is the node that has not been
+expanded yet with the lowest f cost.
+
+0:06:27.210,0:06:29.340
+So we expand that one next.
+
+0:06:29.340,0:06:32.080
+C has only one successor, G.
+So we end up with SBCG.
+
+0:06:35.940,0:06:40.200
+It has an f cost that
+consists of g and h.
+
+0:06:40.200,0:06:44.450
+For g, we look up the g cost
+of the parent, which is 6.
+
+0:06:44.450,0:06:48.110
+We add the cost of the CG
+transition, which is 3.
+
+0:06:48.110,0:06:52.350
+And then we have to add the heuristic
+value which is 0 here.
+
+0:06:52.350,0:06:55.010
+So we end up with 9.
+
+0:06:55.010,0:06:59.020
+Of the nodes currently in consideration
+for expansion, we have
+
+0:06:59.020,0:07:03.820
+one of cost 8, one of cost 9, one
+of cost 13, one of cost 9.
+
+0:07:03.820,0:07:05.590
+8 is the lowest.
+
+0:07:05.590,0:07:08.730
+So we'll expand this one next.
+
+0:07:08.730,0:07:10.360
+This one ends in the goal state.
+
+0:07:10.360,0:07:13.820
+And when we are about to expand a node
+that ends in the goal state, that
+
+0:07:13.820,0:07:18.450
+means we're done and we're return that
+node as our solution to the problem.
+
+0:07:18.450,0:07:22.930
+So in this case, our
+solution is SABCG.
+
+0:07:22.930,0:07:26.470
+And the cost of that path is 8.
+
+0:07:26.470,0:07:30.100
+Is SABCG optimal?
+
+0:07:30.100,0:07:34.900
+Well, for A star research, we have the
+guarantee that it will return the
+
+0:07:34.900,0:07:36.370
+optimal solution.
+
+0:07:36.370,0:07:41.820
+So it is optimal if the heuristic
+h is admissible.
+
+0:07:41.820,0:07:44.790
+To find out whether h is admissible, we
+need to look at all these entries
+
+0:07:44.790,0:07:49.250
+here and verify that they are indeed
+underestimates of the shortest path to
+
+0:07:49.250,0:07:51.480
+a goal state from those states.
+
+0:07:51.480,0:07:54.900
+Not going to step through that here,
+but indeed, it can be verified that
+
+0:07:54.900,0:07:59.390
+each of these are underestimates of
+the cheapest path to a goal state.
+
+0:07:59.390,0:08:04.470
+So we have that indeed,
+SABCG is optimal.
+
+0:08:08.100,0:08:09.600
+Now, let's run A star research again.
+
+0:08:09.600,0:08:13.580
+But visualize our process with a
+priority queue rather than a
+
+0:08:13.580,0:08:13.950
+search-tree.
+
+0:08:13.950,0:08:15.590
+Same problem as before.
+
+0:08:15.590,0:08:20.220
+Our priority queue will start with just
+one entry, S. And the f cost for
+
+0:08:20.220,0:08:25.450
+S is 0 for the g cost plus
+7 for the heuristic.
+
+0:08:25.450,0:08:29.720
+A star research will look at the
+priority queue, pop the node with the
+
+0:08:29.720,0:08:30.680
+highest priority.
+
+0:08:30.680,0:08:31.490
+There's only one.
+
+0:08:31.490,0:08:33.860
+So that that one node is the one
+that's going to be popped.
+
+0:08:33.860,0:08:36.800
+And put all its successors
+into the priority queue.
+
+0:08:36.800,0:08:42.020
+S has two successor states, A
+and B, so we get SA and SB.
+
+0:08:42.020,0:08:45.260
+And for the f cost associated
+with them, we have the g
+
+0:08:45.260,0:08:47.570
+cost plus an h cost.
+
+0:08:47.570,0:08:51.840
+And the g cost is the cost of the parent
+node, S plus the cost of the
+
+0:08:51.840,0:08:54.120
+transition SA, which is 1.
+
+0:08:54.120,0:08:57.860
+The heuristic is the heuristic
+for A, which is 6.
+
+0:08:57.860,0:09:02.750
+And for SB, we also have a g cost of 0
+plus now the cost from S to B, which
+
+0:09:02.750,0:09:06.270
+is 4, plus the heuristic value
+for B, which is 2.
+
+0:09:09.210,0:09:13.380
+Next, A star research will pop the one
+with the highest priority as it always
+
+0:09:13.380,0:09:18.580
+does, which is the one with the lowest
+f cost, which is SB, with
+
+0:09:18.580,0:09:21.140
+an f cost of 6.
+
+0:09:21.140,0:09:23.210
+SA stays in the queue.
+
+0:09:23.210,0:09:27.230
+B has one successor, C.
+So we end up with SBC.
+
+0:09:27.230,0:09:31.380
+The g cost is the g cost of its parent
+node, 4 plus the cost for the
+
+0:09:31.380,0:09:34.190
+transition from B to C, which is 2.
+
+0:09:34.190,0:09:37.310
+And the heuristic value for C is 1.
+
+0:09:37.310,0:09:41.740
+Popping the one with the lowest f cost,
+in this case, there's a tie.
+
+0:09:41.740,0:09:45.650
+Alphabetical tie-breaking makes
+us pick SA before SBC.
+
+0:09:45.650,0:09:49.860
+A has three successors, leading us
+to the following priority queue.
+
+0:09:49.860,0:09:56.150
+The g cost for SAB is 1 from the
+parent node plus 2 for the AB
+
+0:09:56.150,0:09:57.650
+transition.
+
+0:09:57.650,0:10:08.660
+And then adding h, which is 2 for B, the
+second successor of AC with SAC,
+
+0:10:08.660,0:10:15.230
+the f cost consisting of g plus h, we
+have for g 1 from the parent plus 5
+
+0:10:15.230,0:10:16.550
+for the transition.
+
+0:10:16.550,0:10:18.540
+And for h, we have 1.
+
+0:10:22.010,0:10:26.960
+And then the third successor phase G,
+and here we end up with a g cost also
+
+0:10:26.960,0:10:30.140
+of 1 from the parent, plus 12
+for the transition now,
+
+0:10:30.140,0:10:31.890
+plus 0 for the heuristic.
+
+0:10:31.890,0:10:35.220
+And then we still have SBC
+on the priority queue.
+
+0:10:35.220,0:10:44.140
+So I'll put it down here, SBC, with a
+g cost of 6 and a heuristic of 1.
+
+0:10:44.140,0:10:48.880
+Now, the lowest cost is 5,
+which is found over here.
+
+0:10:48.880,0:10:52.760
+We pop SAB from the priority queue.
+
+0:10:52.760,0:10:59.530
+B has one successor, C. The g cost is
+3 from the parent plus 2 from the
+
+0:10:59.530,0:11:00.210
+transition.
+
+0:11:00.210,0:11:02.200
+The heuristic value for C is 1.
+
+0:11:02.200,0:11:05.760
+And then we retain all the other ones.
+
+0:11:05.760,0:11:10.370
+Now, the node with the lowest f cost,
+SABC with an f cost of 6,
+
+0:11:10.370,0:11:11.770
+we expand that one.
+
+0:11:11.770,0:11:14.710
+C as one successor, G. So
+we end up with SABCG.
+
+0:11:17.490,0:11:22.850
+G contribution is 5 from the parent
+plus 3 from the CG transition.
+
+0:11:22.850,0:11:25.740
+Then the heuristic value of G is 0.
+
+0:11:25.740,0:11:29.240
+And we retain the other three.
+
+0:11:29.240,0:11:32.980
+Now, with the lowest f cost is a tie.
+
+0:11:32.980,0:11:36.760
+There is SAC with 7 and
+there is SBC with 7.
+
+0:11:36.760,0:11:39.820
+Alphabetical tie-breaking
+makes us pick SAC first.
+
+0:11:39.820,0:11:46.150
+SAC has one successor, G. C has one
+successor, G. So we end up expanding
+
+0:11:46.150,0:11:50.650
+that into just one node, SACG.
+
+0:11:50.650,0:11:55.980
+The g cost comes from the parent,
+6 plus transition CG 3.
+
+0:11:55.980,0:11:58.160
+And the heuristic at G is 0.
+
+0:11:58.160,0:12:01.280
+And the other ones we just retain
+on the priority queue.
+
+0:12:01.280,0:12:06.270
+Now, the one with the lowest f cost
+is SBC with an f cost of 7.
+
+0:12:06.270,0:12:11.660
+C is one successor, G. We end up with
+putting one new node, SBCG.
+
+0:12:11.660,0:12:16.390
+The g cost consists of 6 from the parent
+plus 3 from the transition CG.
+
+0:12:16.390,0:12:18.140
+And the heuristic value of G is 0.
+
+0:12:18.140,0:12:20.340
+And we copy the other three over.
+
+0:12:20.340,0:12:27.260
+Now, the one with the lowest f cost
+is SABCG, has an f cost of 8.
+
+0:12:27.260,0:12:30.680
+We're about to expand this one, but we
+notice that it ends in the goal state.
+
+0:12:30.680,0:12:31.600
+That means we are done.
+
+0:12:31.600,0:12:32.910
+We declare success.
+
+0:12:32.910,0:12:39.610
+We have SABCG as a solution
+found by A star research.
+
+0:12:39.610,0:12:43.040
+We discussed in the previous slide
+why this is the optimal solution.
+
+0:12:43.040,0:12:44.680
+Now, let's move on to graph search.
+
+0:12:44.680,0:12:46.870
+As a reminder, what's the difference
+between tree search and graph search?
+
+0:12:46.870,0:12:50.950
+In graph search, when you are about to
+expand a node, you check whether you
+
+0:12:50.950,0:12:54.590
+ever expanded a node that ends in the
+same state as the node you're
+
+0:12:54.590,0:12:55.850
+currently about expand.
+
+0:12:55.850,0:12:58.420
+If that's the case, you don't
+expand the current node.
+
+0:12:58.420,0:13:00.730
+You just take it out of
+the priority queue.
+
+0:13:00.730,0:13:03.070
+And that's it.
+
+0:13:03.070,0:13:09.480
+So you avoid reexpanding plans that
+lead into the same state.
+
+0:13:09.480,0:13:12.610
+I'm actually going to do a search
+tree visualization.
+
+0:13:12.610,0:13:15.340
+But the search tree is perhaps
+a slightly more interesting
+
+0:13:15.340,0:13:16.680
+visualization to look at.
+
+0:13:16.680,0:13:18.660
+So let's start with the root.
+
+0:13:18.660,0:13:23.800
+We just have S with an f cost of 0, plus
+the heuristic at f, which is 7.
+
+0:13:23.800,0:13:24.830
+We start graph search.
+
+0:13:24.830,0:13:28.960
+We'll look at the nodes currently
+available for expansion.
+
+0:13:28.960,0:13:30.270
+So that's just S.
+
+0:13:30.270,0:13:37.550
+S has two successors, A and B. We
+expand SA, which has an f cost
+
+0:13:37.550,0:13:41.190
+consisting of g plus h where g consists
+of the g cost of the parent,
+
+0:13:41.190,0:13:45.090
+which is 0, plus the cost of
+the transition, which is 1.
+
+0:13:45.090,0:13:47.270
+And then the heuristic
+value for A is 6.
+
+0:13:47.270,0:13:54.370
+And for B, we have a g cost from the
+parent of 0, plus a cost for the SB
+
+0:13:54.370,0:13:57.840
+transition of 4, plus a
+heuristic value of 2.
+
+0:13:57.840,0:14:01.110
+We have expanded S. And so in A star
+graph search, what we do, we have a
+
+0:14:01.110,0:14:03.030
+separate thing called a Closed List.
+
+0:14:03.030,0:14:06.950
+This keeps track of states we
+have expanded in the past.
+
+0:14:06.950,0:14:10.920
+And this Closed List now contains S.
+
+0:14:10.920,0:14:14.620
+SB has the lowest f cost, f cost of 6.
+
+0:14:14.620,0:14:21.520
+So we expand B. B has one successor,
+C. So we end up with SBC.
+
+0:14:21.520,0:14:26.130
+g cost of 4 from the parent, plus 2 from
+the transition, and an h cost for
+
+0:14:26.130,0:14:31.320
+C of 1-- we have expanded the state B.
+So it goes into our Closed List.
+
+0:14:31.320,0:14:34.240
+Both nodes have an equal f cost of 7.
+
+0:14:34.240,0:14:37.680
+Alphabetical tie-breaking makes us
+pick SA first for expansion.
+
+0:14:37.680,0:14:40.160
+A has three successors.
+
+0:14:40.160,0:14:41.680
+We have SAB.
+
+0:14:41.680,0:14:43.870
+We have SAC.
+
+0:14:43.870,0:14:46.130
+And we have SAG.
+
+0:14:46.130,0:14:50.660
+The f cost for SAB consists of g, which
+is 1 from the parent, plus 2 for
+
+0:14:50.660,0:14:54.970
+the transition, plus 2 from the
+heuristic value for B. For SAC, we
+
+0:14:54.970,0:14:58.800
+have an f cost that consists of g cost,
+which has 1 from the parent,
+
+0:14:58.800,0:15:02.710
+plus 5 from the transition, and then
+the heuristic value for C is 1.
+
+0:15:02.710,0:15:06.950
+And for the last one here, SAG, we have
+g cost, which has a contribution
+
+0:15:06.950,0:15:10.870
+of 1 from the parent, 12 from the
+AG transition, and then a
+
+0:15:10.870,0:15:11.830
+heuristic value of 0.
+
+0:15:11.830,0:15:15.140
+At this point, we've expanded A.
+A goes onto our Closed List.
+
+0:15:15.140,0:15:17.990
+Now, let's look at which one
+has the lowest f cost.
+
+0:15:17.990,0:15:20.940
+We have 5 here which
+is the lowest, SAB.
+
+0:15:20.940,0:15:22.980
+So we're considering
+SAB for expansion.
+
+0:15:22.980,0:15:25.160
+It turns out, however, B has
+already been expanded.
+
+0:15:25.160,0:15:26.330
+It's in our Closed List.
+
+0:15:26.330,0:15:28.230
+So we don't expand this one.
+
+0:15:28.230,0:15:29.270
+We're done with that range.
+
+0:15:29.270,0:15:30.020
+Which one is next?
+
+0:15:30.020,0:15:35.300
+In terms of f cost, we have SAC
+with 7 and we have SBC with 7.
+
+0:15:35.300,0:15:36.710
+We'll do alphabetical tie-breaking.
+
+0:15:36.710,0:15:38.790
+So SAC will get expanded.
+
+0:15:38.790,0:15:44.410
+C has one successor, G. We have one
+child here, SACG with an f cost
+
+0:15:44.410,0:15:48.190
+consisting of g and h. g consists of the
+g cost of the parent, which is 6,
+
+0:15:48.190,0:15:51.640
+plus the cost of the transition which is
+3, and then the heuristic value of
+
+0:15:51.640,0:15:53.540
+G is 0, for a total of 9.
+
+0:15:53.540,0:15:57.260
+Completes the expansion of this node
+with the [INAUDIBLE] at C. So C goes
+
+0:15:57.260,0:15:58.320
+onto our Closed List.
+
+0:15:58.320,0:16:03.670
+Looking at our nodes, we have 9 here,
+we have 13 here, and 7 here.
+
+0:16:03.670,0:16:04.860
+7 is next.
+
+0:16:04.860,0:16:08.990
+So we consider SBC for expansion next.
+
+0:16:08.990,0:16:14.030
+The last state here, C, is, however,
+in our Closed List, which means we
+
+0:16:14.030,0:16:15.410
+don't expand.
+
+0:16:15.410,0:16:18.810
+We just stop this branch
+in the search tree.
+
+0:16:18.810,0:16:20.650
+And we move on to the next one.
+
+0:16:20.650,0:16:24.640
+And the next lowest one
+here is SACG with 9.
+
+0:16:24.640,0:16:26.650
+We consider this one for expansion.
+
+0:16:26.650,0:16:29.100
+We notice that it reaches
+the goal state.
+
+0:16:29.100,0:16:31.310
+So we declare success.
+
+0:16:31.310,0:16:34.370
+We've found a path to the goal, SACG.
+
+0:16:34.370,0:16:36.510
+And it has a cost of 9.
+
+0:16:36.510,0:16:38.540
+Is this optimal?
+
+0:16:38.540,0:16:41.970
+Well, we saw before that there's
+a path that's cheaper than 9.
+
+0:16:41.970,0:16:46.710
+In fact, the path that we found before
+running A star research was one that
+
+0:16:46.710,0:16:55.590
+ran from S to A, to B, to C, and to
+G for a total cost of 8, which
+
+0:16:55.590,0:16:57.060
+is less than 9.
+
+0:16:57.060,0:16:58.370
+So what happened here?
+
+0:16:58.370,0:17:04.610
+We ran an A star graph search and we
+ended up with a solution that has a
+
+0:17:04.610,0:17:06.740
+cost of 9, which is not optimal.
+
+0:17:12.340,0:17:15.320
+What happened here is that we are
+using a heuristic that is not
+
+0:17:15.320,0:17:16.660
+consistent.
+
+0:17:16.660,0:17:19.690
+And because the heuristic is not
+consistent, we are not guaranteed that
+
+0:17:19.690,0:17:22.700
+A star graph search will
+find the optimal path.
+
+0:17:22.700,0:17:29.140
+Indeed, the optimal path, which we know
+is SABCG, did not get explored.
+
+0:17:29.140,0:17:31.400
+Because when we were going down the
+search tree in the direction that
+
+0:17:31.400,0:17:36.290
+would lead to that path which is over
+here, we decided not to expand SAB
+
+0:17:36.290,0:17:38.420
+because B was already
+in the Closed List.
+
+0:17:38.420,0:17:39.160
+How did that happen?
+
+0:17:39.160,0:17:42.640
+Well, because the heuristic is not
+consistent, it happened to be the case
+
+0:17:42.640,0:17:46.500
+that we already expanded B in a
+different part of the search tree.
+
+0:17:46.500,0:17:49.090
+And when we expanded B in a different
+part of the search tree, we had
+
+0:17:49.090,0:17:51.350
+reached B in a more expensive way.
+
+0:17:51.350,0:17:58.470
+And so this cheaper way of reaching
+B through A was not explored.
+
+0:17:58.470,0:18:01.340
+So where is that inconsistency
+in the heuristic?
+
+0:18:01.340,0:18:05.110
+Let's write down the condition
+for h to be consistent.
+
+0:18:05.110,0:18:08.910
+Condition is that for all S and S prime
+where we can go from S to S
+
+0:18:08.910,0:18:15.510
+prime, it needs to be the case that hs
+minus hs prime is more than or equal
+
+0:18:15.510,0:18:17.730
+to the cost to go from S to S prime.
+
+0:18:17.730,0:18:21.760
+Now, let's see if we can find the
+violation in our problem here.
+
+0:18:21.760,0:18:22.770
+Yes!
+
+0:18:22.770,0:18:23.300
+Found it.
+
+0:18:23.300,0:18:28.910
+Let S be A and S prime be B. Then we
+have the condition ha minus hb should
+
+0:18:28.910,0:18:31.700
+be smaller than or equal to 2.
+
+0:18:31.700,0:18:34.700
+ha is 6. hb is 2.
+
+0:18:34.700,0:18:36.460
+We have now 6 minus 2 is 4.
+
+0:18:36.460,0:18:39.030
+It should be smaller than 2,
+which is not the case.
+
+0:18:39.030,0:18:42.890
+So we have a violation of our
+consistency condition.
+
+0:18:42.890,0:18:46.230
+And that's why we don't have the
+guarantee here that A star graph
+
+0:18:46.230,0:18:48.980
+search would find an optimal path.
+
+0:18:48.980,0:18:49.740
+Let's move on.
+
+0:18:49.740,0:18:52.890
+Let's again use the search tree
+visualization because it's a little
+
+0:18:52.890,0:18:56.420
+more compact and conveys a
+little more information.
+
+0:18:56.420,0:19:00.020
+And we have now updated our heuristic
+h to be consistent.
+
+0:19:00.020,0:19:02.980
+You can verify that the consistency
+condition is satisfied for these
+
+0:19:02.980,0:19:03.960
+heuristic values.
+
+0:19:03.960,0:19:06.020
+Let's run our A star
+graph search again.
+
+0:19:06.020,0:19:10.070
+We start with S with an f cost
+consisting of g and h.
+
+0:19:10.070,0:19:11.120
+g is 0.
+
+0:19:11.120,0:19:13.850
+h, we read off from the table as 7.
+
+0:19:13.850,0:19:18.000
+We expand S, which puts
+S on our Closed List.
+
+0:19:18.000,0:19:21.260
+S has two successors, A
+and B. So we have SA.
+
+0:19:21.260,0:19:26.080
+The f cost for SA is the g cost of the
+parent, which is 0, plus the costs for
+
+0:19:26.080,0:19:31.710
+transition SA, which is 1, plus the cost
+from the heuristic value at A,
+
+0:19:31.710,0:19:32.580
+which is 6.
+
+0:19:32.580,0:19:41.110
+And we have for SB a g cost of 0, plus
+4, plus the heuristic value of 4.
+
+0:19:41.110,0:19:43.460
+We have expanded S, which is
+in our Closed List now.
+
+0:19:43.460,0:19:45.250
+Who's up next for expansion?
+
+0:19:45.250,0:19:48.480
+7 versus 8, 7 is a lower f cost.
+
+0:19:48.480,0:19:52.780
+So we'll expand SA, which will
+put A on our Closed List.
+
+0:19:52.780,0:19:55.050
+A has three successors, B, C, and G.
+
+0:19:55.050,0:19:59.500
+So we're going to have SAB with an
+f cost consisting of g and h.
+
+0:19:59.500,0:20:04.730
+g is 1 from the parent, plus 2 from
+the transition, plus the heuristic
+
+0:20:04.730,0:20:06.240
+value at B, which is 4.
+
+0:20:06.240,0:20:14.350
+Then for SAC, we have an f cost of 1
+from the g cost of the parent plus 5
+
+0:20:14.350,0:20:16.300
+from the transition AC.
+
+0:20:16.300,0:20:20.060
+And then we add the heuristic
+value at C, which is 2.
+
+0:20:20.060,0:20:24.690
+And then lastly, we have SAG, which
+has an f cost consisting of
+
+0:20:24.690,0:20:25.720
+a g and an h cost.
+
+0:20:25.720,0:20:28.620
+The g has 1 from the parent.
+
+0:20:28.620,0:20:32.110
+And we add 12 for the AG transition.
+
+0:20:32.110,0:20:35.750
+And the heuristic value at G is 0.
+
+0:20:35.750,0:20:43.870
+So now, we have a 7 here, 8 here,
+13 here, and 8 over here.
+
+0:20:43.870,0:20:45.040
+7 is the lowest.
+
+0:20:45.040,0:20:48.140
+So we'll expand SAB first.
+
+0:20:48.140,0:20:53.690
+So we expand B. B has one successor,
+C. We have SABC.
+
+0:20:53.690,0:20:58.040
+The g cost is 3 from the parent
+plus 2 from the transition.
+
+0:20:58.040,0:21:00.660
+The h cost is 2.
+
+0:21:00.660,0:21:03.190
+We have expanded B so we put
+it on the Closed List.
+
+0:21:07.210,0:21:10.650
+Now again, the lowest f cost
+is down this branch.
+
+0:21:10.650,0:21:12.690
+We expand SABC.
+
+0:21:12.690,0:21:16.490
+C has one successor G. So
+we end up with SABCG.
+
+0:21:16.490,0:21:19.400
+The f cost consists of a
+g cost and an h cost.
+
+0:21:19.400,0:21:25.240
+The g cost is 5 from the parent, plus
+3 from the transition, and then plus
+
+0:21:25.240,0:21:28.540
+an h cost of 0 at the goal
+state for a total of 8.
+
+0:21:28.540,0:21:31.630
+We put C on our Closed List.
+
+0:21:31.630,0:21:37.590
+Now, the next one with the lowest f
+value, there's the three-way tie.
+
+0:21:37.590,0:21:41.850
+There is SABCG, there is
+SAC, and there is SB.
+
+0:21:41.850,0:21:45.250
+SABCG comes alphabetically first.
+
+0:21:45.250,0:21:47.790
+So that's one we'll expand first.
+
+0:21:47.790,0:21:49.520
+This one ends in the goal state.
+
+0:21:49.520,0:21:50.470
+That means we're done.
+
+0:21:50.470,0:21:51.770
+We declare success.
+
+0:21:51.770,0:21:56.880
+And we return SABCG as our solution.
+
+0:21:56.880,0:21:57.150
+[COMPUTER BELL RINGS]
+
+0:21:57.150,0:21:58.430
+And it has a cost of 8.
+
+0:21:58.430,0:22:00.600
+This is the optimal path.
+
+0:22:00.600,0:22:03.860
+We're guaranteed this is the case
+because the heuristic we have here is
+
+0:22:03.860,0:22:04.700
+a consistent heuristic.
+
+0:22:04.700,0:22:09.250
+An A star graph search is guaranteed to
+return an optimal solution when you
+
+0:22:09.250,0:22:12.040
+have a consistent heuristic.
+
+0:22:12.040,0:22:12.760
+OK.
+
+0:22:12.760,0:22:14.960
+That's it for our A star
+search examples.
+

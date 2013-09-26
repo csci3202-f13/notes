@@ -1,0 +1,905 @@
+0:00:00.000,0:00:01.000
+
+0:00:01.000,0:00:03.480
+DAN KLEIN: Now we're going to talk
+about model-free learning.
+
+0:00:03.480,0:00:06.890
+In model-free learning, we don't
+construct a model of
+
+0:00:06.890,0:00:08.210
+the transition function.
+
+0:00:08.210,0:00:10.550
+What we do is we take actions.
+
+0:00:10.550,0:00:14.350
+And every time we take an action, we
+compare what we thought was going to
+
+0:00:14.350,0:00:16.950
+happen to what actually did happen.
+
+0:00:16.950,0:00:21.400
+And whenever something is better or
+worse than what we expected, we adjust
+
+0:00:21.400,0:00:23.160
+our values up and down.
+
+0:00:23.160,0:00:27.770
+So what we track in a model-free
+approach is the values of interest
+
+0:00:27.770,0:00:32.740
+themselves, not the transition
+functions or the rewards.
+
+0:00:32.740,0:00:36.090
+To get us started off, we're going
+to think about the passive case.
+
+0:00:36.090,0:00:40.660
+So in passive reinforcement learning
+the idea is things are happening in
+
+0:00:40.660,0:00:41.780
+the real world.
+
+0:00:41.780,0:00:46.070
+Some agent is taking actions and getting
+specific outcomes that are
+
+0:00:46.070,0:00:48.360
+partially determined by chance.
+
+0:00:48.360,0:00:51.980
+You have to learn from these samples
+you observe, but you
+
+0:00:51.980,0:00:53.750
+don't control the actions.
+
+0:00:53.750,0:00:55.400
+Someone else is choosing the actions.
+
+0:00:55.400,0:00:58.270
+And you're just sitting there with your
+notebook trying to figure out,
+
+0:00:58.270,0:01:01.800
+based on the policy that is being
+followed, what are the values of all
+
+0:01:01.800,0:01:02.890
+the states.
+
+0:01:02.890,0:01:04.760
+So you can think about this
+here as this agent.
+
+0:01:04.760,0:01:06.880
+It's watching real things happen.
+
+0:01:06.880,0:01:08.870
+It can't rewind and try
+something else.
+
+0:01:08.870,0:01:12.820
+But it's not in control,
+it's just monitoring.
+
+0:01:12.820,0:01:15.450
+So the task we're going to think
+about in the passive case is
+
+0:01:15.450,0:01:16.580
+this simplified task.
+
+0:01:16.580,0:01:19.130
+We're not going to try to figure
+out how to act optimally.
+
+0:01:19.130,0:01:22.620
+We're going to try to figure out,
+essentially, exactly what policy
+
+0:01:22.620,0:01:23.960
+evaluation did.
+
+0:01:23.960,0:01:25.750
+The input is a fixed policy.
+
+0:01:25.750,0:01:29.680
+And so, in code, you would receive a
+policy and be asked to evaluate it.
+
+0:01:29.680,0:01:33.760
+In the sketch that I drew, the agent
+is just watching some other agent
+
+0:01:33.760,0:01:35.070
+execute this policy.
+
+0:01:35.070,0:01:36.710
+But in any case, there's
+a fixed policy.
+
+0:01:36.710,0:01:39.300
+The agent does not know the transitions
+or the rewards.
+
+0:01:39.300,0:01:41.020
+This is still reinforcement learning.
+
+0:01:41.020,0:01:43.130
+Our goal is to learn the state values.
+
+0:01:43.130,0:01:47.540
+Now, of course, because we're watching
+this policy, pi, execute, we're going
+
+0:01:47.540,0:01:50.515
+to learn the values under
+the policy pi.
+
+0:01:50.515,0:01:54.550
+If pi is really bad, we're probably
+going to learn values that are also
+
+0:01:54.550,0:01:57.890
+really bad, because they're the
+values for this policy.
+
+0:01:57.890,0:01:59.420
+So this is policy evaluation.
+
+0:01:59.420,0:02:02.020
+We're watching or executing
+a fixed policy.
+
+0:02:02.020,0:02:05.090
+And we're trying to figure out
+how good each state is under
+
+0:02:05.090,0:02:06.740
+that policy's execution.
+
+0:02:06.740,0:02:08.970
+In this case, the learner
+is along for the ride.
+
+0:02:08.970,0:02:11.670
+It doesn't get to actually control
+things, even if it's already learned
+
+0:02:11.670,0:02:12.360
+they're bad.
+
+0:02:12.360,0:02:14.060
+We have no choice about the actions.
+
+0:02:14.060,0:02:15.970
+And we're just executing the policy.
+
+0:02:15.970,0:02:17.810
+It's still not offline planning.
+
+0:02:17.810,0:02:19.870
+We're actually taking actions
+in the world.
+
+0:02:19.870,0:02:23.280
+We're just not being smart
+about picking them.
+
+0:02:23.280,0:02:26.710
+The simplest way you could imagine doing
+model-free learning is what's
+
+0:02:26.710,0:02:28.390
+called direct evaluation.
+
+0:02:28.390,0:02:32.890
+So remember, our goal is to compute the
+values for each state in our MDP
+
+0:02:32.890,0:02:35.080
+under this policy, pi.
+
+0:02:35.080,0:02:37.790
+And the idea of direct evaluation
+is super simple.
+
+0:02:37.790,0:02:41.670
+All we're going to do is
+watch action unfold.
+
+0:02:41.670,0:02:43.810
+We're going to act according to pi.
+
+0:02:43.810,0:02:47.930
+And every time we visit a state, we're
+going to write down what the sum of
+
+0:02:47.930,0:02:52.630
+discounted rewards, the utility,
+turned out to be in the end.
+
+0:02:52.630,0:02:55.690
+And so, in acting, we will
+have been in many states.
+
+0:02:55.690,0:02:58.240
+And for each one, we might have
+been there many times.
+
+0:02:58.240,0:03:01.540
+We're just going to record what
+happened, not in one step, but all the
+
+0:03:01.540,0:03:02.890
+way to the end.
+
+0:03:02.890,0:03:06.440
+When we average those samples together,
+well, that'll be an average
+
+0:03:06.440,0:03:09.160
+achieved score for that state.
+
+0:03:09.160,0:03:09.970
+That's the value.
+
+0:03:09.970,0:03:12.130
+And if we do it long enough,
+we'll got the right answer.
+
+0:03:12.130,0:03:13.910
+So this called direct evaluation.
+
+0:03:13.910,0:03:15.110
+Let's take a look.
+
+0:03:15.110,0:03:18.130
+We're given an input policy because,
+remember, this is passive
+
+0:03:18.130,0:03:21.160
+reinforcement learning, and we're
+only doing policy evaluation.
+
+0:03:21.160,0:03:22.930
+We're evaluating this policy.
+
+0:03:22.930,0:03:23.920
+So what do we do?
+
+0:03:23.920,0:03:26.280
+Well, we're going to get training
+episodes again.
+
+0:03:26.280,0:03:28.390
+And we're going to execute
+them one by one.
+
+0:03:28.390,0:03:31.910
+So maybe the first episode executes
+and we see it happen.
+
+0:03:31.910,0:03:34.180
+These are the same episodes as before.
+
+0:03:34.180,0:03:35.130
+So let's think about this one.
+
+0:03:35.130,0:03:37.760
+In this one, we were in B.
+We chose the action east.
+
+0:03:37.760,0:03:38.750
+We ended up in C.
+
+0:03:38.750,0:03:40.460
+We were in C. We chose
+the action east.
+
+0:03:40.460,0:03:41.480
+We ended up in D.
+
+0:03:41.480,0:03:43.360
+And then we were in D. We
+chose the action exit.
+
+0:03:43.360,0:03:45.130
+And we ended up in the terminal state.
+
+0:03:45.130,0:03:45.920
+The game ended.
+
+0:03:45.920,0:03:47.470
+We got our plus 10.
+
+0:03:47.470,0:03:50.790
+If we looked at just this episode, we
+could say, all right, well, I've been
+
+0:03:50.790,0:03:55.620
+in B. I know something about B. What
+utility did I receive from B?
+
+0:03:55.620,0:03:56.950
+It's not minus one.
+
+0:03:56.950,0:04:00.050
+That was the instantaneous
+one-step reward.
+
+0:04:00.050,0:04:04.670
+According to this episode, from B
+I received a total of plus 8.
+
+0:04:04.670,0:04:06.900
+So I might execute another episode.
+
+0:04:06.900,0:04:08.200
+This one turns out to be the same.
+
+0:04:08.200,0:04:12.030
+And again, from B, I received
+a total of 8.
+
+0:04:12.030,0:04:16.600
+So I've got two examples now of,
+according to this policy, I was in B.
+
+0:04:16.600,0:04:19.370
+And in the end, I received
+a plus 8 total.
+
+0:04:19.370,0:04:20.589
+There might be some other episode.
+
+0:04:20.589,0:04:24.900
+So here's one where I go from E
+to C to D. Again, I receive
+
+0:04:24.900,0:04:26.430
+plus 8 from the start.
+
+0:04:26.430,0:04:29.190
+But here, I receive that
+plus 8 from E.
+
+0:04:29.190,0:04:31.700
+And then here's the weird episode
+where I go from E to
+
+0:04:31.700,0:04:33.510
+C. I try to go east.
+
+0:04:33.510,0:04:37.240
+But when I execute the action east, I
+actually end up in A, which turns out
+
+0:04:37.240,0:04:41.610
+to be minus 10, which, by the way, I
+didn't know until I experienced that.
+
+0:04:41.610,0:04:42.910
+So what are we going to output?
+
+0:04:42.910,0:04:47.800
+Well, for each state we're going to
+write down what we saw happen.
+
+0:04:47.800,0:04:51.710
+So for example, from B, we already saw,
+we were in B twice, and each time
+
+0:04:51.710,0:04:53.030
+we received 8.
+
+0:04:53.030,0:04:53.800
+Great.
+
+0:04:53.800,0:04:55.580
+We've been in D a couple of times.
+
+0:04:55.580,0:04:57.170
+What's happened from D?
+
+0:04:57.170,0:04:59.410
+It's always been plus 10.
+
+0:04:59.410,0:05:00.730
+We've been in A once.
+
+0:05:00.730,0:05:02.190
+What's happened there?
+
+0:05:02.190,0:05:03.650
+Minus 10.
+
+0:05:03.650,0:05:05.250
+Now how about E?
+
+0:05:05.250,0:05:06.750
+We were in E twice.
+
+0:05:06.750,0:05:08.650
+Once we received plus 8.
+
+0:05:08.650,0:05:11.180
+And the other we received minus 12.
+
+0:05:11.180,0:05:13.040
+So what do we learn from all of that?
+
+0:05:13.040,0:05:16.020
+Well, we think 50-50,
+plus 8, minus 12.
+
+0:05:16.020,0:05:17.160
+What do I get?
+
+0:05:17.160,0:05:19.170
+Minus 2, right?
+
+0:05:19.170,0:05:20.080
+All right.
+
+0:05:20.080,0:05:21.250
+Here's the interesting one.
+
+0:05:21.250,0:05:22.570
+What about C?
+
+0:05:22.570,0:05:23.490
+How many times have we been there?
+
+0:05:23.490,0:05:24.540
+We've been there four times.
+
+0:05:24.540,0:05:26.040
+And what have we experienced?
+
+0:05:26.040,0:05:30.540
+Well, we got 3 plus 9's
+and 1 minus 11.
+
+0:05:30.540,0:05:31.370
+What's that?
+
+0:05:31.370,0:05:34.620
+It's plus 4 total.
+
+0:05:34.620,0:05:36.060
+Let's look at what we learned here.
+
+0:05:36.060,0:05:38.710
+Will this process work in the end?
+
+0:05:38.710,0:05:39.510
+Sure.
+
+0:05:39.510,0:05:42.040
+We're going to execute over and over
+and over from every state.
+
+0:05:42.040,0:05:44.060
+We'll eventually learn that some of the
+states are good and some of the
+
+0:05:44.060,0:05:44.900
+states are bad.
+
+0:05:44.900,0:05:48.140
+And eventually, they'll all be right
+because, from each state, we will
+
+0:05:48.140,0:05:50.480
+eventually have a bunch of executions.
+
+0:05:50.480,0:05:52.610
+And the averages will
+work out in the end.
+
+0:05:52.610,0:05:55.700
+But at least, for now, we've learned
+something that's slightly insane.
+
+0:05:55.700,0:05:56.770
+Why is that?
+
+0:05:56.770,0:05:58.550
+What do we know about E
+from our experience?
+
+0:05:58.550,0:06:01.370
+What happens when you follow
+this policy from E?
+
+0:06:01.370,0:06:04.480
+You go to C every time.
+
+0:06:04.480,0:06:04.880
+All right.
+
+0:06:04.880,0:06:06.610
+What score do you get from E?
+
+0:06:06.610,0:06:07.340
+Minus 2.
+
+0:06:07.340,0:06:09.460
+What score do you get from C?
+
+0:06:09.460,0:06:10.830
+Plus 4.
+
+0:06:10.830,0:06:11.820
+Hm.
+
+0:06:11.820,0:06:13.850
+Something doesn't compute here, right?
+
+0:06:13.850,0:06:17.690
+How can E be bad, but the state
+that it leads to every time
+
+0:06:17.690,0:06:18.960
+be reasonably good?
+
+0:06:18.960,0:06:21.310
+Similarly, B looks really good.
+
+0:06:21.310,0:06:24.490
+But it always leads to C, which
+looks kind of mediocre.
+
+0:06:24.490,0:06:27.940
+So somehow, even though this is going to
+work in the limit, we've thrown out
+
+0:06:27.940,0:06:32.630
+a huge amount of information about how
+the states are connected together.
+
+0:06:32.630,0:06:33.780
+So what's good about this?
+
+0:06:33.780,0:06:35.160
+It's really easy to understand.
+
+0:06:35.160,0:06:36.360
+You just act.
+
+0:06:36.360,0:06:39.040
+And you take averages for
+each state separately.
+
+0:06:39.040,0:06:40.340
+It will eventually work.
+
+0:06:40.340,0:06:44.950
+It satisfies our initial desire of
+computing values without knowledge of
+
+0:06:44.950,0:06:46.560
+T or R. They're not optimal values.
+
+0:06:46.560,0:06:48.640
+They're values for the policy
+being executed.
+
+0:06:48.640,0:06:50.180
+And it does the right
+thing in the end.
+
+0:06:50.180,0:06:53.780
+What's bad about it is clearly
+we're wasting information.
+
+0:06:53.780,0:06:56.180
+In particular, we're wasting information
+about how the states
+
+0:06:56.180,0:06:57.710
+connect up to each other.
+
+0:06:57.710,0:07:00.610
+If we know that a state is good, and
+we know that another state leads to
+
+0:07:00.610,0:07:03.730
+it, that state should be good as well.
+
+0:07:03.730,0:07:07.000
+And because we're learning each state
+separately, were failing to exploit
+
+0:07:07.000,0:07:09.580
+information across episodes.
+
+0:07:09.580,0:07:11.780
+That means it's going to take
+a long time to learn.
+
+0:07:11.780,0:07:16.030
+And we're going to have intermediate
+results that are weird like this one.
+
+0:07:16.030,0:07:16.540
+All right.
+
+0:07:16.540,0:07:19.590
+So the key thing that's wrong with these
+output values is that B and E
+
+0:07:19.590,0:07:23.060
+both go to the same state, yet somehow
+they have different values.
+
+0:07:23.060,0:07:24.370
+Something's weird.
+
+0:07:24.370,0:07:27.700
+So you think we already
+solved this problem.
+
+0:07:27.700,0:07:32.950
+We already have a way of exploiting
+the fact that some state s is
+
+0:07:32.950,0:07:36.730
+connected in one step to
+other state's s prime.
+
+0:07:36.730,0:07:39.730
+That's what policy evaluation
+did in the first place.
+
+0:07:39.730,0:07:41.900
+And that's what the Bellman
+equation said.
+
+0:07:41.900,0:07:47.090
+They said the value is determined by,
+essentially, a one-step expect-a-max
+
+0:07:47.090,0:07:49.680
+connected to the other values.
+
+0:07:49.680,0:07:52.750
+Now in the case of a fixed policy,
+the Bellman equation was
+
+0:07:52.750,0:07:54.780
+particularly simple.
+
+0:07:54.780,0:07:56.550
+And I draw these diagrams a lot.
+
+0:07:56.550,0:07:59.240
+We should make sure we understand
+how to read these diagrams.
+
+0:07:59.240,0:08:02.720
+These diagrams are a representation
+of the relevant
+
+0:08:02.720,0:08:04.970
+situation and Bellman equation.
+
+0:08:04.970,0:08:09.180
+When you're following some particular
+policy pi, whenever you're at a state
+
+0:08:09.180,0:08:12.110
+s, you don't have a bunch
+of actions to max over.
+
+0:08:12.110,0:08:13.890
+There's only one action, pi of s.
+
+0:08:13.890,0:08:16.080
+And that's shown here on the red line.
+
+0:08:16.080,0:08:19.110
+You then are in the q
+state of s pi of s.
+
+0:08:19.110,0:08:21.370
+And something s prime
+is going to happen.
+
+0:08:21.370,0:08:22.590
+Anything could happen.
+
+0:08:22.590,0:08:24.650
+And they're weighted by the
+transition function.
+
+0:08:24.650,0:08:27.640
+And that's why you see here multiple
+actions coming out.
+
+0:08:27.640,0:08:31.040
+So when I draw this, this represents
+the case of the action being fixed,
+
+0:08:31.040,0:08:34.110
+but the outcome being
+still up to chance.
+
+0:08:34.110,0:08:37.230
+And of course, if I can see all of those
+different outcomes, I need to
+
+0:08:37.230,0:08:40.080
+transition function to know
+how likely they are.
+
+0:08:40.080,0:08:44.310
+So the Bellman equations gave us this
+policy evaluation where we started out
+
+0:08:44.310,0:08:45.740
+with depth-limited values.
+
+0:08:45.740,0:08:48.640
+We started out with v
+of zero being zero.
+
+0:08:48.640,0:08:54.030
+And we computed the values under this
+policy pi for increasing depths.
+
+0:08:54.030,0:08:55.530
+What was the equation?
+
+0:08:55.530,0:08:58.730
+Well, it's just that diagram
+written down.
+
+0:08:58.730,0:09:03.710
+It says that, if you want to determine
+the depth k plus 1 values for some
+
+0:09:03.710,0:09:08.470
+state, you say what will I
+achieve from that state?
+
+0:09:08.470,0:09:13.690
+Well, whatever happens, I'll achieve 1
+reward in the next time step and then
+
+0:09:13.690,0:09:17.930
+my future rewards, which are
+discounted by gamma.
+
+0:09:17.930,0:09:21.040
+And I have to average over all
+the outcomes according to
+
+0:09:21.040,0:09:22.500
+the transition function.
+
+0:09:22.500,0:09:26.490
+So what this is is it essentially says,
+if you've got values for the
+
+0:09:26.490,0:09:31.110
+states, replace them with a
+one-step-look-ahead, which in here is
+
+0:09:31.110,0:09:35.490
+just an average of real reward
+plus future values.
+
+0:09:35.490,0:09:38.290
+And that gets us one step further
+down into the tree.
+
+0:09:38.290,0:09:41.400
+And the rewards get incorporated
+one step at a time.
+
+0:09:41.400,0:09:44.220
+And the overall estimates
+become better.
+
+0:09:44.220,0:09:46.470
+So we'd like to do this, but we can't.
+
+0:09:46.470,0:09:49.780
+What's stopping us from running this in
+the reinforcement learning setting?
+
+0:09:49.780,0:09:50.440
+It's beautiful.
+
+0:09:50.440,0:09:52.860
+It takes states, it connects
+them up to other states.
+
+0:09:52.860,0:09:55.170
+It converges well.
+
+0:09:55.170,0:09:56.580
+We're missing something.
+
+0:09:56.580,0:10:00.370
+We're missing T, and we're missing
+R. OK, so what do we have?
+
+0:10:00.370,0:10:01.300
+We've got an average.
+
+0:10:01.300,0:10:01.930
+Look at this thing.
+
+0:10:01.930,0:10:02.920
+It's complicated.
+
+0:10:02.920,0:10:04.060
+There's pi's everywhere.
+
+0:10:04.060,0:10:04.800
+There's a discount.
+
+0:10:04.800,0:10:06.640
+But in the end, it's an average.
+
+0:10:06.640,0:10:08.620
+It's an average of a bunch of things.
+
+0:10:08.620,0:10:12.920
+Each thing is a one-step reward plus
+a discounted future from previous
+
+0:10:12.920,0:10:14.250
+computation.
+
+0:10:14.250,0:10:17.410
+And if we want to average a bunch of
+things, we're back to that case of
+
+0:10:17.410,0:10:20.880
+having a model-based or
+model-free option.
+
+0:10:20.880,0:10:23.260
+So this approach fully exploits
+the connections.
+
+0:10:23.260,0:10:24.500
+But we can't do it.
+
+0:10:24.500,0:10:27.850
+And the key question is going to be,
+how do we do this average without
+
+0:10:27.850,0:10:28.930
+knowing the weights?
+
+0:10:28.930,0:10:31.650
+And we already know how to take averages
+without knowing the weights.
+
+0:10:31.650,0:10:34.660
+And that is we look at samples of
+the things we're averaging.
+
+0:10:34.660,0:10:38.440
+And we add up those samples
+with equal weight.
+
+0:10:38.440,0:10:40.260
+So let's think about how we can
+turn that into an algorithm.
+
+0:10:40.260,0:10:41.510
+

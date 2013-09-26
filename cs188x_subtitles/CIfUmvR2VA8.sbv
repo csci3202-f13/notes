@@ -1,0 +1,87 @@
+0:00:00.000,0:00:01.290
+
+0:00:01.290,0:00:03.260
+DAN KLEIN: So when you want breadth
+research, you want it when the
+
+0:00:03.260,0:00:05.610
+solutions are kind of not too far.
+
+0:00:05.610,0:00:09.310
+So what you're trying to find is
+connected to you by a relatively
+
+0:00:09.310,0:00:10.530
+shallow solution.
+
+0:00:10.530,0:00:12.880
+And then it's not so expensive to
+try all the shallow things.
+
+0:00:12.880,0:00:15.740
+Whereas depth research tries
+these crazy long plans that
+
+0:00:15.740,0:00:16.590
+may not even work.
+
+0:00:16.590,0:00:18.500
+So if your solutions are relatively
+shallow, breadth
+
+0:00:18.500,0:00:20.280
+research is a good answer.
+
+0:00:20.280,0:00:23.520
+When you care about the length, breadth
+research has a guarantee that
+
+0:00:23.520,0:00:24.880
+depth research does not.
+
+0:00:24.880,0:00:25.560
+How about the opposite?
+
+0:00:25.560,0:00:27.250
+When might you care about
+depth research?
+
+0:00:27.250,0:00:31.450
+In general, you're going to prefer depth
+research in cases where you want
+
+0:00:31.450,0:00:32.549
+to get to the bottom of the graph.
+
+0:00:32.549,0:00:34.510
+That could be because the graph
+isn't actually very deep.
+
+0:00:34.510,0:00:37.370
+It could be because the solutions are
+all down there at the bottom.
+
+0:00:37.370,0:00:40.360
+So if you remember the cartoon where the
+gems in the mountain, if they're
+
+0:00:40.360,0:00:43.770
+all at the bottom and you need to get
+to the bottom anyway, you might as
+
+0:00:43.770,0:00:46.280
+well go straight there and
+hope for the best, right?
+
+0:00:46.280,0:00:48.300
+So there are a lot of trade offs.
+
+0:00:48.300,0:00:50.530
+We're going to see cases where about
+breadth research is better and where
+
+0:00:50.530,0:00:51.780
+depth research is better.
+
+0:00:51.780,0:00:52.700
+

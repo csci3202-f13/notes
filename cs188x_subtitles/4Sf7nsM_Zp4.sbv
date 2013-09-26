@@ -1,0 +1,464 @@
+0:00:00.000,0:00:00.680
+
+0:00:00.680,0:00:02.930
+PROFESSOR: Let's see another
+example of an MDP.
+
+0:00:02.930,0:00:06.250
+Much like in search problems, it's very
+easy to think of these things in
+
+0:00:06.250,0:00:09.090
+terms of being on a grid, because that's
+often a great running example
+
+0:00:09.090,0:00:10.300
+that we use.
+
+0:00:10.300,0:00:13.670
+So let's take the example
+of a race car.
+
+0:00:13.670,0:00:20.070
+We have some robotic race car, and it
+would like to travel far and quickly.
+
+0:00:20.070,0:00:23.560
+So we're going to imagine that this
+car has three states it can be in.
+
+0:00:23.560,0:00:27.980
+Its engine can be cool, it can be
+getting warm, or it can be completely
+
+0:00:27.980,0:00:29.790
+overheated and break down.
+
+0:00:29.790,0:00:32.509
+So we're going to show them like this.
+
+0:00:32.509,0:00:34.390
+So cool is kind of the good state.
+
+0:00:34.390,0:00:37.240
+As you get warm, you're
+risking overheating.
+
+0:00:37.240,0:00:38.630
+What can the agent do?
+
+0:00:38.630,0:00:40.540
+Well, the agent has two actions.
+
+0:00:40.540,0:00:43.720
+It can drive slow or
+it can drive fast.
+
+0:00:43.720,0:00:45.160
+What do those actions do?
+
+0:00:45.160,0:00:47.220
+Well, slow tends to cool
+the agent down.
+
+0:00:47.220,0:00:49.180
+Fast tends to heat the agent up.
+
+0:00:49.180,0:00:51.550
+But there's some uncertainty involved.
+
+0:00:51.550,0:00:55.070
+So if you're cool and you drive
+slow, then with probability
+
+0:00:55.070,0:00:57.460
+one, you stay cool.
+
+0:00:57.460,0:01:00.670
+If you drive fast, there's a
+50% chance of warming up.
+
+0:01:00.670,0:01:03.460
+Now you might say, how come I don't
+know whether or not I'm
+
+0:01:03.460,0:01:04.120
+going to warm up?
+
+0:01:04.120,0:01:07.520
+Why don't I instrument my car with
+sensors everywhere and build a complex
+
+0:01:07.520,0:01:09.180
+model of thermodynamics?
+
+0:01:09.180,0:01:11.330
+Of course, you can always
+try to do that.
+
+0:01:11.330,0:01:15.110
+You can always make your model of the
+world richer, and you can always sense
+
+0:01:15.110,0:01:16.410
+more about the world.
+
+0:01:16.410,0:01:19.760
+And when you do those things,
+your uncertainty reduces.
+
+0:01:19.760,0:01:22.436
+One, it's never going to go away,
+because as we'll see later, your model
+
+0:01:22.436,0:01:23.910
+is never going to be perfect.
+
+0:01:23.910,0:01:27.090
+And two, in many cases, that's
+not worth the cost.
+
+0:01:27.090,0:01:30.720
+In this very simple model, going fast
+simply has a 50/50 chance of
+
+0:01:30.720,0:01:32.280
+overheating.
+
+0:01:32.280,0:01:32.810
+All right.
+
+0:01:32.810,0:01:34.680
+So that's what slow and
+fast do from cool.
+
+0:01:34.680,0:01:39.120
+From warm, slow either keeps you the
+same or it has a 50/50 chance of
+
+0:01:39.120,0:01:42.060
+cooling you back down.
+
+0:01:42.060,0:01:45.170
+If you go fast, you're guaranteed
+to overheat.
+
+0:01:45.170,0:01:47.430
+All right, what about from overheated?
+
+0:01:47.430,0:01:49.190
+If you get to overheated,
+the game's done.
+
+0:01:49.190,0:01:51.490
+You break down and you drive no more.
+
+0:01:51.490,0:01:54.790
+So a smart race car will
+try not to overeat.
+
+0:01:54.790,0:01:57.600
+If you go faster, you
+get double reward.
+
+0:01:57.600,0:02:00.470
+Otherwise you would just always
+go slow, because why not?
+
+0:02:00.470,0:02:02.790
+So let's see what the
+rewards are on this.
+
+0:02:02.790,0:02:04.815
+Well, all the slow actions
+get a plus one.
+
+0:02:04.815,0:02:07.140
+It doesn't matter whether
+you get warm, right?
+
+0:02:07.140,0:02:10.070
+In and of itself, that's not part
+of the reward structure.
+
+0:02:10.070,0:02:14.160
+You get a plus 1 when you go slow, and
+a plus 2 when you go fast, except if
+
+0:02:14.160,0:02:15.380
+you overheat.
+
+0:02:15.380,0:02:17.910
+Then you get a minus 10
+and the game ends.
+
+0:02:17.910,0:02:21.330
+If you think about this MDP, it's
+actually more important that the game
+
+0:02:21.330,0:02:24.090
+ends than what that number minus
+10 is, because you basically
+
+0:02:24.090,0:02:25.640
+never want to do it.
+
+0:02:25.640,0:02:27.130
+So what do we see here?
+
+0:02:27.130,0:02:30.460
+This is a state transition diagram
+for this Markov decision process.
+
+0:02:30.460,0:02:31.810
+It shows the states.
+
+0:02:31.810,0:02:33.080
+In this case, there are three of them.
+
+0:02:33.080,0:02:34.210
+It shows the actions.
+
+0:02:34.210,0:02:35.120
+There are two of them.
+
+0:02:35.120,0:02:39.510
+And it shows the transition function,
+which says what each action does.
+
+0:02:39.510,0:02:43.410
+It also shows the rewards which are
+associated with a state, an action,
+
+0:02:43.410,0:02:46.330
+and a result.
+
+0:02:46.330,0:02:49.030
+Now this is the kind of thing we
+might have used Expectimax for.
+
+0:02:49.030,0:02:54.110
+And we can think about an MDP, any
+MDP, as defining a search tree.
+
+0:02:54.110,0:02:57.010
+So if you're in some particular state--
+for example, if you're in the
+
+0:02:57.010,0:02:59.170
+state where the car is cool--
+
+0:02:59.170,0:03:02.480
+well, you have two actions, just like
+you did in an Expectimax tree.
+
+0:03:02.480,0:03:04.970
+You can go slow or fast.
+
+0:03:04.970,0:03:06.540
+If you go slow, you stay cool.
+
+0:03:06.540,0:03:09.040
+If you go fast, you might heat up.
+
+0:03:09.040,0:03:10.840
+And this continues down.
+
+0:03:10.840,0:03:14.400
+This is very much like an Expectimax
+tree, but we'll see very shortly why
+
+0:03:14.400,0:03:16.900
+we might not want use Expectimax
+to solve it.
+
+0:03:16.900,0:03:18.390
+You can already see hints of it.
+
+0:03:18.390,0:03:21.040
+What do you notice about this
+tree when you look at it?
+
+0:03:21.040,0:03:24.550
+It's a big tree, but it's kind of the
+same blue and red stuff over and over
+
+0:03:24.550,0:03:25.430
+again, right?
+
+0:03:25.430,0:03:27.340
+There's just not that many states.
+
+0:03:27.340,0:03:29.560
+So this is a case where Expectimax
+would do a lot of work, and
+
+0:03:29.560,0:03:31.970
+we'll see why later.
+
+0:03:31.970,0:03:35.970
+In general, any MDP is going to
+project these search trees.
+
+0:03:35.970,0:03:39.070
+You can think of the MVP as applying the
+rules of a non-deterministic game,
+
+0:03:39.070,0:03:43.450
+and from any state, this is
+what could happen, right?
+
+0:03:43.450,0:03:45.870
+I'm not talking about how to
+compute things like values.
+
+0:03:45.870,0:03:49.010
+I'm just talking about what the
+possible outcomes could be.
+
+0:03:49.010,0:03:50.860
+Well, you're a state.
+
+0:03:50.860,0:03:52.010
+What can happen?
+
+0:03:52.010,0:03:53.365
+There are actions.
+
+0:03:53.365,0:03:56.190
+The actions are under your control.
+
+0:03:56.190,0:03:57.650
+You get to pick one.
+
+0:03:57.650,0:03:59.740
+But there's a variety of actions.
+
+0:03:59.740,0:04:03.500
+From each action, there's
+an uncertain outcome.
+
+0:04:03.500,0:04:05.930
+And so we need a very
+important concept.
+
+0:04:05.930,0:04:09.870
+It's actually analogous to chance nodes
+from before, but it's kind of
+
+0:04:09.870,0:04:11.010
+confusing when you first see.
+
+0:04:11.010,0:04:13.090
+It's called a q-state.
+
+0:04:13.090,0:04:18.860
+When I'm in a state and I take an
+action, I end up in a q-state, which
+
+0:04:18.860,0:04:23.080
+you can think of as kind of the pair
+of the state and the action, where
+
+0:04:23.080,0:04:26.810
+I've committed to the action
+but I haven't done it yet.
+
+0:04:26.810,0:04:29.880
+So this is illustrated here by
+the agent having decided
+
+0:04:29.880,0:04:31.510
+to move to the right.
+
+0:04:31.510,0:04:35.220
+But since the agent hasn't actually done
+it, the action hasn't resolved
+
+0:04:35.220,0:04:36.630
+and we don't know the outcome.
+
+0:04:36.630,0:04:41.570
+So from a q-state, which is a commitment
+to an action, there's then
+
+0:04:41.570,0:04:44.350
+a variety of possible outcomes.
+
+0:04:44.350,0:04:45.390
+What are the outcomes?
+
+0:04:45.390,0:04:48.360
+Well, they're all the states, s-prime,
+that this action can lead
+
+0:04:48.360,0:04:49.750
+to from that state.
+
+0:04:49.750,0:04:52.400
+So these are the important concepts.
+
+0:04:52.400,0:04:54.120
+s here is a state.
+
+0:04:54.120,0:04:58.580
+s, a is a q-state, a
+state-action pair.
+
+0:04:58.580,0:05:02.690
+The actual resolution where
+we land in some s-prime--
+
+0:05:02.690,0:05:05.490
+that's called a transition.
+
+0:05:05.490,0:05:08.740
+And we're going to see these triples
+over and over and over again--
+
+0:05:08.740,0:05:09.830
+s, a, s-prime.
+
+0:05:09.830,0:05:14.460
+I was in state s, I took action a,
+and the outcome was s-prime.
+
+0:05:14.460,0:05:16.150
+That's called a transition.
+
+0:05:16.150,0:05:18.530
+It has a probability
+associated with it.
+
+0:05:18.530,0:05:21.280
+That's T(s, a, s-prime), the
+transition function.
+
+0:05:21.280,0:05:23.205
+And it has a reward associated
+with it.
+
+0:05:23.205,0:05:27.500
+That reward is shown here as a gem, but
+it could be positive or negative.
+
+0:05:27.500,0:05:32.380
+So that's kind of like an Expectimax
+tree except, one, the probabilities
+
+0:05:32.380,0:05:34.820
+are given to you by the
+transition function.
+
+0:05:34.820,0:05:38.390
+And two, the rewards, instead of being
+at the bottom, are kind of smeared
+
+0:05:38.390,0:05:39.290
+throughout the tree.
+
+0:05:39.290,0:05:40.620
+They come to you step by step.
+
+0:05:40.620,0:05:41.870
+

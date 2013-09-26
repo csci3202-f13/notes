@@ -1,0 +1,444 @@
+0:00:00.000,0:00:01.260
+
+0:00:01.260,0:00:01.510
+PROFESSOR: OK.
+
+0:00:01.510,0:00:04.950
+Let's think about how we're going to
+deal with games like chess, where we
+
+0:00:04.950,0:00:07.560
+can't possibly search
+the whole game tree.
+
+0:00:07.560,0:00:09.700
+Essentially we've got
+resource limits--
+
+0:00:09.700,0:00:11.180
+in this case, time--
+
+0:00:11.180,0:00:15.510
+that tell us we can only look forward
+so far into the tree before the
+
+0:00:15.510,0:00:19.030
+exponential growth of
+the tree gets us.
+
+0:00:19.030,0:00:21.530
+This is always going to be the
+case in a realistic game.
+
+0:00:21.530,0:00:22.990
+You will not be able to
+search to the leaf.
+
+0:00:22.990,0:00:25.090
+So you've got this tree
+like the one shown.
+
+0:00:25.090,0:00:28.330
+There's alternating min and max layers,
+and way down at the bottom
+
+0:00:28.330,0:00:31.500
+somewhere are the actual terminal
+utilities, which may all be plus and
+
+0:00:31.500,0:00:35.060
+minus 1, but we can't
+search down to them.
+
+0:00:35.060,0:00:36.090
+So the solution--
+
+0:00:36.090,0:00:37.200
+pretty straightforward.
+
+0:00:37.200,0:00:39.000
+We're going to do a depth-limited
+search.
+
+0:00:39.000,0:00:42.620
+We're only going to actually go down
+as far as we have time for.
+
+0:00:42.620,0:00:45.340
+So we're going to search for some
+limited depth in the tree.
+
+0:00:45.340,0:00:49.070
+Now the problem is, when we get to the
+end of our search, we don't have
+
+0:00:49.070,0:00:52.370
+terminal utilities, because we're not
+actually at the end of the game.
+
+0:00:52.370,0:00:54.360
+We're just a few moves ahead.
+
+0:00:54.360,0:00:57.250
+So what we need is we need to replace
+the terminal utilities in the min and
+
+0:00:57.250,0:01:00.830
+max algorithm with what's called an
+evaluation function, which takes a
+
+0:01:00.830,0:01:05.090
+non-terminal position and gives us some
+estimate of what the terminal
+
+0:01:05.090,0:01:08.670
+utility under that tree would
+be under min and max flat.
+
+0:01:08.670,0:01:11.190
+So for example, we might cut
+the tree off right here and
+
+0:01:11.190,0:01:12.970
+stick in these numbers.
+
+0:01:12.970,0:01:14.170
+Are these the min and max values?
+
+0:01:14.170,0:01:16.990
+Almost certainly not, but
+they're something.
+
+0:01:16.990,0:01:21.410
+So now we do our search, we run min and
+max, and we propagate everything
+
+0:01:21.410,0:01:22.610
+up to the root.
+
+0:01:22.610,0:01:24.670
+This is not the min and
+max value at the root.
+
+0:01:24.670,0:01:28.480
+This is the min and max value under the
+assumption that this evaluation
+
+0:01:28.480,0:01:34.530
+function accurately represents the min
+and max values of the truncated notes.
+
+0:01:34.530,0:01:38.670
+As an example here, back to chess, if
+we've got about 100 seconds to move,
+
+0:01:38.670,0:01:41.600
+and we can explore 10,000 nodes per
+second, which actually isn't very
+
+0:01:41.600,0:01:43.810
+many, that means we can
+check something like a
+
+0:01:43.810,0:01:45.280
+million nodes per move.
+
+0:01:45.280,0:01:48.380
+And with alpha beta pruning that we're
+going to talk about later, that means
+
+0:01:48.380,0:01:51.520
+you'll get to something like depth 8,
+and that will not be a world champion
+
+0:01:51.520,0:01:53.430
+chess player, but it will be decent.
+
+0:01:53.430,0:01:57.190
+So this kind of idea of truncation
+is very important.
+
+0:01:57.190,0:01:59.780
+We're going to have to truncate, so
+we'll want to do it as well as
+
+0:01:59.780,0:02:04.430
+possible, meaning go as deeply as we
+can and plug in as good numbers as
+
+0:02:04.430,0:02:07.610
+possible for the evaluation function.
+
+0:02:07.610,0:02:10.310
+Of course our guarantee of optimal play
+is gone, because these are no
+
+0:02:10.310,0:02:11.960
+longer the min and max values.
+
+0:02:11.960,0:02:15.760
+Our valuation function may not be very
+good at knowing that there's a trap
+
+0:02:15.760,0:02:18.450
+just beyond the horizon.
+
+0:02:18.450,0:02:22.100
+Searching more plies, that is, going
+deeper into this tree, makes a big
+
+0:02:22.100,0:02:23.300
+difference.
+
+0:02:23.300,0:02:25.760
+And we'll see examples
+of that in a second.
+
+0:02:25.760,0:02:29.930
+One cool thing you can do is you can
+do iterative deepening here.
+
+0:02:29.930,0:02:34.750
+What that means is you do a search for
+one move in response, one ply, and
+
+0:02:34.750,0:02:37.430
+then two, and then three,
+and then four.
+
+0:02:37.430,0:02:39.330
+At some point, you'll run out of time.
+
+0:02:39.330,0:02:42.560
+At any given time, you've done
+essentially the best search you can
+
+0:02:42.560,0:02:44.700
+do, and you always have a move.
+
+0:02:44.700,0:02:47.380
+And the more time you get, the
+better that move gets.
+
+0:02:47.380,0:02:49.720
+That's what's called an anytime
+algorithm, and it's a really nice
+
+0:02:49.720,0:02:50.610
+property to have.
+
+0:02:50.610,0:02:53.050
+You've always got an answer, and that
+answer gets better over time.
+
+0:02:53.050,0:02:55.760
+
+0:02:55.760,0:02:57.000
+So depth matters.
+
+0:02:57.000,0:02:58.780
+Evaluation functions are
+going to be imperfect.
+
+0:02:58.780,0:03:01.090
+We're going to talk about how we can
+make them as good as possible, but
+
+0:03:01.090,0:03:03.320
+they're always going to be imperfect.
+
+0:03:03.320,0:03:07.380
+However, the deeper you bury them into
+a tree, the less their imperfection
+
+0:03:07.380,0:03:08.630
+matters in general.
+
+0:03:08.630,0:03:11.140
+So we want to make them as good as
+possible, but we also want to bury
+
+0:03:11.140,0:03:12.900
+them deep in the tree.
+
+0:03:12.900,0:03:16.710
+In general, the deeper you search, the
+more likely you are to see what's
+
+0:03:16.710,0:03:18.440
+actually going on.
+
+0:03:18.440,0:03:20.590
+So here you have the agent on
+the top who's got a very
+
+0:03:20.590,0:03:21.560
+hazy view of the future.
+
+0:03:21.560,0:03:23.230
+Maybe the future looks quite scary.
+
+0:03:23.230,0:03:24.770
+A monster mountain.
+
+0:03:24.770,0:03:27.070
+But then you look just a little bit
+further, and you realize, it's just
+
+0:03:27.070,0:03:28.880
+some nice trees.
+
+0:03:28.880,0:03:31.490
+And it's always better to look further,
+but you'll always have a
+
+0:03:31.490,0:03:34.010
+limit to your resources.
+
+0:03:34.010,0:03:37.890
+This is actually an important example
+of a trade-off here between the
+
+0:03:37.890,0:03:40.900
+complexity of the features that go
+into the evaluation function--
+
+0:03:40.900,0:03:43.800
+you could make a really complicated
+evaluation function, and then you
+
+0:03:43.800,0:03:47.330
+wouldn't have to search so deeply to
+behave well, or you could have a very
+
+0:03:47.330,0:03:51.190
+simple evaluation function, and you
+could compensate by doing more min and
+
+0:03:51.190,0:03:52.630
+max search.
+
+0:03:52.630,0:03:55.540
+And there's this trade-off between
+whether your behavior arises from the
+
+0:03:55.540,0:03:59.610
+computation or from the complexity
+of your stored evaluation.
+
+0:03:59.610,0:04:02.220
+Let's take a look at this in practice.
+
+0:04:02.220,0:04:04.360
+So here's a configuration.
+
+0:04:04.360,0:04:06.620
+Let's think about this for a second.
+
+0:04:06.620,0:04:11.050
+We'd like to eat that dot, and if we
+look forward just a couple steps, we
+
+0:04:11.050,0:04:15.560
+won't be able to see the actual eating
+of the dot, or any future collisions
+
+0:04:15.560,0:04:16.560
+with the ghosts.
+
+0:04:16.560,0:04:19.050
+We're just going to look forward and see
+whether or not we can be closer or
+
+0:04:19.050,0:04:22.850
+farther from the dot, but we'll have
+to have an evaluation function that
+
+0:04:22.850,0:04:26.150
+says, being close to the dot is better
+than being farther, or it's all going
+
+0:04:26.150,0:04:28.400
+to look the same to the
+evaluation function.
+
+0:04:28.400,0:04:30.800
+So let's see what happens when
+we search two ahead.
+
+0:04:30.800,0:04:34.810
+Well, we're going to move towards
+the dot, unsurprisingly.
+
+0:04:34.810,0:04:36.060
+Except now what happens?
+
+0:04:36.060,0:04:39.220
+
+0:04:39.220,0:04:40.470
+We get pinned.
+
+0:04:40.470,0:04:45.880
+
+0:04:45.880,0:04:50.090
+What happens if instead, we have a
+mastermind Pac Man here, and we can
+
+0:04:50.090,0:04:51.800
+see all the way into the future?
+
+0:04:51.800,0:04:56.060
+We can see the whole game play out,
+which on this board is feasible?
+
+0:04:56.060,0:04:57.490
+Well, now what should we do?
+
+0:04:57.490,0:05:01.390
+The critical thing is that blue ghost is
+going to go somewhere, and once it
+
+0:05:01.390,0:05:03.610
+goes somewhere, it's committed.
+
+0:05:03.610,0:05:05.150
+So what we should actually do--
+
+0:05:05.150,0:05:07.560
+and this is not obvious
+from a horizon of 2--
+
+0:05:07.560,0:05:11.690
+is move towards the orange ghost,
+because we're still not actually in
+
+0:05:11.690,0:05:12.360
+any danger.
+
+0:05:12.360,0:05:15.610
+A reasonable evaluation function that
+looks just a little bit in the future
+
+0:05:15.610,0:05:16.570
+would say, that's crazy.
+
+0:05:16.570,0:05:19.160
+You move towards the ghost
+and away from the dot.
+
+0:05:19.160,0:05:22.800
+But in fact, if you look deeply enough
+into the tree, you see that what this
+
+0:05:22.800,0:05:28.180
+allows you to do is force the blue ghost
+to make a decision before you
+
+0:05:28.180,0:05:32.360
+have to, and that lets you get around.
+
+0:05:32.360,0:05:34.160
+And that is Mastermind Pac Man.
+
+0:05:34.160,0:05:35.410
+

@@ -1,0 +1,683 @@
+0:00:00.000,0:00:00.800
+
+0:00:00.800,0:00:04.470
+PROFESSOR: In an MDP, the rewards
+come to you step by step.
+
+0:00:04.470,0:00:08.090
+And because they come to you step by
+step, we need to figure out what our
+
+0:00:08.090,0:00:10.500
+utility function actually is.
+
+0:00:10.500,0:00:13.660
+In the simplest case, you just add up
+the rewards, but it can be a little
+
+0:00:13.660,0:00:15.190
+more subtle than that.
+
+0:00:15.190,0:00:18.600
+For example, as shown here, you might
+care whether or not you get these four
+
+0:00:18.600,0:00:23.660
+gems step by step or all at
+the end in one big prize.
+
+0:00:23.660,0:00:26.470
+This raises a general
+question for MDPs.
+
+0:00:26.470,0:00:32.750
+What preferences or utilities should
+an agent have for reward sequences?
+
+0:00:32.750,0:00:34.230
+Now you might think that's easy.
+
+0:00:34.230,0:00:36.750
+You're asking me whether I want
+more rewards or less rewards.
+
+0:00:36.750,0:00:40.140
+So for example, if I give you the choice
+between the reward sequence
+
+0:00:40.140,0:00:45.480
+plus 1, plus 2, plus 2, plus 2, or
+plus 2, plus 3, plus 4, which one
+
+0:00:45.480,0:00:47.230
+should be agent want?
+
+0:00:47.230,0:00:50.470
+Well, it seems pretty reasonable that
+the agent should want the one where
+
+0:00:50.470,0:00:52.230
+the numbers are bigger.
+
+0:00:52.230,0:00:55.180
+So adding up the rewards will
+give you that effect.
+
+0:00:55.180,0:00:58.080
+But it's a little trickier, because
+there's one other question, which is
+
+0:00:58.080,0:00:59.420
+now or later?
+
+0:00:59.420,0:01:04.160
+So for example, if I have the choice
+between 0, 0, and 1 in three
+
+0:01:04.160,0:01:08.820
+successive timesteps, or the sequence
+1, 0, 0, the sum is the same.
+
+0:01:08.820,0:01:10.150
+Which one should I prefer?
+
+0:01:10.150,0:01:11.430
+Or should I be indifferent?
+
+0:01:11.430,0:01:12.830
+If I added them up, I'd
+be indifferent.
+
+0:01:12.830,0:01:15.140
+They have the same sum.
+
+0:01:15.140,0:01:15.760
+What do you think?
+
+0:01:15.760,0:01:20.690
+Should the agent prefer A or B?
+
+0:01:20.690,0:01:23.330
+Most people think the agent should
+prefer B. And that makes sense,
+
+0:01:23.330,0:01:25.360
+because if you're going to get this
+reward, you might as well get it now.
+
+0:01:25.360,0:01:26.320
+Well, why?
+
+0:01:26.320,0:01:29.590
+It's the same reward in three days.
+
+0:01:29.590,0:01:32.190
+The answer is, it's kind
+of not, right?
+
+0:01:32.190,0:01:36.170
+It's perfectly reasonable to maximize
+the sum of your rewards, but it's also
+
+0:01:36.170,0:01:39.620
+reasonable to prefer a reward
+now to a reward later.
+
+0:01:39.620,0:01:43.460
+One solution to this is to imagine that
+the values of your awards decay
+
+0:01:43.460,0:01:44.470
+exponentially.
+
+0:01:44.470,0:01:48.090
+So for example, the same gem
+that's worth plus 1 now--
+
+0:01:48.090,0:01:51.490
+if I get it tomorrow, it's only
+worth some smaller amount
+
+0:01:51.490,0:01:53.030
+which we call gamma.
+
+0:01:53.030,0:01:56.950
+That gamma is called the discount
+or the decay rate here.
+
+0:01:56.950,0:01:59.420
+In two steps, it's only
+worth gamma squared.
+
+0:01:59.420,0:02:00.700
+I don't even want it anymore.
+
+0:02:00.700,0:02:01.780
+Well, its sign's not going to change.
+
+0:02:01.780,0:02:02.410
+I'm still going to want it.
+
+0:02:02.410,0:02:04.150
+It's just not going to be
+worth nearly as much.
+
+0:02:04.150,0:02:08.780
+So let's look a little bit more closely
+about how and why we do this.
+
+0:02:08.780,0:02:12.650
+So first of all, we've got this tree
+which we might solve with a variant of
+
+0:02:12.650,0:02:16.270
+Expectimax, although we're going to
+have new methods very shortly.
+
+0:02:16.270,0:02:18.800
+How exactly do we do this
+thing where things are
+
+0:02:18.800,0:02:22.290
+discounted gamma every timestep?
+
+0:02:22.290,0:02:24.800
+Well, we're going to be recursing into
+the tree, and we could imagine that
+
+0:02:24.800,0:02:29.910
+every time we descend a level, we
+multiply in gamma against whatever the
+
+0:02:29.910,0:02:31.410
+recursion returns.
+
+0:02:31.410,0:02:34.320
+So we look at the sub-tree and say,
+oh, you're worth 35 points.
+
+0:02:34.320,0:02:37.870
+No, gamma times 35, because
+you're in the future.
+
+0:02:37.870,0:02:40.990
+And if we do it that way where we
+multiply in one gamma every step down
+
+0:02:40.990,0:02:43.960
+the tree, the deeper we get into the
+tree, the more gammas we get, and
+
+0:02:43.960,0:02:45.490
+we'll get this exponential decay.
+
+0:02:45.490,0:02:46.360
+So that's how we do it.
+
+0:02:46.360,0:02:47.650
+But why should we do it?
+
+0:02:47.650,0:02:51.450
+Well, one answer is actually we do like
+the rewards to be sooner rather
+
+0:02:51.450,0:02:55.150
+than later, but it also turns out that
+this discounting has other nice
+
+0:02:55.150,0:02:58.300
+effects, like it helps our
+algorithms converge.
+
+0:02:58.300,0:02:59.820
+Now why is it exponential?
+
+0:02:59.820,0:03:01.300
+Again, there's two answers.
+
+0:03:01.300,0:03:04.750
+One is, if you just think about money
+and investment, there are many cases
+
+0:03:04.750,0:03:08.520
+where if you have the reward now versus
+later, you could just invest it
+
+0:03:08.520,0:03:10.355
+at some kind of exponential growth.
+
+0:03:10.355,0:03:14.170
+So there might be some natural reason
+why exponential decay is appropriate.
+
+0:03:14.170,0:03:17.320
+But it's also going to turn out to be
+a mathematical consequence of some
+
+0:03:17.320,0:03:20.490
+basically reasonable assumptions
+that we're going to make.
+
+0:03:20.490,0:03:24.120
+So we did this discounting, and we had
+a discount of 0.5-- which is really
+
+0:03:24.120,0:03:24.900
+steep, right?
+
+0:03:24.900,0:03:28.460
+Rewards are a half as much every
+time tick that passes.
+
+0:03:28.460,0:03:33.780
+Then if we had the sequence 1, 2, 3
+and I said, how many [? U-tiles ?]
+
+0:03:33.780,0:03:36.500
+is this worth, it wouldn't
+be 1 plus 2 plus 3.
+
+0:03:36.500,0:03:40.180
+The first 1 would be worth its full
+amount, but the 2 would only be worth
+
+0:03:40.180,0:03:42.800
+half, because it's one timestep
+in the future, and the 3 is
+
+0:03:42.800,0:03:44.710
+only worth a quarter.
+
+0:03:44.710,0:03:47.220
+And the effect of that would
+be 1, 2, 3 would not be as
+
+0:03:47.220,0:03:49.030
+desirable as 3, 2, 1.
+
+0:03:49.030,0:03:53.550
+And now we have this preference being
+reflected, where even if the sum of
+
+0:03:53.550,0:03:57.920
+the rewards is the same, I'd
+rather have them soon.
+
+0:03:57.920,0:04:02.230
+So what will we want from an agent that
+looks at sequences of rewards in
+
+0:04:02.230,0:04:04.840
+order to consider it reasonable?
+
+0:04:04.840,0:04:07.030
+Remember, back when we talked about
+utilities and preferences, we have
+
+0:04:07.030,0:04:07.830
+these axioms?
+
+0:04:07.830,0:04:11.430
+And we said, these preferences are
+rational, and if they are rational,
+
+0:04:11.430,0:04:14.690
+then I can conclude they can be
+represented by a utility function.
+
+0:04:14.690,0:04:17.120
+There's kind of an analogy
+here with sequences.
+
+0:04:17.120,0:04:20.230
+And that is, there's a notion
+of stationary preferences.
+
+0:04:20.230,0:04:24.390
+We say that preferences are stationary
+if, whenever I prefer one sequence to
+
+0:04:24.390,0:04:26.900
+another-- so this A sequence
+to the B sequence--
+
+0:04:26.900,0:04:30.920
+if I stick the same rewards in front
+of both-- say, I stick an extra
+
+0:04:30.920,0:04:34.120
+timestep in front at plus 0.4--
+
+0:04:34.120,0:04:36.510
+my preferences should be unchanged.
+
+0:04:36.510,0:04:39.940
+If I liked A better than B now, I should
+like it better shifted into the
+
+0:04:39.940,0:04:42.960
+future as well, and vice versa.
+
+0:04:42.960,0:04:45.750
+This seems pretty reasonable that
+preferences might be stationary.
+
+0:04:45.750,0:04:49.890
+If preferences are stationary, then it
+turns out that there's only two ways
+
+0:04:49.890,0:04:51.590
+you can define utilities.
+
+0:04:51.590,0:04:54.790
+And that is add up the rewards
+or add them up discounted.
+
+0:04:54.790,0:04:56.970
+And if you stare at that, you'll see
+that's actually only one way, because
+
+0:04:56.970,0:05:01.190
+if gamma were 1, the discounted utility
+would be the additive utility.
+
+0:05:01.190,0:05:04.360
+So under the stationary preference
+assumptions, we're going to end up
+
+0:05:04.360,0:05:07.600
+discounting by some multiplicative
+factor.
+
+0:05:07.600,0:05:10.100
+Now, there are cases where your
+preferences won't be stationary.
+
+0:05:10.100,0:05:13.960
+For example, if certain things change
+at certain times, that's not what
+
+0:05:13.960,0:05:16.420
+we're looking at here.
+
+0:05:16.420,0:05:19.590
+There's another problem with these games
+like the racing game, which is
+
+0:05:19.590,0:05:20.920
+they can last forever.
+
+0:05:20.920,0:05:23.670
+The smart race car, it turns
+out, will never overheat.
+
+0:05:23.670,0:05:26.560
+You can see that this is possible
+because if you always go slow, you'll
+
+0:05:26.560,0:05:27.530
+never overheat.
+
+0:05:27.530,0:05:31.000
+And maybe there's a better way to get
+more rewards but still not overheat.
+
+0:05:31.000,0:05:33.320
+And so you have these games
+that can last forever.
+
+0:05:33.320,0:05:35.320
+And so what kinds of rewards
+are you going to get?
+
+0:05:35.320,0:05:36.780
+You're going to get infinite rewards.
+
+0:05:36.780,0:05:39.220
+Plus 1, plus 2, plus 2, plus 1.
+
+0:05:39.220,0:05:41.740
+You add these up forever, and you end up
+with-- pretty much whatever you do
+
+0:05:41.740,0:05:43.460
+that's reasonable is going
+to be infinite.
+
+0:05:43.460,0:05:44.560
+That's kind of bad.
+
+0:05:44.560,0:05:47.310
+I mean, it's good if you like rewards,
+but it's bad if you're trying to
+
+0:05:47.310,0:05:50.750
+decide between policies, because a
+string of plus 1's and a string of
+
+0:05:50.750,0:05:52.540
+plus 2's looks the same.
+
+0:05:52.540,0:05:55.540
+So what do we do about these
+games that last forever?
+
+0:05:55.540,0:05:56.990
+There are multiple solutions.
+
+0:05:56.990,0:06:00.860
+And these will have analogs in the
+further discussion that we have.
+
+0:06:00.860,0:06:03.790
+One solution is to say, there's
+a finite horizon.
+
+0:06:03.790,0:06:07.590
+So I'm going to say, yeah, if I let
+the race car plan forever for its
+
+0:06:07.590,0:06:11.290
+infinite road trip, we would get
+infinite results and we wouldn't be
+
+0:06:11.290,0:06:14.380
+able to decide fast versus slow, because
+anything that doesn't overheat
+
+0:06:14.380,0:06:15.560
+is equally infinite.
+
+0:06:15.560,0:06:17.750
+I can say, look, racecar,
+you've got 100 steps.
+
+0:06:17.750,0:06:18.810
+Do your best.
+
+0:06:18.810,0:06:22.240
+And now because the game ends, we don't
+have this problem of comparing
+
+0:06:22.240,0:06:23.590
+infinities.
+
+0:06:23.590,0:06:27.520
+This actually gives non-stationary
+policies, so that what you actually do
+
+0:06:27.520,0:06:29.160
+may depend on the amount of time left.
+
+0:06:29.160,0:06:31.390
+And we'll see examples of this.
+
+0:06:31.390,0:06:34.760
+Another solution, no surprise,
+is discounting.
+
+0:06:34.760,0:06:37.590
+If we use a discount factor
+that is less than 1--
+
+0:06:37.590,0:06:40.220
+and to make sense, it should
+be greater than 0--
+
+0:06:40.220,0:06:43.540
+then even if I have an infinite sequence
+of positive rewards, then
+
+0:06:43.540,0:06:45.700
+there's this exponentially decaying
+thing that's going to make sure their
+
+0:06:45.700,0:06:48.980
+sum converges, provided the rewards
+themselves are bounded.
+
+0:06:48.980,0:06:52.400
+What does it mean when I change the
+discount from more like 1, meaning not
+
+0:06:52.400,0:06:55.850
+much discounting, to more like 0,
+meaning I don't care about the future?
+
+0:06:55.850,0:06:59.750
+This changes what's called the horizon
+of the agent, which is when things are
+
+0:06:59.750,0:07:03.060
+steeply discounted, we care more about
+achieving rewards right now.
+
+0:07:03.060,0:07:06.420
+When things are not simply discounted,
+we don't care so much about how soon
+
+0:07:06.420,0:07:10.330
+they are, and we try more for bigger
+rewards even if they're later.
+
+0:07:10.330,0:07:14.350
+Another solution is to look
+at an absorbing state.
+
+0:07:14.350,0:07:18.450
+So if we change the racing game such
+that you always had a probability of
+
+0:07:18.450,0:07:22.140
+overheating, no matter what you did,
+then the game would eventually end
+
+0:07:22.140,0:07:23.580
+with probability 1.
+
+0:07:23.580,0:07:26.960
+Sure, there are some sequences where you
+just magically never overheat, but
+
+0:07:26.960,0:07:29.370
+as time goes on those get
+less and less likely.
+
+0:07:29.370,0:07:32.740
+And so if we have this way of
+guaranteeing that for any sequence of
+
+0:07:32.740,0:07:36.300
+actions that you do, you'll eventually
+hit a terminal state with probability
+
+0:07:36.300,0:07:39.040
+1, that also fixes the infinite
+utilities problem.
+
+0:07:39.040,0:07:41.050
+So here are multiple
+possible solutions.
+
+0:07:41.050,0:07:44.820
+In general, we're going to have
+discounts, and that usually saves us.
+
+0:07:44.820,0:07:46.160
+So where are at?
+
+0:07:46.160,0:07:49.160
+We've defined Markov decision processes,
+which are non-deterministic
+
+0:07:49.160,0:07:50.380
+search problems.
+
+0:07:50.380,0:07:53.790
+They're defined by a set of
+states and a start state.
+
+0:07:53.790,0:07:55.840
+They have a set of actions.
+
+0:07:55.840,0:07:58.460
+And then they have a transition function
+which tells you what your
+
+0:07:58.460,0:08:01.040
+actions do and with what probability.
+
+0:08:01.040,0:08:04.010
+And they have a reward function which
+tells you for every possible
+
+0:08:04.010,0:08:07.320
+transition what your reward will be.
+
+0:08:07.320,0:08:12.250
+They also have a discount which tells
+you how much you should downweight
+
+0:08:12.250,0:08:15.110
+future utilities when you plan.
+
+0:08:15.110,0:08:17.700
+We've also talked about two
+important quantities.
+
+0:08:17.700,0:08:20.810
+We've talked about the notion of a
+policy, which is a mapping from states
+
+0:08:20.810,0:08:24.130
+to actions, and we've talked about
+this notion of a utility.
+
+0:08:24.130,0:08:27.260
+And so far, the utility has just
+been on a sequence of rewards.
+
+0:08:27.260,0:08:30.194
+So I say, here's a sequence of rewards,
+and I add them up or I add
+
+0:08:30.194,0:08:31.000
+them up discounted.
+
+0:08:31.000,0:08:32.150
+That's the utility.
+
+0:08:32.150,0:08:34.950
+Of course, because we don't control what
+happens, we're going to need to
+
+0:08:34.950,0:08:39.240
+start talking about expected utilities
+and have a notion of value, which is
+
+0:08:39.240,0:08:41.870
+going to turn out to correspond
+to Expectimax values.
+
+0:08:41.870,0:08:43.120
+

@@ -1,0 +1,234 @@
+0:00:00.000,0:00:01.490
+
+0:00:01.490,0:00:04.460
+DAN KLEIN: From this example, we can
+see that for A star graph search,
+
+0:00:04.460,0:00:08.140
+we're going to need a stronger
+condition than admissibility.
+
+0:00:08.140,0:00:11.620
+The basic idea of this new condition
+is going to be the same as for
+
+0:00:11.620,0:00:15.530
+admissibility, and that is that
+estimated heuristic costs will have to
+
+0:00:15.530,0:00:17.740
+be less than or equal to actual costs.
+
+0:00:17.740,0:00:19.640
+What did admissibility do?
+
+0:00:19.640,0:00:24.030
+It said that the heuristic cost, which
+was an estimate of a cost to the goal,
+
+0:00:24.030,0:00:26.840
+had to be less than or equal to
+the actual cost to the goal.
+
+0:00:26.840,0:00:31.360
+So for example, if you have a node A,
+then admissibility says that heuristic
+
+0:00:31.360,0:00:36.600
+value A must be less than or equal to
+the actual cost from A to the goal in
+
+0:00:36.600,0:00:38.640
+the optimal way.
+
+0:00:38.640,0:00:44.040
+For example, if h is four at A, and
+here's the goal of G, then h equals
+
+0:00:44.040,0:00:48.990
+four is describing the length from A
+to G according to the heuristic.
+
+0:00:48.990,0:00:54.020
+According to the actual cost, there is
+some shortest path from A to G. And in
+
+0:00:54.020,0:00:57.330
+this case, that shortest path
+also has cost four.
+
+0:00:57.330,0:01:02.550
+So here, h equals four is
+admissible in this case.
+
+0:01:02.550,0:01:06.170
+What we need for A star graph search to
+be correct is the stronger notion
+
+0:01:06.170,0:01:07.570
+of consistency.
+
+0:01:07.570,0:01:11.960
+Consistency says that the heuristic cost
+must be less than or equal to the
+
+0:01:11.960,0:01:16.410
+actual cost for each arc, not just
+the path towards the goal.
+
+0:01:16.410,0:01:17.670
+So what does that look like?
+
+0:01:17.670,0:01:22.310
+It looks at a single arc, and it says,
+OK here's a real arc, which has cost
+
+0:01:22.310,0:01:24.180
+one in this case.
+
+0:01:24.180,0:01:27.610
+If the real cost is one, what
+is the cost of this arc
+
+0:01:27.610,0:01:28.780
+according to the heuristic?
+
+0:01:28.780,0:01:31.340
+Well, heuristics don't
+actually score arcs.
+
+0:01:31.340,0:01:35.590
+But if you think about it, if the
+heuristic is four at A, and it's one
+
+0:01:35.590,0:01:40.160
+at C, like in our example, then really
+if you look at the heuristic, it looks
+
+0:01:40.160,0:01:42.740
+like this arc cost three.
+
+0:01:42.740,0:01:46.690
+In particular, you can look at the
+difference in heuristic value from A
+
+0:01:46.690,0:01:51.950
+to C and say that that difference must
+be less than or equal to the actual
+
+0:01:51.950,0:01:56.600
+cost from A to C. That is consistency.
+
+0:01:56.600,0:02:01.170
+Now, in this case, where A star went
+wrong, we can see that this arc is not
+
+0:02:01.170,0:02:01.810
+consistent.
+
+0:02:01.810,0:02:05.770
+h equals four is admissible, and so
+is h equals one, but because the
+
+0:02:05.770,0:02:10.300
+heuristic implies a cost of three, where
+the real arc only costs one,
+
+0:02:10.300,0:02:12.520
+this is not a consistent heuristic.
+
+0:02:12.520,0:02:14.540
+To make it consistent,
+we could lower h.
+
+0:02:14.540,0:02:17.970
+For example, we could make h equal
+two at A. And now we have
+
+0:02:17.970,0:02:19.340
+a consistent heuristic.
+
+0:02:19.340,0:02:22.650
+If you went back and ran the same
+example with this change to the
+
+0:02:22.650,0:02:28.580
+heuristic, you would get the correct
+optimal result from A star.
+
+0:02:28.580,0:02:30.720
+What are the consequences
+of consistency?
+
+0:02:30.720,0:02:33.360
+Well, one consequence is that
+the f value along the
+
+0:02:33.360,0:02:34.930
+path will never decrease.
+
+0:02:34.930,0:02:36.120
+Why is that?
+
+0:02:36.120,0:02:43.490
+If you go from a parent A to a child C,
+then at A you added in h of A, the
+
+0:02:43.490,0:02:49.310
+heuristic A. And at C, you add in the
+cost from A to C and then the
+
+0:02:49.310,0:02:50.990
+heuristic value at C.
+
+0:02:50.990,0:02:57.760
+Consistency, by simple rewriting,
+guarantees that that is an increase.
+
+0:02:57.760,0:03:00.150
+The result of this is that A star
+graph search is optimal.
+
+0:03:00.150,0:03:02.970
+
+0:03:02.970,0:03:06.630
+Why is A star graph search going to be
+optimal with a consistent heuristic?
+
+0:03:06.630,0:03:08.890
+We'll sketch the proof.
+
+0:03:08.890,0:03:13.660
+First, let's consider what A star does
+when it has a consistent heuristic.
+
+0:03:13.660,0:03:17.950
+The first fact is that because of
+consistency, A star will expand nodes
+
+0:03:17.950,0:03:21.150
+in increasing total f value.
+
+0:03:21.150,0:03:26.190
+The second fact is that for every state
+S, nodes that reach S optimally
+
+0:03:26.190,0:03:28.710
+are expanded before nodes that
+reach S suboptimally.
+
+0:03:28.710,0:03:31.490
+
+0:03:31.490,0:03:35.690
+Once we have these two facts proven,
+we'll have the result that A star
+
+0:03:35.690,0:03:39.190
+graph search is optimal because
+in particular, fact two will
+
+0:03:39.190,0:03:40.730
+hold at goal states.
+
+0:03:40.730,0:03:43.400
+

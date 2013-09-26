@@ -1,0 +1,88 @@
+0:00:00.000,0:00:01.770
+
+0:00:01.770,0:00:03.550
+DAN KLEIN: Now, there are
+going to be problems.
+
+0:00:03.550,0:00:08.860
+So for example, let's take a look at
+this case in the Australia graph.
+
+0:00:08.860,0:00:12.770
+Western Australia has been assigned
+red, Queensland has been assigned
+
+0:00:12.770,0:00:16.010
+green, and we've run our
+forward checking.
+
+0:00:16.010,0:00:18.610
+So at this point, everything
+looks good, right?
+
+0:00:18.610,0:00:22.210
+All unassigned variables still have
+legal values in their domain.
+
+0:00:22.210,0:00:26.040
+For example, in the northern territories
+we can still assign blue.
+
+0:00:26.040,0:00:29.300
+And in southern Australia we
+can still assign blue.
+
+0:00:29.300,0:00:31.850
+Now of course, what would happen
+if we actually assigned
+
+0:00:31.850,0:00:33.920
+blue to both of those?
+
+0:00:33.920,0:00:36.530
+Well, we'd violate a constraint.
+
+0:00:36.530,0:00:39.030
+Now, forward checking doesn't
+know about this, right?
+
+0:00:39.030,0:00:41.940
+This is a problem between two unassigned
+variables, and forward
+
+0:00:41.940,0:00:43.740
+checking doesn't deal with that.
+
+0:00:43.740,0:00:48.300
+But it might be nice if we could know
+that the consequences of our decision
+
+0:00:48.300,0:00:51.740
+further out in the graph somewhere have
+already doomed us to failure, so
+
+0:00:51.740,0:00:53.530
+we can backtrack early.
+
+0:00:53.530,0:00:56.530
+OK, so let's see if we can come up
+with a better approach here.
+
+0:00:56.530,0:00:59.240
+The general class of methods that reason
+from constraint to constraint
+
+0:00:59.240,0:01:01.250
+are called constraint
+propagation methods.
+
+0:01:01.250,0:01:03.690
+We're going to talk about one particular
+constraint propagation
+
+0:01:03.690,0:01:05.780
+method called enforcing
+arc consistency.
+
+0:01:05.780,0:01:07.030
+

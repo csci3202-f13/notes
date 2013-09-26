@@ -1,0 +1,311 @@
+0:00:00.000,0:00:01.580
+
+0:00:01.580,0:00:02.850
+Here's another example.
+
+0:00:02.850,0:00:04.019
+This is cryptarithmetic.
+
+0:00:04.019,0:00:07.080
+How many of you have solved
+a cryptarithmetic problem?
+
+0:00:07.080,0:00:07.620
+OK.
+
+0:00:07.620,0:00:10.780
+Very important for things such
+as robotic crime fighting.
+
+0:00:10.780,0:00:16.030
+In a cryptarithmetic problem, the
+variables are the letters in the
+
+0:00:16.030,0:00:19.830
+arithmetic problem, and each
+letter stands for a number.
+
+0:00:19.830,0:00:23.100
+So here, the variables are things
+like the F, the T, and so on.
+
+0:00:23.100,0:00:25.340
+There's some extra variables
+you need to insert--
+
+0:00:25.340,0:00:27.190
+X1, X2, X3 for the carry bits.
+
+0:00:27.190,0:00:29.340
+When you actually solve this, you need
+to keep track of whether or not you
+
+0:00:29.340,0:00:30.910
+carried a one.
+
+0:00:30.910,0:00:34.850
+Each of these variables has a single
+digit domain, so 0 to 9.
+
+0:00:34.850,0:00:38.230
+And the constraints indicate, well, when
+you substitute something in for O
+
+0:00:38.230,0:00:41.440
+and something in for R, then O plus
+O has to equal R, and so on.
+
+0:00:41.440,0:00:44.370
+And so if we wrote this out, we would
+write things like, well, they all have
+
+0:00:44.370,0:00:48.955
+to be different, and O plus O equals R,
+and we would connect in the carry
+
+0:00:48.955,0:00:49.910
+bit and so on.
+
+0:00:49.910,0:00:52.400
+We're not going to go through the
+details of cryptarithmetic, but the
+
+0:00:52.400,0:00:56.860
+point here is, these constraints aren't
+that complicated to phrase, but
+
+0:00:56.860,0:00:59.670
+they actually touch more than
+two variables at once.
+
+0:00:59.670,0:01:01.970
+And so what we can do is we can draw the
+constraint graph here, but we'll
+
+0:01:01.970,0:01:04.780
+find out that an arc doesn't suffice.
+
+0:01:04.780,0:01:10.910
+So for example, for this constraint
+here, this one touches O, R, and X1,
+
+0:01:10.910,0:01:13.360
+and that's this constraint right here.
+
+0:01:13.360,0:01:17.170
+And when we have constraint graphs that
+contain constraints that are more
+
+0:01:17.170,0:01:20.170
+them binary, meaning they touch more
+than two variables, we draw them as a
+
+0:01:20.170,0:01:23.760
+square to indicate the constraints, and
+we connect that square up to all
+
+0:01:23.760,0:01:28.350
+of the variables that are constrained.
+
+0:01:28.350,0:01:29.390
+Here's another example.
+
+0:01:29.390,0:01:29.990
+Sudoku.
+
+0:01:29.990,0:01:31.520
+How many people have played Sudoku?
+
+0:01:31.520,0:01:32.290
+OK.
+
+0:01:32.290,0:01:33.990
+So, here's an example of Sudoku.
+
+0:01:33.990,0:01:37.560
+The variables here, every open
+square takes on some value.
+
+0:01:37.560,0:01:39.060
+So it's going to be a variable.
+
+0:01:39.060,0:01:40.790
+The domains are going to
+be one through nine.
+
+0:01:40.790,0:01:42.150
+That's how Sudoku works.
+
+0:01:42.150,0:01:42.960
+And there are constraints.
+
+0:01:42.960,0:01:44.380
+What do the constraints look like?
+
+0:01:44.380,0:01:48.240
+Well, every column has to have nine
+different values, and every row has to
+
+0:01:48.240,0:01:49.290
+have nine different values.
+
+0:01:49.290,0:01:53.210
+Every three by three square as shown has
+to have nine different values in
+
+0:01:53.210,0:01:54.010
+that region.
+
+0:01:54.010,0:01:57.220
+And we could just encode these all
+different things as a bunch of
+
+0:01:57.220,0:01:59.430
+pairwise inequality constraints,
+that would be fine too.
+
+0:01:59.430,0:02:02.710
+But you get the idea of how a Sudoku
+board can be phrase as an
+
+0:02:02.710,0:02:05.870
+instance of a CSP.
+
+0:02:05.870,0:02:09.270
+OK, we've seen a bunch of examples of
+CSPs so far that look very much like
+
+0:02:09.270,0:02:11.340
+puzzles, kind of configurational
+things.
+
+0:02:11.340,0:02:15.090
+Here's an example of a CSP that does
+something very, very different.
+
+0:02:15.090,0:02:16.900
+So this is the Waltz Algorithm.
+
+0:02:16.900,0:02:20.840
+The Waltz Algorithm was originally
+designed for interpreting line
+
+0:02:20.840,0:02:23.950
+drawings of solid polyhedra
+in three dimensions.
+
+0:02:23.950,0:02:27.410
+So for example, you would have some
+robot looking at some scene, and it
+
+0:02:27.410,0:02:30.570
+would see some line drawing that it got
+out of a vision system, and it's
+
+0:02:30.570,0:02:33.440
+trying to figure out what
+the heck is this thing.
+
+0:02:33.440,0:02:34.240
+Is it concave?
+
+0:02:34.240,0:02:35.000
+Is it convex?
+
+0:02:35.000,0:02:36.710
+Is it what kind of structure?
+
+0:02:36.710,0:02:39.370
+You can think of this, I mean, unless
+you've got Escher drawing your
+
+0:02:39.370,0:02:43.120
+structures here, that when you look at
+these, you'd see, OK, that vertex
+
+0:02:43.120,0:02:45.280
+there is an outie, right?
+
+0:02:45.280,0:02:46.280
+It's pointing out at you.
+
+0:02:46.280,0:02:48.440
+And this one here, this
+one's in innie.
+
+0:02:48.440,0:02:49.920
+But they kind of both look
+the same locally.
+
+0:02:49.920,0:02:52.250
+They both have three lines
+coming together.
+
+0:02:52.250,0:02:54.730
+And in order to be able to look at a
+drawing like this and figure out which
+
+0:02:54.730,0:02:58.480
+of the corners are innies and which of
+them are outies, the Waltz Algorithm
+
+0:02:58.480,0:02:59.120
+was developed.
+
+0:02:59.120,0:03:02.600
+This is an early example of a
+computation that you'd want to do
+
+0:03:02.600,0:03:05.880
+posed as a declarative constraint
+satisfaction problem.
+
+0:03:05.880,0:03:06.670
+So what's the approach?
+
+0:03:06.670,0:03:09.200
+The approach is that each intersection
+is a variable.
+
+0:03:09.200,0:03:11.980
+So for example, you'd have
+a variable here.
+
+0:03:11.980,0:03:13.650
+You'd have another variable here.
+
+0:03:13.650,0:03:16.240
+And adjacent intersections impose
+constraints on each other.
+
+0:03:16.240,0:03:19.740
+Like, if the top one is an outie, the
+bottom one can't be an innie in this
+
+0:03:19.740,0:03:22.350
+particular case, in a certain way.
+
+0:03:22.350,0:03:25.900
+If you then solved the CSP, all of
+the physically realizable 3D
+
+0:03:25.900,0:03:28.400
+interpretations show up as solutions
+of the constraint
+
+0:03:28.400,0:03:29.610
+satisfaction problem.
+
+0:03:29.610,0:03:33.640
+So here's a neat case where kind
+of we've encoded a geometric
+
+0:03:33.640,0:03:36.050
+interpretation problem as a CSP.
+
+0:03:36.050,0:03:38.660
+Same machinery to solve
+as the rest of them.
+
+0:03:38.660,0:03:40.067
+

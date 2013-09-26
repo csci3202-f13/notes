@@ -1,0 +1,418 @@
+0:00:00.000,0:00:00.692
+
+0:00:00.692,0:00:03.575
+PROFESSOR: Now what we'd like to do is
+we'd like to go back to our tree
+
+0:00:03.575,0:00:05.210
+search algorithm.
+
+0:00:05.210,0:00:08.710
+If you think about the tree search
+algorithm we presented, it turns out
+
+0:00:08.710,0:00:12.610
+you do a lot of repeated work, because
+the search tree essentially unrolls
+
+0:00:12.610,0:00:13.850
+the search graph.
+
+0:00:13.850,0:00:18.820
+And we'd like to save time by avoiding
+retracing our steps, because the
+
+0:00:18.820,0:00:21.410
+second time you do the work is not going
+to be any more useful than the
+
+0:00:21.410,0:00:22.620
+first time you did it.
+
+0:00:22.620,0:00:25.910
+So as a good, important general idea in
+computer science, avoid repeating
+
+0:00:25.910,0:00:26.990
+work you've already done.
+
+0:00:26.990,0:00:29.980
+Now we're going to apply that in the
+context of search with an idea called
+
+0:00:29.980,0:00:32.600
+graph search.
+
+0:00:32.600,0:00:35.070
+So what's up with this?
+
+0:00:35.070,0:00:38.400
+Well, let's say you have this
+state graph on the left.
+
+0:00:38.400,0:00:42.230
+So the nodes are ABC and D. And from
+A there's two ways to get to B. And
+
+0:00:42.230,0:00:44.913
+there's two ways to get from B to C. And
+there's two ways to get from C to
+
+0:00:44.913,0:00:45.360
+D.
+
+0:00:45.360,0:00:47.140
+And so this graph is not that big.
+
+0:00:47.140,0:00:51.740
+But if you think about it, it includes
+quite a lot of plans.
+
+0:00:51.740,0:00:53.290
+So the search tree, what's
+it look like?
+
+0:00:53.290,0:00:54.940
+It's got A at the root.
+
+0:00:54.940,0:00:57.850
+But then it's kind of got B twice,
+because there's two ways to get there.
+
+0:00:57.850,0:01:00.930
+And then under each of those
+B's it's got C twice.
+
+0:01:00.930,0:01:04.069
+And it's going to be this exponential
+unrolling of this graph.
+
+0:01:04.069,0:01:05.740
+And in general, this is
+what happens, right?
+
+0:01:05.740,0:01:09.022
+You're going to get exponentially more
+work, because when you do a search in
+
+0:01:09.022,0:01:12.060
+this tree, well, you're going to kind
+of search from B at some point.
+
+0:01:12.060,0:01:14.610
+And then when that's all done, say
+you're doing depth research, you're
+
+0:01:14.610,0:01:16.580
+then going to search over
+here from B again.
+
+0:01:16.580,0:01:19.050
+And it's not like the second B is
+going to be particularly more
+
+0:01:19.050,0:01:22.420
+informative than the first B. Now it
+may be that one or the other is the
+
+0:01:22.420,0:01:26.650
+right one to do, and so we might have to
+worry about which one we should do.
+
+0:01:26.650,0:01:28.980
+But we probably don't want to do both.
+
+0:01:28.980,0:01:29.210
+OK?
+
+0:01:29.210,0:01:32.150
+Because what's underneath
+those trees is the same.
+
+0:01:32.150,0:01:36.860
+So let's see if we can figure out
+a way to avoid repeating work.
+
+0:01:36.860,0:01:38.680
+Let's say we're doing breadth-first
+search.
+
+0:01:38.680,0:01:40.860
+Well, if we do breadth-first search,
+we all know what happens.
+
+0:01:40.860,0:01:41.650
+We do s.
+
+0:01:41.650,0:01:43.220
+Then we do d, e, and p.
+
+0:01:43.220,0:01:45.650
+And then we do the next layer and the
+next layer and the next layer.
+
+0:01:45.650,0:01:49.490
+That means that we're going
+to do this node e early.
+
+0:01:49.490,0:01:51.740
+And at some point later we're
+going to do this node.
+
+0:01:51.740,0:01:54.430
+Now, breadth-first search is going to
+be looking for the shallowest goal,
+
+0:01:54.430,0:01:56.650
+which I guess is here.
+
+0:01:56.650,0:01:59.050
+It's under this subtree through e.
+
+0:01:59.050,0:02:02.100
+But what about this subtree
+here versus this subtree?
+
+0:02:02.100,0:02:02.990
+They're the same.
+
+0:02:02.990,0:02:05.430
+The lower one is not going to
+tell you anything the higher
+
+0:02:05.430,0:02:06.680
+one didn't tell you.
+
+0:02:06.680,0:02:09.720
+And so if you're already in the process
+of exploring the higher one--
+
+0:02:09.720,0:02:11.760
+let's say the higher e
+is on your fringe--
+
+0:02:11.760,0:02:13.450
+there's no reason to explore both.
+
+0:02:13.450,0:02:15.460
+So you need to be careful about
+which one you explore, but you
+
+0:02:15.460,0:02:16.610
+don't want to do both.
+
+0:02:16.610,0:02:20.410
+In the case of breadth-first search,
+here are some nodes that we already
+
+0:02:20.410,0:02:21.850
+would have expanded.
+
+0:02:21.850,0:02:24.150
+And so we probably shouldn't expand them
+again, because we're not going to
+
+0:02:24.150,0:02:26.070
+discover anything new.
+
+0:02:26.070,0:02:27.960
+How do we do this in our algorithm?
+
+0:02:27.960,0:02:29.980
+Changing the algorithm
+is incredibly easy.
+
+0:02:29.980,0:02:32.470
+Understanding its consequences
+is hard.
+
+0:02:32.470,0:02:33.890
+The change in the algorithm is simple.
+
+0:02:33.890,0:02:37.530
+You don't want to expand a
+state twice, don't do it.
+
+0:02:37.530,0:02:39.360
+All right, so how are
+we going to do that?
+
+0:02:39.360,0:02:41.930
+Well, we're going to run our tree
+search, just like we always have.
+
+0:02:41.930,0:02:43.270
+There's a fringe.
+
+0:02:43.270,0:02:45.050
+There's a strategy for removing
+things on the fringe.
+
+0:02:45.050,0:02:47.890
+Successors, goal tasks, none
+of that has changed.
+
+0:02:47.890,0:02:52.080
+Only one small change, and that is that
+every time we expand a state,
+
+0:02:52.080,0:02:56.980
+meaning we call Get Successors on it,
+every time we expand a state, then we
+
+0:02:56.980,0:02:59.670
+keep track of the set we've expanded.
+
+0:02:59.670,0:03:03.720
+So that set of states we've expanded
+is called the closed set.
+
+0:03:03.720,0:03:07.610
+Word of warning, lots of books and
+treatments call it a closed list.
+
+0:03:07.610,0:03:09.160
+It is a closed set.
+
+0:03:09.160,0:03:11.800
+You do not want to implement
+this thing as a list.
+
+0:03:11.800,0:03:13.190
+Back to the flow.
+
+0:03:13.190,0:03:14.770
+How do we implement this algorithm?
+
+0:03:14.770,0:03:17.600
+Well, we're going to do a tree search,
+and we're going to keep track of the
+
+0:03:17.600,0:03:19.180
+set of states we've already expanded.
+
+0:03:19.180,0:03:22.110
+We go node by node, expanding
+just like before.
+
+0:03:22.110,0:03:26.050
+But before we expand a node, we check
+to make sure it's a state that we've
+
+0:03:26.050,0:03:28.400
+never expanded before.
+
+0:03:28.400,0:03:31.510
+If it is a state we've expanded before,
+we've already got it covered.
+
+0:03:31.510,0:03:32.160
+We skip it.
+
+0:03:32.160,0:03:35.290
+We do not enqueue its children
+onto the fringe.
+
+0:03:35.290,0:03:38.441
+Because if it's a new state,
+then we do expand it.
+
+0:03:38.441,0:03:41.520
+It's very important to store the closed
+set as a set, not as a list, no
+
+0:03:41.520,0:03:44.060
+matter how many people slip
+up and say closed list.
+
+0:03:44.060,0:03:46.930
+The access to this is
+checking membership.
+
+0:03:46.930,0:03:50.360
+Checking membership in a set is
+more efficient than in a list.
+
+0:03:50.360,0:03:52.760
+And if you implement this is
+a list, you will be sad.
+
+0:03:52.760,0:03:55.560
+
+0:03:55.560,0:03:58.830
+All right, so we made a change
+to our search algorithm.
+
+0:03:58.830,0:04:01.320
+Sometimes we don't expand a node.
+
+0:04:01.320,0:04:04.850
+So sometimes, rather than enqueuing
+the children, we just don't.
+
+0:04:04.850,0:04:06.860
+Can this wreck the completeness
+of our search.
+
+0:04:06.860,0:04:12.980
+That is, by refusing to expand certain
+nodes in the tree, can we lose the
+
+0:04:12.980,0:04:17.200
+ability to guarantee that
+we find a solution?
+
+0:04:17.200,0:04:19.980
+Could it be that there was one
+goal and we just lost it?
+
+0:04:19.980,0:04:21.060
+Bye, bye goal.
+
+0:04:21.060,0:04:22.140
+Can that happen?
+
+0:04:22.140,0:04:25.490
+That actually can't happen, because
+the only time we don't expand
+
+0:04:25.490,0:04:28.260
+something is when there's an equivalent
+state in some other node
+
+0:04:28.260,0:04:29.490
+that we did expand.
+
+0:04:29.490,0:04:32.410
+So there will still be
+a path to this goal.
+
+0:04:32.410,0:04:36.720
+So completeness is absolutely
+unaffected by graph search.
+
+0:04:36.720,0:04:39.260
+How about optimality?
+
+0:04:39.260,0:04:40.840
+Optimality's a little trickier, OK?
+
+0:04:40.840,0:04:43.540
+Because there were these
+two subtree under e.
+
+0:04:43.540,0:04:45.480
+And we know we've got one of them.
+
+0:04:45.480,0:04:48.780
+And so we know if there's a path in
+one, there's a path in the other.
+
+0:04:48.780,0:04:50.300
+But maybe we got the wrong one.
+
+0:04:50.300,0:04:51.550
+Maybe we kept the wrong subtree.
+
+0:04:51.550,0:04:52.867
+

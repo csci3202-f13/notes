@@ -1,0 +1,332 @@
+0:00:00.000,0:00:01.720
+
+0:00:01.720,0:00:01.870
+PROFESSOR: OK.
+
+0:00:01.870,0:00:05.810
+One last important thing about how
+these things work in practice--
+
+0:00:05.810,0:00:09.550
+is, in general, Q-Learning will only
+take you so far, and what people often
+
+0:00:09.550,0:00:11.680
+do in practice to make these
+really work is something
+
+0:00:11.680,0:00:13.350
+called policy search.
+
+0:00:13.350,0:00:18.180
+In policy search what you do is you
+directly try to improve the policy.
+
+0:00:18.180,0:00:20.720
+And the problem with things
+like Q-Learning is, what
+
+0:00:20.720,0:00:22.420
+does Q-Learning do?
+
+0:00:22.420,0:00:25.350
+It tries to figure out the
+Q value of the state.
+
+0:00:25.350,0:00:27.260
+It's modeling the states.
+
+0:00:27.260,0:00:29.540
+But that may not be the same
+setting of the weights
+
+0:00:29.540,0:00:31.070
+that makes good decisions.
+
+0:00:31.070,0:00:35.830
+So in particular, in project 2, you
+wrote down 5 times the distance to the
+
+0:00:35.830,0:00:38.690
+dot minus 2 times the distance
+to [? go ?] squared.
+
+0:00:38.690,0:00:42.260
+That was almost certainly not the actual
+value of the state, but it
+
+0:00:42.260,0:00:44.270
+distinguished good states
+from bad states.
+
+0:00:44.270,0:00:46.040
+And that's a general thing.
+
+0:00:46.040,0:00:49.250
+Q-Learning tries to get the
+values close in general.
+
+0:00:49.250,0:00:54.710
+It does not try explicitly to make the
+best action from a state have a higher
+
+0:00:54.710,0:00:57.050
+value than the worst action
+from the state.
+
+0:00:57.050,0:00:58.640
+It doesn't try to order the Q values.
+
+0:00:58.640,0:01:00.730
+It just tries to get their
+magnitudes right.
+
+0:01:00.730,0:01:03.480
+For action selection, you only
+care about the ordering.
+
+0:01:03.480,0:01:05.860
+Now, of course, if the Q values were
+close enough, their orders would be
+
+0:01:05.860,0:01:07.010
+correct as well.
+
+0:01:07.010,0:01:08.840
+But we're never perfect, and
+so there's a trade-off
+
+0:01:08.840,0:01:10.190
+between these things.
+
+0:01:10.190,0:01:13.070
+We'll also see this in much greater
+detail in the second half of the
+
+0:01:13.070,0:01:16.630
+course, that there's a trade-off between
+modeling, getting the values
+
+0:01:16.630,0:01:19.105
+right, and prediction, getting
+the ordering right and
+
+0:01:19.105,0:01:21.360
+making the correct decision.
+
+0:01:21.360,0:01:24.850
+The solution to this is to learn
+policies that maximize your rewards,
+
+0:01:24.850,0:01:26.690
+and to do that directly in some way.
+
+0:01:26.690,0:01:29.660
+And to not try so hard to figure out
+what the values that predict the
+
+0:01:29.660,0:01:30.770
+rewards are.
+
+0:01:30.770,0:01:32.680
+Just learn the policies.
+
+0:01:32.680,0:01:36.230
+So policy search, in general,
+starts with an OK solution.
+
+0:01:36.230,0:01:38.940
+For example, you might do some
+Q-Learning for a while, or if you've
+
+0:01:38.940,0:01:41.960
+got like a helicopter or something
+that's expensive to replace, you might
+
+0:01:41.960,0:01:45.380
+get an initial policy based on domain
+knowledge or simulation.
+
+0:01:45.380,0:01:49.570
+And then you fine tune by essentially
+hill climbing on the feature weights.
+
+0:01:49.570,0:01:52.580
+And here, when you hill climb, you just
+change the feature weights and
+
+0:01:52.580,0:01:55.780
+you see whether your rewards over time
+are better as opposed to just a
+
+0:01:55.780,0:01:59.730
+one-step look ahead, and then
+do a Q magnitude update.
+
+0:01:59.730,0:02:01.950
+So here's the simplest way you
+could do policy search.
+
+0:02:01.950,0:02:05.780
+Start with an initial linear valued
+function, or Q function, which is in
+
+0:02:05.780,0:02:06.710
+the ballpark.
+
+0:02:06.710,0:02:10.070
+Take each feature and nudge it up and
+down and see if your policy is better
+
+0:02:10.070,0:02:11.960
+than it was before.
+
+0:02:11.960,0:02:12.840
+It's pretty direct.
+
+0:02:12.840,0:02:15.540
+You don't actually need
+the Q update here.
+
+0:02:15.540,0:02:16.250
+There's some problems.
+
+0:02:16.250,0:02:19.000
+How do we tell if the policy got better
+in response to our nudge?
+
+0:02:19.000,0:02:23.130
+Well, we've got to run a lot of episodes
+because it might have only
+
+0:02:23.130,0:02:25.560
+gotten a little better, and it's going
+to take a lot of samples to figure out
+
+0:02:25.560,0:02:27.520
+whether or not we're better or
+worse, and that's going to
+
+0:02:27.520,0:02:29.230
+take a lot of trials.
+
+0:02:29.230,0:02:31.710
+If there are a lot of features, it's
+going to be impractical to go to each
+
+0:02:31.710,0:02:35.710
+one, one by one, nudging it up
+and down over and over again.
+
+0:02:35.710,0:02:38.780
+So, of course, better methods do exploit
+the look-ahead structure like
+
+0:02:38.780,0:02:39.520
+Q-Learning.
+
+0:02:39.520,0:02:43.670
+They do sample wisely so you make the
+best use of your experiences, and they
+
+0:02:43.670,0:02:46.680
+also change multiple parameters
+at a time.
+
+0:02:46.680,0:02:48.930
+Here's an example of so you
+can do with policy search.
+
+0:02:48.930,0:02:50.900
+This is an autonomous helicopter.
+
+0:02:50.900,0:02:53.050
+So this helicopter is flying itself.
+
+0:02:53.050,0:02:54.290
+But it's not actually that big.
+
+0:02:54.290,0:02:55.800
+You can't fit people in
+these helicopters.
+
+0:02:55.800,0:02:57.030
+This is a model helicopter.
+
+0:02:57.030,0:03:00.170
+But it turns out helicopters
+are very hard to fly.
+
+0:03:00.170,0:03:03.840
+Unlike a plane, which in many cases, if
+you just more or less keep pushing,
+
+0:03:03.840,0:03:06.070
+you'll stay in the air for a while.
+
+0:03:06.070,0:03:07.690
+Helicopters are very unstable.
+
+0:03:07.690,0:03:09.910
+If you're not constantly correcting,
+you don't stay in the
+
+0:03:09.910,0:03:10.780
+air for very long.
+
+0:03:10.780,0:03:13.000
+So it's hard to even get
+a helicopter to hover.
+
+0:03:13.000,0:03:15.230
+It's not just about blast
+air downward.
+
+0:03:15.230,0:03:16.970
+That actually does not work.
+
+0:03:16.970,0:03:21.060
+This is a way of getting helicopters
+to hover that's trained and tuned
+
+0:03:21.060,0:03:23.330
+using policy search.
+
+0:03:23.330,0:03:24.120
+So here it is.
+
+0:03:24.120,0:03:24.890
+It's amazing.
+
+0:03:24.890,0:03:28.330
+You can get these things that hover on
+their own, but it's actually even more
+
+0:03:28.330,0:03:31.230
+impressive than that.
+
+0:03:31.230,0:03:34.120
+Not only do they hover, they
+hover upside down.
+
+0:03:34.120,0:03:41.560
+
+0:03:41.560,0:03:44.540
+So not only can't you get people into
+these helicopters, people don't want
+
+0:03:44.540,0:03:45.790
+to go into these helicopters.
+
+0:03:45.790,0:03:49.440
+
+0:03:49.440,0:03:54.670
+We will see much more amazing things
+with helicopters when we take a look
+
+0:03:54.670,0:03:56.940
+at some advanced topics later
+on in the course.
+
+0:03:56.940,0:03:58.190
+

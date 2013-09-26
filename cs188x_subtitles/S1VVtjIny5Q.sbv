@@ -1,0 +1,1551 @@
+0:00:00.000,0:00:01.990
+
+0:00:01.990,0:00:05.720
+PROFESSOR: So what kind of reasoning is
+gonna go into adversarial search?
+
+0:00:05.720,0:00:08.880
+Well, we're gonna have an agent who's
+trying to figure out what to do.
+
+0:00:08.880,0:00:12.680
+And just like in regular single-agent
+search from before, the way we're
+
+0:00:12.680,0:00:14.550
+gonna decide what to do is we're
+gonna think about the
+
+0:00:14.550,0:00:16.450
+consequences of our actions.
+
+0:00:16.450,0:00:19.870
+The difference is rather than thinking
+about the sequence of actions that I
+
+0:00:19.870,0:00:22.980
+can perform, I need to think
+about my opponent.
+
+0:00:22.980,0:00:24.910
+I imagine taking an action.
+
+0:00:24.910,0:00:28.270
+And then I imagine that my opponent
+will then be in the situation of
+
+0:00:28.270,0:00:30.970
+thinking about what the
+opponent should do.
+
+0:00:30.970,0:00:33.420
+And they're gonna imagine that
+they're taking an action to
+
+0:00:33.420,0:00:34.345
+which I will respond.
+
+0:00:34.345,0:00:40.150
+And we'll get this embedded interleaving
+of our future states.
+
+0:00:40.150,0:00:42.180
+So what's this gonna look
+like in computation?
+
+0:00:42.180,0:00:43.980
+Well, remember back to the
+single-agent case.
+
+0:00:43.980,0:00:44.850
+We drew these trees.
+
+0:00:44.850,0:00:46.310
+We callled them search trees.
+
+0:00:46.310,0:00:49.620
+And what a search tree had was at the
+root it had the current position.
+
+0:00:49.620,0:00:50.820
+So here's the current state.
+
+0:00:50.820,0:00:53.800
+And here we have Pac-Man near a dot.
+
+0:00:53.800,0:00:56.770
+Well, in a single-agent tree
+I can take an action.
+
+0:00:56.770,0:01:00.350
+And because I have two actions in this
+case, left and right, I have two
+
+0:01:00.350,0:01:01.390
+possible futures.
+
+0:01:01.390,0:01:03.120
+And below that I have more futures.
+
+0:01:03.120,0:01:06.970
+And the search tree then goes
+down until the game ends.
+
+0:01:06.970,0:01:09.090
+So, what happened in this tree?
+
+0:01:09.090,0:01:11.130
+Well, some of these paths go forever.
+
+0:01:11.130,0:01:14.200
+Some of these paths end because I've
+eaten the last dot, and the game
+
+0:01:14.200,0:01:15.940
+terminates.
+
+0:01:15.940,0:01:17.190
+And what did we actually do?
+
+0:01:17.190,0:01:19.380
+Well, we imagine we associate
+values with this.
+
+0:01:19.380,0:01:22.620
+So let's say this is the best possible
+outcome where I go straight to the dot
+
+0:01:22.620,0:01:23.220
+and eat it.
+
+0:01:23.220,0:01:25.290
+And then there are various other
+outcomes buried further
+
+0:01:25.290,0:01:26.110
+in the other trees.
+
+0:01:26.110,0:01:28.710
+And I can associate numbers with them.
+
+0:01:28.710,0:01:30.260
+So this is a search tree.
+
+0:01:30.260,0:01:31.370
+Current states are the root.
+
+0:01:31.370,0:01:34.200
+All possible futures then
+branch out from there.
+
+0:01:34.200,0:01:37.330
+And what happened in the case of single
+agent is I get to pick any
+
+0:01:37.330,0:01:38.210
+outcome I like.
+
+0:01:38.210,0:01:40.510
+I can pick any leaf in this tree.
+
+0:01:40.510,0:01:44.160
+In the actual search case, right,
+we are minimizing costs.
+
+0:01:44.160,0:01:46.550
+And here we're gonna be talking
+about maximizing values.
+
+0:01:46.550,0:01:49.000
+So if we really wanted to work out this
+analogy, there would have to be
+
+0:01:49.000,0:01:50.170
+some sign changes.
+
+0:01:50.170,0:01:51.220
+I'm not gonna get into that.
+
+0:01:51.220,0:01:53.950
+For today, it's gonna be
+maximizing values.
+
+0:01:53.950,0:01:55.540
+So the question is, what should we do?
+
+0:01:55.540,0:01:58.810
+Well, in a single-agent case it's
+pretty clear what we should do.
+
+0:01:58.810,0:02:01.930
+We should find a way to make
+this outcome happen, right.
+
+0:02:01.930,0:02:02.420
+And we can.
+
+0:02:02.420,0:02:03.800
+We just go right twice.
+
+0:02:03.800,0:02:05.060
+And no one's gonna stop us.
+
+0:02:05.060,0:02:07.940
+So we can essentially pick any leaf.
+
+0:02:07.940,0:02:09.090
+Let's formalize that.
+
+0:02:09.090,0:02:12.240
+Let's talk about taking this tree
+and thinking about each
+
+0:02:12.240,0:02:13.830
+state having a value.
+
+0:02:13.830,0:02:15.540
+So what's a value?
+
+0:02:15.540,0:02:18.840
+A value is going to be a general idea
+we're gonna use over and over again in
+
+0:02:18.840,0:02:19.650
+this course.
+
+0:02:19.650,0:02:23.440
+And the value of a state is the best
+achievable outcome from that state.
+
+0:02:23.440,0:02:26.370
+And that's gonna be in terms of these
+terminal utility functions.
+
+0:02:26.370,0:02:29.510
+So if I think about the root in this
+single-agent case, I can look at this
+
+0:02:29.510,0:02:31.120
+and think, well, there are
+a lot of outcomes.
+
+0:02:31.120,0:02:32.120
+Some of them are scored zero.
+
+0:02:32.120,0:02:33.110
+Some of them are scored eight.
+
+0:02:33.110,0:02:36.490
+But since I want the best and I can do
+whatever I want, the value of the root
+
+0:02:36.490,0:02:37.800
+should be eight.
+
+0:02:37.800,0:02:40.630
+Well, let's go one more step
+figuring that out.
+
+0:02:40.630,0:02:42.610
+Well, for terminal states
+the value is known.
+
+0:02:42.610,0:02:44.000
+That's given, right.
+
+0:02:44.000,0:02:47.180
+In the definition of the game
+I'm trying to solve, I know
+
+0:02:47.180,0:02:48.080
+the terminal values.
+
+0:02:48.080,0:02:50.130
+Just like in search I knew the costs.
+
+0:02:50.130,0:02:51.390
+What about the other ones?
+
+0:02:51.390,0:02:53.920
+So for example, what about
+this state here?
+
+0:02:53.920,0:02:56.460
+Well, in this state here
+I have a choice.
+
+0:02:56.460,0:02:57.480
+I can get the eight.
+
+0:02:57.480,0:03:00.730
+Or I can get whatever is down
+below the left path.
+
+0:03:00.730,0:03:03.450
+So here, this state here
+has some value.
+
+0:03:03.450,0:03:04.750
+Let's say it's six.
+
+0:03:04.750,0:03:07.650
+And if I have a choice between six and
+eight and I'm maximizing, I should
+
+0:03:07.650,0:03:08.450
+take the eight.
+
+0:03:08.450,0:03:09.840
+So the value here should be eight.
+
+0:03:09.840,0:03:11.860
+And so in general, I can
+write this equation.
+
+0:03:11.860,0:03:15.660
+I can write that the value of a state is
+defined to be the maximum over its
+
+0:03:15.660,0:03:18.490
+children of the value
+over the children.
+
+0:03:18.490,0:03:20.330
+So in some sense this is
+stuff we already know.
+
+0:03:20.330,0:03:23.210
+The value of a state is the maximum
+of the value of its children.
+
+0:03:23.210,0:03:26.440
+That's exactly how it works out
+in the single-agent case.
+
+0:03:26.440,0:03:26.620
+OK.
+
+0:03:26.620,0:03:29.660
+Let's think about the case where
+we have an adversary.
+
+0:03:29.660,0:03:31.830
+So here we have Pac-Man
+trying to eat a dot.
+
+0:03:31.830,0:03:34.000
+And we also have a ghost.
+
+0:03:34.000,0:03:36.500
+If this is the root of the tree,
+we can still do the same
+
+0:03:36.500,0:03:37.570
+thought process as before.
+
+0:03:37.570,0:03:39.500
+We can think, what are
+the possible futures?
+
+0:03:39.500,0:03:42.590
+Well, I can still move left or right.
+
+0:03:42.590,0:03:47.020
+The difference is now in each of these
+possible futures, the ghost can then
+
+0:03:47.020,0:03:48.160
+move left or right.
+
+0:03:48.160,0:03:50.150
+So there's still a tree
+of possible futures.
+
+0:03:50.150,0:03:53.590
+From this left state, the ghost can
+either come towards me and go camp the
+
+0:03:53.590,0:03:56.120
+dot, or it can go to the right.
+
+0:03:56.120,0:03:56.270
+OK.
+
+0:03:56.270,0:03:58.930
+And then over here, again,
+the ghost has a choice.
+
+0:03:58.930,0:04:01.480
+So we have the exact same kind
+of branching futures.
+
+0:04:01.480,0:04:03.270
+It's just like the single-agent case.
+
+0:04:03.270,0:04:06.280
+The only difference in this
+tree is who controls what
+
+0:04:06.280,0:04:07.540
+happens at each node.
+
+0:04:07.540,0:04:11.170
+The actual tree itself is the exact same
+kind of set of branching futures.
+
+0:04:11.170,0:04:13.630
+Everyone's in agreement about
+what might happen.
+
+0:04:13.630,0:04:17.180
+But the two agents are in disagreement
+about what they will choose to do.
+
+0:04:17.180,0:04:21.829
+And again, these trees in general go
+on very deeply until the game ends.
+
+0:04:21.829,0:04:24.290
+And there gonna be various terminal
+values at the bottom.
+
+0:04:24.290,0:04:26.690
+And I've illustrated a
+couple numbers here.
+
+0:04:26.690,0:04:30.480
+So the question is now we still have
+this tree, except we can't do we did
+
+0:04:30.480,0:04:33.310
+with a single-agent case and look at
+this and say, oh, you know what?
+
+0:04:33.310,0:04:36.880
+I would like that plus eight or I would
+like some number somewhere at
+
+0:04:36.880,0:04:40.270
+the bottom because our opponent
+may not let us have it.
+
+0:04:40.270,0:04:43.620
+So we need to think about, now, what a
+value is in the case of an adversary.
+
+0:04:43.620,0:04:46.480
+And this is gonna give us the
+idea of a minimax value.
+
+0:04:46.480,0:04:50.590
+It's still gonna be the best outcome
+we can achieve under perfect play
+
+0:04:50.590,0:04:52.750
+against an optimal adversary.
+
+0:04:52.750,0:04:56.700
+So it's still the best thing that we
+can enforce, but now it has to
+
+0:04:56.700,0:04:59.380
+incorporate this idea of
+adversarial reasoning.
+
+0:04:59.380,0:05:00.470
+So let's think about this.
+
+0:05:00.470,0:05:02.910
+We still know what's at the bottom
+because the game defines
+
+0:05:02.910,0:05:04.050
+the terminal states.
+
+0:05:04.050,0:05:06.220
+So for all the terminal states at the
+bottom of the tree-- and here I'm
+
+0:05:06.220,0:05:07.740
+imagining the tree is much smaller.
+
+0:05:07.740,0:05:11.250
+I imagine the game just ends after
+this move and response.
+
+0:05:11.250,0:05:12.890
+So at the terminals we know the value.
+
+0:05:12.890,0:05:15.640
+We can look them up because
+the game's over.
+
+0:05:15.640,0:05:19.990
+For a state that's under my opponents
+control, I imagine that this ghost is
+
+0:05:19.990,0:05:21.970
+out here to minimize my value.
+
+0:05:21.970,0:05:24.710
+And so even though I may look out
+and I may look and say that
+
+0:05:24.710,0:05:25.770
+plus eight's terrific.
+
+0:05:25.770,0:05:27.440
+I would love to have it, right.
+
+0:05:27.440,0:05:28.760
+It's just not gonna happen.
+
+0:05:28.760,0:05:32.680
+Because if we ever got to this state
+that's highlighted here, what's the
+
+0:05:32.680,0:05:34.040
+ghost gonna do?
+
+0:05:34.040,0:05:35.210
+They're gonna go left.
+
+0:05:35.210,0:05:37.520
+They're gonna force the number
+down to negative 10.
+
+0:05:37.520,0:05:41.700
+And so in essence here, this state's
+minimax value is negative 10.
+
+0:05:41.700,0:05:44.010
+The computation here is fairly
+straightforward.
+
+0:05:44.010,0:05:47.410
+I just figure out what the values of
+the children are and I minimize.
+
+0:05:47.410,0:05:51.890
+That's what you do at a node
+that the opponent controls.
+
+0:05:51.890,0:05:55.030
+Now a node that the agent controls,
+we're gonna maximize.
+
+0:05:55.030,0:05:56.410
+So it's just like before.
+
+0:05:56.410,0:05:59.980
+So over here the opponent would have
+forced us down to negative eight.
+
+0:05:59.980,0:06:02.930
+And then I look and I say, well, I'd
+really love that plus eight.
+
+0:06:02.930,0:06:04.460
+But it's not an option, right.
+
+0:06:04.460,0:06:08.587
+I'm really only choosing between going
+left to which I know the response will
+
+0:06:08.587,0:06:09.490
+be negative eight.
+
+0:06:09.490,0:06:12.340
+Or going right, which I know the
+response will be negative 10.
+
+0:06:12.340,0:06:16.060
+And then that means over here, what I
+should do is I should go left and I
+
+0:06:16.060,0:06:17.640
+should get negative eight.
+
+0:06:17.640,0:06:20.680
+So in other words, life is much,
+much worse when there's
+
+0:06:20.680,0:06:21.530
+an adversary, right.
+
+0:06:21.530,0:06:26.530
+There's this nice plus eight, and the
+ghost just won't let me have it.
+
+0:06:26.530,0:06:30.730
+Here's an example of a game tree that's
+already pretty big for a game
+
+0:06:30.730,0:06:32.250
+that's pretty small.
+
+0:06:32.250,0:06:34.630
+So how many of you have
+played tic-tac-toe?
+
+0:06:34.630,0:06:37.160
+How long did you play tic-tac-toe for?
+
+0:06:37.160,0:06:38.400
+Not very long.
+
+0:06:38.400,0:06:40.680
+Why do people stop playing
+tic-tac-toe, right?
+
+0:06:40.680,0:06:42.100
+You learn the game tree pretty fast.
+
+0:06:42.100,0:06:43.640
+You know exactly what's gonna happen.
+
+0:06:43.640,0:06:45.860
+And what's gonna happen
+in tic-tac-toe?
+
+0:06:45.860,0:06:49.135
+Second player is gonna force a draw,
+unless one of the players is really,
+
+0:06:49.135,0:06:51.790
+really bad, like if they're
+three years old.
+
+0:06:51.790,0:06:52.640
+OK.
+
+0:06:52.640,0:06:55.050
+But when adults play tic-tac-toe,
+it's pretty boring.
+
+0:06:55.050,0:06:56.720
+So here's the tic-tac-toe game tree.
+
+0:06:56.720,0:06:59.190
+It's already pretty big even
+though the game is simple.
+
+0:06:59.190,0:07:00.810
+It looks just like these
+other game trees.
+
+0:07:00.810,0:07:04.780
+It alternates layers where the
+maximizing agent here, the blue agent,
+
+0:07:04.780,0:07:07.840
+moves first, and then the minimizing
+agent, and then the maximizing agent,
+
+0:07:07.840,0:07:09.800
+and so on until the game ends.
+
+0:07:09.800,0:07:13.610
+Now at the bottom, the utilities
+are given here.
+
+0:07:13.610,0:07:17.520
+And they're a plus one for a win for the
+max agent, minus one for a win for
+
+0:07:17.520,0:07:20.100
+the min agent, and zero for a draw.
+
+0:07:20.100,0:07:22.340
+We could do a bunch of computation
+and figure out what the
+
+0:07:22.340,0:07:23.570
+value of the root is.
+
+0:07:23.570,0:07:26.070
+We probably all did this computation
+at some point in our life.
+
+0:07:26.070,0:07:27.980
+So we kind of know what
+the value is, right.
+
+0:07:27.980,0:07:28.990
+What is it?
+
+0:07:28.990,0:07:30.950
+We know the value at the root is zero.
+
+0:07:30.950,0:07:34.670
+But more importantly, even if you didn't
+know that, you would know that
+
+0:07:34.670,0:07:38.140
+it's either plus one, minus
+one, or zero, right.
+
+0:07:38.140,0:07:39.090
+It's not 0.7.
+
+0:07:39.090,0:07:43.030
+I guarantee you for any tree like this
+that's got minus ones, plus ones, and
+
+0:07:43.030,0:07:46.050
+zeros at the bottom, no matter what
+the value is at the root,
+
+0:07:46.050,0:07:47.790
+right, it's not 0.7.
+
+0:07:47.790,0:07:50.533
+Because the only operations we use
+to compute the value at the root
+
+0:07:50.533,0:07:51.620
+are mins and maxes.
+
+0:07:51.620,0:07:55.790
+So you're gonna get at the root a
+minimax value which is backed up by
+
+0:07:55.790,0:07:59.720
+some particular outcome, right, might
+be that one, might be this one.
+
+0:07:59.720,0:08:03.000
+In practice, it's backed up by a bunch
+of these for tic-tac-toe, right.
+
+0:08:03.000,0:08:06.100
+Because tic-tac-toe you
+can force a draw.
+
+0:08:06.100,0:08:07.210
+That's an important point.
+
+0:08:07.210,0:08:10.840
+The minimax value isn't just some weird
+aggregation of the whole tree.
+
+0:08:10.840,0:08:15.310
+It is some particular outcome or set of
+outcomes which are minimax optimal
+
+0:08:15.310,0:08:16.780
+in the appropriate sense.
+
+0:08:16.780,0:08:19.720
+That means if you get a 4.3 at the root,
+there's some leaf down there
+
+0:08:19.720,0:08:22.720
+that says 4.3.
+
+0:08:22.720,0:08:24.690
+So we've talked about what
+this adversarial tree is.
+
+0:08:24.690,0:08:27.420
+And we basically already have an
+algorithm for computing the
+
+0:08:27.420,0:08:29.110
+appropriate values.
+
+0:08:29.110,0:08:31.540
+That same algorithm that computes
+the values will also tell us
+
+0:08:31.540,0:08:32.679
+the actions to take.
+
+0:08:32.679,0:08:36.210
+Because when we maximize, we'll want
+to take the child or a child which
+
+0:08:36.210,0:08:37.940
+achieved the max.
+
+0:08:37.940,0:08:41.950
+So, for these kinds of deterministic
+zero-sum games of perfect information,
+
+0:08:41.950,0:08:43.570
+we have a tree like this.
+
+0:08:43.570,0:08:45.900
+And it's very important to
+conceptually break it up.
+
+0:08:45.900,0:08:50.040
+The terminal values are part of the
+game, just like in search the cost of
+
+0:08:50.040,0:08:53.030
+the arcs were part of the
+problem definition.
+
+0:08:53.030,0:08:56.520
+The algorithm you run propagates
+things up the tree.
+
+0:08:56.520,0:08:58.610
+So we compute these recursively.
+
+0:08:58.610,0:09:01.810
+And we'll take the minimum of the
+children at a min node, and we'll take
+
+0:09:01.810,0:09:04.610
+the maximum of the children
+at a max node.
+
+0:09:04.610,0:09:08.170
+The number this returns at the root is
+the minimax value of the root, as well
+
+0:09:08.170,0:09:09.796
+for the other nodes.
+
+0:09:09.796,0:09:11.630
+Let's think about how we
+implement this thing.
+
+0:09:11.630,0:09:14.780
+And we basically already know because
+we've done it by hand.
+
+0:09:14.780,0:09:18.070
+If we have a state and we're trying to
+compute the value of this state under
+
+0:09:18.070,0:09:21.050
+the maximizing player,
+well, what do we do?
+
+0:09:21.050,0:09:23.290
+We compute the values of
+all of the children.
+
+0:09:23.290,0:09:25.090
+And then we take the maximum.
+
+0:09:25.090,0:09:27.920
+Let's think just for a minute exactly
+how that works because this is gonna
+
+0:09:27.920,0:09:30.030
+get more complicated in a bit.
+
+0:09:30.030,0:09:33.710
+When we compute the maximum of a bunch
+of children, the way we compute the
+
+0:09:33.710,0:09:37.560
+max is we start with this value
+which is the max so far.
+
+0:09:37.560,0:09:39.730
+It's v here in the pseudocode.
+
+0:09:39.730,0:09:43.300
+The max so far starts out at negative
+infinity as the edge case.
+
+0:09:43.300,0:09:48.350
+And then every time I see a child, I
+improve the value of v if appropriate.
+
+0:09:48.350,0:09:50.510
+So if I see a child at seven,
+now the max is seven.
+
+0:09:50.510,0:09:52.880
+If I see a child that's
+10, now the max is 10.
+
+0:09:52.880,0:09:56.710
+So at all points, I've got this lower
+bound which starts at negative
+
+0:09:56.710,0:09:59.360
+infinity and zips upward as
+I examine the children.
+
+0:09:59.360,0:10:01.690
+And after I've seen all the children,
+it's equal to the maximum.
+
+0:10:01.690,0:10:02.940
+So keep that in mind.
+
+0:10:02.940,0:10:03.720
+You start low.
+
+0:10:03.720,0:10:08.220
+And as you see the children, the
+max so far slowly tics up.
+
+0:10:08.220,0:10:10.880
+Now of course to do this, I need
+to be able to recurse.
+
+0:10:10.880,0:10:14.250
+And that means I need to be able
+to compute the min value.
+
+0:10:14.250,0:10:15.510
+And so how do I do that?
+
+0:10:15.510,0:10:18.030
+Well, I initialize to
+positive infinity.
+
+0:10:18.030,0:10:22.370
+And then as I compute all of the
+children's values, I lower my value of
+
+0:10:22.370,0:10:24.660
+v. So when I compute a
+min, I start high.
+
+0:10:24.660,0:10:26.920
+And it slowly tics low as
+I examine children.
+
+0:10:26.920,0:10:28.890
+This'll be important later.
+
+0:10:28.890,0:10:31.920
+Now you notice that these
+are mutually recursive.
+
+0:10:31.920,0:10:34.150
+And in fact, it's really pseudocode
+because it's omitting
+
+0:10:34.150,0:10:35.000
+an important thing.
+
+0:10:35.000,0:10:35.850
+What's this omitting?
+
+0:10:35.850,0:10:37.110
+It's omitting the base case.
+
+0:10:37.110,0:10:40.940
+So if I just did this in a naive
+way, it wouldn't work so well.
+
+0:10:40.940,0:10:43.880
+But we imagine that there's a case
+the captures the terminal case.
+
+0:10:43.880,0:10:46.500
+And if it's a terminal, then you simply
+return whatever the problem
+
+0:10:46.500,0:10:49.450
+tells you the terminal utility is.
+
+0:10:49.450,0:10:53.880
+This operationalizes the equations that
+we had before, which is that at a
+
+0:10:53.880,0:10:56.365
+max node, the value of that node
+is defined by the maximum
+
+0:10:56.365,0:10:57.570
+of the child values.
+
+0:10:57.570,0:11:01.200
+And at a min node, the value is
+defined by the minimum of
+
+0:11:01.200,0:11:04.330
+the children values.
+
+0:11:04.330,0:11:07.210
+Now when you actually implement this,
+you have to handle the base case.
+
+0:11:07.210,0:11:09.710
+And it's gonna turn out for your
+projects you're gonna have to handle
+
+0:11:09.710,0:11:13.720
+other cases as well, nodes that
+aren't pure min and max nodes.
+
+0:11:13.720,0:11:16.880
+And so a general way that's often
+convenient to implement this is to say
+
+0:11:16.880,0:11:17.630
+no, no, no.
+
+0:11:17.630,0:11:19.980
+States simply have values.
+
+0:11:19.980,0:11:21.490
+How do I compute the value of a state?
+
+0:11:21.490,0:11:25.390
+If the state is a terminal state, then
+I simply return it's utility.
+
+0:11:25.390,0:11:26.810
+Then I can have a dispatch.
+
+0:11:26.810,0:11:31.130
+And it says, if max controls this node,
+then I'm gonna return the max
+
+0:11:31.130,0:11:33.600
+value of the state which will
+do the appropriate thing.
+
+0:11:33.600,0:11:35.770
+If it's a min, then I'll do
+the min value which will
+
+0:11:35.770,0:11:37.330
+do appropriate things.
+
+0:11:37.330,0:11:41.370
+And then I have these specific functions
+just like before that always
+
+0:11:41.370,0:11:42.770
+call the dispatch.
+
+0:11:42.770,0:11:47.030
+And this is nice if you have multiple
+mins in a row or, for next class, once
+
+0:11:47.030,0:11:49.830
+you have expectation layers.
+
+0:11:49.830,0:11:51.500
+So let's do an example.
+
+0:11:51.500,0:11:54.860
+And more importantly for this example,
+since I know we can all do minimax
+
+0:11:54.860,0:11:58.570
+kind of by hand looking at the tree,
+let's think about how this appears to
+
+0:11:58.570,0:11:59.630
+the recursive algorithm.
+
+0:11:59.630,0:12:02.780
+The tree doesn't just materialize and
+you kind of see that plus eight in the
+
+0:12:02.780,0:12:03.980
+lower right corner.
+
+0:12:03.980,0:12:07.540
+Instead, it appears bit by bit
+in a depth-first fashion.
+
+0:12:07.540,0:12:10.800
+So if I want to compute the minimax
+value of this max node at the root,
+
+0:12:10.800,0:12:13.650
+well, I got to take a max
+of a bunch of things.
+
+0:12:13.650,0:12:16.230
+So far the max is negative infinity.
+
+0:12:16.230,0:12:17.960
+So I look for the first child.
+
+0:12:17.960,0:12:18.680
+It's a min node.
+
+0:12:18.680,0:12:21.950
+So I need to know its value, which
+of course involves recursing.
+
+0:12:21.950,0:12:23.420
+So I look at the first child.
+
+0:12:23.420,0:12:25.450
+The min so far is three.
+
+0:12:25.450,0:12:27.070
+The min so far is still three.
+
+0:12:27.070,0:12:28.600
+The min so far is still three.
+
+0:12:28.600,0:12:33.130
+And there's no more children, so
+I can stick a three right here.
+
+0:12:33.130,0:12:36.390
+Now at the root, the max has gone
+up to three, but there are
+
+0:12:36.390,0:12:37.450
+more children to check.
+
+0:12:37.450,0:12:38.800
+So I check the second child.
+
+0:12:38.800,0:12:41.250
+I'm gonna take the minimum
+of its children.
+
+0:12:41.250,0:12:42.980
+Its two.
+
+0:12:42.980,0:12:44.390
+It's still two.
+
+0:12:44.390,0:12:46.860
+It's still two.
+
+0:12:46.860,0:12:49.720
+So I write a two there,
+and I can return that.
+
+0:12:49.720,0:12:52.660
+The max so far at the
+root is still three.
+
+0:12:52.660,0:12:54.570
+Now I go to here, and I take the min.
+
+0:12:54.570,0:12:55.640
+So 14.
+
+0:12:55.640,0:12:56.620
+Now it's five.
+
+0:12:56.620,0:12:57.540
+Now it's two.
+
+0:12:57.540,0:12:58.510
+I return two.
+
+0:12:58.510,0:13:02.430
+And only now can the root say, all
+right, the maximum is three, and it's
+
+0:13:02.430,0:13:06.310
+supported by this action, which is
+in turn supported by this action.
+
+0:13:06.310,0:13:11.290
+So in fact, this is that magic node at
+the leaf that's giving rise to the
+
+0:13:11.290,0:13:13.840
+whole minimax value at the root.
+
+0:13:13.840,0:13:16.010
+But the root minimax is three.
+
+0:13:16.010,0:13:17.740
+So now we have an algorithm.
+
+0:13:17.740,0:13:19.170
+How efficient is it?
+
+0:13:19.170,0:13:20.790
+Well, it's just like a
+depth-first search.
+
+0:13:20.790,0:13:22.150
+You saw the procedure.
+
+0:13:22.150,0:13:23.630
+It recurses into each node.
+
+0:13:23.630,0:13:26.190
+It goes through the children from left
+to right in whatever order they're
+
+0:13:26.190,0:13:28.120
+returned by the successor function.
+
+0:13:28.120,0:13:30.930
+That means the time and memory profile
+are gonna be just like that
+
+0:13:30.930,0:13:32.150
+depth-first search.
+
+0:13:32.150,0:13:36.140
+The space isn't that bad because at
+any time your storage is basically
+
+0:13:36.140,0:13:38.540
+what's on their recursion stack.
+
+0:13:38.540,0:13:40.030
+The time is bad news.
+
+0:13:40.030,0:13:41.040
+And why is it bad news?
+
+0:13:41.040,0:13:44.420
+The branching factor of the game is b,
+which, for example, for chess is
+
+0:13:44.420,0:13:46.570
+something like 35.
+
+0:13:46.570,0:13:50.280
+The time is then b to the depth
+that you have to search.
+
+0:13:50.280,0:13:52.430
+So how deep m can you go?
+
+0:13:52.430,0:13:55.800
+Well, in chess, how many moves
+are there in a chess game?
+
+0:13:55.800,0:13:57.700
+Something like 100.
+
+0:13:57.700,0:14:01.250
+So for chess, the time complexity
+is gonna be something
+
+0:14:01.250,0:14:03.910
+like 35 to the 100th.
+
+0:14:03.910,0:14:06.000
+That's not going to happen.
+
+0:14:06.000,0:14:09.780
+So the exact solution for something like
+chess is completely infeasible.
+
+0:14:09.780,0:14:13.020
+Actually in this sense, I'm not even
+sure we're gonna do it for checkers
+
+0:14:13.020,0:14:14.050
+anytime soon.
+
+0:14:14.050,0:14:16.660
+The methods that solve checkers
+involved very aggressive
+
+0:14:16.660,0:14:19.090
+de-duplication so you didn't
+have to look at the same
+
+0:14:19.090,0:14:21.890
+state in subtle variance.
+
+0:14:21.890,0:14:25.120
+So for the case of chess, the exact
+solution is completely infeasable.
+
+0:14:25.120,0:14:26.870
+It's just not gonna happen.
+
+0:14:26.870,0:14:29.060
+But of course, we have chess
+playing programs.
+
+0:14:29.060,0:14:31.320
+They do use minimax-like methods.
+
+0:14:31.320,0:14:34.690
+And so, somehow we need to be able to
+actually play these games without
+
+0:14:34.690,0:14:37.410
+exploring the whole tree.
+
+0:14:37.410,0:14:40.640
+Let's think a little bit about the
+properties this algorithm has.
+
+0:14:40.640,0:14:42.630
+So here's a little game.
+
+0:14:42.630,0:14:43.980
+Max controls the root.
+
+0:14:43.980,0:14:45.400
+Min controls the response.
+
+0:14:45.400,0:14:47.920
+Now let's think about what
+the outcomes are.
+
+0:14:47.920,0:14:51.420
+Well, according to the minimax
+algorithm, if we get to the left
+
+0:14:51.420,0:14:56.020
+branch, min has no choice
+but to return 10.
+
+0:14:56.020,0:14:58.800
+On the right branch, what
+will min return?
+
+0:14:58.800,0:15:00.760
+Nine.
+
+0:15:00.760,0:15:03.560
+And that means that at the
+root, max can force a 10.
+
+0:15:03.560,0:15:06.390
+And that means max should
+choose to go left.
+
+0:15:06.390,0:15:06.880
+Why?
+
+0:15:06.880,0:15:10.930
+Because even though that 100 is there
+tempting you, you know min is not
+
+0:15:10.930,0:15:12.360
+gonna let you have it.
+
+0:15:12.360,0:15:16.780
+And so that right branch is only
+worth nine in a minimax sense.
+
+0:15:16.780,0:15:19.630
+And this is exactly the correct
+reasoning that you want if you're
+
+0:15:19.630,0:15:22.120
+playing against an evil mastermind.
+
+0:15:22.120,0:15:25.000
+So if you're playing against a perfect
+player, this is exactly
+
+0:15:25.000,0:15:25.770
+what you should do.
+
+0:15:25.770,0:15:27.860
+You cannot achieve more than 10.
+
+0:15:27.860,0:15:30.970
+And if you do this other action and
+you go to the right, you're gonna
+
+0:15:30.970,0:15:31.660
+achieve less.
+
+0:15:31.660,0:15:33.750
+You're gonna achieve nine.
+
+0:15:33.750,0:15:36.170
+Now that assumes a perfect player.
+
+0:15:36.170,0:15:38.290
+What if we don't have
+a perfect player?
+
+0:15:38.290,0:15:39.550
+What if we have this guy?
+
+0:15:39.550,0:15:42.550
+Well, now the reasoning
+isn't so clear cut.
+
+0:15:42.550,0:15:44.080
+The minimax value is still 10.
+
+0:15:44.080,0:15:46.300
+10 is the best you can achieve
+against a perfect player.
+
+0:15:46.300,0:15:48.900
+Maybe against this guy you
+have a shot at the 100.
+
+0:15:48.900,0:15:50.760
+So maybe you should go to the right.
+
+0:15:50.760,0:15:53.600
+Minimax does not include
+this kind of reasoning.
+
+0:15:53.600,0:15:56.640
+We get to methods that will
+in the next lecture.
+
+0:15:56.640,0:16:00.240
+Let's take a look about how minimax
+reasoning can lead to suboptimal
+
+0:16:00.240,0:16:04.280
+behavior when you are not in fact
+in an adversarial case.
+
+0:16:04.280,0:16:08.770
+Apologies for the grim nature we're
+about to put Pac-Man in.
+
+0:16:08.770,0:16:12.390
+So, let's imagine these
+are mastermind ghosts.
+
+0:16:12.390,0:16:14.212
+What's gonna happen?
+
+0:16:14.212,0:16:16.470
+It's not looking good for Pac-Man.
+
+0:16:16.470,0:16:19.490
+Now in this version of the game,
+you get points when you win.
+
+0:16:19.490,0:16:20.350
+You get points when you eat a dot.
+
+0:16:20.350,0:16:23.100
+You lose a point every step.
+
+0:16:23.100,0:16:25.890
+So what should Pac-Man do?
+
+0:16:25.890,0:16:30.670
+He should dive-bomb the orange ghost
+to stop a loss of points before the
+
+0:16:30.670,0:16:32.180
+inevitable failure.
+
+0:16:32.180,0:16:33.640
+So it's really, really grim.
+
+0:16:33.640,0:16:36.970
+And in fact, Pac-Man does
+what you think.
+
+0:16:36.970,0:16:39.110
+The ghost do what you think.
+
+0:16:39.110,0:16:41.620
+Now, that is adversarial
+worst-case reasoning.
+
+0:16:41.620,0:16:43.700
+What if these ghosts
+aren't adversarial?
+
+0:16:43.700,0:16:45.310
+What if, in fact, they're
+moving randomly?
+
+0:16:45.310,0:16:46.070
+I mean, look at them.
+
+0:16:46.070,0:16:47.180
+Look at those eyes, right.
+
+0:16:47.180,0:16:48.430
+These are not masterminds.
+
+0:16:48.430,0:16:51.350
+
+0:16:51.350,0:16:54.180
+So if in fact they're moving
+randomly, the orange guy's
+
+0:16:54.180,0:16:55.100
+coming towards Pac-Man.
+
+0:16:55.100,0:16:57.290
+There's not much we can do about that.
+
+0:16:57.290,0:16:59.240
+It actually doesn't have a choice.
+
+0:16:59.240,0:17:03.040
+The blue is either gonna
+go up or down, 50-50.
+
+0:17:03.040,0:17:05.950
+If the blue one goes up,
+it's gonna be bad.
+
+0:17:05.950,0:17:09.319
+If the blue one goes down,
+we're actually gonna win.
+
+0:17:09.319,0:17:12.450
+And so rather than assuming the worst
+case, we're basically in exactly the
+
+0:17:12.450,0:17:13.349
+tree I showed.
+
+0:17:13.349,0:17:16.089
+We're in the worst case, we should
+just save that one point by
+
+0:17:16.089,0:17:17.599
+dive-bombing the ghost.
+
+0:17:17.599,0:17:19.579
+But, half the time we're
+gonna do better.
+
+0:17:19.579,0:17:23.010
+And so let's see what Pac-Man
+does in the average case.
+
+0:17:23.010,0:17:26.210
+Well, we lucked out.
+
+0:17:26.210,0:17:28.980
+And here we'll be able to get
+through the whole game.
+
+0:17:28.980,0:17:29.590
+OK.
+
+0:17:29.590,0:17:32.330
+So we'll come back to that next
+time, about how we can do
+
+0:17:32.330,0:17:33.410
+that kind of reasoning.
+
+0:17:33.410,0:17:37.200
+But for now we'll just realize
+that against this guy,
+
+0:17:37.200,0:17:38.530
+you want to use minimax.
+
+0:17:38.530,0:17:42.130
+But if you are not playing against a
+perfect player, if for example your
+
+0:17:42.130,0:17:45.360
+player is random, than minimax is
+going to be overly pessimistic.
+
+0:17:45.360,0:17:47.400
+And we'll see the consequences
+of that later.
+
+0:17:47.400,0:17:48.650
+

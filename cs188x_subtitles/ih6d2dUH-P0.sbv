@@ -1,0 +1,255 @@
+0:00:00.000,0:00:01.146
+
+0:00:01.146,0:00:02.380
+DAN KLEIN: OK.
+
+0:00:02.380,0:00:05.590
+So if you have a completely separated
+graph, you have independent
+
+0:00:05.590,0:00:06.270
+sub-problems.
+
+0:00:06.270,0:00:07.860
+But you probably don't.
+
+0:00:07.860,0:00:10.470
+If you have a tree-structured
+CSP, then you can
+
+0:00:10.470,0:00:12.570
+apply this great algorithm.
+
+0:00:12.570,0:00:13.665
+But guess what?
+
+0:00:13.665,0:00:16.730
+Your CSP is probably not
+tree-structured either.
+
+0:00:16.730,0:00:20.010
+And so what we'd like for you to do is
+take a constraint graph that doesn't
+
+0:00:20.010,0:00:22.560
+have the structure we want and
+improve its structure.
+
+0:00:22.560,0:00:26.360
+And there's a very simple
+way to do this.
+
+0:00:26.360,0:00:29.420
+So let's imagine we had a nearly
+tree-structured CSP.
+
+0:00:29.420,0:00:32.890
+So for example, on the Australia graph,
+it's pretty much a tree or, in
+
+0:00:32.890,0:00:36.320
+particular, it's pretty much a straight
+line, if only Southern
+
+0:00:36.320,0:00:38.320
+Australia weren't there.
+
+0:00:38.320,0:00:38.810
+OK.
+
+0:00:38.810,0:00:41.290
+Well, what are we going to do about
+Southern Australia to get rid of it?
+
+0:00:41.290,0:00:43.600
+Well, we have this technique
+called conditioning.
+
+0:00:43.600,0:00:45.740
+And that is Southern Australia
+is going to still be there.
+
+0:00:45.740,0:00:46.630
+Don't worry.
+
+0:00:46.630,0:00:48.820
+But we're going to assign
+a value to it.
+
+0:00:48.820,0:00:52.220
+Once we've assigned a value to it and
+we imagine that that value that we
+
+0:00:52.220,0:00:58.410
+assign to SA is fixed, then the rest
+of the graph can forget that that
+
+0:00:58.410,0:00:59.750
+variable exists.
+
+0:00:59.750,0:01:06.330
+Any constraint that existed on an arc
+touching SA can now turn into a unary
+
+0:01:06.330,0:01:09.020
+constraint on the other end.
+
+0:01:09.020,0:01:09.095
+OK.
+
+0:01:09.095,0:01:12.990
+So if we assign SA red, this constraint
+says, essentially, that WA
+
+0:01:12.990,0:01:13.950
+can't be red.
+
+0:01:13.950,0:01:16.810
+So we can remove SA from the graph
+and add a unary constraint in
+
+0:01:16.810,0:01:18.280
+its place on WA.
+
+0:01:18.280,0:01:23.900
+So we get a simpler graph, once we
+instantiate SA and then remove it.
+
+0:01:23.900,0:01:26.520
+So the algorithm we have for making
+something that is nearly
+
+0:01:26.520,0:01:30.430
+tree-structured into a tree-structure
+is called cutset conditioning.
+
+0:01:30.430,0:01:33.790
+It says, find a set of variables,
+hopefully, a very small set of
+
+0:01:33.790,0:01:38.260
+variables, that, when instantiated
+and removed from the graph,
+
+0:01:38.260,0:01:39.790
+leave you with a tree.
+
+0:01:39.790,0:01:42.670
+And of course, this idea could also
+leave you with independent sub-graphs.
+
+0:01:42.670,0:01:44.700
+That would be fine too.
+
+0:01:44.700,0:01:50.020
+If your cutset is of size C, then you
+might have to try all possible
+
+0:01:50.020,0:01:51.800
+instantiations of the cutset.
+
+0:01:51.800,0:01:53.640
+So you're still going to be exponential
+in the size of your
+
+0:01:53.640,0:01:56.880
+cutset, but you're going to
+be linear in the size of
+
+0:01:56.880,0:01:58.250
+everything that's left over.
+
+0:01:58.250,0:02:01.280
+So if you have a small cutset, it means
+you're close to being a tree.
+
+0:02:01.280,0:02:04.220
+You instantiate that cutset,
+possibly, many times.
+
+0:02:04.220,0:02:06.360
+And now you're on your fast algorithm.
+
+0:02:06.360,0:02:08.560
+The whole cutset conditioning algorithm
+looks something like this.
+
+0:02:08.560,0:02:09.770
+You take your graph.
+
+0:02:09.770,0:02:11.970
+You choose a cutset.
+
+0:02:11.970,0:02:14.780
+You're going to instantiate that
+cutset in all possible ways.
+
+0:02:14.780,0:02:16.790
+Maybe you'll luck out and not
+have to try them all.
+
+0:02:16.790,0:02:19.840
+So here are all the ways you can
+instantiate that cutset.
+
+0:02:19.840,0:02:24.810
+For each instantiation, you compute the
+residual CSP by removing the nodes
+
+0:02:24.810,0:02:28.040
+that are instantiated and replacing
+their constraints with smaller
+
+0:02:28.040,0:02:30.390
+constraints over the remaining
+variables.
+
+0:02:30.390,0:02:33.760
+So once you have a simplified version
+of the constraint graph, you can now
+
+0:02:33.760,0:02:36.850
+apply a simpler algorithm like the
+tree-structured algorithm.
+
+0:02:36.850,0:02:39.290
+Is it hard to find what the cutset is?
+
+0:02:39.290,0:02:41.370
+Finding smallest cutset, NP-hard.
+
+0:02:41.370,0:02:43.340
+Anything you want to do, NP-hard.
+
+0:02:43.340,0:02:44.780
+Sorry, this is an AI class.
+
+0:02:44.780,0:02:47.030
+Everything is hard.
+
+0:02:47.030,0:02:49.410
+Sometimes you know something
+that lets you find it for
+
+0:02:49.410,0:02:51.410
+your particular problem.
+
+0:02:51.410,0:02:53.830
+Sometimes you can find a small one.
+
+0:02:53.830,0:02:57.380
+Very small cutsets aren't that hard to
+find, because you can just search all
+
+0:02:57.380,0:02:58.470
+the possibilities.
+
+0:02:58.470,0:03:01.720
+But if a cutset's kind of a moderate
+size, it can be very difficult to find
+
+0:03:01.720,0:03:02.970
+the best one.
+
+0:03:02.970,0:03:03.570
+

@@ -1,0 +1,38 @@
+0:00:00.000,0:00:00.640
+
+0:00:00.640,0:00:01.850
+PROFESSOR: Here's the summary.
+
+0:00:01.850,0:00:06.420
+A star uses both backward costs and
+estimates of forward costs.
+
+0:00:06.420,0:00:09.390
+A star is optimal if you have the
+appropriate constraints on your
+
+0:00:09.390,0:00:13.440
+heuristics which both boil down to
+saying that the heuristic is cheaper
+
+0:00:13.440,0:00:14.830
+than reality.
+
+0:00:14.830,0:00:18.100
+And when you use these things in
+practice, heuristic design is key.
+
+0:00:18.100,0:00:21.900
+And the general way we get heuristics is
+by using relaxed problems, thinking
+
+0:00:21.900,0:00:26.060
+through how could I solve this problem,
+if I made it easier somehow?
+
+0:00:26.060,0:00:29.130
+In a smaller number of steps than
+the actual optimal solution.
+
+0:00:29.130,0:00:30.380
+

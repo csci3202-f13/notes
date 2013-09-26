@@ -1,0 +1,585 @@
+0:00:00.000,0:00:00.590
+PROFESSOR: Hi.
+
+0:00:00.590,0:00:04.110
+In this video we will step through
+the execution of a couple of such
+
+0:00:04.110,0:00:06.010
+algorithms on a few examples.
+
+0:00:06.010,0:00:09.870
+The first algorithm we'll consider
+is depth-first tree search.
+
+0:00:09.870,0:00:12.590
+While we step through it we'll visualize
+the algorithm using the
+
+0:00:12.590,0:00:14.410
+search tree visualization.
+
+0:00:14.410,0:00:18.190
+Here's our state space graph, which
+defines our search problem.
+
+0:00:18.190,0:00:20.420
+We even have cost annotated
+on the edges.
+
+0:00:20.420,0:00:23.530
+But remember, for dept-first search
+they will not play a role.
+
+0:00:23.530,0:00:26.990
+They are essentially just
+distractors for now.
+
+0:00:26.990,0:00:31.510
+We have a start state, which
+is denoted by s.
+
+0:00:31.510,0:00:35.020
+And a goal state, just a single
+goal state denoted by g.
+
+0:00:35.020,0:00:39.300
+And we'll look at how the search tree
+will evolve running depth-first search
+
+0:00:39.300,0:00:40.440
+off of medical tie-breaking.
+
+0:00:40.440,0:00:44.790
+We start with just the root node, s.
+
+0:00:44.790,0:00:51.030
+And when we call the successive function
+on s, we get two children--
+
+0:00:51.030,0:00:54.400
+a and b.
+
+0:00:54.400,0:00:59.290
+And remember, really these children are
+not just a and b, but they are a
+
+0:00:59.290,0:01:08.740
+plan to start on s and go to a; and
+a plan to start on s and go to b.
+
+0:01:08.740,0:01:13.700
+Then once we are in a, which
+is alphabetically first
+
+0:01:13.700,0:01:16.090
+compared to b, we will--
+
+0:01:16.090,0:01:16.870
+after expansion--
+
+0:01:16.870,0:01:20.990
+get c and b again.
+
+0:01:20.990,0:01:22.690
+These are not just c and b.
+
+0:01:22.690,0:01:24.160
+These are really partial plans.
+
+0:01:24.160,0:01:28.950
+So what you have here is the plan to
+start in s, go to a, and then go to c;
+
+0:01:28.950,0:01:33.020
+and the plan to start in s,
+go to a, then go to b.
+
+0:01:33.020,0:01:37.520
+Depth-first search always looks at the
+things deepest in the tree first.
+
+0:01:37.520,0:01:39.600
+There is two of them that
+are equally deep.
+
+0:01:39.600,0:01:42.290
+Amongst ones that are equally deep,
+it does alphabetical tie-breaking.
+
+0:01:42.290,0:01:47.220
+b comes first alphabetically,
+so now it will expand b.
+
+0:01:47.220,0:01:49.400
+b has just one successor, c.
+
+0:01:49.400,0:01:51.650
+So now we have c here.
+
+0:01:51.650,0:01:56.900
+Again this is not really just c, but it
+is a plan to start on s, go to a,
+
+0:01:56.900,0:01:58.970
+go to b, and then go to c.
+
+0:01:58.970,0:02:02.230
+So next node to expand we'll pick this
+one here because it's the deepest one
+
+0:02:02.230,0:02:03.480
+in the search tree.
+
+0:02:03.480,0:02:09.289
+And when expanding this one we
+get just one successor, g.
+
+0:02:09.289,0:02:12.140
+Again this is not just g that we
+have in the search tree here.
+
+0:02:12.140,0:02:17.480
+It's really the plan to start in
+s, go to a, go to b, go to c,
+
+0:02:17.480,0:02:20.040
+and then go to g.
+
+0:02:20.040,0:02:24.780
+Now the deepest one in the search
+tree is this node over here.
+
+0:02:24.780,0:02:31.770
+Expanding this node oversees, then,
+the last state in this plan is the
+
+0:02:31.770,0:02:32.120
+goal state.
+
+0:02:32.120,0:02:36.500
+That means when we are expanding this,
+we actually don't have to expand
+
+0:02:36.500,0:02:39.100
+anymore what we declare success.
+
+0:02:39.100,0:02:43.040
+And the path found is sabcg.
+
+0:02:43.040,0:02:45.980
+Now once again, look at depth-first tree
+search, but do a priority queue
+
+0:02:45.980,0:02:46.810
+visualization.
+
+0:02:46.810,0:02:55.310
+priority queue will use as its priority,
+depth in the search tree,
+
+0:02:55.310,0:03:03.570
+which corresponds to the number
+of steps in the plan.
+
+0:03:03.570,0:03:06.310
+So as always we initialize
+with the start state.
+
+0:03:06.310,0:03:14.490
+So our priority queue consists of
+just s with a priority of one.
+
+0:03:14.490,0:03:16.800
+Only one element in the priority
+queue, so that's the one
+
+0:03:16.800,0:03:17.970
+that gets taken out.
+
+0:03:17.970,0:03:21.950
+When we take out s in the priority
+queue, after expansion in our priority
+
+0:03:21.950,0:03:27.150
+queue we have the elements a and b.
+
+0:03:27.150,0:03:28.680
+It's not just a.
+
+0:03:28.680,0:03:32.400
+This is really going from s to a.
+
+0:03:32.400,0:03:34.380
+And for b also, it's not just b.
+
+0:03:34.380,0:03:37.480
+It's going from s to b that we
+have in our priority queue.
+
+0:03:37.480,0:03:42.880
+For sa, the priority level is 2.
+
+0:03:42.880,0:03:45.840
+And for sb the priority level
+is a 2 because [INAUDIBLE].
+
+0:03:45.840,0:03:48.910
+We'll do alphabetical tie-breaking,
+which means it'll expand this one
+
+0:03:48.910,0:03:50.940
+first, one going to a.
+
+0:03:50.940,0:03:53.220
+We'll take this element
+out and expand it.
+
+0:03:53.220,0:03:55.170
+a has two successors--
+
+0:03:55.170,0:03:57.250
+b and c.
+
+0:03:57.250,0:04:02.700
+So we'll add two elements to the
+priority queue that will be sab, and
+
+0:04:02.700,0:04:04.910
+the priority there will be three.
+
+0:04:04.910,0:04:09.840
+And there will be sac with
+a priority also of three.
+
+0:04:09.840,0:04:14.490
+And we will retain sb, looking
+for expansion again.
+
+0:04:14.490,0:04:16.870
+The nodes with the highest priority--
+
+0:04:16.870,0:04:19.709
+higher numbers higher priority
+for depth-first search.
+
+0:04:19.709,0:04:21.660
+The threes here.
+
+0:04:21.660,0:04:25.260
+Alphabetical tie-breaking makes us go
+with this one first. b has only one
+
+0:04:25.260,0:04:26.500
+successor, c.
+
+0:04:26.500,0:04:28.495
+So we have sabc--
+
+0:04:28.495,0:04:31.040
+
+0:04:31.040,0:04:32.560
+this has a priority of four.
+
+0:04:32.560,0:04:40.160
+The other two, sac with priority of
+3; and sb with priority of two.
+
+0:04:40.160,0:04:44.650
+Next one to expand-- well the one with
+the highest priority here is sabc with
+
+0:04:44.650,0:04:45.600
+priority of four.
+
+0:04:45.600,0:04:48.540
+c has only one successor, g.
+
+0:04:48.540,0:04:53.180
+So after expansion we get
+one successor, sabcg.
+
+0:04:53.180,0:04:57.280
+This is a priority of five and
+the other two remain on the
+
+0:04:57.280,0:04:58.590
+queue as the were.
+
+0:04:58.590,0:05:01.685
+The next one to expand is this one
+here with a priority of five.
+
+0:05:01.685,0:05:06.050
+When we are about to expand this, we
+realize that the last state here is g,
+
+0:05:06.050,0:05:07.170
+which is the goal state.
+
+0:05:07.170,0:05:09.360
+So we actually don't have
+to expand anymore.
+
+0:05:09.360,0:05:10.760
+We can declare success.
+
+0:05:10.760,0:05:15.300
+The path we found to the goal is
+the one right here-- sabcg.
+
+0:05:15.300,0:05:18.470
+Now let's look at breadth-first
+tree search.
+
+0:05:18.470,0:05:21.010
+And we'll do the search
+tree visualization.
+
+0:05:21.010,0:05:23.840
+We have the same state
+space graph here.
+
+0:05:23.840,0:05:26.110
+So the search tree will be initialized
+with the start state.
+
+0:05:26.110,0:05:30.580
+And when calling the successive function
+on the start state we get two
+
+0:05:30.580,0:05:31.840
+successors--
+
+0:05:31.840,0:05:33.010
+a and b.
+
+0:05:33.010,0:05:37.390
+Remember these are really plans, not
+just states, that are associated with
+
+0:05:37.390,0:05:39.212
+the nodes in the search tree.
+
+0:05:39.212,0:05:40.490
+So sa and sb.
+
+0:05:40.490,0:05:42.200
+B
+
+0:05:42.200,0:05:46.880
+Then breadth-first search will look at
+the shallowest nodes in the tree that
+
+0:05:46.880,0:05:47.820
+haven't been expanded yet.
+
+0:05:47.820,0:05:49.430
+There's two of them.
+
+0:05:49.430,0:05:51.070
+We'll do alphabetical tie-breaking.
+
+0:05:51.070,0:05:53.950
+So sa will get expanded first.
+
+0:05:53.950,0:05:55.410
+a has two successors--
+
+0:05:55.410,0:05:56.720
+c and g.
+
+0:05:56.720,0:06:01.730
+So we'll get sac and sag.
+
+0:06:01.730,0:06:05.010
+
+0:06:05.010,0:06:09.680
+Next breadth-first search will expand
+again the one that is shallowest in
+
+0:06:09.680,0:06:11.710
+the search tree and hasn't been
+expanded yet, which is
+
+0:06:11.710,0:06:13.530
+this node over here.
+
+0:06:13.530,0:06:15.990
+And b has one successor, c.
+
+0:06:15.990,0:06:18.570
+So expanding this one leads to sbd.
+
+0:06:18.570,0:06:22.340
+Performing alphabetical, who's next?
+
+0:06:22.340,0:06:23.360
+This one here.
+
+0:06:23.360,0:06:27.352
+Expanding sac we get just
+one successor for c.
+
+0:06:27.352,0:06:29.400
+We get sacg.
+
+0:06:29.400,0:06:32.290
+Now these are the two shallowest
+in the search tree.
+
+0:06:32.290,0:06:38.370
+Alphabetical tie-breaking tells us
+to go with this one next, sag.
+
+0:06:38.370,0:06:41.340
+When we ask for expansion sag
+we notice that the last
+
+0:06:41.340,0:06:42.930
+state is the goal state.
+
+0:06:42.930,0:06:44.670
+That means we declare success.
+
+0:06:44.670,0:06:46.380
+We found a path to the goal.
+
+0:06:46.380,0:06:49.730
+And the path we return is sag.
+
+0:06:49.730,0:06:53.960
+Now let's do a visualization of our
+steps through using priority queues.
+
+0:06:53.960,0:06:57.640
+So a priority queue gets initialized
+with just a start state, s.
+
+0:06:57.640,0:07:00.190
+This start state is at level
+one in the search tree.
+
+0:07:00.190,0:07:04.670
+There's only one state that
+participates in this plan.
+
+0:07:04.670,0:07:08.500
+So priority of one.
+
+0:07:08.500,0:07:10.230
+That's our initial priority queue.
+
+0:07:10.230,0:07:11.920
+And we get, there's two successors--
+
+0:07:11.920,0:07:12.895
+a and b.
+
+0:07:12.895,0:07:17.200
+So we get the two successors on
+top priority queue-- sa, sb.
+
+0:07:17.200,0:07:19.640
+And both of them have
+a priority of two.
+
+0:07:19.640,0:07:21.670
+Pick the one with the lowest number.
+
+0:07:21.670,0:07:24.240
+Both of them have two, alphabetical
+tie-breaking picks.
+
+0:07:24.240,0:07:25.210
+This one next.
+
+0:07:25.210,0:07:29.250
+So next our priority queue will be
+placing that one with its successors.
+
+0:07:29.250,0:07:31.530
+a has two successors, c and g.
+
+0:07:31.530,0:07:37.930
+So we get we get sac, which will
+have priority of three.
+
+0:07:37.930,0:07:42.680
+And we get sag, which has
+a priority of three.
+
+0:07:42.680,0:07:47.760
+And we retain as b, which
+has a priority of two.
+
+0:07:47.760,0:07:49.140
+Two is lowest number.
+
+0:07:49.140,0:07:51.190
+Breadth-first search will
+go for that one.
+
+0:07:51.190,0:07:56.430
+Expanding, skipping the others, we'll
+get sac with priority of three; sag as
+
+0:07:56.430,0:07:58.690
+a priority of three.
+
+0:07:58.690,0:08:01.210
+And b has one successor, c.
+
+0:08:01.210,0:08:06.830
+So you get sbc, with a
+priority of three.
+
+0:08:06.830,0:08:09.380
+That's our new priority queue.
+
+0:08:09.380,0:08:12.680
+The lowest number here, which
+is a breadth-first search,
+
+0:08:12.680,0:08:14.630
+we'll look for is three.
+
+0:08:14.630,0:08:18.310
+Alphabetical tie-breaking
+puts sac first.
+
+0:08:18.310,0:08:19.970
+So expand that one.
+
+0:08:19.970,0:08:21.790
+c has one successor, g.
+
+0:08:21.790,0:08:26.530
+So we get sacg, which has
+a priority of four.
+
+0:08:26.530,0:08:29.660
+We retain the other two.
+
+0:08:29.660,0:08:31.050
+Now who's next?
+
+0:08:31.050,0:08:33.370
+The threes are the lowest numbers.
+
+0:08:33.370,0:08:39.200
+sag is alphabetically before
+sbc, so we have sag first.
+
+0:08:39.200,0:08:42.650
+The last one here is a goal state.
+
+0:08:42.650,0:08:49.180
+That means we declare success and we
+return sag as our path found by a
+
+0:08:49.180,0:08:50.430
+breadth-first tree search.
+
+0:08:50.430,0:08:51.640
+

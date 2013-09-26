@@ -1,0 +1,182 @@
+0:00:00.000,0:00:00.810
+
+0:00:00.810,0:00:03.770
+PROFESSOR: So this algorithm, what
+do people use this thing for?
+
+0:00:03.770,0:00:05.260
+They use it for a lot of stuff.
+
+0:00:05.260,0:00:08.940
+So pathing and routing problems
+are natural for A star.
+
+0:00:08.940,0:00:10.840
+This actually shows up
+in video games a lot.
+
+0:00:10.840,0:00:13.320
+That's one of the big crossover
+points actually between AI
+
+0:00:13.320,0:00:14.510
+research and video games.
+
+0:00:14.510,0:00:19.790
+This is a cost sensitive A star variant
+that we used in our StarCraft
+
+0:00:19.790,0:00:21.120
+bot, the Overmind.
+
+0:00:21.120,0:00:23.330
+We'll see more about that
+later in the semester.
+
+0:00:23.330,0:00:27.090
+There are resource planning problems
+where you can have a nice heuristics
+
+0:00:27.090,0:00:29.930
+that involve ways that you can allocate
+the resources that aren't
+
+0:00:29.930,0:00:31.200
+actually realizable.
+
+0:00:31.200,0:00:32.540
+Robot motion planning.
+
+0:00:32.540,0:00:33.440
+Language analysis.
+
+0:00:33.440,0:00:36.290
+A huge amount of the search in natural
+language, which definitely looks
+
+0:00:36.290,0:00:39.440
+nothing like position planning we're
+doing, parse trees or machine
+
+0:00:39.440,0:00:42.370
+translation or something like that,
+speech recognition, A star is used in
+
+0:00:42.370,0:00:43.470
+all of these things.
+
+0:00:43.470,0:00:47.050
+And we'll see much later in the
+semester how it is this A star
+
+0:00:47.050,0:00:49.790
+approach can work for things like
+speech recognition or machine
+
+0:00:49.790,0:00:50.740
+translation.
+
+0:00:50.740,0:00:53.575
+All right, let's see why
+this is so successful.
+
+0:00:53.575,0:00:59.470
+
+0:00:59.470,0:01:00.920
+This is Mastermind Pac-Man.
+
+0:01:00.920,0:01:02.840
+He's going to eat all the
+dots in one plan.
+
+0:01:02.840,0:01:04.530
+He's going to think, and he's going to
+think, and he's going to think, and
+
+0:01:04.530,0:01:07.210
+he's going to execute the entire
+plan without replanning.
+
+0:01:07.210,0:01:10.810
+This is the quickest way of eating all
+of the dots and when I click, he's
+
+0:01:10.810,0:01:13.890
+going to start thinking and at the
+bottom you'll see the node counts.
+
+0:01:13.890,0:01:15.300
+All right, so this is
+uniform cost search.
+
+0:01:15.300,0:01:17.460
+We're going to find the best way to eat
+all of these dots, and this is a
+
+0:01:17.460,0:01:19.130
+small graph.
+
+0:01:19.130,0:01:21.840
+OK, so he's thinking, thinking,
+thinking, thinking, thinking,
+
+0:01:21.840,0:01:23.350
+thinking, that's a lot.
+
+0:01:23.350,0:01:23.960
+Thinking.
+
+0:01:23.960,0:01:25.180
+Over 9,000.
+
+0:01:25.180,0:01:28.840
+OK, he eats them.
+
+0:01:28.840,0:01:31.260
+Optimal path, but took a lot
+of thinking to get there.
+
+0:01:31.260,0:01:33.560
+Over 9,000 nodes expanded.
+
+0:01:33.560,0:01:35.950
+What about A star?
+
+0:01:35.950,0:01:38.830
+
+0:01:38.830,0:01:41.950
+A star, done.
+
+0:01:41.950,0:01:43.420
+182 expanded.
+
+0:01:43.420,0:01:43.850
+Why?
+
+0:01:43.850,0:01:46.200
+Because A star is telling you, no,
+this is crazy, no, this is crazy.
+
+0:01:46.200,0:01:47.790
+Don't do this, this is crazy.
+
+0:01:47.790,0:01:51.220
+And so this search tree, you don't go
+all the way into the search tree in
+
+0:01:51.220,0:01:54.050
+every direction, you only do the
+things that are making progress
+
+0:01:54.050,0:01:55.160
+according to the heuristic.
+
+0:01:55.160,0:01:56.810
+What heuristic works that well?
+
+0:01:56.810,0:01:59.010
+Well, it's up for you to discover
+in your project runs.
+
+0:01:59.010,0:02:00.260
+

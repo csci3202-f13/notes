@@ -1,0 +1,264 @@
+0:00:00.000,0:00:01.040
+
+0:00:01.040,0:00:02.110
+PROFESSOR: Let's take a look.
+
+0:00:02.110,0:00:03.580
+Here's this tree-structured CSP.
+
+0:00:03.580,0:00:04.710
+We've already ordered it.
+
+0:00:04.710,0:00:09.450
+After we have an ordering, we have an
+algorithm where we enforce consistency
+
+0:00:09.450,0:00:13.590
+of arcs from right to left, and then
+we assign from left to right.
+
+0:00:13.590,0:00:17.480
+My first claim is that after the
+backward pass, where we visit the arcs
+
+0:00:17.480,0:00:22.760
+one by one, enforcing their consistency
+one time, that all of the
+
+0:00:22.760,0:00:25.450
+arcs in this direction are consistent.
+
+0:00:25.450,0:00:28.460
+I'm not saying anything about
+the other direction, right.
+
+0:00:28.460,0:00:32.119
+So let's see if we can figure
+out why that claim is true.
+
+0:00:32.119,0:00:32.700
+Well, let's think.
+
+0:00:32.700,0:00:35.020
+Let's think about an individual arc.
+
+0:00:35.020,0:00:41.460
+For example, let's think about this
+arc here from B to D. Right.
+
+0:00:41.460,0:00:42.515
+Here's an arc.
+
+0:00:42.515,0:00:46.600
+At some point in this algorithm, I
+looked at it, and I made it consistent
+
+0:00:46.600,0:00:49.580
+by deleting things from B. So there
+was a point at which it was
+
+0:00:49.580,0:00:50.680
+consistent.
+
+0:00:50.680,0:00:54.720
+And the question is, could my further
+processing mess that up.
+
+0:00:54.720,0:00:57.290
+Well what I do after this.
+
+0:00:57.290,0:01:02.190
+I changed, possibly, something about
+the arc from B to C and from A
+
+0:01:02.190,0:01:03.450
+to B, and so on.
+
+0:01:03.450,0:01:10.250
+But basically, all of the arcs I touch
+after this one are on the left.
+
+0:01:10.250,0:01:14.830
+Which means all of the domains that I
+could possibly delete values from are
+
+0:01:14.830,0:01:16.320
+on the left.
+
+0:01:16.320,0:01:19.960
+And when do I have to revisit this
+arc to make it consistent again.
+
+0:01:19.960,0:01:21.620
+What domain is important.
+
+0:01:21.620,0:01:26.070
+The head, so as long as D here doesn't
+lose a value from its domain, this
+
+0:01:26.070,0:01:28.990
+arc, once consistent,
+will stay that way.
+
+0:01:28.990,0:01:31.740
+And because nothing in this algorithm
+will then delete a value
+
+0:01:31.740,0:01:35.190
+from D, we're good.
+
+0:01:35.190,0:01:38.340
+So once I've done this single pass, all
+of these arcs in this direction a
+
+0:01:38.340,0:01:38.910
+consistent.
+
+0:01:38.910,0:01:41.360
+Not the other direction, but I don't
+care about the other direction for
+
+0:01:41.360,0:01:43.650
+this algorithm.
+
+0:01:43.650,0:01:44.690
+All right.
+
+0:01:44.690,0:01:47.660
+So now we know that after this pass, all
+of the arcs in this direction are
+
+0:01:47.660,0:01:48.770
+consistent.
+
+0:01:48.770,0:01:52.970
+The second claim is, if all of the
+route-to-leaf arcs, these directions,
+
+0:01:52.970,0:01:55.280
+are consistent, then forward assignment
+will not backtrack.
+
+0:01:55.280,0:01:57.560
+And we've already basically
+seen why that's true.
+
+0:01:57.560,0:01:58.150
+Right.
+
+0:01:58.150,0:01:59.680
+And we can do an induction
+on position.
+
+0:01:59.680,0:02:00.910
+So at the beginning you're fine.
+
+0:02:00.910,0:02:03.710
+You assign something to A, and whatever
+you assign to A, because A to
+
+0:02:03.710,0:02:06.850
+B is consistent, you can extend to
+B. What's the important bit.
+
+0:02:06.850,0:02:14.570
+The important bit here is that, for
+example, when I get to, let's say, E--
+
+0:02:14.570,0:02:19.250
+and if I'm thinking about making an
+assignment at E --if D-to-E is
+
+0:02:19.250,0:02:23.360
+consistent, and I've assigned something
+to D, I'm guaranteed there's
+
+0:02:23.360,0:02:29.020
+a value at E which will continue
+to satisfy the constraints.
+
+0:02:29.020,0:02:33.410
+So that's great but why don't I have an
+algorithm that works for any CSP.
+
+0:02:33.410,0:02:36.980
+Where in this do we actually use
+the fact that this is a tree.
+
+0:02:36.980,0:02:40.030
+Well, an important place we used it,
+is what if E had another parent.
+
+0:02:40.030,0:02:44.630
+What if there were an arc from C-to-E.
+And so the arc from D-to-E, let's say
+
+0:02:44.630,0:02:47.480
+it were consistent, and the arc from
+C-to-E is also consistent.
+
+0:02:47.480,0:02:48.220
+And I say great.
+
+0:02:48.220,0:02:52.260
+I have a value at D, which means I can
+extend it to an assignment at E. I
+
+0:02:52.260,0:02:56.360
+have a value at C, and that means I can
+extend it to an assignment at E.
+
+0:02:56.360,0:02:58.230
+Why isn't that enough.
+
+0:02:58.230,0:03:03.320
+Problem is, the value that is safe that
+E, based on what I did at D, and
+
+0:03:03.320,0:03:05.420
+the value that's safe at E based
+on what I did at C may
+
+0:03:05.420,0:03:06.860
+not be the same value.
+
+0:03:06.860,0:03:11.050
+Arc consistency doesn't let you have two
+things happening at once, be safe
+
+0:03:11.050,0:03:11.760
+at the same time.
+
+0:03:11.760,0:03:14.140
+That would be some higher
+order of consistency.
+
+0:03:14.140,0:03:17.160
+So for tree-structured CSPs,
+arc consistency--
+
+0:03:17.160,0:03:19.890
+in fact we're not even enforcing full
+arc consistency --is enough to
+
+0:03:19.890,0:03:21.280
+guarantee that you won't backtrack.
+
+0:03:21.280,0:03:24.540
+But once you have cycles,
+all bets are off.
+
+0:03:24.540,0:03:29.180
+The basic idea where a tree structure
+ensures that the steps that you take
+
+0:03:29.180,0:03:33.240
+kind of don't reenter and interact again
+in a bad way, we have that here
+
+0:03:33.240,0:03:35.040
+in CSP's, and we'll see it again
+later for Baye's nets.
+
+0:03:35.040,0:03:37.167
+

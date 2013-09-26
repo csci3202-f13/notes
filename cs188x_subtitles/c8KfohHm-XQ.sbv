@@ -1,0 +1,479 @@
+0:00:00.000,0:00:00.260
+
+0:00:00.260,0:00:03.050
+So here's back to the case of Romania.
+
+0:00:03.050,0:00:05.400
+We're trying to get from
+Arad to Bucharest.
+
+0:00:05.400,0:00:08.260
+And we're going to think about what the
+search tree looks like and what an
+
+0:00:08.260,0:00:13.240
+algorithm for on-the-fly discovery
+of plans might look like.
+
+0:00:13.240,0:00:16.620
+And that's going to lead us to
+the general search algorithm.
+
+0:00:16.620,0:00:18.540
+So here's a search tree.
+
+0:00:18.540,0:00:21.260
+When you start off, you've only
+got the top of the tree.
+
+0:00:21.260,0:00:22.520
+You've got to start state.
+
+0:00:22.520,0:00:25.220
+Now in principle, there's all
+this green stuff that's
+
+0:00:25.220,0:00:26.360
+mathematically defined.
+
+0:00:26.360,0:00:27.870
+There is a rest of the tree.
+
+0:00:27.870,0:00:30.790
+But unless you've done something wrong
+you haven't constructed this dotted
+
+0:00:30.790,0:00:32.420
+green stuff in code yet.
+
+0:00:32.420,0:00:33.920
+So how's search going to work?
+
+0:00:33.920,0:00:37.010
+Well we're going to start at the very
+top and we're going to build downward
+
+0:00:37.010,0:00:39.010
+in some way.
+
+0:00:39.010,0:00:44.100
+As we go, we're going to maintain a
+collection of potential plans, which
+
+0:00:44.100,0:00:47.560
+are nodes in this tree, and
+that collection is going
+
+0:00:47.560,0:00:48.900
+to be called a fringe.
+
+0:00:48.900,0:00:52.930
+This fringe is plans that we are
+still considering that may
+
+0:00:52.930,0:00:54.630
+lead us to the goal.
+
+0:00:54.630,0:00:57.860
+And again we're going to try to expand
+as few tree nodes as possible until we
+
+0:00:57.860,0:00:58.930
+find a goal.
+
+0:00:58.930,0:01:03.380
+So at this point, the only potential
+plan we've got on our fringe is the
+
+0:01:03.380,0:01:06.350
+one that says, empty plan,
+you're at Arad.
+
+0:01:06.350,0:01:09.900
+OK well that expands, so I might
+take that off the fringe.
+
+0:01:09.900,0:01:12.460
+And it turns into three longer plans--
+
+0:01:12.460,0:01:14.470
+one that gets me to Sibiu,
+you that gets me to
+
+0:01:14.470,0:01:16.180
+Timisoara, and one to Zerind.
+
+0:01:16.180,0:01:18.930
+Now on my fringe is these three plans.
+
+0:01:18.930,0:01:20.750
+I can't consider them all at once.
+
+0:01:20.750,0:01:23.060
+I can't extend them all
+simultaneously.
+
+0:01:23.060,0:01:24.340
+So I'm going to have to pick one.
+
+0:01:24.340,0:01:25.220
+I'm going to take something off.
+
+0:01:25.220,0:01:27.200
+Maybe I'll take off the one to Sibiu.
+
+0:01:27.200,0:01:28.660
+And then I expand it.
+
+0:01:28.660,0:01:30.770
+And then it has longer plans.
+
+0:01:30.770,0:01:34.340
+And now my collection of plans under
+consideration are these four-length
+
+0:01:34.340,0:01:36.540
+two plans and the two-length
+one plans.
+
+0:01:36.540,0:01:38.760
+They're all sitting in my
+fringe and I keep going.
+
+0:01:38.760,0:01:42.560
+And eventually I'm going to consider a
+plan and discover it achieves my goal.
+
+0:01:42.560,0:01:46.180
+And I'll be happy and declare victory
+and return that solution.
+
+0:01:46.180,0:01:48.270
+OK?
+
+0:01:48.270,0:01:49.680
+That's Tree Search.
+
+0:01:49.680,0:01:52.090
+So here's the algorithm
+in pseudo code.
+
+0:01:52.090,0:01:55.280
+We're not going to process the pseudo
+code in depth, but I want to show you
+
+0:01:55.280,0:01:56.040
+how it breaks down.
+
+0:01:56.040,0:01:57.970
+You'll have a chance to go through
+this in much greater
+
+0:01:57.970,0:02:00.370
+detail in your projects.
+
+0:02:00.370,0:02:02.400
+So what does Tree Search do?
+
+0:02:02.400,0:02:04.920
+Well you pass in a problem.
+
+0:02:04.920,0:02:06.250
+We'll get to strategy in a bit.
+
+0:02:06.250,0:02:09.530
+You pass in a problem and you do
+something over and over again.
+
+0:02:09.530,0:02:10.900
+What you do is you check.
+
+0:02:10.900,0:02:15.080
+And if there are no plans that you're
+currently considering then you can't
+
+0:02:15.080,0:02:16.750
+achieve your goal and
+you return failure.
+
+0:02:16.750,0:02:18.990
+You say, goal not achievable.
+
+0:02:18.990,0:02:22.900
+If there's still a set of plans
+that might work, you pick one.
+
+0:02:22.900,0:02:26.980
+It's a leaf node on the tree, but it's
+just a partial plan in your fringe.
+
+0:02:26.980,0:02:28.980
+So you pick something.
+
+0:02:28.980,0:02:31.860
+And then if that plan you just picked
+happens to achieve your
+
+0:02:31.860,0:02:32.830
+goal, you're done.
+
+0:02:32.830,0:02:35.530
+You have a plan for achieving
+your goal and you do your
+
+0:02:35.530,0:02:37.430
+goal-achieving dance.
+
+0:02:37.430,0:02:40.950
+If it doesn't, then you expand this
+node and all of its children--
+
+0:02:40.950,0:02:42.580
+they're all longer plans--
+
+0:02:42.580,0:02:44.260
+they all go back into the fringe.
+
+0:02:44.260,0:02:45.150
+So that's the cycle.
+
+0:02:45.150,0:02:48.770
+The important ideas are, there's a
+fringe which is all of the plans that
+
+0:02:48.770,0:02:52.490
+may yet work, there's expansion which
+is picking something out of the
+
+0:02:52.490,0:02:56.220
+fringe, and if it's not a goal already,
+putting in all of the
+
+0:02:56.220,0:02:58.840
+extensions of that plan,
+the expansions.
+
+0:02:58.840,0:03:01.840
+And there's your exploration strategy,
+which is all these things sitting on
+
+0:03:01.840,0:03:02.580
+the fringe.
+
+0:03:02.580,0:03:03.570
+Some of them are good ideas.
+
+0:03:03.570,0:03:04.720
+Some of them are bad ideas.
+
+0:03:04.720,0:03:07.250
+Which one should I do next?
+
+0:03:07.250,0:03:08.470
+So that's the main question.
+
+0:03:08.470,0:03:11.000
+And this is going to basically define
+all of the search algorithms we're
+
+0:03:11.000,0:03:11.740
+going to study.
+
+0:03:11.740,0:03:14.720
+What fringe nodes do you explore next?
+
+0:03:14.720,0:03:18.310
+So let's do an example of Tree Search.
+
+0:03:18.310,0:03:20.120
+So let's say, what does it look like?
+
+0:03:20.120,0:03:21.380
+We start off with a fringe.
+
+0:03:21.380,0:03:26.070
+So we have our fringe here.
+
+0:03:26.070,0:03:29.480
+And then we actually have our
+tree which we're going
+
+0:03:29.480,0:03:31.710
+to build as we process.
+
+0:03:31.710,0:03:34.520
+Really the key object in
+the code is the fringe.
+
+0:03:34.520,0:03:35.760
+The tree's kind of there.
+
+0:03:35.760,0:03:38.610
+It exists in back pointers, so
+from a node you can figure
+
+0:03:38.610,0:03:39.550
+out how you got there.
+
+0:03:39.550,0:03:41.190
+But really the fringe
+is the key object.
+
+0:03:41.190,0:03:43.810
+The tree is object it makes sense
+to think about on slides.
+
+0:03:43.810,0:03:46.430
+I'm going to draw them both
+in some of these cases.
+
+0:03:46.430,0:03:47.980
+So let's think, what
+are we going to do?
+
+0:03:47.980,0:03:52.600
+We start off with a tree which is just
+S. And that means on our fringe is the
+
+0:03:52.600,0:03:56.940
+empty plan, congratulations you're
+still at S. We have to pick one.
+
+0:03:56.940,0:03:58.450
+So there's no choice.
+
+0:03:58.450,0:04:00.240
+We pick S and we expand it.
+
+0:04:00.240,0:04:10.940
+And that means back on the fringe goes S
+to D, S to E, and S to P. And that's
+
+0:04:10.940,0:04:16.339
+kind of equivalent to expanding out the
+tree with D, E and P. And now the
+
+0:04:16.339,0:04:19.950
+fringe is these nodes.
+
+0:04:19.950,0:04:21.779
+What do I take off next?
+
+0:04:21.779,0:04:22.800
+E. All right.
+
+0:04:22.800,0:04:25.435
+So off comes E. And what
+are its successors?
+
+0:04:25.435,0:04:29.230
+
+0:04:29.230,0:04:40.500
+S to E to H. S to E to R. And this
+is equivalent to E having
+
+0:04:40.500,0:04:44.360
+now H and R as children.
+
+0:04:44.360,0:04:48.650
+And now my fringe is this kind
+of periphery of the tree.
+
+0:04:48.650,0:04:50.650
+I won't keep drawing the
+fringe in both places.
+
+0:04:50.650,0:04:52.690
+What do I pop next?
+
+0:04:52.690,0:04:56.910
+S to E to R. There may be multiple ways
+on my fringe of achieving R, at
+
+0:04:56.910,0:04:59.610
+least in the algorithms
+as they are right now.
+
+0:04:59.610,0:05:01.240
+So S to E to R pops off.
+
+0:05:01.240,0:05:10.760
+And then on to my fringe goes S to E
+to R to F. And that R right now has
+
+0:05:10.760,0:05:12.050
+this child F.
+
+0:05:12.050,0:05:14.330
+What should I pop off next?
+
+0:05:14.330,0:05:17.080
+S-E-R-F, serf.
+
+0:05:17.080,0:05:18.990
+We pop off the serf.
+
+0:05:18.990,0:05:20.240
+S-E-R-F--
+
+0:05:20.240,0:05:22.620
+
+0:05:22.620,0:05:24.290
+and now this has two children.
+
+0:05:24.290,0:05:33.180
+One with C-R-F, and one
+with G. Am I done?
+
+0:05:33.180,0:05:34.820
+Strictly speaking, you're not done.
+
+0:05:34.820,0:05:37.740
+And this will be more important for
+some algorithms than others.
+
+0:05:37.740,0:05:41.910
+Strictly speaking, your successors go on
+the fringe and only when they come
+
+0:05:41.910,0:05:44.360
+off the fringe could you possibly
+declare victory.
+
+0:05:44.360,0:05:47.250
+But what shall I pop off?
+
+0:05:47.250,0:05:48.690
+Next maybe we'll pop this off.
+
+0:05:48.690,0:05:50.810
+It passes the goal test.
+
+0:05:50.810,0:05:53.660
+And now we have a solution
+and we return it.
+
+0:05:53.660,0:05:57.180
+So without expanding the whole
+tree, we found a goal.
+
+0:05:57.180,0:05:58.600
+We did it relatively efficiently.
+
+0:05:58.600,0:06:03.320
+I would say this is a successful use of
+Tree Search to find a goal without
+
+0:06:03.320,0:06:05.870
+having to expand something
+large and exponential.
+
+0:06:05.870,0:06:10.570
+This algorithm is called CS188 Guided
+Search and is not, in general,
+
+0:06:10.570,0:06:11.820
+available to you.
+
+0:06:11.820,0:06:12.833
+

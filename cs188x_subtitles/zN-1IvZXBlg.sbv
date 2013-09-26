@@ -1,0 +1,67 @@
+0:00:00.000,0:00:01.000
+
+0:00:01.000,0:00:02.980
+DAN KLEIN: So far, we have backtracking
+search and we'd like to
+
+0:00:02.980,0:00:04.690
+make it better.
+
+0:00:04.690,0:00:08.170
+And here, there are some general purpose
+ideas that apply to any CSP
+
+0:00:08.170,0:00:10.480
+that will give us huge gains in speed.
+
+0:00:10.480,0:00:12.260
+One idea is ordering.
+
+0:00:12.260,0:00:14.120
+So, which variable should
+be assigned next?
+
+0:00:14.120,0:00:17.340
+As we'll see, there is better orderings
+and worse orderings.
+
+0:00:17.340,0:00:20.140
+Similarly, for values, which order
+should we try them in?
+
+0:00:20.140,0:00:22.230
+Some values are going to work
+out, some values aren't.
+
+0:00:22.230,0:00:25.120
+Maybe we should be smart about
+the order we try them.
+
+0:00:25.120,0:00:27.930
+Another big class of ways of
+speeding up backtracking is
+
+0:00:27.930,0:00:29.080
+what's called filtering.
+
+0:00:29.080,0:00:32.759
+Is there some way to detect an
+inevitable failure early so we don't
+
+0:00:32.759,0:00:35.740
+have to go through a whole bunch
+of assigning to discover it?
+
+0:00:35.740,0:00:38.470
+And then finally, we're going to look at
+structure methods where we look at
+
+0:00:38.470,0:00:42.060
+the constraint graph and exploit its
+structure in some way in order to get
+
+0:00:42.060,0:00:43.310
+a better algorithm.
+
+0:00:43.310,0:00:44.267
+

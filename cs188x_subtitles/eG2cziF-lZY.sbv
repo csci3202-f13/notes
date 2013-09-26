@@ -1,0 +1,95 @@
+0:00:00.000,0:00:00.510
+
+0:00:00.510,0:00:02.750
+PROFESSOR: So what's the
+story about optimality?
+
+0:00:02.750,0:00:04.990
+There was tree search, there was graph
+search, there was admissibility, there
+
+0:00:04.990,0:00:05.960
+was consistency.
+
+0:00:05.960,0:00:07.120
+Here's the story.
+
+0:00:07.120,0:00:11.870
+A star is optimal in tree search if
+you have an admissible heuristic.
+
+0:00:11.870,0:00:13.450
+That's the easy one to think about.
+
+0:00:13.450,0:00:16.580
+Such tree search is optimal when
+the heuristic is admissible.
+
+0:00:16.580,0:00:18.670
+Uniform cost search is a special case.
+
+0:00:18.670,0:00:22.800
+Whenever h equals zero, and clearly
+h equals zero is admissible.
+
+0:00:22.800,0:00:26.990
+For graph search, a star is still
+optimal, but only if the heuristic
+
+0:00:26.990,0:00:30.940
+obeys the stronger condition
+of consistency.
+
+0:00:30.940,0:00:34.460
+Uniform cost search is then still
+optimal for graph search, because h
+
+0:00:34.460,0:00:37.910
+equals zero, in addition to being
+obviously admissible, is easy to show
+
+0:00:37.910,0:00:39.510
+that it's also consistent.
+
+0:00:39.510,0:00:42.540
+So in both cases, uniform cost
+search is a special case.
+
+0:00:42.540,0:00:44.750
+In both cases, a star is optimal.
+
+0:00:44.750,0:00:47.120
+Tree search requires
+only admissibility.
+
+0:00:47.120,0:00:49.700
+Graph search also requires
+consistency.
+
+0:00:49.700,0:00:53.610
+In general, most natural admissible
+heuristics that you'll come up with,
+
+0:00:53.610,0:00:57.720
+say in the course of doing your project
+one, will be consistent if
+
+0:00:57.720,0:00:58.970
+they're admissible.
+
+0:00:58.970,0:00:59.850
+That's not always true.
+
+0:00:59.850,0:01:00.650
+You'll have to be careful.
+
+0:01:00.650,0:01:04.519
+But in general, things you come up with
+especially through relaxations,
+
+0:01:04.519,0:01:05.950
+if they're admissible, they're
+also consistent.
+
+0:01:05.950,0:01:07.200
+

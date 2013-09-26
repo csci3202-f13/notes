@@ -1,0 +1,206 @@
+0:00:00.000,0:00:01.210
+
+0:00:01.210,0:00:01.610
+DAN KLEIN: All right.
+
+0:00:01.610,0:00:03.515
+Let's see why A star tree search
+will be optimal with
+
+0:00:03.515,0:00:05.530
+an admissible heuristic.
+
+0:00:05.530,0:00:07.050
+So here's the setup.
+
+0:00:07.050,0:00:12.490
+Let's say A is an optimal goal node,
+and B is a suboptimal goal node.
+
+0:00:12.490,0:00:16.680
+And let's imagine that h is
+an admissible heuristic.
+
+0:00:16.680,0:00:21.370
+The claim we're going to show is that
+A, the optimal node, will exit the
+
+0:00:21.370,0:00:24.700
+fringe before B, the suboptimal node.
+
+0:00:24.700,0:00:26.390
+How are we going to show that?
+
+0:00:26.390,0:00:28.330
+First, let's imagine that
+B is on the fringe.
+
+0:00:28.330,0:00:31.210
+It can't exit the fringe until
+it gets on the fringe.
+
+0:00:31.210,0:00:32.870
+And if B is on the fringe,
+the fringe looks
+
+0:00:32.870,0:00:34.430
+something like This.
+
+0:00:34.430,0:00:38.840
+So we've already expanded some prefix of
+this tree, and we've gotten down to
+
+0:00:38.840,0:00:43.280
+the point where we've reached
+B. Now, some ancestor of A
+
+0:00:43.280,0:00:44.830
+must be on the fringe.
+
+0:00:44.830,0:00:48.160
+Maybe it's A itself, but maybe not.
+
+0:00:48.160,0:00:52.950
+In any case, let's call n the ancestor
+of A that's on the fringe.
+
+0:00:52.950,0:00:56.560
+The claim we're going to show is that
+n will be expanded by A star search
+
+0:00:56.560,0:01:02.090
+before B. If n is expanded before B,
+then n's child will be expanded before
+
+0:01:02.090,0:01:06.000
+B, all the way down to A, and then
+eventually A will be expanded before
+
+0:01:06.000,0:01:08.890
+B.
+
+0:01:08.890,0:01:14.550
+First, let's look at n versus A. And the
+claim is that f of n is less than
+
+0:01:14.550,0:01:17.900
+or equal to f of A. Why is this?
+
+0:01:17.900,0:01:19.670
+Let's take a look.
+
+0:01:19.670,0:01:21.700
+First, what is f of n?
+
+0:01:21.700,0:01:26.660
+By the definition of f cost for A star,
+that's equal to g of n, its path
+
+0:01:26.660,0:01:30.930
+cost, plus h of n, the heuristic at n.
+
+0:01:30.930,0:01:33.220
+But we know that h is admissible.
+
+0:01:33.220,0:01:38.360
+And for an admissible heuristic, h
+cannot overestimate the cost to a
+
+0:01:38.360,0:01:45.100
+closest goal, such as A. That means that
+f of n is less than or equal to g
+
+0:01:45.100,0:01:48.980
+of A, the path cost of A itself.
+
+0:01:48.980,0:01:53.880
+Because h is zero at a goal, g
+of A and f of A are the same.
+
+0:01:53.880,0:01:57.810
+Putting all this together, we get that
+f of n is less than or equal to f of
+
+0:01:57.810,0:01:59.910
+A.
+
+0:01:59.910,0:02:06.200
+Next, we'll compare A and B. And we'll
+show that f of A is less than f of B.
+
+0:02:06.200,0:02:07.270
+Why is that true?
+
+0:02:07.270,0:02:11.990
+Well, we know that g of A, A's
+path cost, is less than g
+
+0:02:11.990,0:02:14.280
+of B, B's path cost.
+
+0:02:14.280,0:02:17.700
+That's because we assumed that B is
+suboptimal, and that's what it means
+
+0:02:17.700,0:02:20.140
+to be suboptimal.
+
+0:02:20.140,0:02:25.230
+Again, because h equals zero for an
+admissible heuristic at any goal, we
+
+0:02:25.230,0:02:32.230
+also know that f of A
+is less than f of B.
+
+0:02:32.230,0:02:36.360
+The third thing we have to notice
+is that n will expand before
+
+0:02:36.360,0:02:38.760
+B. Now, why is that?
+
+0:02:38.760,0:02:43.270
+Well, if we compare n and B, then we'll
+see if we put these inequalities
+
+0:02:43.270,0:02:47.790
+together that f of n is less than or
+equal to f of A, which is less than f
+
+0:02:47.790,0:02:51.900
+of B. And so f of n is
+less than f of B.
+
+0:02:51.900,0:02:56.150
+That means the A star algorithm will
+choose to remove n before it moves B
+
+0:02:56.150,0:02:57.342
+from the queue.
+
+0:02:57.342,0:03:01.630
+Of course, this holds not only for n,
+but for any node along the path
+
+0:03:01.630,0:03:07.250
+towards A. That means that all ancestors
+of A will expand before B.
+
+0:03:07.250,0:03:13.830
+And in turn, that means A itself will
+expand before B. Since we've just
+
+0:03:13.830,0:03:20.250
+shown that any optimal node will be
+removed before any suboptimal node,
+
+0:03:20.250,0:03:24.070
+that means that A star search is optimal
+because the first goal node
+
+0:03:24.070,0:03:25.760
+that it returns will be optimal.
+
+0:03:25.760,0:03:27.333
+

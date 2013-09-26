@@ -1,0 +1,266 @@
+0:00:00.000,0:00:01.510
+
+0:00:01.510,0:00:04.150
+DAN KLEIN: We're going to talk a
+little about one more class of
+
+0:00:04.150,0:00:08.050
+algorithms for improving structure.
+
+0:00:08.050,0:00:11.020
+This is a more advanced algorithm, and
+I'm not going to go through all of the
+
+0:00:11.020,0:00:11.950
+details and conditions.
+
+0:00:11.950,0:00:15.880
+But I want to give you a sense that
+there are other approaches then
+
+0:00:15.880,0:00:19.880
+deleting nodes that let you take a
+complex graph structure that's not a
+
+0:00:19.880,0:00:23.220
+tree, and apply a tree structured
+algorithm to it.
+
+0:00:23.220,0:00:26.510
+The idea here is you look at your
+constraint satisfaction problem, and
+
+0:00:26.510,0:00:30.160
+you think, well, actually, it's a
+bunch of small problems glued
+
+0:00:30.160,0:00:31.620
+together, right?
+
+0:00:31.620,0:00:34.680
+You can think of each constraint,
+really, as a small problem.
+
+0:00:34.680,0:00:37.910
+If these problems were separate, they
+wouldn't be so hard to solve.
+
+0:00:37.910,0:00:40.660
+And so there's a kind of divide and
+conquer way of using the tree
+
+0:00:40.660,0:00:42.740
+structure algorithm that's
+really neat.
+
+0:00:42.740,0:00:44.850
+So what we do is we create
+mega variables.
+
+0:00:44.850,0:00:48.220
+Each mega variable is going to be a
+sub part of the original problem.
+
+0:00:48.220,0:00:51.400
+And then we're going to glue the mega
+variables up together in a way that
+
+0:00:51.400,0:00:58.170
+will have this meta graph, and in the
+meta CSP we will have tree structure.
+
+0:00:58.170,0:01:02.970
+So for example, we could take this
+little sub part of this CSP about WA,
+
+0:01:02.970,0:01:05.740
+NT, and SA, and it says they
+all have to be different.
+
+0:01:05.740,0:01:07.500
+Well, this is part of the CSP.
+
+0:01:07.500,0:01:09.680
+You have to solve this
+to solve the CSP.
+
+0:01:09.680,0:01:12.390
+By itself, it's not so hard
+because it's small.
+
+0:01:12.390,0:01:15.130
+But you know, also NT, Q, and
+SA all have to be different.
+
+0:01:15.130,0:01:16.350
+And that's another small problem.
+
+0:01:16.350,0:01:18.670
+And to solve the whole thing,
+you have to solve this.
+
+0:01:18.670,0:01:20.690
+But again, it's really small.
+
+0:01:20.690,0:01:21.370
+And so we can do this.
+
+0:01:21.370,0:01:24.120
+We can write down all of the sub
+problems, and we can recognize that
+
+0:01:24.120,0:01:26.110
+we're going to have to solve them all.
+
+0:01:26.110,0:01:29.370
+So for each of these sub problems, we
+can say, actually, you're just kind of
+
+0:01:29.370,0:01:31.480
+a mega variable in a meta problem.
+
+0:01:31.480,0:01:33.670
+So here's mega variable one.
+
+0:01:33.670,0:01:38.200
+It represents this whole sub problem,
+and the values it can take on are
+
+0:01:38.200,0:01:40.740
+joint assignments to those
+three variables.
+
+0:01:40.740,0:01:47.570
+So a valid value for mega variable
+one is RGB for WA, SA, and NT.
+
+0:01:47.570,0:01:49.120
+And then we just list
+all the valid ones.
+
+0:01:49.120,0:01:51.480
+And there aren't too many variables
+in mega variable one, so
+
+0:01:51.480,0:01:52.430
+this isn't too hard.
+
+0:01:52.430,0:01:55.350
+We're essentially listing all the
+solutions to the sub problem.
+
+0:01:55.350,0:01:57.440
+And then mega variable two,
+it's got solutions.
+
+0:01:57.440,0:01:58.510
+We can list them.
+
+0:01:58.510,0:02:01.070
+And aren't that many because
+it's not that big.
+
+0:02:01.070,0:02:03.520
+And then we can continue doing
+this for all of them.
+
+0:02:03.520,0:02:06.580
+Now, this isn't quite enough, because if
+we solved all of these problems, it
+
+0:02:06.580,0:02:07.510
+would be easy.
+
+0:02:07.510,0:02:10.860
+But then we might find that in mega
+variable one, the Northern Territory
+
+0:02:10.860,0:02:14.180
+is green, but in mega variable two,
+the Northern Territory is blue.
+
+0:02:14.180,0:02:16.880
+So somehow we have to solve all the
+problems, and that's just unary
+
+0:02:16.880,0:02:18.020
+constraints here.
+
+0:02:18.020,0:02:21.620
+But we also have to make sure that
+everything is consistent.
+
+0:02:21.620,0:02:25.220
+And so we have constraints between the
+variables that say that where they
+
+0:02:25.220,0:02:28.120
+share variables, they have to
+agree in the assignment.
+
+0:02:28.120,0:02:32.255
+So for example, we might say that for M1
+and M2 to agree, here's the list of
+
+0:02:32.255,0:02:33.050
+valid options, right?
+
+0:02:33.050,0:02:36.130
+And in particular, NT has to either
+be green in both, or red in
+
+0:02:36.130,0:02:37.790
+both, or blue in both.
+
+0:02:37.790,0:02:42.270
+So here is a kind of meta CSP that
+encodes the original one, and can be
+
+0:02:42.270,0:02:44.490
+solved using tree structured
+approaches.
+
+0:02:44.490,0:02:47.550
+But of course, the domains
+are now much bigger.
+
+0:02:47.550,0:02:49.620
+And there's one other tricky thing here
+that I haven't really given you
+
+0:02:49.620,0:02:53.520
+the details of, which is you have to
+make sure that they overlap in just
+
+0:02:53.520,0:02:56.720
+the right way to guarantee
+consistency.
+
+0:02:56.720,0:02:58.270
+At just the right way, it's something
+called the running
+
+0:02:58.270,0:02:59.690
+intersection property.
+
+0:02:59.690,0:03:02.980
+And we won't talk about the running
+intersection property more here, but
+
+0:03:02.980,0:03:04.530
+you can kind of imagine what
+it must look like.
+
+0:03:04.530,0:03:07.520
+It must be the things overlaps
+sufficiently that you can't have the
+
+0:03:07.520,0:03:10.230
+Northern Territory in two
+places without appearing
+
+0:03:10.230,0:03:11.480
+everywhere in between.
+
+0:03:11.480,0:03:12.200
+

@@ -1,0 +1,1103 @@
+0:00:00.000,0:00:00.160
+
+0:00:00.160,0:00:03.170
+PROFESSOR: OK, let's look at some
+step by step examples for
+
+0:00:03.170,0:00:05.120
+the alpha-beta algorithm.
+
+0:00:05.120,0:00:08.390
+And just as a reminder, let me
+put on the slide the meaning
+
+0:00:08.390,0:00:09.800
+of alpha and beta.
+
+0:00:09.800,0:00:14.450
+Alpha is the best already-explored
+option along the path to the root for
+
+0:00:14.450,0:00:15.750
+the maximizer.
+
+0:00:15.750,0:00:19.440
+And beta is the equivalent for the
+minimizer, that is, the best
+
+0:00:19.440,0:00:24.810
+already-explored option along the path
+to the root for the minimizer.
+
+0:00:24.810,0:00:27.670
+OK, with this intuition in mind, let's
+now work through the alpha-beta
+
+0:00:27.670,0:00:30.020
+execution on this particular
+game three.
+
+0:00:30.020,0:00:32.475
+We start at the top node,
+the root of the tree.
+
+0:00:32.475,0:00:37.170
+This is a maximizer node, so the value
+gets initialized to be the worst case
+
+0:00:37.170,0:00:40.260
+for the maximizer, which
+is minus infinity.
+
+0:00:40.260,0:00:41.960
+And this node will explore
+it's children.
+
+0:00:41.960,0:00:45.560
+We do a left-right traversal,
+so first go down here.
+
+0:00:45.560,0:00:49.200
+So we'll pass out an alpha value and
+a beta value, which have these
+
+0:00:49.200,0:00:50.350
+meetings over here.
+
+0:00:50.350,0:00:53.830
+Looking at the path to the roof,
+this not itself is the root.
+
+0:00:53.830,0:00:57.630
+In that node, no options have been
+explored yet, so along the entire
+
+0:00:57.630,0:00:59.350
+path, no options have been explored.
+
+0:00:59.350,0:01:02.850
+So the best available options to
+the maximizer is no option.
+
+0:01:02.850,0:01:06.670
+So that's the worst case minus infinity,
+and same for the minimizer,
+
+0:01:06.670,0:01:09.790
+the worst case, which, for the
+minimizer is plus infinity.
+
+0:01:09.790,0:01:11.420
+Now we're at the first child here.
+
+0:01:11.420,0:01:12.630
+This is a minimizer node.
+
+0:01:12.630,0:01:16.260
+So the value gets initialized to the
+worst case for minimizer, which is
+
+0:01:16.260,0:01:17.530
+plus infinity.
+
+0:01:17.530,0:01:19.790
+It will start looking at its children.
+
+0:01:19.790,0:01:22.380
+It'll pass down an alpha
+value and a beta value.
+
+0:01:22.380,0:01:24.970
+Alpha and beta have the meanings
+shown over here.
+
+0:01:24.970,0:01:27.650
+So this case, we'll look at
+the path to the route.
+
+0:01:27.650,0:01:30.330
+No options have been explored yet
+along the path of the root.
+
+0:01:30.330,0:01:34.640
+So we still have minus infinity
+and plus infinity.
+
+0:01:34.640,0:01:36.550
+Then we're at the next node here.
+
+0:01:36.550,0:01:38.360
+This node is a maximizer node.
+
+0:01:38.360,0:01:42.400
+For maximizer nodes, we initialize
+our values to minus infinity.
+
+0:01:42.400,0:01:44.010
+It'll start exploring its children.
+
+0:01:44.010,0:01:47.090
+It'll pass down and alpha and a beta
+value, again, with the same
+
+0:01:47.090,0:01:48.870
+meaning over here.
+
+0:01:48.870,0:01:53.440
+So since no options have been explored
+yet, for maximizer or for minimizer,
+
+0:01:53.440,0:01:59.200
+or we have still minus infinity and
+plus infinity being passed down.
+
+0:01:59.200,0:02:01.590
+This node here's a leaf node.
+
+0:02:01.590,0:02:02.900
+The value is four.
+
+0:02:02.900,0:02:04.870
+The value gets passed back up.
+
+0:02:04.870,0:02:07.340
+This allows this maximizer
+node to update its value.
+
+0:02:07.340,0:02:13.130
+Four is better than minus infinity for
+the maximizer, so we have four now.
+
+0:02:13.130,0:02:17.500
+And before looking at its next children,
+this maximizer node decides
+
+0:02:17.500,0:02:19.780
+where it's even worth it to
+look at its next children.
+
+0:02:19.780,0:02:21.920
+And for that it checks the
+following condition.
+
+0:02:21.920,0:02:26.680
+It checks whether this value of
+four, the current value here,
+
+0:02:26.680,0:02:30.510
+is higher than beta.
+
+0:02:30.510,0:02:33.840
+If that's the case, then it doesn't
+need to look at any
+
+0:02:33.840,0:02:35.710
+further children here.
+
+0:02:35.710,0:02:37.560
+Well unfortunately, that's
+not the case.
+
+0:02:37.560,0:02:40.290
+The value v is smaller than beta.
+
+0:02:40.290,0:02:43.120
+So we still need to look at
+the children down here.
+
+0:02:43.120,0:02:44.730
+OK, so we go down here.
+
+0:02:44.730,0:02:47.210
+We have an alpha and beta.
+
+0:02:47.210,0:02:51.580
+Alpha, best option available to
+maximizer along the path to the root.
+
+0:02:51.580,0:02:54.850
+Well, the maximizer now has an
+option of four, right here.
+
+0:02:54.850,0:02:56.990
+So alpha is four.
+
+0:02:56.990,0:02:58.910
+Beta is the best option
+for the minimizer.
+
+0:02:58.910,0:03:04.820
+No options for the minimizer yet,
+so this is still plus infinity.
+
+0:03:04.820,0:03:07.876
+Get down here, this is a leaf
+node, the value is 6.
+
+0:03:07.876,0:03:09.570
+6 gets passed back up.
+
+0:03:09.570,0:03:13.370
+For the maximizer, six is better that
+four, so the value becomes four.
+
+0:03:13.370,0:03:17.860
+And that becomes the value
+of this node over here.
+
+0:03:17.860,0:03:20.890
+So six gets passed back up.
+
+0:03:20.890,0:03:23.950
+The minimizer node looks at the
+six and the plus infinity.
+
+0:03:23.950,0:03:29.340
+Six is better than plus infinity for
+to minimizer, so this becomes six.
+
+0:03:29.340,0:03:33.380
+Now the minimizer considers whether it's
+worth going down to look at its
+
+0:03:33.380,0:03:34.882
+other children.
+
+0:03:34.882,0:03:37.080
+In this case, just one other child.
+
+0:03:37.080,0:03:41.970
+To decide this, the minimizer will
+compare its current value, v, which is
+
+0:03:41.970,0:03:45.580
+six, with the best option available
+to the maximizer anywhere
+
+0:03:45.580,0:03:46.870
+higher up in the tree.
+
+0:03:46.870,0:03:49.850
+Well, the best option available to the
+maximizer, anywhere higher up in the
+
+0:03:49.850,0:03:50.995
+tree-- there is no such options.
+
+0:03:50.995,0:03:52.100
+It's minus infinity.
+
+0:03:52.100,0:03:55.340
+In fact, it's stored in
+this alpha over here.
+
+0:03:55.340,0:03:59.580
+So that means we don't get to prune.
+
+0:03:59.580,0:04:03.140
+We go down here, we have an
+alpha and beta value.
+
+0:04:03.140,0:04:06.390
+Alpha, it's always the best option
+for the maximizer along
+
+0:04:06.390,0:04:07.980
+the path to the root.
+
+0:04:07.980,0:04:12.060
+Now, here's where it's important that
+you look at the phrasing carefully.
+
+0:04:12.060,0:04:15.250
+It's about the best option along the
+path to the route, not the best option
+
+0:04:15.250,0:04:17.660
+the already has ever
+encountered before.
+
+0:04:17.660,0:04:20.050
+For the maximizer, the algorithm
+has already seen a six
+
+0:04:20.050,0:04:21.360
+and a four over there.
+
+0:04:21.360,0:04:24.360
+They don't matter, however, because
+they're not sitting along the path to
+
+0:04:24.360,0:04:25.850
+the route from this node.
+
+0:04:25.850,0:04:28.030
+So alpha is here minus infinity.
+
+0:04:28.030,0:04:31.060
+Beta, best option for the minimizer
+along the path to the root.
+
+0:04:31.060,0:04:36.900
+Minimizer has an option here, that
+option is six, so beta is six.
+
+0:04:36.900,0:04:39.080
+No we'll get to maximizer
+node over here.
+
+0:04:39.080,0:04:43.215
+Its value gets initialized to be minus
+infinity, passing down an alpha and a
+
+0:04:43.215,0:04:44.150
+beta value.
+
+0:04:44.150,0:04:47.470
+Alpha is the best option for the
+maximizer along the path to the root.
+
+0:04:47.470,0:04:50.080
+That's minus infinity, because
+there's no such option.
+
+0:04:50.080,0:04:51.730
+Beta is the best value
+for to minimizer.
+
+0:04:51.730,0:04:55.640
+There is one such option, it's six,
+so that's a 6 being passed down.
+
+0:04:55.640,0:04:57.595
+The value of the leaf
+node here is seven.
+
+0:04:57.595,0:04:59.350
+Seven gets passed back up.
+
+0:04:59.350,0:05:01.910
+Minus infinity gets replaced
+with seven because that's
+
+0:05:01.910,0:05:03.930
+better for the maximizer.
+
+0:05:03.930,0:05:05.190
+Now the maximizer checks.
+
+0:05:05.190,0:05:08.960
+Is it still worth checking
+my next children?
+
+0:05:08.960,0:05:12.290
+Well, to verify that, the maximizer
+will compare the value that it
+
+0:05:12.290,0:05:17.270
+currently has, seven, with the best a
+minimizer can guarantee, which is six,
+
+0:05:17.270,0:05:17.970
+the beta value.
+
+0:05:17.970,0:05:22.450
+That means if the maximizer can get
+seven here, the minimizer would never
+
+0:05:22.450,0:05:23.280
+let that happen.
+
+0:05:23.280,0:05:26.770
+And wherever that option is available
+on the path to the route, the
+
+0:05:26.770,0:05:31.240
+minimizer will prefer that option over
+this option, here, that could lead to
+
+0:05:31.240,0:05:34.670
+a seven or even worse, because the
+maximizer has even more options
+
+0:05:34.670,0:05:36.440
+available, which we haven't
+looked at yet.
+
+0:05:36.440,0:05:38.060
+Seven bigger than six.
+
+0:05:38.060,0:05:41.050
+Equivalently, we have the
+v bigger than beta.
+
+0:05:41.050,0:05:42.260
+That means we get to prune.
+
+0:05:42.260,0:05:44.520
+We don't have to go down this path.
+
+0:05:44.520,0:05:47.680
+We know that the value of this
+node is seven or higher.
+
+0:05:47.680,0:05:50.160
+We don't know how high, but
+it's seven or higher.
+
+0:05:50.160,0:05:52.390
+It's enough that we know
+it's seven or higher.
+
+0:05:52.390,0:05:55.780
+To pass that back up, we pass
+up the seven or higher.
+
+0:05:55.780,0:05:59.880
+The minimizer compares the seven with
+the six, six is better, this was the
+
+0:05:59.880,0:06:03.530
+last child, so we have
+a value of six here.
+
+0:06:03.530,0:06:06.710
+This six gets passed back up
+to the root of the tree.
+
+0:06:06.710,0:06:09.250
+That's a maximizer between
+minus infinity and six.
+
+0:06:09.250,0:06:14.280
+It'll be for a six, the minus infinity
+disappears, we get a six here.
+
+0:06:14.280,0:06:18.280
+OK, now this node here has to decide
+whether it's worth it to explore any
+
+0:06:18.280,0:06:19.370
+further children.
+
+0:06:19.370,0:06:23.930
+To do that, it'll check and compare the
+current value six with the best
+
+0:06:23.930,0:06:26.840
+option available to the minimizer
+anywhere higher up in the tree.
+
+0:06:26.840,0:06:29.440
+Well, minimizer has no options
+higher up in the tree.
+
+0:06:29.440,0:06:33.320
+So that's no reason for the minimizer
+to deviate from getting here-- no
+
+0:06:33.320,0:06:34.550
+option to do so.
+
+0:06:34.550,0:06:36.205
+So we still need to go down.
+
+0:06:36.205,0:06:39.660
+The alpha value here is the best option
+for the maximizer so far.
+
+0:06:39.660,0:06:42.190
+The best option for the maximizer
+is to go down this path and
+
+0:06:42.190,0:06:43.570
+would attend a six.
+
+0:06:43.570,0:06:46.070
+Beta is the best option for the
+minimizer, no options for the
+
+0:06:46.070,0:06:48.450
+minimizer yet, so that's
+plus infinity.
+
+0:06:48.450,0:06:49.490
+Now we're at a minimizer node.
+
+0:06:49.490,0:06:51.460
+We'll initialize with plus infinity.
+
+0:06:51.460,0:06:53.580
+Then it'll look at its first child.
+
+0:06:53.580,0:06:56.720
+It'll pass down an alpha and a beta,
+same meaning as they've always had,
+
+0:06:56.720,0:06:58.820
+best option is available along
+the path to the root
+
+0:06:58.820,0:07:00.410
+for each of the players.
+
+0:07:00.410,0:07:06.960
+For alpha, that's six, for beta that's
+still plus infinity because no past
+
+0:07:06.960,0:07:10.190
+have been explored for the minimizer
+along the path to the root.
+
+0:07:10.190,0:07:11.580
+Now we're at this node here.
+
+0:07:11.580,0:07:14.370
+We initialize the value
+to minus infinity.
+
+0:07:14.370,0:07:16.420
+That's the worst case
+for the maximizer.
+
+0:07:16.420,0:07:19.665
+And we start exploring its first child,
+passing down an alpha and a
+
+0:07:19.665,0:07:20.240
+beta value.
+
+0:07:20.240,0:07:22.180
+Alpha fills six here.
+
+0:07:22.180,0:07:25.410
+Beta plus infinity, then
+look at this node.
+
+0:07:25.410,0:07:28.050
+The value of leaf node is one.
+
+0:07:28.050,0:07:30.420
+The one gets passed back up.
+
+0:07:30.420,0:07:34.080
+The maximizer says one is better than
+what I currently had, so I replace
+
+0:07:34.080,0:07:36.240
+minus infinity with one.
+
+0:07:36.240,0:07:40.340
+Now the question is, do I still need
+to explore any remaining children?
+
+0:07:40.340,0:07:43.710
+To decide that what the maximizer does,
+it compares its current value,
+
+0:07:43.710,0:07:48.070
+one, with options already available
+to minimizer anywhere along
+
+0:07:48.070,0:07:49.070
+the path to the route.
+
+0:07:49.070,0:07:52.270
+There are no such option for the
+minimizer, so there is no such
+
+0:07:52.270,0:07:53.540
+possibility of pruning here.
+
+0:07:53.540,0:07:55.440
+So we have to go down this path here.
+
+0:07:55.440,0:07:57.750
+We pass down a alpha value
+and a beta value.
+
+0:07:57.750,0:07:59.985
+Alpha is the best option
+for the maximizer.
+
+0:07:59.985,0:08:03.050
+The maximizer had a six and has a one.
+
+0:08:03.050,0:08:07.040
+Among those two six is best,
+alpha a six, beta is best
+
+0:08:07.040,0:08:08.660
+option for the minimizer.
+
+0:08:08.660,0:08:12.200
+Along the path to the root, well, no
+options have been explored yet.
+
+0:08:12.200,0:08:14.010
+So still plus infinity.
+
+0:08:14.010,0:08:18.080
+Coming down here, we see two,
+we pass the two back up.
+
+0:08:18.080,0:08:19.820
+We compare the two with the one.
+
+0:08:19.820,0:08:23.760
+Well, two is better than one,
+so the value here is two.
+
+0:08:23.760,0:08:27.280
+The two gets passed up to
+this minimizer node.
+
+0:08:27.280,0:08:32.230
+Two is better than plus infinity for
+the minimizer, so we make this two.
+
+0:08:32.230,0:08:35.260
+Now we need to contemplate whether we
+need to still explore other children
+
+0:08:35.260,0:08:37.110
+of the minimizer.
+
+0:08:37.110,0:08:40.429
+To decide on this, we look at the
+current value for the minimizer, here,
+
+0:08:40.429,0:08:41.740
+which is two.
+
+0:08:41.740,0:08:45.350
+We compare with the best option
+available to the maximizer, which is
+
+0:08:45.350,0:08:48.070
+stored in alpha, which is
+sitting right here.
+
+0:08:48.070,0:08:49.590
+And we have six.
+
+0:08:49.590,0:08:52.980
+Well, the maximizer has a better
+option available than two--
+
+0:08:52.980,0:08:54.230
+six.
+
+0:08:54.230,0:08:57.930
+The minimizer here has an option to
+force a two, and then has other
+
+0:08:57.930,0:09:00.425
+options for which we don't know
+yet what the value will be.
+
+0:09:00.425,0:09:04.160
+But we do know the minimizer could
+potentially force a two.
+
+0:09:04.160,0:09:06.590
+And if it's going to take another option
+than the two, it's going to be
+
+0:09:06.590,0:09:08.520
+even worse for the maximizer.
+
+0:09:08.520,0:09:12.210
+That means the maximizer would never
+let the game get down here because
+
+0:09:12.210,0:09:15.320
+that two is worse than the six it could
+guarantee by veering the game
+
+0:09:15.320,0:09:16.530
+off to the left.
+
+0:09:16.530,0:09:20.030
+So we don't have to look at this part of
+the tree because no matter what the
+
+0:09:20.030,0:09:23.770
+values are there, all it can do is
+make the value of this node here
+
+0:09:23.770,0:09:24.860
+smaller than two.
+
+0:09:24.860,0:09:27.360
+Whatever value is smaller than
+two, doesn't matter.
+
+0:09:27.360,0:09:29.340
+Two or smaller always means
+the maximizer would
+
+0:09:29.340,0:09:30.640
+never take this option.
+
+0:09:30.640,0:09:33.770
+So we have a value here smaller than
+or equal to two for the node.
+
+0:09:33.770,0:09:35.760
+We pass back up the two.
+
+0:09:35.760,0:09:38.450
+The maximizer compares that two with
+the six it has, and it says,
+
+0:09:38.450,0:09:39.400
+well, six is better.
+
+0:09:39.400,0:09:42.866
+So I retain my value of six.
+
+0:09:42.866,0:09:45.700
+The maximizer then, again,
+has to make a decision.
+
+0:09:45.700,0:09:49.210
+Is it worth exploring
+any next children.
+
+0:09:49.210,0:09:53.270
+To make that decision, it compares it's
+current value, which is six, with
+
+0:09:53.270,0:09:56.560
+the best option available to the
+minimizer on the path to the root.
+
+0:09:56.560,0:09:57.950
+But that path to the root is empty.
+
+0:09:57.950,0:09:59.870
+There are no such options
+for the minimizer.
+
+0:09:59.870,0:10:04.220
+So I have to go down this path.
+
+0:10:04.220,0:10:08.490
+Passing down alpha and beta, try the
+best options available for a maximizer
+
+0:10:08.490,0:10:11.450
+or minimizer along the
+path to the root.
+
+0:10:11.450,0:10:14.320
+Well, maximizer at the route
+as an option of six.
+
+0:10:14.320,0:10:15.970
+That's the only option, so
+it's the best option.
+
+0:10:15.970,0:10:17.500
+The minimizer has no options.
+
+0:10:17.500,0:10:20.030
+So we have plus infinity here.
+
+0:10:20.030,0:10:21.880
+We'll look at this node here.
+
+0:10:21.880,0:10:23.170
+This is a minimizer node.
+
+0:10:23.170,0:10:25.560
+We visualize its value
+to plus infinity.
+
+0:10:25.560,0:10:27.680
+And it'll look at first child.
+
+0:10:27.680,0:10:30.010
+We'll pass down an alpha
+and a beta value.
+
+0:10:30.010,0:10:33.220
+Alpha is, again, best option for the
+maximizer along the path to the
+
+0:10:33.220,0:10:34.640
+root, that's 6.
+
+0:10:34.640,0:10:38.560
+Beta, similarly, for the minimizer,
+that's plus infinity.
+
+0:10:38.560,0:10:41.160
+This node initializes
+itself to maximizer,
+
+0:10:41.160,0:10:44.070
+initializes to minus infinity.
+
+0:10:44.070,0:10:45.940
+It'll look at his first child.
+
+0:10:45.940,0:10:49.300
+First child get passed an
+alpha and a beta value.
+
+0:10:49.300,0:10:52.650
+The values are six and plus infinity.
+
+0:10:52.650,0:10:55.870
+That child is a leaf node, so just
+pass that value back up.
+
+0:10:55.870,0:10:58.770
+The maximizer prefers eight
+over minus infinity.
+
+0:10:58.770,0:11:00.780
+So the current estimate is eight.
+
+0:11:00.780,0:11:04.090
+Now, before it starts looking at its
+next children, it has to decide
+
+0:11:04.090,0:11:05.610
+whether that's even needed.
+
+0:11:05.610,0:11:09.320
+It will compare eight with the best
+option the minimizer could potentially
+
+0:11:09.320,0:11:11.010
+force higher up in the tree.
+
+0:11:11.010,0:11:13.300
+So we look higher up in the tree.
+
+0:11:13.300,0:11:17.140
+No options have been explored for the
+minimizer yet, so no pruning.
+
+0:11:17.140,0:11:21.650
+Equivalently, we compare that eight with
+beta, which is the best option
+
+0:11:21.650,0:11:23.990
+available to the minimizer
+higher up in the tree.
+
+0:11:23.990,0:11:25.520
+Beta is plus infinity.
+
+0:11:25.520,0:11:28.090
+So eight is a lower value,
+so no pruning.
+
+0:11:28.090,0:11:29.746
+We go down this path.
+
+0:11:29.746,0:11:34.210
+Pass down an alpha and beta, alpha is
+the best option for the maximizer,
+
+0:11:34.210,0:11:38.660
+which is now eight, which is
+obtained by going here.
+
+0:11:38.660,0:11:41.740
+And for the minimizer, best
+option is still no options
+
+0:11:41.740,0:11:43.110
+available, so plus infinity.
+
+0:11:43.110,0:11:44.380
+We have a value of one.
+
+0:11:44.380,0:11:47.150
+Pass the one back up to
+an eight and one.
+
+0:11:47.150,0:11:50.290
+Eight is the better one, so we
+retain eight and the value of
+
+0:11:50.290,0:11:51.930
+this node is eight.
+
+0:11:51.930,0:11:54.440
+We pass the eight back up for here.
+
+0:11:54.440,0:11:56.810
+The minimizer compares eight
+with plus infinity.
+
+0:11:56.810,0:11:57.600
+Eight is better.
+
+0:11:57.600,0:12:00.460
+So the current value is eight.
+
+0:12:00.460,0:12:03.830
+Then the minimizer decides whether or
+not it's worth going down to look at
+
+0:12:03.830,0:12:05.080
+its next children.
+
+0:12:05.080,0:12:07.580
+It looks at its value, eight.
+
+0:12:07.580,0:12:10.590
+It compares it with options
+available to the maximizer
+
+0:12:10.590,0:12:11.820
+higher up in the tree.
+
+0:12:11.820,0:12:15.010
+The best options available to the
+maximizer higher up in the tree is
+
+0:12:15.010,0:12:17.035
+alpha, which is six.
+
+0:12:17.035,0:12:19.850
+Eight is better than six, so
+the maximizer might let the
+
+0:12:19.850,0:12:20.950
+game come over here.
+
+0:12:20.950,0:12:23.780
+So we need to explore what exactly
+the value is over here.
+
+0:12:23.780,0:12:26.710
+So we go down, look at the next
+child of the minimizer.
+
+0:12:26.710,0:12:31.930
+Alpha is best option for the maximizer
+on the path to the root.
+
+0:12:31.930,0:12:33.445
+So that's six here.
+
+0:12:33.445,0:12:36.530
+And beta is the best value available
+to the minimizer on the path to the
+
+0:12:36.530,0:12:40.260
+root, and that's eight.
+
+0:12:40.260,0:12:42.700
+Coming to this maximizer node
+here, initializing its
+
+0:12:42.700,0:12:45.580
+value to minus infinity.
+
+0:12:45.580,0:12:50.570
+Look at its first child, passing
+down an alpha value of six, a
+
+0:12:50.570,0:12:54.110
+beta value of eight.
+
+0:12:54.110,0:12:57.890
+Eight's child here is a leaf
+node with a value of nine.
+
+0:12:57.890,0:12:59.840
+So nine gets passed back up.
+
+0:12:59.840,0:13:02.620
+The maximizer prefers nine
+over minus infinity.
+
+0:13:02.620,0:13:04.180
+So we have nine here for now.
+
+0:13:04.180,0:13:08.550
+Then to decide whether or not it's worth
+going down this path here, the
+
+0:13:08.550,0:13:12.260
+maximizer has to look at what the
+minimizer has available to itself.
+
+0:13:12.260,0:13:15.420
+Well, on the path of the root, the
+minimize had an option of eight.
+
+0:13:15.420,0:13:19.260
+Namely over here, if the minimizer had
+gone to the left, the value of the
+
+0:13:19.260,0:13:20.790
+game would be eight.
+
+0:13:20.790,0:13:25.310
+Since the maximizer here is able to
+achieve nine, and maybe higher, thanks
+
+0:13:25.310,0:13:28.260
+to unexplored options, which could
+only increase the value for the
+
+0:13:28.260,0:13:32.840
+maximizer, or minimizer would veer off
+to the eight, rather than letting it
+
+0:13:32.840,0:13:36.370
+get to a place where the maximizer could
+get nine or maybe even better
+
+0:13:36.370,0:13:37.670
+for the maximizer.
+
+0:13:37.670,0:13:40.290
+So we don't need to consider
+what's down here.
+
+0:13:40.290,0:13:42.030
+This can be pruned.
+
+0:13:42.030,0:13:44.960
+We know that value of this node for
+the maximizer is at least nine.
+
+0:13:44.960,0:13:45.690
+We know enough.
+
+0:13:45.690,0:13:46.780
+We pass up the nine.
+
+0:13:46.780,0:13:51.000
+The minimizer retains the eight, eight
+is better than nine for the minimizer.
+
+0:13:51.000,0:13:53.210
+Then this eight gets passed back up.
+
+0:13:53.210,0:13:56.150
+The maximizer at the top
+compares eight and six.
+
+0:13:56.150,0:13:57.270
+Eight is better.
+
+0:13:57.270,0:14:02.280
+And so we have here, the value
+of the game to be eight.
+
+0:14:02.280,0:14:03.530
+And that's it.
+
+0:14:03.530,0:14:05.300
+

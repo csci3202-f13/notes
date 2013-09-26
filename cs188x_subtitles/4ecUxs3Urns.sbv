@@ -1,0 +1,190 @@
+0:00:00.000,0:00:01.470
+
+0:00:01.470,0:00:03.305
+DAN KLEIN: So what happens when
+you enforce arc consistency?
+
+0:00:03.305,0:00:05.950
+Is it some magic wand that
+solves your CSP?
+
+0:00:05.950,0:00:07.190
+It's definitely not.
+
+0:00:07.190,0:00:10.910
+So after enforcing arc consistency, you
+can be in a couple of situations.
+
+0:00:10.910,0:00:14.060
+You can have one solution left.
+
+0:00:14.060,0:00:17.000
+You can have multiple solutions left,
+because of course the CSP may have
+
+0:00:17.000,0:00:20.010
+multiple solutions remaining, given
+the assignment you have so far.
+
+0:00:20.010,0:00:23.010
+And you can also no solutions
+left and not know it.
+
+0:00:23.010,0:00:24.720
+OK, so here are some configurations.
+
+0:00:24.720,0:00:27.090
+Let's take a look at them and see
+whether or not things are arc
+
+0:00:27.090,0:00:28.530
+consistent.
+
+0:00:28.530,0:00:31.060
+All right, so again, these are
+all inequality constraints.
+
+0:00:31.060,0:00:32.659
+This is still map coloring.
+
+0:00:32.659,0:00:33.360
+How about here?
+
+0:00:33.360,0:00:35.450
+Let's look at the top one.
+
+0:00:35.450,0:00:36.175
+Are things consistent?
+
+0:00:36.175,0:00:37.040
+Well we could check.
+
+0:00:37.040,0:00:38.600
+Is this arc consistent?
+
+0:00:38.600,0:00:41.050
+Well, for everything in the
+tail does it work out?
+
+0:00:41.050,0:00:42.140
+Yep.
+
+0:00:42.140,0:00:43.700
+How about this arc, is it consistent?
+
+0:00:43.700,0:00:44.450
+Yes.
+
+0:00:44.450,0:00:45.250
+OK, how about here?
+
+0:00:45.250,0:00:46.770
+This is the interesting one.
+
+0:00:46.770,0:00:48.840
+Well, they can't both be green, right?
+
+0:00:48.840,0:00:51.880
+But if you assign green to the tail,
+then you can assign blue in the head,
+
+0:00:51.880,0:00:53.890
+and if assign blue to the tail, you
+can assign green to the head.
+
+0:00:53.890,0:00:56.260
+So this one here, it's arc consistent.
+
+0:00:56.260,0:00:59.150
+Are there any solutions left in there?
+
+0:00:59.150,0:01:00.190
+Yes.
+
+0:01:00.190,0:01:01.180
+How many?
+
+0:01:01.180,0:01:02.080
+There are two.
+
+0:01:02.080,0:01:06.320
+So arc consistency certainly will not
+narrow you down to one solution.
+
+0:01:06.320,0:01:08.050
+How about down here?
+
+0:01:08.050,0:01:09.380
+Is this thing arc consistent?
+
+0:01:09.380,0:01:10.910
+Well, let's check the arcs.
+
+0:01:10.910,0:01:13.080
+OK, is this arc consistent?
+
+0:01:13.080,0:01:15.220
+If I assign red at the tail,
+how about the head?
+
+0:01:15.220,0:01:15.790
+I'll assign blue.
+
+0:01:15.790,0:01:18.100
+If I assign blue at the tail,
+I'll assign red at the head.
+
+0:01:18.100,0:01:19.170
+How about the other direction?
+
+0:01:19.170,0:01:20.220
+Also consistent.
+
+0:01:20.220,0:01:23.040
+All right, great, the whole
+thing is arc consistent.
+
+0:01:23.040,0:01:24.540
+That CSP is arc consistent.
+
+0:01:24.540,0:01:26.900
+Are there any solutions to this CSP?
+
+0:01:26.900,0:01:27.440
+No.
+
+0:01:27.440,0:01:30.180
+Arc consistency does not
+detect all failures.
+
+0:01:30.180,0:01:32.360
+It only detects a subclass
+of failures.
+
+0:01:32.360,0:01:36.500
+In this particular case, to detect the
+failure I would need to consider three
+
+0:01:36.500,0:01:37.510
+variables at once.
+
+0:01:37.510,0:01:40.620
+Arc consistency only
+traffics in pairs.
+
+0:01:40.620,0:01:44.390
+Because of this, arc consistency is only
+part of a backtracking search.
+
+0:01:44.390,0:01:45.460
+It's a filtering algorithm.
+
+0:01:45.460,0:01:48.660
+If I enforce arc consistency, I have to
+do it after every assignment in a
+
+0:01:48.660,0:01:49.910
+backtracking search.
+
+0:01:49.910,0:01:50.710
+

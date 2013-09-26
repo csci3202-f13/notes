@@ -1,0 +1,288 @@
+0:00:00.000,0:00:00.800
+
+0:00:00.800,0:00:03.490
+DAN KLEIN: So let's see
+what can happen.
+
+0:00:03.490,0:00:05.750
+Well, here's this state space graph.
+
+0:00:05.750,0:00:07.220
+Let's see what tree search does.
+
+0:00:07.220,0:00:08.980
+And let's run graph search.
+
+0:00:08.980,0:00:11.610
+So at the beginning, we need
+to have a heuristic.
+
+0:00:11.610,0:00:15.450
+And this is the specification
+of our problem.
+
+0:00:15.450,0:00:16.420
+Here's our search tree.
+
+0:00:16.420,0:00:22.410
+We start off with on our fringe, S,
+whose priority here is its backward
+
+0:00:22.410,0:00:25.290
+cost, 0, because we haven't done
+anything yet on this plan, plus its
+
+0:00:25.290,0:00:27.110
+forward cost, 2.
+
+0:00:27.110,0:00:28.060
+What are we going to do?
+
+0:00:28.060,0:00:29.400
+We're going to expand it.
+
+0:00:29.400,0:00:35.610
+When we expand it, we then put its
+children, A and B, on the fringe.
+
+0:00:35.610,0:00:36.930
+A's got cost 1 plus 4.
+
+0:00:36.930,0:00:38.690
+The 4 comes from the heuristic.
+
+0:00:38.690,0:00:41.080
+B's got cost 1 plus 1.
+
+0:00:41.080,0:00:43.460
+When we do that, this is
+now off the fringe.
+
+0:00:43.460,0:00:46.300
+And we also need to keep
+track of a closed set.
+
+0:00:46.300,0:00:46.980
+It's a set.
+
+0:00:46.980,0:00:48.590
+It's always a set.
+
+0:00:48.590,0:00:50.160
+What is on the closed set S?
+
+0:00:50.160,0:00:52.460
+We will never agree to expand S again.
+
+0:00:52.460,0:00:55.760
+We'll never be asked to, but we'll
+never agree to expand it again.
+
+0:00:55.760,0:01:00.000
+According to A star, which of these
+has the better priority, A or B?
+
+0:01:00.000,0:01:01.220
+B, all right.
+
+0:01:01.220,0:01:04.940
+And so what we're going to do is
+we're going to expand B, and
+
+0:01:04.940,0:01:06.240
+its child is enqueued.
+
+0:01:06.240,0:01:08.450
+And that's this plan, S to B to C.
+
+0:01:08.450,0:01:12.370
+That one has cumulative cost
+1 plus 2 here, right?
+
+0:01:12.370,0:01:15.790
+And then it's got forward
+cost from h equals 1.
+
+0:01:15.790,0:01:17.950
+So its total cost will be 4.
+
+0:01:17.950,0:01:19.560
+This comes off the fringe.
+
+0:01:19.560,0:01:21.090
+B goes on the closed set.
+
+0:01:21.090,0:01:24.050
+We will never agree to expand B again.
+
+0:01:24.050,0:01:26.860
+Who's next?
+
+0:01:26.860,0:01:28.530
+C, all right.
+
+0:01:28.530,0:01:30.680
+What's the child of C in the tree?
+
+0:01:30.680,0:01:34.090
+Well, it's S to B to C to G, right?
+
+0:01:34.090,0:01:36.910
+So we extend the tree downward,
+and now we're at G.
+
+0:01:36.910,0:01:40.450
+Its cumulative cost is 1 plus
+2 plus 3, those three arcs.
+
+0:01:40.450,0:01:42.120
+So its cumulative cost is 6.
+
+0:01:42.120,0:01:45.490
+Because we're at a goal,
+the heuristic says 0.
+
+0:01:45.490,0:01:49.610
+And we say we will never
+expand C again.
+
+0:01:49.610,0:01:50.860
+OK, so far so good.
+
+0:01:50.860,0:01:54.980
+This is not the optimal goal, but
+that's OK because it's fine when
+
+0:01:54.980,0:01:56.480
+suboptimal goals go on the queue.
+
+0:01:56.480,0:01:58.390
+It's just not OK if they come off.
+
+0:01:58.390,0:02:00.700
+OK, so hopefully A star is
+going to do its job.
+
+0:02:00.700,0:02:03.590
+G is on the queue, but it's going to
+sit there and rot, and we're never
+
+0:02:03.590,0:02:05.090
+going to return it.
+
+0:02:05.090,0:02:06.440
+So what happens next?
+
+0:02:06.440,0:02:10.169
+Well, we should expand A.
+That's good, right?
+
+0:02:10.169,0:02:12.270
+A star search knows G got
+pretty expensive.
+
+0:02:12.270,0:02:14.310
+Time to go back to A.
+
+0:02:14.310,0:02:18.040
+All right, so we expand A.
+And what's its child?
+
+0:02:18.040,0:02:23.200
+S to A to C. All right, A
+goes on the closed set.
+
+0:02:23.200,0:02:26.670
+Who is next in priority?
+
+0:02:26.670,0:02:28.030
+C, right?
+
+0:02:28.030,0:02:29.990
+C has priority 3.
+
+0:02:29.990,0:02:33.350
+The path to G has priority 6.
+
+0:02:33.350,0:02:35.650
+So I pick C off the fringe.
+
+0:02:35.650,0:02:38.230
+Now what happens?
+
+0:02:38.230,0:02:40.380
+It gets killed by the closed set.
+
+0:02:40.380,0:02:41.510
+I say I've already done this.
+
+0:02:41.510,0:02:42.530
+I refuse.
+
+0:02:42.530,0:02:44.160
+I will not expand it.
+
+0:02:44.160,0:02:49.520
+So now the only thing on the fringe
+is the suboptimal path to G.
+
+0:02:49.520,0:02:51.250
+We return it, and we made a mistake.
+
+0:02:51.250,0:02:52.320
+We're now suboptimal.
+
+0:02:52.320,0:02:54.000
+And what went wrong here?
+
+0:02:54.000,0:02:56.330
+If we look at the heuristic, it
+looks pretty good, right?
+
+0:02:56.330,0:02:58.130
+It's admissible.
+
+0:02:58.130,0:03:00.890
+I mean, the only place where you might
+worry it's not admissible is
+
+0:03:00.890,0:03:02.320
+here, h equals 4.
+
+0:03:02.320,0:03:04.060
+But h is actually 4 there.
+
+0:03:04.060,0:03:05.670
+So here's admissible heuristic.
+
+0:03:05.670,0:03:07.890
+A star did the wrong thing in
+the presence of the graph
+
+0:03:07.890,0:03:10.260
+search closed set check.
+
+0:03:10.260,0:03:12.630
+Why would this have been correct
+if it had been tree search?
+
+0:03:12.630,0:03:15.950
+Well, we would have just taken this off
+the fringe, stuck its child on,
+
+0:03:15.950,0:03:19.470
+the two goal paths would have fought,
+and the right one would have won.
+
+0:03:19.470,0:03:23.060
+So the problem here is essentially,
+C got used up by the
+
+0:03:23.060,0:03:25.830
+wrong part of the tree.
+
+0:03:25.830,0:03:27.220
+We got C at the wrong time.
+
+0:03:27.220,0:03:28.470
+

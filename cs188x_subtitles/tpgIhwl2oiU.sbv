@@ -1,0 +1,392 @@
+0:00:00.000,0:00:00.900
+
+0:00:00.900,0:00:01.800
+PROFESSOR: All right.
+
+0:00:01.800,0:00:04.900
+Now, we built this whole A* things,
+and you see there's a star in its
+
+0:00:04.900,0:00:08.970
+name, and star usually means optimal,
+so I built this up to some giant
+
+0:00:08.970,0:00:11.620
+tortoise plus hare combination.
+
+0:00:11.620,0:00:14.960
+And the question is, is this thing we've
+just build, is it even optimal?
+
+0:00:14.960,0:00:16.620
+Uniform-cost search was optimal,
+greedy was not.
+
+0:00:16.620,0:00:18.590
+If we can't get optimality, why don't
+we just stick with greedy?
+
+0:00:18.590,0:00:19.560
+It's simple.
+
+0:00:19.560,0:00:24.040
+Well, let's execute A* search and
+see if anything can go wrong.
+
+0:00:24.040,0:00:27.870
+Well, our friend starts out with S,
+backward costs 0, forward costs 0,
+
+0:00:27.870,0:00:29.240
+total costs 0.
+
+0:00:29.240,0:00:32.030
+So let's do backward costs
+and total costs.
+
+0:00:32.030,0:00:34.070
+All right, so we pop that off.
+
+0:00:34.070,0:00:42.420
+We get S to A. And S to A has backward
+cost 1, forward cost 6, total cost 7.
+
+0:00:42.420,0:00:50.790
+We have S to G, which looks like it has
+backward cost 5, forward cost 0,
+
+0:00:50.790,0:00:51.620
+total cost 5.
+
+0:00:51.620,0:00:53.750
+All right, so what comes off?
+
+0:00:53.750,0:00:55.220
+S to G comes off.
+
+0:00:55.220,0:00:57.410
+We see it passes the goal
+test and we return it.
+
+0:00:57.410,0:00:59.660
+Optimal cost 5.
+
+0:00:59.660,0:01:00.600
+Oops, right.
+
+0:01:00.600,0:01:05.220
+So the problem here is, we actually
+got the wrong answer out of A*.
+
+0:01:05.220,0:01:08.430
+Why didn't we keep traveling down
+the S to A path that was
+
+0:01:08.430,0:01:10.260
+going to turn out well.
+
+0:01:10.260,0:01:11.850
+It was going to be so cheap, 1 plus 3.
+
+0:01:11.850,0:01:14.710
+Why'd we stop?
+
+0:01:14.710,0:01:16.910
+We stopped because of this guy.
+
+0:01:16.910,0:01:21.950
+The heuristic says, abandon all hope, ye
+who enter here, and we say, OK, you
+
+0:01:21.950,0:01:23.230
+can stay on the fringe now.
+
+0:01:23.230,0:01:24.800
+We're going to go do something else.
+
+0:01:24.800,0:01:27.780
+And so the problem is, this heuristic,
+it's nice because it can push you
+
+0:01:27.780,0:01:31.300
+towards the goal, but it's dangerous
+because if it tells you this is really
+
+0:01:31.300,0:01:35.540
+bad news, well, you won't explore
+that area of the graph.
+
+0:01:35.540,0:01:40.360
+So what went wrong here is the actual
+bad goal cost here was less than the
+
+0:01:40.360,0:01:42.260
+estimated good goal cost.
+
+0:01:42.260,0:01:49.470
+And in particular, this number 6
+overestimated the expense, and silly
+
+0:01:49.470,0:01:52.260
+us, we listened to the heuristic.
+
+0:01:52.260,0:01:54.280
+So we need our estimates.
+
+0:01:54.280,0:01:57.920
+Our heuristic values, they need to
+always be less than the actual cost.
+
+0:01:57.920,0:02:01.750
+So if it actually costs us 3 to get to
+the goal, the heuristic, it can answer
+
+0:02:01.750,0:02:05.210
+0, it can answer 3, but it better not
+say 6, or we're going to start being
+
+0:02:05.210,0:02:06.460
+so optimal.
+
+0:02:06.460,0:02:07.060
+
+0:02:07.230,0:02:09.810
+PROFESSOR: So this is a key idea for
+getting A star search to be correct.
+
+0:02:09.810,0:02:11.920
+It's the idea of admissibility.
+
+0:02:11.920,0:02:14.340
+And this has to do with whether you're,
+it's kind of your heuristics
+
+0:02:14.340,0:02:15.510
+outlook on life.
+
+0:02:15.510,0:02:19.110
+If your outlook is bad, if you have a
+heuristic which is pessimistic, we
+
+0:02:19.110,0:02:20.880
+call it inadmissible.
+
+0:02:20.880,0:02:23.790
+And an inadmissible heuristic is one
+that always says you're farther than
+
+0:02:23.790,0:02:26.320
+the goal than you are, or maybe there's
+some good path that says, oh,
+
+0:02:26.320,0:02:26.990
+that's terrible.
+
+0:02:26.990,0:02:28.560
+It's going to cost a million, right?
+
+0:02:28.560,0:02:33.240
+We saw that if the heuristic lies to you
+and says that something costs more
+
+0:02:33.240,0:02:35.330
+than it actually does,
+we can make mistakes.
+
+0:02:35.330,0:02:38.540
+So here's a case where pessimistic
+inadmissible heuristics, they break
+
+0:02:38.540,0:02:39.810
+optimality.
+
+0:02:39.810,0:02:44.490
+An admissible, or optimistic heuristic
+is one that always underestimates the
+
+0:02:44.490,0:02:47.450
+true costs, but hopefully
+not by too much.
+
+0:02:47.450,0:02:50.000
+And these heuristics can
+slow down a bad path.
+
+0:02:50.000,0:02:51.770
+They can say yeah, this
+path is expensive.
+
+0:02:51.770,0:02:52.760
+I'm not sure how expensive.
+
+0:02:52.760,0:02:55.050
+Not more than this, but it is going
+to be pretty expensive.
+
+0:02:55.050,0:02:58.100
+And when it tells you it's going to cost
+at least eight, you believe it,
+
+0:02:58.100,0:02:59.890
+and you're safe in believing
+it, right?
+
+0:02:59.890,0:03:03.740
+And so an admissible heuristic and slow
+down the bad plans on the fringe.
+
+0:03:03.740,0:03:06.620
+It can keep them on the fringe for
+longer, so you don't have to explore
+
+0:03:06.620,0:03:07.920
+what they lead to.
+
+0:03:07.920,0:03:11.640
+But in the end, the heuristic never
+outweighs your true costs.
+
+0:03:11.640,0:03:14.190
+And that means the cheap stuff
+will eventually win.
+
+0:03:14.190,0:03:17.330
+And so you'll eventually
+do the right thing.
+
+0:03:17.330,0:03:20.930
+In math, a heuristic h is admissible,
+or optimistic if
+
+0:03:20.930,0:03:22.810
+it's less than h star.
+
+0:03:22.810,0:03:28.190
+And h star is defined to be the true
+optimal cost to a nearest goal.
+
+0:03:28.190,0:03:30.320
+So of course we build heuristic h.
+
+0:03:30.320,0:03:33.520
+They're little snippets of code that
+execute them in compute h of n.
+
+0:03:33.520,0:03:36.400
+We don't know how to build
+h star of n, right?
+
+0:03:36.400,0:03:37.770
+But it's a mathematical thing.
+
+0:03:37.770,0:03:41.220
+And so what you would do is you would
+prove that the h that you have built
+
+0:03:41.220,0:03:43.670
+is less than h star, which
+you can't build.
+
+0:03:43.670,0:03:46.520
+And then you know you're safe.
+
+0:03:46.520,0:03:48.260
+So here's some examples of
+admissible heuristics.
+
+0:03:48.260,0:03:49.520
+We already saw one.
+
+0:03:49.520,0:03:53.420
+So on this kind of Pac-Man board,
+the Manhattan distance.
+
+0:03:53.420,0:03:56.700
+Change in x plus change in y is
+admissible because if there are no
+
+0:03:56.700,0:03:58.650
+walls, you could get there that fast.
+
+0:03:58.650,0:04:01.550
+But chances are the walls will
+make you take some detours.
+
+0:04:01.550,0:04:03.830
+It's admissible in that it's
+less than the true cost.
+
+0:04:03.830,0:04:05.620
+It may be a lot less than the
+true cost, depending on how
+
+0:04:05.620,0:04:07.870
+tricky the maze is.
+
+0:04:07.870,0:04:09.270
+Here's pancake flipping.
+
+0:04:09.270,0:04:14.110
+I said I have to at least flip in order
+to get, if the fourth pancake is
+
+0:04:14.110,0:04:16.720
+out of position, in order to get it in
+position, I have to at least do a flip
+
+0:04:16.720,0:04:17.830
+of size four.
+
+0:04:17.830,0:04:20.080
+But I might have to do
+a lot of other flips.
+
+0:04:20.080,0:04:23.910
+So here's a case where it's admissible
+because it kind of keeps track of one
+
+0:04:23.910,0:04:25.380
+part of the solution.
+
+0:04:25.380,0:04:28.000
+But there may be a lot cell so the
+solution that's going to cause you to
+
+0:04:28.000,0:04:30.990
+incur costs as well.
+
+0:04:30.990,0:04:35.460
+In practice, it's easy to define
+what admissibility is.
+
+0:04:35.460,0:04:40.030
+Coming up with admissible heuristics,
+which are lower bounds like this, but
+
+0:04:40.030,0:04:44.200
+are still accurate enough to be useful
+in search is a big part of what's
+
+0:04:44.200,0:04:46.120
+involved in using A star in practice.
+
+0:04:46.120,0:04:47.630
+So people already know
+the A star algorithm.
+
+0:04:47.630,0:04:50.810
+You're not going to publish a paper on
+the A star algorithm very easily.
+
+0:04:50.810,0:04:54.300
+However, if you have a task that has an
+interesting heuristic, that takes a
+
+0:04:54.300,0:04:58.060
+lot of work to figure out how A star
+works in my case, because A star is
+
+0:04:58.060,0:05:00.030
+not a problem specific,
+but your heuristic is.
+

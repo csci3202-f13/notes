@@ -1,0 +1,185 @@
+0:00:00.000,0:00:03.690
+PROFESSOR: In general, this family of
+heuristics can, kind of, be laid out
+
+0:00:03.690,0:00:04.980
+in a nice way.
+
+0:00:04.980,0:00:09.010
+So we can take two heuristics,
+say, h a and h c.
+
+0:00:09.010,0:00:15.330
+If we have these two heuristics and if
+it's true that for all nodes n, a is
+
+0:00:15.330,0:00:16.800
+bigger than c.
+
+0:00:16.800,0:00:17.720
+So we run them both.
+
+0:00:17.720,0:00:20.900
+And whatever node I give you, it looks
+at the state, it does its computation,
+
+0:00:20.900,0:00:23.750
+and one heuristic is always
+bigger than the other.
+
+0:00:23.750,0:00:27.270
+We say that h sub a dominates h sub c.
+
+0:00:27.270,0:00:29.940
+This means that we have a notion
+of heuristics being better.
+
+0:00:29.940,0:00:32.229
+Now some heuristics won't
+actually be better.
+
+0:00:32.229,0:00:33.840
+You'll have h a and you'll have h b.
+
+0:00:33.840,0:00:36.370
+And sometimes h a is bigger and
+sometimes h b is bigger, and so
+
+0:00:36.370,0:00:38.950
+they're kind of incomparable
+in the sense of dominance.
+
+0:00:38.950,0:00:40.790
+However, we can still talk
+about their relation.
+
+0:00:40.790,0:00:43.610
+We can talk about what's called the
+semi lattice of heuristics.
+
+0:00:43.610,0:00:46.630
+Because we can take two incomparable
+things, a and b.
+
+0:00:46.630,0:00:49.820
+We can take the point-wise max,
+which means for any node
+
+0:00:49.820,0:00:51.820
+n, we find its state.
+
+0:00:51.820,0:00:54.820
+And then we compute a and we compute
+b, and we take the max.
+
+0:00:54.820,0:00:57.880
+It turns out, the max of immiscible
+heuristics is admissible.
+
+0:00:57.880,0:01:01.070
+And if I take these two different things
+a and b and I take their max,
+
+0:01:01.070,0:01:03.040
+it's going to be dominate them both.
+
+0:01:03.040,0:01:05.300
+That's easy to see from the
+definition of dominance.
+
+0:01:05.300,0:01:07.940
+So that means we're going to have this
+structure where we've got sometimes
+
+0:01:07.940,0:01:10.340
+you have c, and sometimes you have
+something that's just better.
+
+0:01:10.340,0:01:14.540
+And sometimes you have a and b, but you
+can merge them together by maxing
+
+0:01:14.540,0:01:17.400
+and get something that's
+better than either.
+
+0:01:17.400,0:01:20.200
+And at the top and bottom of this
+lattice is something interesting.
+
+0:01:20.200,0:01:21.720
+We already talked about the top.
+
+0:01:21.720,0:01:24.270
+There's always, at the top of this
+lattice, the best possible heuristic,
+
+0:01:24.270,0:01:25.680
+which is the exact one.
+
+0:01:25.680,0:01:28.700
+And we know that's not very useful
+because, although it expands few
+
+0:01:28.700,0:01:30.710
+nodes, it's too expensive to compute.
+
+0:01:30.710,0:01:32.580
+The bottom of the lattice
+is also interesting.
+
+0:01:32.580,0:01:36.130
+The bottom of the lattice is a heuristic
+that always return zero.
+
+0:01:36.130,0:01:37.500
+OK?
+
+0:01:37.500,0:01:39.070
+Is it admissible?
+
+0:01:39.070,0:01:39.450
+Sure.
+
+0:01:39.450,0:01:40.490
+Is easy to compute?
+
+0:01:40.490,0:01:41.130
+Sure.
+
+0:01:41.130,0:01:47.230
+What happens when you run a star search
+and h always return zero?
+
+0:01:47.230,0:01:52.670
+Yeah, you're ordering things by the f
+value of a state, which is the g value
+
+0:01:52.670,0:01:54.750
+of the state plus the h
+value of the state.
+
+0:01:54.750,0:01:58.630
+But if h is zero, then you're just
+working with the g cost, the path
+
+0:01:58.630,0:02:00.970
+cost, and that's uniform cost search.
+
+0:02:00.970,0:02:03.130
+So if you ever panic and you can't
+come up with a heuristic, you can
+
+0:02:03.130,0:02:05.570
+always just answer zero and you end
+up with uniform cost search.
+
+0:02:05.570,0:02:07.940
+But it won't speed anything up, and
+it's one of the two trivial
+
+0:02:07.940,0:02:09.190
+heuristics.
+
+0:02:09.190,0:02:09.933
+

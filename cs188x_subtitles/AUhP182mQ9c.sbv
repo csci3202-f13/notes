@@ -1,0 +1,20 @@
+0:00:00.000,0:00:01.280
+
+0:00:01.280,0:00:05.650
+PROFESSOR: How do you know you just
+saw a breadth-first search?
+
+0:00:05.650,0:00:09.520
+Everything kind of radiates out in more
+or less a kind of a cost sphere.
+
+0:00:09.520,0:00:12.750
+Everything is one distance away, two
+distance away, and so on, and you end
+
+0:00:12.750,0:00:16.120
+up with a short path in terms
+of number of steps.
+
+0:00:16.120,0:00:17.370
+

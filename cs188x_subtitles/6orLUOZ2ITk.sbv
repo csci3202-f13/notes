@@ -1,0 +1,349 @@
+0:00:00.000,0:00:01.440
+
+0:00:01.440,0:00:03.620
+DAN KLEIN: Now we're going to talk
+about a very different class of
+
+0:00:03.620,0:00:07.180
+methods for solving CSPs called
+iterative improvement algorithms.
+
+0:00:07.180,0:00:10.280
+An iterative improvement algorithm,
+rather than building your solution up
+
+0:00:10.280,0:00:15.030
+one step by one step, we're going to
+start with an incorrect solution, and
+
+0:00:15.030,0:00:16.940
+try to fix it by breaking
+up conflicts.
+
+0:00:16.940,0:00:19.450
+
+0:00:19.450,0:00:21.830
+Iterative algorithms are an
+instance of local search.
+
+0:00:21.830,0:00:25.210
+A local search method works typically
+with a complete state.
+
+0:00:25.210,0:00:27.810
+For example in this case, all
+variables being assigned.
+
+0:00:27.810,0:00:31.480
+So here's a mini CSP where you have two
+nodes, and they're supposed to be
+
+0:00:31.480,0:00:32.800
+different colors.
+
+0:00:32.800,0:00:35.880
+And this is a complete state, in that
+all variables are assigned.
+
+0:00:35.880,0:00:38.730
+It is, however, not a goal state
+in the sense that the
+
+0:00:38.730,0:00:40.510
+constraints are not satisfied.
+
+0:00:40.510,0:00:44.020
+You won't ever get here with the
+methods that we talked about
+
+0:00:44.020,0:00:45.930
+previously.
+
+0:00:45.930,0:00:48.990
+But in order to apply an iterative
+algorithm, we start with an
+
+0:00:48.990,0:00:52.440
+assignment, and the assignment might
+look like this in that it will have
+
+0:00:52.440,0:00:54.010
+unsatisfied constraints.
+
+0:00:54.010,0:00:57.440
+So you take some assignment, it will not
+in general be a goal assignment.
+
+0:00:57.440,0:01:01.220
+The operators now reassign
+values of variables.
+
+0:01:01.220,0:01:04.620
+So for example, we might take the
+right variable and change
+
+0:01:04.620,0:01:06.350
+its value to blue.
+
+0:01:06.350,0:01:08.320
+And now we have a goal.
+
+0:01:08.320,0:01:10.000
+So there is no fringe, right?
+
+0:01:10.000,0:01:11.210
+This is life on the edge.
+
+0:01:11.210,0:01:13.750
+There is no fall back plan, right?
+
+0:01:13.750,0:01:18.040
+You've got one complete configuration,
+and you're tinkering with it one step
+
+0:01:18.040,0:01:21.140
+at a time, trying to make it better.
+
+0:01:21.140,0:01:22.860
+Here's an algorithm.
+
+0:01:22.860,0:01:26.930
+While this single state you
+have no fringe, right?
+
+0:01:26.930,0:01:28.310
+No backup plan.
+
+0:01:28.310,0:01:32.320
+While this single state that
+you have is not a goal, you
+
+0:01:32.320,0:01:33.980
+pick a variable, right?
+
+0:01:33.980,0:01:35.230
+How do you pick a variable?
+
+0:01:35.230,0:01:39.580
+You randomly select any variable
+which is currently conflicted.
+
+0:01:39.580,0:01:42.680
+And then you pick a new value
+for that variable.
+
+0:01:42.680,0:01:45.230
+And one very effective thing in
+practice is the min conflicts
+
+0:01:45.230,0:01:49.070
+heuristic that says you should choose
+a value that violates the fewest
+
+0:01:49.070,0:01:50.410
+constraints.
+
+0:01:50.410,0:01:53.440
+In other words, we're going to hill
+climb where the function we're
+
+0:01:53.440,0:01:57.490
+climbing is the total number of
+violated constraints here.
+
+0:01:57.490,0:02:01.920
+So in the case of n-queens, for example
+here we see four queens.
+
+0:02:01.920,0:02:06.070
+The states are going to be complete
+assignments where every column has a
+
+0:02:06.070,0:02:11.355
+queen, and our operators pick a column
+and move the queen up or down.
+
+0:02:11.355,0:02:14.880
+The goal test will be, as
+before, are there are no
+
+0:02:14.880,0:02:16.720
+conflicts between the queens?
+
+0:02:16.720,0:02:18.810
+And the evaluation that we're
+going to use is to look at
+
+0:02:18.810,0:02:20.270
+the number of attacks.
+
+0:02:20.270,0:02:24.770
+So let's actually see iterative
+improvement in action.
+
+0:02:24.770,0:02:26.900
+Here we have five queens.
+
+0:02:26.900,0:02:32.520
+And what I'm going to do is I'm going
+to run min conflicts for you.
+
+0:02:32.520,0:02:33.380
+So what does it say?
+
+0:02:33.380,0:02:36.140
+Well first, of all this
+is not a particularly
+
+0:02:36.140,0:02:38.570
+typical assignment, right?
+
+0:02:38.570,0:02:39.850
+And you might think, OK, that's great.
+
+0:02:39.850,0:02:41.980
+We started with everything in
+some reasonable position.
+
+0:02:41.980,0:02:44.620
+In fact, this is about as bad as it's
+going to get for this problem, to
+
+0:02:44.620,0:02:45.790
+start everything off altogether.
+
+0:02:45.790,0:02:47.670
+This is very conflicted.
+
+0:02:47.670,0:02:49.770
+OK, so what I'm going to do is I'm
+going to run min conflict.
+
+0:02:49.770,0:02:52.520
+So I pick some variable,
+which is conflicted.
+
+0:02:52.520,0:02:55.580
+And my random number generator
+says row two.
+
+0:02:55.580,0:03:02.260
+OK, so now what I do is I move this
+assignment from the first column to a
+
+0:03:02.260,0:03:06.070
+minimum column, which in this
+case might be here.
+
+0:03:06.070,0:03:06.400
+All right.
+
+0:03:06.400,0:03:08.890
+Now I pick another conflicted variable,
+and my random number
+
+0:03:08.890,0:03:13.050
+generator says row four.
+
+0:03:13.050,0:03:14.860
+I've got multiple choices,
+so I'll pick one.
+
+0:03:14.860,0:03:17.350
+Let's see, this one.
+
+0:03:17.350,0:03:18.730
+I pick a conflicted variable.
+
+0:03:18.730,0:03:20.670
+Does not have to be the most
+conflicted variable.
+
+0:03:20.670,0:03:21.650
+Maybe this one.
+
+0:03:21.650,0:03:24.430
+I move it somewhere.
+
+0:03:24.430,0:03:25.670
+And then I continue this process.
+
+0:03:25.670,0:03:28.520
+Maybe I pick this one, I move it here.
+
+0:03:28.520,0:03:30.550
+Maybe I pick this one,
+and I move it here.
+
+0:03:30.550,0:03:31.960
+And now I'm done.
+
+0:03:31.960,0:03:32.670
+OK.
+
+0:03:32.670,0:03:36.300
+So instead of building things up step
+by step, we start with a complete
+
+0:03:36.300,0:03:36.990
+assignment.
+
+0:03:36.990,0:03:40.330
+And we try to fix problems.
+
+0:03:40.330,0:03:44.570
+Let's see this in the
+map coloring case.
+
+0:03:44.570,0:03:47.240
+So let's now look at iterative
+improvement on this graph.
+
+0:03:47.240,0:03:48.880
+So what do we see right here?
+
+0:03:48.880,0:03:50.980
+We see a complete assignment.
+
+0:03:50.980,0:03:54.130
+Everything's been colored, but there's
+all kinds of violations of the map
+
+0:03:54.130,0:03:55.180
+coloring constraint.
+
+0:03:55.180,0:03:57.910
+So in orange, we see
+all the violations.
+
+0:03:57.910,0:04:03.520
+So when I click Next, what's going to
+happen is some conflicted variable is
+
+0:04:03.520,0:04:06.700
+going to have its value reassigned.
+
+0:04:06.700,0:04:07.150
+Right.
+
+0:04:07.150,0:04:08.295
+So it was that one.
+
+0:04:08.295,0:04:13.200
+And we do it again, and again,
+and again, and again.
+
+0:04:13.200,0:04:15.410
+And we keep doing this step by step.
+
+0:04:15.410,0:04:21.440
+
+0:04:21.440,0:04:23.710
+And now we're done.
+
+0:04:23.710,0:04:25.590
+So it can be very effective
+in practice.
+
+0:04:25.590,0:04:27.200
+

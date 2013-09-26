@@ -1,0 +1,476 @@
+0:00:00.000,0:00:00.580
+
+0:00:00.580,0:00:03.780
+PROFESSOR: Now we have all the ideas
+we need to build the really killer
+
+0:00:03.780,0:00:08.770
+algorithm, the cornerstone of search
+[? A ?] in AI, which is A star search.
+
+0:00:08.770,0:00:12.130
+A star search takes all these ideas
+and puts them together.
+
+0:00:12.130,0:00:15.900
+Maybe some of you have heard the story
+of the tortoise and the hare.
+
+0:00:15.900,0:00:18.270
+Have you heard the story of
+the tortoise and the hare?
+
+0:00:18.270,0:00:19.990
+OK, so how's the story go?
+
+0:00:19.990,0:00:22.510
+You've got the tortoise, which
+is slow and steady.
+
+0:00:22.510,0:00:23.670
+It's very careful.
+
+0:00:23.670,0:00:28.170
+It eventually gets to the goal,
+but very, very deliberately.
+
+0:00:28.170,0:00:31.280
+You've got the hare, which zips straight
+along, but then at some point
+
+0:00:31.280,0:00:34.040
+goes rogue and something goes wrong.
+
+0:00:34.040,0:00:35.950
+This should remind you of something
+you've just seen.
+
+0:00:35.950,0:00:40.650
+Basically, this guy is Uniform Cost
+Search, slow and steady, but
+
+0:00:40.650,0:00:41.910
+eventually gets there.
+
+0:00:41.910,0:00:44.720
+And then you've got the hare, which
+is Greedy search, zips off in some
+
+0:00:44.720,0:00:46.600
+direction, maybe it's
+the right direction.
+
+0:00:46.600,0:00:51.150
+What we want to do, the goal of this
+entire endeavor is to build this.
+
+0:00:51.150,0:00:57.920
+
+0:00:57.920,0:01:01.770
+We want to have something that's got
+the properties of the turtle.
+
+0:01:01.770,0:01:02.585
+It's very slow.
+
+0:01:02.585,0:01:06.500
+It makes sure it hedges all of its bets,
+but it's got some vision about
+
+0:01:06.500,0:01:09.050
+where it's going and it tries
+to do things efficiently,
+
+0:01:09.050,0:01:10.400
+like the hare does.
+
+0:01:10.400,0:01:12.760
+So let's see how we can put
+these two things together.
+
+0:01:12.760,0:01:16.940
+Now, it's kind of hard to bolt the
+rabbit on top of the turtle, but it's
+
+0:01:16.940,0:01:20.070
+actually not so hard to bolt Uniform
+Cost Search and Greedy together.
+
+0:01:20.070,0:01:23.130
+So let's see what they do and
+how they do things wrong.
+
+0:01:23.130,0:01:24.030
+So here's a graph.
+
+0:01:24.030,0:01:24.980
+The start state is s.
+
+0:01:24.980,0:01:26.290
+The goal state is g.
+
+0:01:26.290,0:01:28.860
+The numbers h are the heuristics
+at each point.
+
+0:01:28.860,0:01:31.160
+And the other numbers are
+the action costs.
+
+0:01:31.160,0:01:38.120
+So Uniform Cost will explore ordering
+based on the path cost, the cumulative
+
+0:01:38.120,0:01:41.310
+path cost, which is also sometimes
+called the backward cost, g of n.
+
+0:01:41.310,0:01:44.420
+So for a node in the search tree, which
+corresponds to a path in this
+
+0:01:44.420,0:01:47.140
+graph, it has some sum
+of the action costs.
+
+0:01:47.140,0:01:48.870
+That's g of n for that node.
+
+0:01:48.870,0:01:52.380
+And Uniform Cost looks at all the cheap
+paths first, which means at the
+
+0:01:52.380,0:01:53.670
+beginning, what's it going to do?
+
+0:01:53.670,0:01:55.460
+It's going to explore
+out all this stuff.
+
+0:01:55.460,0:01:57.020
+Not because it's headed in
+the right direction.
+
+0:01:57.020,0:01:57.440
+It's not.
+
+0:01:57.440,0:02:00.100
+The heuristic is telling
+you to turn back.
+
+0:02:00.100,0:02:03.210
+Uniform Cost Search explores this stuff
+towards c, not because it's
+
+0:02:03.210,0:02:04.950
+headed in the right direction,
+but because it's cheap.
+
+0:02:04.950,0:02:06.350
+It does all the cheap stuff.
+
+0:02:06.350,0:02:07.950
+That's how it gets optimality.
+
+0:02:07.950,0:02:09.180
+What does Greedy do?
+
+0:02:09.180,0:02:13.910
+Well, Greedy is going to order by the
+proximity of the goal, which means
+
+0:02:13.910,0:02:18.240
+after it expands the path s to a,
+the next path it's going to for
+
+0:02:18.240,0:02:19.520
+is s to a to e.
+
+0:02:19.520,0:02:22.600
+Because even though it's really
+expensive, look at that eight, it
+
+0:02:22.600,0:02:24.330
+looks like it gets it
+close to the goal.
+
+0:02:24.330,0:02:26.760
+And Greedy has no clue about
+expensive paths.
+
+0:02:26.760,0:02:28.730
+It only knows about closeness to goal.
+
+0:02:28.730,0:02:31.410
+So that number h, the heuristic,
+is also sometimes
+
+0:02:31.410,0:02:32.310
+called the forward cost.
+
+0:02:32.310,0:02:36.380
+It's the cost of the remaining
+part of getting to the goal.
+
+0:02:36.380,0:02:42.070
+So it's going to explore this red area
+in order to find its first goal.
+
+0:02:42.070,0:02:46.840
+And so it does expensive things
+that look good in the future.
+
+0:02:46.840,0:02:50.070
+Even though they're actually have
+high cost and that can be
+
+0:02:50.070,0:02:51.800
+computed as you go.
+
+0:02:51.800,0:02:53.440
+So what does A star do?
+
+0:02:53.440,0:02:55.190
+It just adds these things together.
+
+0:02:55.190,0:02:58.120
+So in A star, you look at the
+sum of the backward cost.
+
+0:02:58.120,0:03:02.590
+How much this plan actually
+has cost you, plus the
+
+0:03:02.590,0:03:04.000
+forward cost, the heuristic.
+
+0:03:04.000,0:03:06.740
+How much you think it's going
+to cost going forward.
+
+0:03:06.740,0:03:08.860
+Now these two numbers, it's important,
+they're very different.
+
+0:03:08.860,0:03:11.000
+g sums up the action costs.
+
+0:03:11.000,0:03:14.240
+The heuristic is just for that one point
+because the heuristic represents
+
+0:03:14.240,0:03:16.180
+the whole rest of the way to the goal.
+
+0:03:16.180,0:03:20.640
+So if you do A star, it won't go towards
+c very early because the
+
+0:03:20.640,0:03:22.525
+heuristic is going to say
+that's expensive.
+
+0:03:22.525,0:03:24.280
+The forward cost will be high.
+
+0:03:24.280,0:03:27.930
+And it's not going to spend time on this
+branch that costs eight because g
+
+0:03:27.930,0:03:28.900
+will be very high.
+
+0:03:28.900,0:03:30.760
+It's going to basically
+go down the center.
+
+0:03:30.760,0:03:32.540
+And that's a really nice property.
+
+0:03:32.540,0:03:36.090
+OK, because of g it knows to ignore
+paths that are actually expensive.
+
+0:03:36.090,0:03:39.635
+And because of h it knows to ignore
+paths that are going to be expensive.
+
+0:03:39.635,0:03:43.020
+
+0:03:43.020,0:03:47.280
+All right, so, so far we've basically
+got an algorithm.
+
+0:03:47.280,0:03:52.530
+We're going to order what take off the
+fringe based on the sum of the
+
+0:03:52.530,0:03:57.350
+cumulative path cost of that node, all
+the actions that led to it, plus the
+
+0:03:57.350,0:04:00.300
+heuristic, which comes out of
+our heuristic function.
+
+0:04:00.300,0:04:01.820
+So let's execute it.
+
+0:04:01.820,0:04:02.800
+So here's a small graph.
+
+0:04:02.800,0:04:05.070
+It shouldn't be too bad.
+
+0:04:05.070,0:04:08.690
+We start with our fringe having just
+the empty plan starting at s.
+
+0:04:08.690,0:04:11.160
+And what's it's priority?
+
+0:04:11.160,0:04:12.850
+So we can have g here and h here.
+
+0:04:12.850,0:04:14.620
+It's its backward cost, which
+is zero-- right, we
+
+0:04:14.620,0:04:15.520
+haven't done anything--
+
+0:04:15.520,0:04:18.300
+plus its forward cost, which is from
+the heuristic, which is three.
+
+0:04:18.300,0:04:21.110
+So it's total cost is three.
+
+0:04:21.110,0:04:22.180
+We pop that.
+
+0:04:22.180,0:04:23.930
+On go it's children.
+
+0:04:23.930,0:04:26.750
+s to a, that's one successor.
+
+0:04:26.750,0:04:27.820
+s to b.
+
+0:04:27.820,0:04:32.650
+What are their Priorities s to a has
+backward cost two, and forward cost
+
+0:04:32.650,0:04:35.730
+two, for total cost of four.
+
+0:04:35.730,0:04:38.410
+s to b has a backward cost of two
+and forward cost of one, for a
+
+0:04:38.410,0:04:39.660
+total cost of three.
+
+0:04:39.660,0:04:42.610
+
+0:04:42.610,0:04:43.680
+What comes off first?
+
+0:04:43.680,0:04:45.610
+S to b.
+
+0:04:45.610,0:04:46.800
+What's its child?
+
+0:04:46.800,0:05:03.000
+s to b to g, which has a backward cost
+of five, forward cost of zero, total
+
+0:05:03.000,0:05:04.160
+cost of five.
+
+0:05:04.160,0:05:06.050
+OK, if I said I found the goal.
+
+0:05:06.050,0:05:09.170
+I just found the successor that's a goal
+and I returned it, I would return
+
+0:05:09.170,0:05:11.610
+the path s to b to g.
+
+0:05:11.610,0:05:16.350
+And that would be bad because it costs
+five and s to a to g only costs four.
+
+0:05:16.350,0:05:19.760
+So even though I found this lower
+path, why did I find it first?
+
+0:05:19.760,0:05:22.020
+I found it first because the heuristic
+made it appealing to
+
+0:05:22.020,0:05:24.180
+check into it first.
+
+0:05:24.180,0:05:29.970
+The reason why we leave things on the
+fringe until we dequeue them is
+
+0:05:29.970,0:05:33.970
+because s to a still holds out hope
+of being better than this path.
+
+0:05:33.970,0:05:35.160
+And in fact, it will be.
+
+0:05:35.160,0:05:36.910
+So I do not yet declare victory.
+
+0:05:36.910,0:05:38.460
+I pop off s to a.
+
+0:05:38.460,0:05:42.520
+I get s to a to g, which has backward
+cost four, forward cost
+
+0:05:42.520,0:05:44.160
+zero, total cost four.
+
+0:05:44.160,0:05:47.170
+Then, this is now the cheapest
+thing on the fringe.
+
+0:05:47.170,0:05:47.880
+I pop it off.
+
+0:05:47.880,0:05:49.080
+I see it passed the goal test.
+
+0:05:49.080,0:05:49.800
+And I return it.
+
+0:05:49.800,0:05:50.560
+So this is critical.
+
+0:05:50.560,0:05:53.430
+You stop when you dequeue the
+goal from the fringe, not
+
+0:05:53.430,0:05:54.220
+when you enqueue it.
+
+0:05:54.220,0:05:57.010
+Otherwise, you will make mistakes.
+
+0:05:57.010,0:05:58.080
+So that's lesson number one.
+
+0:05:58.080,0:06:00.380
+That goal test really matters
+when you execute it.
+
+0:06:00.380,0:06:02.300
+

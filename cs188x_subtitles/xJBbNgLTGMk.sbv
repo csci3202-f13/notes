@@ -1,0 +1,66 @@
+0:00:00.000,0:00:01.161
+
+0:00:01.161,0:00:02.720
+PROFESSOR: OK.
+
+0:00:02.720,0:00:04.140
+Let's do a quick quiz.
+
+0:00:04.140,0:00:07.570
+I'm going to pose a question to you and
+give you some time to discuss with
+
+0:00:07.570,0:00:08.740
+those around you.
+
+0:00:08.740,0:00:11.360
+So imagine you have some
+board like this.
+
+0:00:11.360,0:00:14.130
+This is a case where Pac-Man is
+trying to eat all the dots.
+
+0:00:14.130,0:00:16.100
+There are some nasty ghosts
+lurking about.
+
+0:00:16.100,0:00:19.120
+We are not going to think about this
+as an adversarial search problem--
+
+0:00:19.120,0:00:21.380
+that will come later in the semester.
+
+0:00:21.380,0:00:25.800
+For now, think about the problem of
+eating all of the dots in a kind of
+
+0:00:25.800,0:00:29.060
+safe way, where that ghosts
+can't hurt you.
+
+0:00:29.060,0:00:33.330
+In particular, you have to keep that
+ghosts kind of continually scared by
+
+0:00:33.330,0:00:36.030
+eating power pellets at
+appropriate intervals.
+
+0:00:36.030,0:00:38.580
+So that's the problem-- eat all
+the dots with the ghosts being
+
+0:00:38.580,0:00:40.090
+permascared.
+
+0:00:40.090,0:00:43.350
+And I'd like you to think about what
+needs to go in your search state
+
+0:00:43.350,0:00:44.600
+representation.
+
+0:00:44.600,0:00:44.900
+

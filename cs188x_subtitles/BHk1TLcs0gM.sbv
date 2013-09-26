@@ -1,0 +1,189 @@
+0:00:00.969,0:00:02.250
+Game playing.
+
+0:00:02.250,0:00:04.490
+There's been a lot of advances in
+game playing. I'm going to tell you a lot about
+
+0:00:04.490,0:00:07.310
+the classic thing because I think
+actually this is one of these pivotal
+
+0:00:07.310,0:00:09.509
+points in AI where we kind of
+
+0:00:09.509,0:00:12.879
+really realize that maybe we have capacities that we didn't before.
+
+0:00:12.879,0:00:16.540
+Before we could play checkers. Today,
+checkers is solved.
+
+0:00:16.540,0:00:20.070
+We'll talk more about checkers when we talk about game-playing later,
+
+0:00:20.070,0:00:24.289
+but there was this classic moment in May
+of 1997. Deep Blue, which is shown here--
+
+0:00:24.289,0:00:28.140
+Deep Blue looks approximately like a
+refrigerator, is giant, parallel,
+
+0:00:28.140,0:00:29.619
+special-purpose hardware
+
+0:00:29.619,0:00:33.190
+that basically exists to crunch through
+chess positions
+
+0:00:33.190,0:00:38.390
+and it beat the world champion Kasparov,
+and the sequence of moves
+
+0:00:38.390,0:00:42.370
+was described as intelligent and
+creative, as opposed to kinda maybe alien
+
+0:00:42.370,0:00:46.580
+and weird. You could imagine humans being,
+like, well, that's, yeah I guess that those
+
+0:00:46.580,0:00:50.460
+moves are legal but weird right. You can
+imagine, you kind of play chess and
+
+0:00:50.460,0:00:53.080
+all the pieces scatter to the corner and
+they come back and you've lost and you're like
+
+0:00:53.080,0:00:55.330
+what the heck just happened.
+
+0:00:55.330,0:00:58.750
+But no it's just like, yeah, that's a
+good move, you know. That's better than the human.
+
+0:00:58.750,0:01:01.010
+And you can interpret it,
+
+0:01:01.010,0:01:02.630
+and that's amazing!
+
+0:01:02.630,0:01:06.030
+This thing's crunching two hundred million
+board positions per second. It was amazing then.
+
+0:01:06.030,0:01:09.620
+You can now do that with a PC
+cluster so things have advanced obviously.
+
+0:01:09.620,0:01:11.540
+But the amazing thing is, it's doing
+
+0:01:11.540,0:01:14.710
+nothing like with the humans are doing
+when they play chess. But the resulting
+
+0:01:14.710,0:01:18.979
+behavior is surprisingly similar, and
+this is a case of there are a lot of
+
+0:01:18.979,0:01:22.210
+different computations you can do, but
+there is good kind of rational
+
+0:01:22.210,0:01:25.330
+behavior and multiple ways to get
+there. We don't always know how humans get there.
+
+0:01:25.330,0:01:26.060
+
+0:01:26.060,0:01:30.510
+But we do have ways of making machines
+do it in some way.
+
+0:01:30.510,0:01:34.070
+So, there's this open question: How do humans play chess?
+
+0:01:34.070,0:01:37.970
+There's lots of things you just can't do. When you get into like a multiplication race with the computer,
+
+0:01:37.970,0:01:41.210
+like here's some five digit numbers, go!
+Like you know you're going to lose.
+
+0:01:41.210,0:01:43.270
+There's just things where you know the computer is better.
+
+0:01:43.270,0:01:47.310
+Why isn't the computer just so much better at chess that we lost this
+
+0:01:47.310,0:01:51.030
+battle in the eighties? It's an open
+question how humans are so good. I mean,
+
+0:01:51.030,0:01:55.120
+they lose, but it's like, they try,
+its kinda amazing how humans
+
+0:01:55.120,0:01:56.800
+can compete with computers at all.
+
+0:01:56.800,0:02:00.800
+Okay, in 1996 actually,
+Kasparov beat Deep Blue and had some
+
+0:02:00.800,0:02:05.890
+really nice words to say. Kasparov said,
+"I could feel--I could smell--a new kind
+
+0:02:05.890,0:02:07.800
+of intelligence across the table".
+
+0:02:07.800,0:02:10.210
+I don't really know what that
+means like some new
+
+0:02:10.210,0:02:15.119
+intelligence scent you can hang in your car,
+
+0:02:15.119,0:02:19.039
+but Kasparov is very positive. And then in
+1997,
+
+0:02:19.039,0:02:22.029
+"Deep Blue hasn't proven anything."
+
+0:02:22.029,0:02:23.150
+So...
+
+0:02:23.150,0:02:28.499
+yeah, I guess that's more a comment about humans.
+
+0:02:28.499,0:02:31.739
+There have been huge advances in game playing recently. For example, in Go.
+
+0:02:31.739,0:02:35.709
+A couple of years ago when I would talk
+about Go I would say, Go is a case where
+
+0:02:35.709,0:02:37.829
+humans are so much better than machines,
+
+0:02:37.829,0:02:41.829
+that the human masters will not even play the
+machines because it's insulting.
+
+0:02:41.829,0:02:46.010
+Now the machines are pretty good, and able
+to play extremely competitive people,
+
+0:02:46.010,0:02:46.919
+and win.
+
+0:02:46.919,0:02:50.059
+and that's been very recent. We'll talk about how some of those advances work much later.
+
+0:02:50.059,0:02:50.419
+

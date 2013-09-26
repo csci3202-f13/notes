@@ -1,0 +1,378 @@
+0:00:00.000,0:00:01.170
+
+0:00:01.170,0:00:02.310
+DAN KLEIN: OK.
+
+0:00:02.310,0:00:08.290
+So when we decide to use Expectimax,
+and when we decide to use Minimax,
+
+0:00:08.290,0:00:10.300
+we're making modelling assumptions.
+
+0:00:10.300,0:00:14.340
+So we're back to this case of trying
+to figure out based on how we think
+
+0:00:14.340,0:00:18.030
+the world works, what computation
+we should do.
+
+0:00:18.030,0:00:20.740
+And in this case, there are a lot of
+modeling assumptions going on.
+
+0:00:20.740,0:00:23.370
+There's what are the utilities
+in Expectamax or Minimax.
+
+0:00:23.370,0:00:26.100
+There's what are the chance
+probabilities that we compute in
+
+0:00:26.100,0:00:26.930
+Expectimax.
+
+0:00:26.930,0:00:31.410
+But fundamentally, a key modeling choice
+is are the outcomes out of our
+
+0:00:31.410,0:00:35.410
+control adversarial or chance?
+
+0:00:35.410,0:00:36.900
+Now, it's dangerous to get it wrong.
+
+0:00:36.900,0:00:38.760
+And it's dangerous in
+either direction.
+
+0:00:38.760,0:00:43.095
+So in fact, optimism and pessimism
+can both be dangerous.
+
+0:00:43.095,0:00:46.110
+Why can optimism be dangerous?
+
+0:00:46.110,0:00:49.280
+Optimism can be dangerous because you
+assume that things are only happening
+
+0:00:49.280,0:00:53.770
+according to chance, when the world
+really is out to get you.
+
+0:00:53.770,0:00:54.630
+It's something like this.
+
+0:00:54.630,0:00:56.550
+You're wandering down, you think,
+oh, those bad things
+
+0:00:56.550,0:00:57.420
+aren't going to happen.
+
+0:00:57.420,0:01:00.760
+If those bad things are actually
+adversaries and they're after you,
+
+0:01:00.760,0:01:02.735
+you're going to do dangerous
+things, right?
+
+0:01:02.735,0:01:05.122
+I mean, you're basically going
+to get mugged a lot.
+
+0:01:05.122,0:01:06.750
+What about pessimism?
+
+0:01:06.750,0:01:08.850
+Why is pessimism dangerous?
+
+0:01:08.850,0:01:12.580
+Pessimism is dangerous because you
+assume the worst possible imaginable
+
+0:01:12.580,0:01:15.820
+case, even when it's
+extremely unlikely.
+
+0:01:15.820,0:01:19.470
+So it could be a vampire bunny.
+
+0:01:19.470,0:01:21.570
+Now, that's all nice and
+good at a high level.
+
+0:01:21.570,0:01:24.800
+How does this play out in terms
+of the actual search?
+
+0:01:24.800,0:01:26.910
+Well, we can simulate these things.
+
+0:01:26.910,0:01:31.780
+So I can take this board shown here, and
+I can run a simulation of Pac-Man
+
+0:01:31.780,0:01:35.570
+trying to eat that dot, and the
+ghost doing whatever it does.
+
+0:01:35.570,0:01:38.180
+And I can run it in lots
+of different ways.
+
+0:01:38.180,0:01:43.050
+I can say that is a random ghost, and
+I have an Expectimax Pac-Man.
+
+0:01:43.050,0:01:46.200
+And then I can run a simulation
+and see what happens.
+
+0:01:46.200,0:01:50.820
+So let's take a look at what happens
+with various combinations of actual
+
+0:01:50.820,0:01:55.050
+ghost behavior, and the modeling choice
+that Pac-Man makes by running
+
+0:01:55.050,0:01:56.970
+Minimax or Expectimax.
+
+0:01:56.970,0:02:03.280
+Let's start with the case of the ghost
+is actually random, and Pac-Man models
+
+0:02:03.280,0:02:06.305
+that correctly, meaning
+Expectmax search.
+
+0:02:06.305,0:02:07.840
+Well, what's going to happen?
+
+0:02:07.840,0:02:09.970
+What's going to happen is you basically
+go straight for the dot.
+
+0:02:09.970,0:02:11.810
+Because sure, the ghost could
+come for you, but you know
+
+0:02:11.810,0:02:12.480
+it's wandering around.
+
+0:02:12.480,0:02:15.750
+What are the chance it's actually
+going to end up on top of you?
+
+0:02:15.750,0:02:17.520
+So you go pretty much straight
+towards the ghost.
+
+0:02:17.520,0:02:20.830
+You take a risk, and it
+works out in general.
+
+0:02:20.830,0:02:26.090
+What happens when the ghost
+is smart, and you know it?
+
+0:02:26.090,0:02:27.185
+So you use Minimax.
+
+0:02:27.185,0:02:29.880
+Well, you're not going to go for the
+dot, because you know it's going to
+
+0:02:29.880,0:02:31.780
+get on top of you, and
+you're going to die.
+
+0:02:31.780,0:02:35.730
+And so you kind of lead it on a chase,
+and you do the safe thing.
+
+0:02:35.730,0:02:39.410
+And you are in a position in this
+board that you can force a win.
+
+0:02:39.410,0:02:40.060
+Great.
+
+0:02:40.060,0:02:42.240
+You'll notice the score was
+lower because I had to go
+
+0:02:42.240,0:02:43.790
+the long way around.
+
+0:02:43.790,0:02:44.860
+And that's just true.
+
+0:02:44.860,0:02:49.460
+The world is worse in a case where you
+have an adversary then when you don't.
+
+0:02:49.460,0:02:51.180
+So it's not surprising that
+the score is lower.
+
+0:02:51.180,0:02:52.220
+It doesn't mean you did
+something wrong.
+
+0:02:52.220,0:02:54.950
+It just means the world was worse.
+
+0:02:54.950,0:02:57.210
+What happens when you get
+your assumptions wrong?
+
+0:02:57.210,0:03:01.440
+Well, what happens when there's a smart
+ghost who's going to come right
+
+0:03:01.440,0:03:02.320
+for you, but you don't know that?
+
+0:03:02.320,0:03:05.560
+Well, you're going to take a risk, and
+the ghost is coming right at you, but
+
+0:03:05.560,0:03:07.130
+you just can't imagine it's true.
+
+0:03:07.130,0:03:08.620
+You keep taking these risks.
+
+0:03:08.620,0:03:10.390
+And maybe it works out,
+or maybe it doesn't.
+
+0:03:10.390,0:03:11.450
+That time it worked out.
+
+0:03:11.450,0:03:16.800
+What happens when the ghost is random,
+but you assume it's out to get you?
+
+0:03:16.800,0:03:18.300
+Right, this is vampire bunny.
+
+0:03:18.300,0:03:22.760
+Well, you're being pessimistic, so
+it shouldn't be too dangerous.
+
+0:03:22.760,0:03:24.760
+It's actually not particularly
+efficient.
+
+0:03:24.760,0:03:26.630
+So you run away, and what
+does the ghost do?
+
+0:03:26.630,0:03:29.170
+It just kind of does its thing.
+
+0:03:29.170,0:03:30.880
+But you're scared, right?
+
+0:03:30.880,0:03:34.410
+Because at any point, you're like any
+moment now, it's going to bust out its
+
+0:03:34.410,0:03:35.930
+master plan, right?
+
+0:03:35.930,0:03:54.580
+
+0:03:54.580,0:03:55.830
+Oh, random number generator.
+
+0:03:55.830,0:03:58.500
+
+0:03:58.500,0:04:00.180
+Until at some point--
+
+0:04:00.180,0:04:01.430
+no.
+
+0:04:01.430,0:04:07.280
+
+0:04:07.280,0:04:09.930
+All right, so we could do
+that a bunch of times.
+
+0:04:09.930,0:04:11.110
+I did it five times.
+
+0:04:11.110,0:04:14.550
+That's not really a statistically
+adequate number, but you can look at
+
+0:04:14.550,0:04:15.240
+the outcomes here.
+
+0:04:15.240,0:04:18.120
+Basically, the only thing that's
+actually dangerous, the only thing
+
+0:04:18.120,0:04:22.910
+that's going to get Pac-Man killed is
+an adversarial ghost that you assume
+
+0:04:22.910,0:04:24.730
+is not out to get you, right?
+
+0:04:24.730,0:04:27.400
+If you're overly optimistic,
+Pac-Man might actually die.
+
+0:04:27.400,0:04:28.480
+He gets mugged.
+
+0:04:28.480,0:04:30.610
+In the other cases, though,
+take a look.
+
+0:04:30.610,0:04:33.040
+Expectimax Pac-Man with
+a random ghost.
+
+0:04:33.040,0:04:36.880
+It's using the right model, and you get
+503 because life's pretty good.
+
+0:04:36.880,0:04:38.290
+No one's out to get you.
+
+0:04:38.290,0:04:41.070
+Minimax and adversary, you still win.
+
+0:04:41.070,0:04:41.960
+You're still safe.
+
+0:04:41.960,0:04:46.750
+The score is lower, and the score is
+lower because the world's just worse.
+
+0:04:46.750,0:04:50.940
+What about the last case, when there's
+a random ghost and Minimax Pac-Man?
+
+0:04:50.940,0:04:52.400
+Well, you still win.
+
+0:04:52.400,0:04:55.260
+It just takes a while, and you
+saw a case where it actually
+
+0:04:55.260,0:04:56.510
+took a very long time.
+
+0:04:56.510,0:04:57.540
+

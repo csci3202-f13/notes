@@ -1,0 +1,173 @@
+0:00:00.320,0:00:04.430
+What do we do in this course: we design
+rational agents. What's that?
+
+0:00:04.430,0:00:07.060
+An agent is some entity that perceives
+
+0:00:07.060,0:00:08.700
+and acts.
+
+0:00:08.700,0:00:10.619
+What does that mean, well here's an agent,
+
+0:00:10.619,0:00:13.629
+an agent that's trying to get at some kind
+of apple. We'll come back to
+
+0:00:13.629,0:00:15.719
+this agent again later.
+
+0:00:15.719,0:00:18.710
+We can think about this agent with the
+following diagram--we'll draw these
+
+0:00:18.710,0:00:20.189
+agent diagrams from time to time.
+
+0:00:20.189,0:00:23.590
+There's an environment and there's an agent.
+
+0:00:23.590,0:00:26.640
+What's the difference? The
+environment is what you don't control,
+
+0:00:26.640,0:00:28.179
+the agent is what you do.
+
+0:00:28.179,0:00:31.710
+So, in particular, where you draw that
+boundary--you might think when
+
+0:00:31.710,0:00:35.980
+you're driving the agent is like the car, it can turn left and it can turn right. But the agent
+
+0:00:35.980,0:00:39.170
+is also your arms. You have to move
+the steering wheel.
+
+0:00:39.170,0:00:42.949
+If the car is not working right maybe you want to think of the car as the environment, or
+
+0:00:42.949,0:00:46.050
+maybe your arms not working right--you
+threw out your elbow driving so hard.
+
+0:00:46.050,0:00:49.659
+Now the line between the agent and the
+environment is in your head. You can send
+
+0:00:49.659,0:00:52.670
+the signal to your arm but who knows
+what your trick arm is going to do.
+
+0:00:52.670,0:00:55.699
+And so where we draw this abstraction,
+just like everything else in computer science,
+
+0:00:55.699,0:00:56.310
+
+0:00:56.310,0:00:57.840
+depends on the problem we're solving
+
+0:00:57.840,0:01:00.240
+and what abstraction is safe.
+
+0:01:00.240,0:01:01.839
+Okay, so what can an agent do?
+
+0:01:01.839,0:01:03.380
+It can perceive,
+
+0:01:03.380,0:01:05.810
+we have percepts coming in.
+
+0:01:05.810,0:01:08.620
+We have actions going to the
+environment. What does the environment do?
+
+0:01:08.620,0:01:11.320
+It does whatever the environment does.
+The world does its thing.
+
+0:01:11.320,0:01:12.950
+And then the agent
+
+0:01:12.950,0:01:15.890
+takes what comes in and it formulates an action
+
+0:01:15.890,0:01:17.659
+using the question mark.
+
+0:01:17.659,0:01:21.090
+What the heck is the question mark?
+That's the all important agent function.
+
+0:01:21.090,0:01:23.780
+That's the thing that maps inputs (sensation)
+
+0:01:23.780,0:01:27.360
+to outputs (actuation).
+
+0:01:27.360,0:01:31.100
+So a rational agent chooses actions that
+maximizes its utilities. Since it doesn't
+
+0:01:31.100,0:01:33.540
+know what's gonna happen, like this agent's
+not really sure whether it's going to succeed,
+
+0:01:33.540,0:01:38.009
+we have to talk about
+expectations. The characteristics of the
+
+0:01:38.009,0:01:41.570
+percepts, the environment, the action
+space tell us how to solve the problem.
+
+0:01:41.570,0:01:45.880
+If an agent can see everything, that's
+one thing. If the agent can't, that's another thing.
+
+0:01:45.880,0:01:48.470
+So, for example, if you think about a video game.
+Sometimes you can see the whole board,
+
+0:01:48.470,0:01:53.240
+sometimes there's the fog-of-war, and in
+general, you don't always have full information.
+
+0:01:53.240,0:01:56.390
+The techniques you use are different.
+
+0:01:56.390,0:01:59.960
+This class is largely about general AI
+techniques
+
+0:01:59.960,0:02:02.370
+that apply to a variety of problems
+types,
+
+0:02:02.370,0:02:05.959
+and about learning to recognize when and
+how a problem
+
+0:02:05.959,0:02:09.920
+can be solved by one of those techniques,
+by thinking about what kinds of
+
+0:02:09.920,0:02:13.599
+percepts do I have, what kinds of environment do I have. Is it adversarial,
+
+0:02:13.599,0:02:14.189
+is it fully observed,
+
+0:02:14.189,0:02:17.700
+and so on. And as we go through this course
+you'll get more and more of these tools
+
+0:02:17.700,0:02:19.140
+to deal with more and more complicated environments.
+
+0:02:19.140,0:02:19.720
+

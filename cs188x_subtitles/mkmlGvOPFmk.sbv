@@ -1,0 +1,405 @@
+0:00:00.000,0:00:01.270
+
+0:00:01.270,0:00:04.070
+PROFESSOR: So just remember
+what CSPs are.
+
+0:00:04.070,0:00:07.220
+They are a subclass of search problems,
+but they're an important
+
+0:00:07.220,0:00:08.600
+class of problems in their own right.
+
+0:00:08.600,0:00:12.070
+A CSP is defined by a
+set of variables.
+
+0:00:12.070,0:00:15.740
+Each variable has a set of values it
+can take on called its domain, and
+
+0:00:15.740,0:00:19.180
+then in addition to variables taking on
+values in the domain, there's a set
+
+0:00:19.180,0:00:22.590
+of constraints which describe the
+configurations of the variable
+
+0:00:22.590,0:00:24.600
+assignments which are acceptable.
+
+0:00:24.600,0:00:26.440
+Constraints can come in two forms.
+
+0:00:26.440,0:00:29.190
+They can either be implicit, meaning
+there's a little snippet of code that
+
+0:00:29.190,0:00:32.870
+you execute to see whether or not the
+constraint is satisfied, or explicit,
+
+0:00:32.870,0:00:36.260
+where you actually enumerate the legal
+tuples that you're willing to have in
+
+0:00:36.260,0:00:38.100
+the constraint.
+
+0:00:38.100,0:00:42.580
+So in the case that we looked at last
+time, we had a recurring example of
+
+0:00:42.580,0:00:44.370
+map coloring.
+
+0:00:44.370,0:00:48.590
+And so here's a CSP for map coloring,
+and each variable
+
+0:00:48.590,0:00:50.550
+might represent a country.
+
+0:00:50.550,0:00:54.010
+The domains are the colors we might
+use, so in the simplified version,
+
+0:00:54.010,0:00:55.550
+red, green, and blue.
+
+0:00:55.550,0:00:58.420
+And the constraints might be the two
+adjacent countries that touch on the
+
+0:00:58.420,0:01:00.680
+map can't have the same color.
+
+0:01:00.680,0:01:03.650
+That's an implicit constraint, and an
+explicit constraint would say these
+
+0:01:03.650,0:01:07.500
+two variables can either be red/green,
+blue/green, and so on.
+
+0:01:07.500,0:01:09.230
+Constraints come in multiple arities.
+
+0:01:09.230,0:01:13.400
+They can be unary, meaning they impose
+constraints on one variable at a time;
+
+0:01:13.400,0:01:15.440
+binary, meaning two variables
+at a time--
+
+0:01:15.440,0:01:18.390
+these inequality constraints are
+binary constraints; or n-ary.
+
+0:01:18.390,0:01:20.800
+For example, we might have five
+variables that are mutually
+
+0:01:20.800,0:01:24.880
+constrained, and that would be
+a degree five constraint.
+
+0:01:24.880,0:01:27.920
+The goal from a constraint satisfaction,
+as we've been talking
+
+0:01:27.920,0:01:31.010
+about in this class, is to find some
+solution-- meaning to find some
+
+0:01:31.010,0:01:34.670
+assignment to the variables which
+assigns a value to every variable and
+
+0:01:34.670,0:01:36.200
+meets all of the constraints.
+
+0:01:36.200,0:01:38.710
+You could imagine doing other things,
+but the algorithms we're presenting
+
+0:01:38.710,0:01:39.810
+here don't do these things.
+
+0:01:39.810,0:01:43.060
+For example, find all the solutions,
+find the best solution according to
+
+0:01:43.060,0:01:44.780
+some scoring function.
+
+0:01:44.780,0:01:47.900
+Here, we're just looking to
+find some legal solution.
+
+0:01:47.900,0:01:50.430
+
+0:01:50.430,0:01:53.720
+We had a basic mechanism for solving
+these called backtracking search,
+
+0:01:53.720,0:01:56.340
+which is really just a variant
+of depth-first search.
+
+0:01:56.340,0:01:58.850
+In this particular case, the
+implementation in the
+
+0:01:58.850,0:02:00.400
+pseudo code is recursive.
+
+0:02:00.400,0:02:03.720
+But in terms of the computation it
+performs, that computation is just
+
+0:02:03.720,0:02:05.200
+like depth-first search.
+
+0:02:05.200,0:02:08.840
+It starts at the top of the search tree,
+and at the top of the search
+
+0:02:08.840,0:02:11.270
+tree, you have no variables assigned.
+
+0:02:11.270,0:02:14.160
+And then you recurse, assigning
+one variable at a time.
+
+0:02:14.160,0:02:17.200
+In a naive depth-first search, all you
+know is two things about a state.
+
+0:02:17.200,0:02:18.530
+Does it have successors--
+
+0:02:18.530,0:02:21.560
+which everything that's not a complete
+assignment has successors--
+
+0:02:21.560,0:02:22.790
+and is it a goal?
+
+0:02:22.790,0:02:25.210
+So you don't know whether or not you
+have a goal until you get to the very
+
+0:02:25.210,0:02:28.780
+end at the bottom of the tree when
+all variables are assigned.
+
+0:02:28.780,0:02:32.890
+This recursive backtracking search has a
+big innovation in that it can detect
+
+0:02:32.890,0:02:34.940
+when a constraint is already violated.
+
+0:02:34.940,0:02:39.100
+That means not only does this state
+not pass the goal test, but it
+
+0:02:39.100,0:02:42.360
+essentially doesn't have successors,
+because it's already doomed.
+
+0:02:42.360,0:02:45.590
+So together, these ideas give this
+algorithm recursive backtracking
+
+0:02:45.590,0:02:48.630
+search that we've presented last time,
+and there were a couple question
+
+0:02:48.630,0:02:51.220
+marks, like what order should
+we work on the variables?
+
+0:02:51.220,0:02:54.110
+When we have a variable in front of
+us, which values should we try, in
+
+0:02:54.110,0:02:55.230
+what order, and so on?
+
+0:02:55.230,0:02:57.730
+But essentially, you do a depth-first
+search until you find a solution, or
+
+0:02:57.730,0:03:00.420
+you exhaust all options.
+
+0:03:00.420,0:03:02.790
+In order to improve backtracking
+search, we had a couple general
+
+0:03:02.790,0:03:07.340
+purpose ideas that together and
+individually give huge gains in speed.
+
+0:03:07.340,0:03:09.510
+But in the end, constraint
+satisfaction is
+
+0:03:09.510,0:03:10.930
+still an NP-hard problem.
+
+0:03:10.930,0:03:13.950
+That means no matter how many of these
+tricks we have, and how sophisticated
+
+0:03:13.950,0:03:17.040
+our CSP solvers are, there are still
+going to be instances that, to the
+
+0:03:17.040,0:03:20.550
+best of our knowledge, are going
+to be extremely hard.
+
+0:03:20.550,0:03:24.030
+So what can we do that, in general,
+will these things up greatly?
+
+0:03:24.030,0:03:26.450
+Well, one idea is ordering.
+
+0:03:26.450,0:03:29.850
+Whenever we have a choice of what
+variable to visit next in the depth
+
+0:03:29.850,0:03:33.750
+first procedure, we should be smart
+about which variable we work on.
+
+0:03:33.750,0:03:36.780
+And the short version was, we decided
+that if there are easy variables and
+
+0:03:36.780,0:03:40.200
+hard variables, where easy means there
+are lots of values left in their
+
+0:03:40.200,0:03:43.560
+domains, and hard means they're very
+heavily constrained and may only have
+
+0:03:43.560,0:03:47.610
+a few values left, we should work
+on the hard variables first.
+
+0:03:47.610,0:03:49.860
+The reason we should work on the hard
+variables first is because sooner or
+
+0:03:49.860,0:03:51.490
+later, you have to do
+all the variables.
+
+0:03:51.490,0:03:53.730
+You might as well do the hard ones now
+and get your backtracking out of the
+
+0:03:53.730,0:03:56.110
+way before you get too
+deep into the tree.
+
+0:03:56.110,0:03:59.080
+On the other hand, when we're
+considering the values that we're
+
+0:03:59.080,0:04:01.420
+going to try, you don't have
+to try all the values.
+
+0:04:01.420,0:04:04.360
+If you get lucky with the first value,
+you never have to try the others.
+
+0:04:04.360,0:04:07.430
+So you should try the values that
+are most likely to work out.
+
+0:04:07.430,0:04:11.260
+And the way that we formulated that
+as a heuristic here is the least
+
+0:04:11.260,0:04:12.450
+constraining value.
+
+0:04:12.450,0:04:15.720
+And the way we implement that is, we
+consider the possible values to
+
+0:04:15.720,0:04:18.730
+assign, we look at their
+effect on filtering--
+
+0:04:18.730,0:04:20.640
+so forward checking arc consistency--
+
+0:04:20.640,0:04:24.920
+and we choose the one that imposes
+the least constraints.
+
+0:04:24.920,0:04:26.030
+Then there was filtering.
+
+0:04:26.030,0:04:29.050
+Filtering was this idea that we want
+to detect inevitable failure early.
+
+0:04:29.050,0:04:32.610
+We had forward checking, which was a
+very limited kind of look ahead, where
+
+0:04:32.610,0:04:36.610
+even beyond the variables we've
+assigned, we check to see whether are
+
+0:04:36.610,0:04:39.800
+any constraint violations waiting
+to happen in one step.
+
+0:04:39.800,0:04:43.930
+And then we had this notion of arc
+consistency, where with arc
+
+0:04:43.930,0:04:48.080
+consistency, we have a much more
+thorough check for future inevitable
+
+0:04:48.080,0:04:50.290
+failures, but it's still not perfect.
+
+0:04:50.290,0:04:53.310
+So we still had a backtracking search.
+
+0:04:53.310,0:04:56.350
+We're going to talk a little bit more
+about arc consistency today, and then
+
+0:04:56.350,0:04:58.060
+we're going to talk about structure.
+
+0:04:58.060,0:05:00.410
+And the idea with structure is
+sometimes, we can look at the
+
+0:05:00.410,0:05:04.060
+constraint graph, and we can see
+something special there that lets us
+
+0:05:04.060,0:05:05.310
+speed up our solution.
+
+0:05:05.310,0:05:05.980
+

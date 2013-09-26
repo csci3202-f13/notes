@@ -1,0 +1,517 @@
+0:00:00.000,0:00:01.688
+
+0:00:01.688,0:00:02.520
+PROFESSOR: All right.
+
+0:00:02.520,0:00:03.980
+How are we going to use the heuristic?
+
+0:00:03.980,0:00:07.860
+Well, the first thing that occurs you
+is, well, I have this arrow, in some
+
+0:00:07.860,0:00:10.740
+sense, that tells me whether or
+not I'm close to the goal.
+
+0:00:10.740,0:00:12.740
+Why don't we just follow
+the heuristic?
+
+0:00:12.740,0:00:13.250
+And you can.
+
+0:00:13.250,0:00:14.240
+That's Greedy Search.
+
+0:00:14.240,0:00:18.680
+And as you might imagine from the name,
+it's not a perfect solution.
+
+0:00:18.680,0:00:20.790
+Let's figure out what it looks like.
+
+0:00:20.790,0:00:22.340
+In Greedy Search, you
+look at your map.
+
+0:00:22.340,0:00:24.350
+So for example, let's say
+we're at Arad again.
+
+0:00:24.350,0:00:25.790
+So we start here.
+
+0:00:25.790,0:00:27.890
+And we're trying to get to Bucharest.
+
+0:00:27.890,0:00:30.440
+And we're going to follow the
+heuristic in some way.
+
+0:00:30.440,0:00:31.900
+Now, it's not going to
+be hill climbing.
+
+0:00:31.900,0:00:33.750
+It's not going to be a local search.
+
+0:00:33.750,0:00:35.490
+It's going to still be a fringe.
+
+0:00:35.490,0:00:38.720
+It's just the things that come out of
+the fringe will be prioritized, based
+
+0:00:38.720,0:00:41.170
+on whether or not they seem
+to be close to the goal.
+
+0:00:41.170,0:00:42.550
+And so let's look at this
+map for a second.
+
+0:00:42.550,0:00:44.075
+So we can understand the example.
+
+0:00:44.075,0:00:44.790
+All right.
+
+0:00:44.790,0:00:48.760
+The actual shortest path is
+what I call the low road,
+
+0:00:48.760,0:00:51.140
+through Rimnicu Vilcea.
+
+0:00:51.140,0:00:56.090
+The high road, through
+Fagaras, is longer.
+
+0:00:56.090,0:00:58.040
+Depth First Search would like it
+because it has fewer steps.
+
+0:00:58.040,0:01:01.950
+But Uniform Cost would do the right
+thing and return the low road.
+
+0:01:01.950,0:01:04.580
+Because the sum of the
+path cost is lower.
+
+0:01:04.580,0:01:04.849
+OK.
+
+0:01:04.849,0:01:05.920
+So remember that.
+
+0:01:05.920,0:01:07.990
+The one through Fagaras is longer.
+
+0:01:07.990,0:01:10.500
+And it makes more progress, quickly.
+
+0:01:10.500,0:01:12.400
+Fagaras itself is closer to Bucharest.
+
+0:01:12.400,0:01:14.840
+But it's the wrong answer.
+
+0:01:14.840,0:01:19.850
+So Greedy Search, you expand the
+node that seems to be closest.
+
+0:01:19.850,0:01:21.970
+So let's say you were at Arad.
+
+0:01:21.970,0:01:27.010
+And that has distance 366, according
+to our heuristic.
+
+0:01:27.010,0:01:27.850
+We expand it.
+
+0:01:27.850,0:01:30.580
+And onto our fringe go the three
+places you can get to in
+
+0:01:30.580,0:01:31.920
+one step, from Arad.
+
+0:01:31.920,0:01:35.000
+And you can see here that Sibiu, which
+in fact is the right direction to
+
+0:01:35.000,0:01:36.310
+head, is closest.
+
+0:01:36.310,0:01:37.590
+Now, all three are on our Fringe.
+
+0:01:37.590,0:01:38.775
+But we're going to do Sibiu first.
+
+0:01:38.775,0:01:40.190
+So we expand that.
+
+0:01:40.190,0:01:43.150
+And now, we've got this Fringe that
+has a bunch of stuff on it.
+
+0:01:43.150,0:01:46.170
+It's got some crazy stuff, like
+going back to a Arad.
+
+0:01:46.170,0:01:47.820
+We probably shouldn't do that.
+
+0:01:47.820,0:01:52.150
+But the thing on the entire Fringe
+that's closest is Fagaras.
+
+0:01:52.150,0:01:54.560
+Because it makes immediate progress.
+
+0:01:54.560,0:01:59.610
+However, the right answer, through
+the low road, is not yet cheaper.
+
+0:01:59.610,0:02:02.590
+Because it gets there kind
+of in more steps.
+
+0:02:02.590,0:02:04.620
+And it doesn't look cheaper, yet.
+
+0:02:04.620,0:02:06.280
+So what do we do in Greedy Search?
+
+0:02:06.280,0:02:07.300
+We go through Fagaras.
+
+0:02:07.300,0:02:09.919
+Now, the problem is, once we
+go through Fagaras, now
+
+0:02:09.919,0:02:10.740
+we can see the goal.
+
+0:02:10.740,0:02:11.580
+We can see Bucharest.
+
+0:02:11.580,0:02:13.620
+We're going to go straight there.
+
+0:02:13.620,0:02:17.520
+And this good path that would actually
+have been cheap, had we kind of
+
+0:02:17.520,0:02:19.310
+checked it out.
+
+0:02:19.310,0:02:20.770
+It didn't look good right away.
+
+0:02:20.770,0:02:21.770
+And it's still on the Fringe.
+
+0:02:21.770,0:02:24.600
+We would eventually come back to
+it, if it were the only path.
+
+0:02:24.600,0:02:27.470
+But we end up picking the high road.
+
+0:02:27.470,0:02:30.020
+And therefore, we drive farther.
+
+0:02:30.020,0:02:33.110
+So what can go wrong
+with Greedy Search?
+
+0:02:33.110,0:02:37.640
+Well, what can go wrong is you don't
+get the thing you wanted.
+
+0:02:37.640,0:02:39.290
+You end up with some kind of goal.
+
+0:02:39.290,0:02:40.540
+But it's not the cheapest.
+
+0:02:40.540,0:02:44.700
+
+0:02:44.700,0:02:45.270
+All right.
+
+0:02:45.270,0:02:46.990
+So how does Greedy Search work?
+
+0:02:46.990,0:02:49.160
+Well, all I have to really do
+is tell you the strategy.
+
+0:02:49.160,0:02:50.120
+And you've got the algorithm.
+
+0:02:50.120,0:02:52.120
+I don't need to go through
+Tree Search again.
+
+0:02:52.120,0:02:54.280
+The strategy is expand a
+goal, that you think is
+
+0:02:54.280,0:02:55.640
+closest to the goal state.
+
+0:02:55.640,0:02:59.240
+Which means, in code, you take the
+state that node corresponds to.
+
+0:02:59.240,0:03:02.460
+You execute the heuristic on it. the
+heuristic is in general code, not a
+
+0:03:02.460,0:03:03.260
+Lookup Table.
+
+0:03:03.260,0:03:04.520
+You execute the heuristic.
+
+0:03:04.520,0:03:05.330
+You take the number.
+
+0:03:05.330,0:03:06.390
+And that's your priority.
+
+0:03:06.390,0:03:10.190
+The thing with the lowest number,
+at any given time, comes off.
+
+0:03:10.190,0:03:13.090
+Unlike Uniform Cost, which looked
+at cumulative costs, this
+
+0:03:13.090,0:03:14.530
+is a one-shot number.
+
+0:03:14.530,0:03:17.600
+You don't add up your heuristics.
+
+0:03:17.600,0:03:20.250
+And you always go kind of towards
+whatever appears to be
+
+0:03:20.250,0:03:21.730
+closest to the goal.
+
+0:03:21.730,0:03:27.610
+Now, a common case is that this kind of
+Best-First, Greedy Search will take
+
+0:03:27.610,0:03:28.630
+you straight to a goal.
+
+0:03:28.630,0:03:29.890
+But it will be the wrong one.
+
+0:03:29.890,0:03:32.780
+So I have this image in my head
+here, where you go straight
+
+0:03:32.780,0:03:33.540
+down into the tree.
+
+0:03:33.540,0:03:36.310
+And in general, unlike Depth First
+Search, where you go straight off into
+
+0:03:36.310,0:03:40.050
+some crazy left-door way, you're going
+straight in some basically reasonable
+
+0:03:40.050,0:03:42.380
+way, especially if your heuristic
+is really good.
+
+0:03:42.380,0:03:43.300
+And so you get to a goal.
+
+0:03:43.300,0:03:45.010
+But it may not be the right goal.
+
+0:03:45.010,0:03:47.040
+So it's deep like Depth
+First Research.
+
+0:03:47.040,0:03:50.920
+But it's not kind of completely rogue,
+like Depth First Search.
+
+0:03:50.920,0:03:53.900
+Now, on the other hand, you're heuristic
+could play games with you.
+
+0:03:53.900,0:03:57.150
+It could tell you that everything is
+close to the goal, except the things
+
+0:03:57.150,0:03:58.810
+that are actually close to the goal.
+
+0:03:58.810,0:03:59.720
+And then what happens?
+
+0:03:59.720,0:04:00.900
+Well, then you go on this goose chase.
+
+0:04:00.900,0:04:03.390
+And you expand the entire tree,
+except the part you want.
+
+0:04:03.390,0:04:06.370
+So really, Greedy is only as
+good as your heuristic.
+
+0:04:06.370,0:04:07.980
+And in general, heuristics
+aren't perfect.
+
+0:04:07.980,0:04:10.230
+And this thing on the bottom
+doesn't always happen.
+
+0:04:10.230,0:04:12.970
+But it certainly can, if your
+heuristic isn't very good.
+
+0:04:12.970,0:04:16.264
+You can think of Greedy, basically, as
+having all the properties of Depth
+
+0:04:16.264,0:04:18.630
+First Search.
+
+0:04:18.630,0:04:20.620
+Except that Depth First
+Search is guided.
+
+0:04:20.620,0:04:22.910
+And it's maybe guided well.
+
+0:04:22.910,0:04:24.885
+So let's look at what this
+looks like in execution.
+
+0:04:24.885,0:04:28.470
+
+0:04:28.470,0:04:30.970
+Sometimes, it looks great.
+
+0:04:30.970,0:04:33.680
+So if I look at the empty water--
+
+0:04:33.680,0:04:36.550
+remember how Uniform Cost Search
+checked every direction?
+
+0:04:36.550,0:04:37.510
+What does Greedy do?
+
+0:04:37.510,0:04:38.755
+AUDIENCE: When it works, it works.
+
+0:04:38.755,0:04:40.685
+PROFESSOR: When it works
+it works, right.
+
+0:04:40.685,0:04:44.050
+
+0:04:44.050,0:04:44.850
+How about--
+
+0:04:44.850,0:04:49.730
+what does Greedy Search do
+in the case of that maze?
+
+0:04:49.730,0:04:51.100
+Well, here you can see what it did.
+
+0:04:51.100,0:04:52.720
+It's actually pretty interesting.
+
+0:04:52.720,0:04:57.660
+It expanded, unsurprisingly, things
+that seemed to make progress.
+
+0:04:57.660,0:05:00.560
+And then, at that point, going
+left seem to make progress.
+
+0:05:00.560,0:05:01.890
+So it expanded all of this.
+
+0:05:01.890,0:05:03.670
+Then, it couldn't get any closer.
+
+0:05:03.670,0:05:06.320
+The things that looked closest were
+actually kind of curling back.
+
+0:05:06.320,0:05:08.040
+So it expanded these next.
+
+0:05:08.040,0:05:09.360
+Those did not work.
+
+0:05:09.360,0:05:11.600
+Rather than declaring failure--
+it's not a local search.
+
+0:05:11.600,0:05:13.760
+This other stuff was still
+on the fringe.
+
+0:05:13.760,0:05:16.810
+And so it did eventually come back
+and expand all that stuff.
+
+0:05:16.810,0:05:17.870
+Now, what's the problem?
+
+0:05:17.870,0:05:21.250
+The problem is, well, it avoided the
+worst possible outcome, which is just
+
+0:05:21.250,0:05:22.640
+not even finding a solution.
+
+0:05:22.640,0:05:25.590
+It did know to backtrack, in some sense,
+meaning take things off the
+
+0:05:25.590,0:05:27.340
+fringe and try again.
+
+0:05:27.340,0:05:31.870
+But in fact, the optimal solution goes
+right here and then straight down.
+
+0:05:31.870,0:05:35.480
+The problem with Greedy here is, the
+right solution actually goes
+
+0:05:35.480,0:05:38.500
+backwards, according to the
+heuristic, very briefly,
+
+0:05:38.500,0:05:40.230
+before it can make progress.
+
+0:05:40.230,0:05:41.500
+Greedy is not OK with that.
+
+0:05:41.500,0:05:43.267
+

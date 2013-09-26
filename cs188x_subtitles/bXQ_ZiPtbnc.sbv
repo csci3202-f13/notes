@@ -1,0 +1,177 @@
+0:00:00.000,0:00:01.250
+
+0:00:01.250,0:00:03.330
+DAN KLEIN: Let's take a look and see
+what that looks like in the demo.
+
+0:00:03.330,0:00:06.260
+All right, so here we go.
+
+0:00:06.260,0:00:08.430
+Let's look forward checking first.
+
+0:00:08.430,0:00:10.320
+All right, what's going to happen?
+
+0:00:10.320,0:00:11.590
+I'm going to start in the lower left.
+
+0:00:11.590,0:00:13.750
+I'm going to assign blue.
+
+0:00:13.750,0:00:15.840
+Then I'm going to assign red.
+
+0:00:15.840,0:00:17.080
+Then how about in the next one?
+
+0:00:17.080,0:00:19.840
+Well, I'm going to assign blue, that's
+the first thing on my strike order.
+
+0:00:19.840,0:00:21.320
+And then I'm going to assign red.
+
+0:00:21.320,0:00:23.292
+Now let's stop and think.
+
+0:00:23.292,0:00:26.140
+I'm doing forward checking.
+
+0:00:26.140,0:00:27.970
+So forward checking has done its job.
+
+0:00:27.970,0:00:32.940
+It said, given your assignment, these
+two variables, one up here and one
+
+0:00:32.940,0:00:36.430
+over here, both have only green
+as their legal domain.
+
+0:00:36.430,0:00:39.210
+So for forward checking,
+what happens next?
+
+0:00:39.210,0:00:40.610
+I keep going, right?
+
+0:00:40.610,0:00:41.860
+So I keep going.
+
+0:00:41.860,0:00:45.240
+I get to here and I assign
+green, and then I fail.
+
+0:00:45.240,0:00:48.730
+So I back up and I try
+it again, and I fail.
+
+0:00:48.730,0:00:51.750
+I back up a little further and
+I try it again, and I fail.
+
+0:00:51.750,0:00:56.160
+And so, for forward checking, even
+though we're looking into the future,
+
+0:00:56.160,0:00:58.560
+we're kind of not looking
+into the future enough.
+
+0:00:58.560,0:01:01.420
+So eventually, I'll get
+past this region.
+
+0:01:01.420,0:01:02.590
+This is a tricky region.
+
+0:01:02.590,0:01:06.580
+Eventually I'll backtrack
+enough to get past here.
+
+0:01:06.580,0:01:10.580
+And then I'll basically kind of tear
+through the rest pretty well.
+
+0:01:10.580,0:01:12.840
+So forward checking would
+eventually work.
+
+0:01:12.840,0:01:15.630
+How about if we enforce arc consistency
+instead of just doing
+
+0:01:15.630,0:01:16.810
+forward checking?
+
+0:01:16.810,0:01:18.660
+Well, let's see what happens here.
+
+0:01:18.660,0:01:21.130
+So I assign blue.
+
+0:01:21.130,0:01:22.370
+I assign red.
+
+0:01:22.370,0:01:24.500
+I assign blue.
+
+0:01:24.500,0:01:25.430
+Now look here.
+
+0:01:25.430,0:01:30.310
+We already know that as a consequence of
+the blue and red here that we have
+
+0:01:30.310,0:01:31.610
+to have green up here.
+
+0:01:31.610,0:01:33.660
+And that means we can't
+have green here.
+
+0:01:33.660,0:01:36.970
+And that means that as soon as I assign
+blue here, I can see that I'm
+
+0:01:36.970,0:01:40.910
+going to have to use green
+at this fourth circle.
+
+0:01:40.910,0:01:43.820
+That means we never actually get into
+that thrashing where we have to
+
+0:01:43.820,0:01:45.920
+backtrack to figure out
+what to do next here.
+
+0:01:45.920,0:01:50.620
+We simply assign green
+and then move on.
+
+0:01:50.620,0:01:54.710
+Now just because we're doing arc
+consistency doesn't mean there won't
+
+0:01:54.710,0:01:55.470
+be backtracking.
+
+0:01:55.470,0:01:58.440
+In fact, here there is a
+little backtracking.
+
+0:01:58.440,0:02:03.490
+But it's much more limited
+and much more local.
+
+0:02:03.490,0:02:07.590
+So arc consistency here fixed that
+problem of having the violation that
+
+0:02:07.590,0:02:08.840
+we couldn't detect.
+
+0:02:08.840,0:02:09.510
+

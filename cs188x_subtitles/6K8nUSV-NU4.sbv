@@ -1,0 +1,326 @@
+0:00:00.000,0:00:01.260
+
+0:00:01.260,0:00:02.630
+DAN KLEIN: Here's another idea.
+
+0:00:02.630,0:00:05.100
+An algorithm called simulated
+annealing.
+
+0:00:05.100,0:00:08.360
+The idea is that you can escape local
+maxima by not simply going
+
+0:00:08.360,0:00:09.680
+uphill all the time.
+
+0:00:09.680,0:00:13.180
+If you go uphill all the time, you have
+this problem that if you're going
+
+0:00:13.180,0:00:17.400
+uphill, and then there's a little blip,
+and then uphill again, you may
+
+0:00:17.400,0:00:19.850
+stop here and declare victory, right?
+
+0:00:19.850,0:00:22.560
+And if only you would take this tiny
+step downhill, you could just resume
+
+0:00:22.560,0:00:25.140
+what you were doing before,
+getting better and better.
+
+0:00:25.140,0:00:28.190
+And so what you do is you essentially
+bounce around.
+
+0:00:28.190,0:00:31.650
+So here's the algorithm in pseudocode,
+but here's the important idea about
+
+0:00:31.650,0:00:32.460
+this algorithm.
+
+0:00:32.460,0:00:36.180
+You have some current state, just
+like any local search algorithm.
+
+0:00:36.180,0:00:39.310
+And you're going to look at the
+successors, just like in any other
+
+0:00:39.310,0:00:40.820
+search algorithm.
+
+0:00:40.820,0:00:46.450
+The difference is you have this other
+concept of a temperature, OK?
+
+0:00:46.450,0:00:49.220
+And the idea is when the temperature
+is high, you're
+
+0:00:49.220,0:00:50.490
+bouncing around like crazy.
+
+0:00:50.490,0:00:53.290
+And essentially you're going to go to
+a neighbor, whether it's better than
+
+0:00:53.290,0:00:55.400
+you or not.
+
+0:00:55.400,0:00:59.800
+So what you do is you pick a
+random successor, right?
+
+0:00:59.800,0:01:01.975
+Not the best successor,
+a random successor.
+
+0:01:01.975,0:01:05.340
+And you figure out, is it
+better or worse than me?
+
+0:01:05.340,0:01:07.680
+If it's better than me, I'll take it.
+
+0:01:07.680,0:01:10.460
+If it's worse than me,
+maybe I'll take it.
+
+0:01:10.460,0:01:12.830
+I'll take it when the
+temperature is high.
+
+0:01:12.830,0:01:15.360
+And so the beginning, you're just kind
+of bouncing around like crazy.
+
+0:01:15.360,0:01:17.690
+And as time goes on, you
+change the temperature.
+
+0:01:17.690,0:01:18.370
+You lower it.
+
+0:01:18.370,0:01:21.230
+This is where the annealing comes,
+in it's a physics analogy.
+
+0:01:21.230,0:01:24.620
+You lower the temperature, and you take
+these downhill steps less and
+
+0:01:24.620,0:01:25.980
+less often.
+
+0:01:25.980,0:01:30.190
+But if you only one downhill step away
+from making huge progress, you'll sit
+
+0:01:30.190,0:01:31.100
+there, you'll bounce
+around for a while.
+
+0:01:31.100,0:01:32.590
+Eventually you'll escape
+and continue going.
+
+0:01:32.590,0:01:37.920
+So it's kind of uphill, but kind of a
+very caffeinated way of going uphill.
+
+0:01:37.920,0:01:40.180
+Simulated annealing.
+
+0:01:40.180,0:01:41.510
+Magic or not?
+
+0:01:41.510,0:01:45.200
+So here's a theoretical guarantee the
+sure makes it look like magic.
+
+0:01:45.200,0:01:46.620
+The guarantee says this.
+
+0:01:46.620,0:01:51.120
+It says that if you run this forever,
+keep in mind you will not actually run
+
+0:01:51.120,0:01:51.590
+this forever.
+
+0:01:51.590,0:01:55.710
+If you did run this forever, then you
+would find that you spend more time at
+
+0:01:55.710,0:01:58.610
+certain places in the search
+space than others.
+
+0:01:58.610,0:02:01.960
+And because of how the algorithm works,
+you spend more time at higher
+
+0:02:01.960,0:02:03.560
+places on the mountain.
+
+0:02:03.560,0:02:05.930
+So essentially E here is
+your fitness function.
+
+0:02:05.930,0:02:09.100
+If the fitness function is high, you'll
+spend more time up there,
+
+0:02:09.100,0:02:12.290
+because it kind of takes you longer to
+bounce your way out of a very high
+
+0:02:12.290,0:02:14.810
+point than a very low point.
+
+0:02:14.810,0:02:18.960
+As the temperature decreases, you
+tend to get stuck where you are.
+
+0:02:18.960,0:02:21.400
+So in essence, you've got this beautiful
+guarantee this says as T
+
+0:02:21.400,0:02:24.710
+goes to zero, then you will converge
+to the optimal state.
+
+0:02:24.710,0:02:28.230
+And you will spend kind of infinitely
+much time there.
+
+0:02:28.230,0:02:29.600
+That's great.
+
+0:02:29.600,0:02:30.735
+OK, is this interesting?
+
+0:02:30.735,0:02:32.610
+Well, it's certainly interesting.
+
+0:02:32.610,0:02:33.460
+Is it useful?
+
+0:02:33.460,0:02:36.570
+So it sounds like magic, and sometimes
+simulated annealing can be very
+
+0:02:36.570,0:02:39.090
+powerful for escaping
+mild local optima.
+
+0:02:39.090,0:02:42.880
+However, it is still the case that if
+you are at a local optimum, and you
+
+0:02:42.880,0:02:46.920
+need to take 30 downhill steps to get
+out, you kind of have to take 30
+
+0:02:46.920,0:02:49.530
+downhill steps to get out without
+getting distracted and going back up
+
+0:02:49.530,0:02:51.340
+to where you came from.
+
+0:02:51.340,0:02:54.790
+And typically, taking 30 downhill steps
+is unlikely in any problem at
+
+0:02:54.790,0:02:56.230
+any temperature.
+
+0:02:56.230,0:02:59.810
+And so really, there's this issue that
+if you are in a very, very kind of
+
+0:02:59.810,0:03:02.750
+extreme local optimum where you have
+to take many downhill steps to get
+
+0:03:02.750,0:03:04.610
+out, you're probably suck
+there in practice.
+
+0:03:04.610,0:03:06.905
+Yes, if you ran this forever,
+after a billion years you
+
+0:03:06.905,0:03:07.890
+would finally escape.
+
+0:03:07.890,0:03:09.950
+And then you would get to an even better
+place for which it would take
+
+0:03:09.950,0:03:11.330
+you a trillion years to escape.
+
+0:03:11.330,0:03:13.750
+So in the limit you're going to the
+right thing, but given that you don't
+
+0:03:13.750,0:03:18.770
+care about anything much beyond the
+first hour, and certainly not much you
+
+0:03:18.770,0:03:23.350
+on the first million years, that
+guarantee may not actually help you.
+
+0:03:23.350,0:03:26.200
+What people do in addition to this a
+of bouncing around a little bit is
+
+0:03:26.200,0:03:30.420
+they think about what are called ridge
+operators, which basically say one way
+
+0:03:30.420,0:03:32.970
+or another, if my search face looks like
+this, and I'm standing here, I'm
+
+0:03:32.970,0:03:34.260
+just in trouble.
+
+0:03:34.260,0:03:36.640
+And so rather than actually hoping
+that something like simulated
+
+0:03:36.640,0:03:41.350
+annealing will just happen to want to
+go downhill for a very long time,
+
+0:03:41.350,0:03:44.810
+instead what you think about is, is
+there a way to kind of move to a
+
+0:03:44.810,0:03:48.350
+completely different region of the
+space where maybe I can move
+
+0:03:48.350,0:03:49.480
+from peak to peak.
+
+0:03:49.480,0:03:51.980
+These operators are called ridge
+operators, because rather than kind of
+
+0:03:51.980,0:03:55.040
+going along the search problem,
+they add new directions.
+
+0:03:55.040,0:03:56.567
+

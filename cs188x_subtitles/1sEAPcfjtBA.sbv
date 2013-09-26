@@ -1,0 +1,295 @@
+0:00:00.000,0:00:01.210
+
+0:00:01.210,0:00:03.970
+DAN KLEIN: So before we enforce arc
+consistency on a whole graph, we need
+
+0:00:03.970,0:00:07.600
+to talk about what it means for
+a single arc to be consistent.
+
+0:00:07.600,0:00:08.620
+So what's an arc?
+
+0:00:08.620,0:00:11.260
+We had this constraint graph, there
+weren't any arrows in it.
+
+0:00:11.260,0:00:13.180
+A constraint graph isn't
+a directed thing.
+
+0:00:13.180,0:00:15.790
+You have two variables, and there's
+either a constraint between them or
+
+0:00:15.790,0:00:17.030
+there isn't, right?
+
+0:00:17.030,0:00:18.610
+It's not a directional thing.
+
+0:00:18.610,0:00:22.660
+An arc is a new idea that's used
+in filtering algorithms.
+
+0:00:22.660,0:00:25.020
+So it takes two variables and
+it gives a direction.
+
+0:00:25.020,0:00:30.130
+So X to Y. So if we have an arc X to Y,
+we're talking about variables X and
+
+0:00:30.130,0:00:33.490
+Y, and that arc is either
+consistent or not.
+
+0:00:33.490,0:00:37.090
+And what it means for an arc to be
+consistent is, essentially, there
+
+0:00:37.090,0:00:39.660
+aren't any constraint violations
+lurking there.
+
+0:00:39.660,0:00:40.590
+What's that mean?
+
+0:00:40.590,0:00:45.570
+It means that for every value in the
+tail x, there is some y in the head
+
+0:00:45.570,0:00:48.230
+which can be assigned without
+violating a constraint.
+
+0:00:48.230,0:00:49.500
+Let's see an example.
+
+0:00:49.500,0:00:51.360
+So here we could look
+at this constraint.
+
+0:00:51.360,0:00:53.410
+This is the constraint that
+goes from the Northern
+
+0:00:53.410,0:00:56.050
+Territory to Western Australia.
+
+0:00:56.050,0:00:58.150
+And we look at this and we
+check our definition.
+
+0:00:58.150,0:00:59.520
+Is there a problem here?
+
+0:00:59.520,0:01:04.525
+Is it the case that for every x in the
+tail there is some y in the head that
+
+0:01:04.525,0:01:07.026
+can be assigned without violating
+a constraint?
+
+0:01:07.026,0:01:09.260
+OK, well, what about for blue?
+
+0:01:09.260,0:01:12.770
+If we put blue in the tail, can
+we pick something at Western
+
+0:01:12.770,0:01:13.910
+Australia and be OK?
+
+0:01:13.910,0:01:14.870
+Sure, we pick red.
+
+0:01:14.870,0:01:16.710
+We actually have no choice
+at the head.
+
+0:01:16.710,0:01:19.380
+How about if we pick red
+at Northern Territory?
+
+0:01:19.380,0:01:21.050
+Well, now we have a problem.
+
+0:01:21.050,0:01:24.490
+This constraint is not consistent.
+
+0:01:24.490,0:01:25.460
+I could make it consistent.
+
+0:01:25.460,0:01:27.810
+How could I make it consistent?
+
+0:01:27.810,0:01:29.750
+Red is the problem.
+
+0:01:29.750,0:01:32.110
+I could get rid of the red.
+
+0:01:32.110,0:01:33.970
+And now it would become consistent.
+
+0:01:33.970,0:01:38.000
+So it wasn't consistent before, I can
+make it consistent by deleting values
+
+0:01:38.000,0:01:39.280
+from the tail.
+
+0:01:39.280,0:01:43.260
+So that I now have the property that
+anything in the tail can extend
+
+0:01:43.260,0:01:46.090
+satisfactorily to the head.
+
+0:01:46.090,0:01:47.580
+How about this one?
+
+0:01:47.580,0:01:51.830
+So here we have Queensland
+in the upper right,
+
+0:01:51.830,0:01:54.370
+looking at Western Australia.
+
+0:01:54.370,0:01:59.540
+Now here, every single value I can
+try in the tail can extend to an
+
+0:01:59.540,0:02:03.130
+assignment to the head without
+violating a constraint.
+
+0:02:03.130,0:02:04.950
+So this arc is consistent.
+
+0:02:04.950,0:02:07.890
+I don't have to do anything
+to make it consistent.
+
+0:02:07.890,0:02:08.970
+So how do you remember this?
+
+0:02:08.970,0:02:10.199
+Is this directional notion?
+
+0:02:10.199,0:02:12.350
+The arc's going in the other direction
+too and they may or may not be
+
+0:02:12.350,0:02:13.730
+consistent in the other direction.
+
+0:02:13.730,0:02:16.380
+An arc is a directed thing, it's
+either consistent or not.
+
+0:02:16.380,0:02:19.250
+And the way you make it consistent is
+you delete stuff from the tail.
+
+0:02:19.250,0:02:20.350
+How do you remember that?
+
+0:02:20.350,0:02:22.000
+Well, l like to think
+about it this way.
+
+0:02:22.000,0:02:26.700
+Let's say that you're pulled over by
+the constraint satisfaction police.
+
+0:02:26.700,0:02:28.480
+Well, what are they going to do?
+
+0:02:28.480,0:02:30.750
+They're going to check your trunk and
+they're going to make sure there's
+
+0:02:30.750,0:02:32.780
+nothing in there that's illegal.
+
+0:02:32.780,0:02:36.170
+And so the idea with making an arc
+consistent is you're going to look at
+
+0:02:36.170,0:02:39.820
+all the stuff in the trunk, that's the
+tail of the arc, and if anything in
+
+0:02:39.820,0:02:43.620
+there is causing a problem, meaning if
+you assigned it there would be no way
+
+0:02:43.620,0:02:47.230
+to satisfy that arc, you're going
+to pull it out and delete it.
+
+0:02:47.230,0:02:51.310
+This should help you remember you always
+delete from the tail of an arc.
+
+0:02:51.310,0:02:53.200
+Of course, the arc goes in the other
+direction and you'll get the other
+
+0:02:53.200,0:02:55.800
+direction too at some point
+in these algorithms.
+
+0:02:55.800,0:02:57.460
+All right, so what's forward checking?
+
+0:02:57.460,0:02:59.050
+What does forward checking do?
+
+0:02:59.050,0:03:03.250
+Well, if we assigned Western Australia,
+we would check everything
+
+0:03:03.250,0:03:04.170
+adjacent to it.
+
+0:03:04.170,0:03:07.500
+So we check the Northern Territory
+and Southern Australia.
+
+0:03:07.500,0:03:10.320
+And for each of those, we delete
+anything that violates a constraint
+
+0:03:10.320,0:03:11.860
+against our assignment.
+
+0:03:11.860,0:03:16.390
+So in essence, forward checking is just
+looking at the arcs that point
+
+0:03:16.390,0:03:21.030
+towards our new assignments, in this
+case WA, and enforcing their
+
+0:03:21.030,0:03:22.500
+consistency.
+
+0:03:22.500,0:03:24.410
+Now, of course, forward checking
+is a pretty intuitive thing.
+
+0:03:24.410,0:03:26.220
+We don't have to think
+about it like this.
+
+0:03:26.220,0:03:29.250
+But it is just enforcing the consistency
+of the incoming arcs.
+
+0:03:29.250,0:03:30.500
+

@@ -1,0 +1,66 @@
+0:00:01.679,0:00:04.830
+In short, this course is broken into two parts.
+
+0:00:04.830,0:00:08.029
+The first part is about making decisions--about how computation can give rise to
+
+0:00:08.029,0:00:11.660
+behavior. We're going to think about about how do search and planning, how to do constraint satisfaction,
+
+0:00:11.660,0:00:15.270
+and how to think about the
+presence of adversaries and uncertainty.
+
+0:00:15.270,0:00:18.720
+The second part of this course is about
+reasoning when there's uncertainty,
+
+0:00:18.720,0:00:21.840
+and about learning. We're gonna think
+about representing knowledge, uncertain
+
+0:00:21.840,0:00:25.669
+knowledge with Bayes nets, we're going to talk about decision theory and machine learning.
+
+0:00:25.669,0:00:29.149
+This is the two sides of AI that I
+talked about. When you make a good
+
+0:00:29.149,0:00:31.109
+decision it's partly because of memory,
+
+0:00:31.109,0:00:32.510
+you've learned from the past,
+
+0:00:32.510,0:00:35.350
+and it's partly because of prediction,
+you have a model of the consequences of your actions.
+
+0:00:35.350,0:00:35.959
+
+0:00:35.959,0:00:39.019
+We're going to learn how to blend these two things
+together to give rise to sophisticated
+
+0:00:39.019,0:00:41.090
+and intelligent behaviors.
+
+0:00:41.090,0:00:42.280
+Throughout all of this,
+
+0:00:42.280,0:00:45.809
+we're gonna have applications like
+natural language and vision and robotics,
+
+0:00:45.809,0:00:46.870
+and games.
+
+0:00:46.870,0:00:47.600
+So,
+
+0:00:47.600,0:00:54.600
+thank you for attending this first lecture of CS 188,
+
+0:00:56.180,0:00:57.239
+and we will see you next lecture.
+

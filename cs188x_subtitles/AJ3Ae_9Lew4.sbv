@@ -1,0 +1,37 @@
+0:00:00.000,0:00:01.590
+
+0:00:01.590,0:00:04.375
+PROFESSOR: So we are done with Part One
+of this course, which was Search
+
+0:00:04.375,0:00:05.600
+and Planning.
+
+0:00:05.600,0:00:10.620
+We've seen how AI methods can solve
+problems in search, solve CSPs, games,
+
+0:00:10.620,0:00:14.310
+Markov Decision Problems and
+now reinforcement learning.
+
+0:00:14.310,0:00:17.420
+The next half of this course
+will be about Uncertainty.
+
+0:00:17.420,0:00:21.260
+machine learning, where we'll see how
+to take all of this and put it in
+
+0:00:21.260,0:00:24.980
+environments where you have to learn
+what's going on and you're uncertain
+
+0:00:24.980,0:00:26.796
+about the state of the world.
+
+0:00:26.796,0:00:28.046
+See you next lecture.
+
+0:00:28.046,0:00:28.910
+

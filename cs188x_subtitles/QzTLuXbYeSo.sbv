@@ -1,0 +1,85 @@
+0:00:00.000,0:00:01.300
+
+0:00:01.300,0:00:04.510
+PROFESSOR: Here's a case where your
+graph doesn't have to be broken into
+
+0:00:04.510,0:00:06.770
+pieces, but it's still
+simple in some way.
+
+0:00:06.770,0:00:09.590
+And this is in a very important case
+that we'll see coming up over and over
+
+0:00:09.590,0:00:13.530
+again in this class, and that's the
+case where your constraint graph--
+
+0:00:13.530,0:00:17.390
+it's not separated into pieces, but
+it's not a general graph, either.
+
+0:00:17.390,0:00:19.930
+The intermediate ground that
+it's tree structured.
+
+0:00:19.930,0:00:23.540
+So here's a case of a constraint graph
+which has tree structure, which means
+
+0:00:23.540,0:00:26.496
+no loops-- no cycles in
+the constraint graph.
+
+0:00:26.496,0:00:27.670
+So there's a theorem--
+
+0:00:27.670,0:00:30.280
+and we'll see why this is true-- that
+says that if the constraint graph has
+
+0:00:30.280,0:00:34.290
+no loops, then the CSP can be solved in
+time that is linear in the size of
+
+0:00:34.290,0:00:37.560
+the graph, and quadratic in
+the size of the domains.
+
+0:00:37.560,0:00:40.780
+That's so much better than general
+CSPs where it's exponential.
+
+0:00:40.780,0:00:41.100
+Right.
+
+0:00:41.100,0:00:45.400
+So tree structured is much, much more
+efficient, and it's not crazy that you
+
+0:00:45.400,0:00:49.460
+would find something either tree
+structured or nearly tree structured.
+
+0:00:49.460,0:00:52.380
+This is a particular case where there's
+a connection between the kind
+
+0:00:52.380,0:00:55.540
+of syntactic restrictions, the structure
+of the problem, what we're
+
+0:00:55.540,0:00:58.760
+allowed to stay in the CSP, right--
+here, the restriction is that it be
+
+0:00:58.760,0:00:59.650
+tree structured--
+
+0:00:59.650,0:01:03.010
+and the complexity of reasoning that
+results from that restriction.
+
+0:01:03.010,0:01:04.260
+

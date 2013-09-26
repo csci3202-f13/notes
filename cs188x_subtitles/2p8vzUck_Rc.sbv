@@ -1,0 +1,179 @@
+0:00:01.879,0:00:05.000
+And so you say, what about the brain? I mean we're engineers right. We want to build something.
+
+0:00:05.000,0:00:09.050
+we want to build something that's intelligent. It'd be a little silly to ignore the fact that we
+
+0:00:09.050,0:00:12.270
+actually have a working prototype, and we're
+trying to do this really hard thing. We
+
+0:00:12.270,0:00:13.719
+should look at the prototype.
+
+0:00:13.719,0:00:17.239
+And you know human minds are not perfect
+decision-makers, but by and large they are
+
+0:00:17.239,0:00:18.699
+actually very good.
+
+0:00:18.699,0:00:22.449
+And even the cases where humans are
+famously not rational, there are many cases
+
+0:00:22.449,0:00:24.899
+there where you can actually say, well
+they are rational if you think of their
+
+0:00:24.899,0:00:27.739
+goals in a different way. That's a whole
+sticky subject, we'lll talk about that
+
+0:00:27.739,0:00:30.979
+later in the course. But basically human
+brains are in many ways
+
+0:00:30.979,0:00:31.960
+better than what we can build.
+
+0:00:31.960,0:00:36.120
+So let's just reverse engineer them. So it
+turns out, brains aren't as modular as software, and
+
+0:00:36.120,0:00:39.970
+they're a whole lot more squishy. And
+so they're hard to reverse engineer.
+
+0:00:39.970,0:00:42.690
+And because we can't reverse engineer
+them we have a very limited understanding of
+
+0:00:42.690,0:00:45.660
+what brains actually do, we really
+don't
+
+0:00:45.660,0:00:47.540
+kind of reverse engineer them and build a kind of
+
+0:00:47.540,0:00:49.230
+biomimetic brain.
+
+0:00:49.230,0:00:53.750
+And in particular there is an idea, which,
+you know, this is one point of view,
+
+0:00:53.750,0:00:56.620
+but I think it's got a lot of merit to it.
+People say that brains are to
+
+0:00:56.620,0:00:59.480
+intelligence as wings are to flight.
+
+0:00:59.480,0:01:01.080
+That is to say, that
+
+0:01:01.080,0:01:04.230
+the biggest breakthrough in manned
+flight--does anybody know what was the
+
+0:01:04.230,0:01:06.240
+biggest breakthrough in manned flight?
+
+0:01:06.240,0:01:10.520
+Stop making the wings flap, right.
+Stop trying to make a really big bird
+
+0:01:10.520,0:01:14.500
+made out of metal or something, or fabric
+right. And so this idea of, okay, maybe the
+
+0:01:14.500,0:01:17.180
+wings can be fixed 'cause we're going to be
+going faster or we're going to be going higher,
+
+0:01:17.180,0:01:20.210
+it's going to be rigid. And so when people started
+thinking, okay, we're going to learn something about
+
+0:01:20.210,0:01:25.010
+aerodynamics from the proofs of concept, say
+the birds, but we're not gonna just
+
+0:01:25.010,0:01:28.220
+slavishly mimic what's in the biology.
+Same thing with the brains. We're gonna
+
+0:01:28.220,0:01:31.420
+learn what we can, but we're not gonna just
+mimic that because we got different constraints
+
+0:01:31.420,0:01:36.310
+and a limited understanding of what
+the brain does to begin with.
+
+0:01:36.310,0:01:39.410
+So, what do we actually get. Well, we do know
+something from the brain and it boils down
+
+0:01:39.410,0:01:41.900
+to this, kind of at the very highest
+level.
+
+0:01:41.900,0:01:44.490
+We know that in order to make good
+decisions,
+
+0:01:44.490,0:01:46.210
+there's really two parts to that.
+
+0:01:46.210,0:01:48.230
+One way you can make a good decision
+
+0:01:48.230,0:01:52.490
+is by remembering that in the past you
+did this thing and it was bad,
+
+0:01:52.490,0:01:55.680
+so you know not to do that thing again.
+You know that boils down to memory. That leads into
+
+0:01:55.680,0:01:58.659
+learning, machine learning, and that's
+going to be a big part of this course.
+
+0:01:58.659,0:02:01.760
+The other way you can make a good
+prediction, is through simulation--having a
+
+0:02:01.760,0:02:04.990
+model of the world. We think, alright, what
+would happen if I do this, well then this
+
+0:02:04.990,0:02:07.799
+would happen, then this would happen--oh,
+and then that would happen,
+
+0:02:07.799,0:02:10.700
+that would be bad. And so you can realize
+that something is a bad decision by thinking
+
+0:02:10.700,0:02:14.400
+through a chain of consequences. Not
+actually doing that chain,
+
+0:02:14.400,0:02:16.529
+but thinking it through in a simulated model of the
+world
+
+0:02:16.529,0:02:19.619
+and that's going to occupy the first half of
+the class, when we think about
+
+0:02:19.619,0:02:21.760
+what it means to have a model of the world, that's an abstraction
+of the world,
+
+0:02:21.760,0:02:24.629
+and what it means to think ahead along a kind of tree of outcomes.
+

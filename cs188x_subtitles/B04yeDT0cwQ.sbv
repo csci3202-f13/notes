@@ -1,0 +1,369 @@
+0:00:00.000,0:00:01.400
+
+0:00:01.400,0:00:03.180
+PROFESSOR: So what about
+other types of games?
+
+0:00:03.180,0:00:05.190
+I'm not going to talk about
+all kinds of games.
+
+0:00:05.190,0:00:07.430
+It's going to be a very long time in
+this course before we have the
+
+0:00:07.430,0:00:10.570
+machinery to talk about games
+of partial information.
+
+0:00:10.570,0:00:16.010
+But we can imagine other kinds of
+simple, turn-based games where the
+
+0:00:16.010,0:00:17.620
+layer types are just mixed.
+
+0:00:17.620,0:00:19.240
+For example, how about backgammon?
+
+0:00:19.240,0:00:20.530
+What happens in backgammon?
+
+0:00:20.530,0:00:25.590
+Well, I move, you move, and every time
+one of us moves, we roll some dice.
+
+0:00:25.590,0:00:29.470
+And so in that case, the sequence
+of actions is, the maximizing
+
+0:00:29.470,0:00:31.260
+agent takes an action.
+
+0:00:31.260,0:00:34.600
+There is some chance outcome, which
+in this case is determined by true
+
+0:00:34.600,0:00:35.520
+randomness, right?
+
+0:00:35.520,0:00:38.570
+The dice rolling that are
+intentionally random.
+
+0:00:38.570,0:00:41.870
+Then min goes, and then the chance
+node will happen again.
+
+0:00:41.870,0:00:44.920
+You can essentially, when you think
+about these trees, you basically just
+
+0:00:44.920,0:00:48.580
+imagine the environment is one
+other player in the game.
+
+0:00:48.580,0:00:52.960
+It's kind of a random agent that moves
+in between the min and max.
+
+0:00:52.960,0:00:55.210
+How do you compute the
+value of this tree?
+
+0:00:55.210,0:00:58.870
+Well, this is what's called
+an Expectiminimax tree.
+
+0:00:58.870,0:01:01.780
+And what you do is, each node basically
+does the same recursion
+
+0:01:01.780,0:01:02.630
+we've had before.
+
+0:01:02.630,0:01:06.185
+Max nodes max over their children, min
+nodes min over their children, and x
+
+0:01:06.185,0:01:08.110
+nodes x over their children.
+
+0:01:08.110,0:01:10.370
+The backgammon case is actually
+pretty interesting.
+
+0:01:10.370,0:01:14.320
+Because you're rolling dice, the
+branching factor explodes.
+
+0:01:14.320,0:01:17.550
+There's all these possible outcomes for
+the dice, and that means that even
+
+0:01:17.550,0:01:20.400
+if you only go down to depth 2, you
+already have a huge number of
+
+0:01:20.400,0:01:23.650
+outcomes, because not only do you have
+a lot of moves available to you, but
+
+0:01:23.650,0:01:25.980
+the dice kind of do their thing.
+
+0:01:25.980,0:01:29.130
+What this means is a game like this,
+where it's not just you and the
+
+0:01:29.130,0:01:33.190
+opponent moving, but also some element
+of chance with many values, it's
+
+0:01:33.190,0:01:36.340
+really hard to go very
+deep into the tree.
+
+0:01:36.340,0:01:40.230
+So the usefulness of a depth-based
+search is really, really low, because
+
+0:01:40.230,0:01:42.850
+you can't go very far into the future.
+
+0:01:42.850,0:01:47.210
+On the other hand, the probability of
+reaching any particular node is low.
+
+0:01:47.210,0:01:50.250
+No matter what your plan is, you can't
+really guarantee you're going to have
+
+0:01:50.250,0:01:53.590
+one outcome or another, because the
+dice are largely in control.
+
+0:01:53.590,0:01:57.830
+And that means that limiting depth
+is actually less damaging.
+
+0:01:57.830,0:02:02.360
+There's a historic example here, a
+very historic AI called TDGammon,
+
+0:02:02.360,0:02:06.160
+which used only a depth-2 search, which
+is actually already a lot of
+
+0:02:06.160,0:02:11.330
+computation for backgammon, and a very
+good evaluation function that was
+
+0:02:11.330,0:02:13.960
+tuned through reinforcement learning,
+which we'll talk about
+
+0:02:13.960,0:02:15.480
+later in the course.
+
+0:02:15.480,0:02:18.470
+And this achieved world champion-level
+play in backgammon.
+
+0:02:18.470,0:02:20.810
+This was the first AI world
+champion in any game.
+
+0:02:20.810,0:02:23.670
+
+0:02:23.670,0:02:24.350
+OK.
+
+0:02:24.350,0:02:27.400
+That's the case when there are
+lots of things going on, mins
+
+0:02:27.400,0:02:29.380
+and maxes and chance.
+
+0:02:29.380,0:02:33.340
+A very important general case that we
+haven't talked about is what happens
+
+0:02:33.340,0:02:37.870
+if the game isn't zero-sum, or
+there are multiple players?
+
+0:02:37.870,0:02:41.810
+And this turns out to work out as a very
+nice generalization of minimax.
+
+0:02:41.810,0:02:46.580
+So what's shown here is a tree with
+three players, red, blue, and green.
+
+0:02:46.580,0:02:51.360
+And each player is simply out to
+maximize their own utility.
+
+0:02:51.360,0:02:53.750
+They may compete, they may cooperate.
+
+0:02:53.750,0:02:56.540
+And what this means is we can't get away
+with one number and think about
+
+0:02:56.540,0:02:58.260
+having a max and a min.
+
+0:02:58.260,0:03:01.310
+Everyone's a max, but they
+max their own thing.
+
+0:03:01.310,0:03:03.620
+And what that means is
+with each state--
+
+0:03:03.620,0:03:05.340
+here the terminal states are shown--
+
+0:03:05.340,0:03:09.040
+with each state, we associate not a
+single utility, but we have to keep
+
+0:03:09.040,0:03:14.020
+track of how much that state is worth
+to each of the possible players.
+
+0:03:14.020,0:03:18.540
+So for example, if we look down here in
+the left, what we would do is you
+
+0:03:18.540,0:03:19.210
+would say, all right.
+
+0:03:19.210,0:03:22.010
+At this green node here, what happens?
+
+0:03:22.010,0:03:24.660
+Well, green's going to look at
+these two outcomes, and it's
+
+0:03:24.660,0:03:25.570
+going to say, all right.
+
+0:03:25.570,0:03:28.720
+I have a choice of something that's
+worth 6 to me and something that's
+
+0:03:28.720,0:03:29.920
+worth 2 to me.
+
+0:03:29.920,0:03:31.250
+What am I going to do?
+
+0:03:31.250,0:03:32.820
+I'm going to pick the
+one that's worth 6.
+
+0:03:32.820,0:03:38.920
+So here this state is worth 1,
+6, 6 to those opponents.
+
+0:03:38.920,0:03:42.030
+Now we chose it because it was
+worth 6 to me, and you know,
+
+0:03:42.030,0:03:43.580
+blue's pretty happy.
+
+0:03:43.580,0:03:45.100
+We didn't set out to make blue happy.
+
+0:03:45.100,0:03:48.080
+It just kind of happened because
+blue and green want the same
+
+0:03:48.080,0:03:49.630
+thing at this node.
+
+0:03:49.630,0:03:50.770
+Red's unhappy.
+
+0:03:50.770,0:03:53.880
+So in some sense, our behavior actually
+shows that we're competing
+
+0:03:53.880,0:03:57.270
+with red, but we're not doing
+it, really, to make red sad.
+
+0:03:57.270,0:03:58.850
+We're doing it to make
+ourselves happy.
+
+0:03:58.850,0:04:01.270
+The actual numbers in the utility
+function suggest that we're
+
+0:04:01.270,0:04:03.070
+adversaries.
+
+0:04:03.070,0:04:07.110
+Now what's nice about this is it gives
+rise to coordination and cooperation
+
+0:04:07.110,0:04:10.980
+in a very sophisticated
+and elegant way.
+
+0:04:10.980,0:04:13.650
+And so down here on the left part
+of the tree, if you look at the
+
+0:04:13.650,0:04:17.120
+utilities, you see that green and blue
+are basically aligned, and you could
+
+0:04:17.120,0:04:18.850
+imagine that they're teaming up here.
+
+0:04:18.850,0:04:21.790
+And in fact, the actions they take
+will tend to support each other,
+
+0:04:21.790,0:04:25.200
+because that's what the utilities say
+to do when they do their reasoning.
+
+0:04:25.200,0:04:28.720
+On the other half of the tree, if you
+actually look down here, green and
+
+0:04:28.720,0:04:30.530
+blue have pretty opposite utilities.
+
+0:04:30.530,0:04:33.290
+So up here, they're going
+to have more competes.
+
+0:04:33.290,0:04:37.370
+And this notion of competing and
+cooperation are just extremes of the
+
+0:04:37.370,0:04:40.740
+kinds of behaviors that emerge naturally
+from these kinds of trees,
+
+0:04:40.740,0:04:42.060
+and that's pretty cool.
+
+0:04:42.060,0:04:46.160
+That's a case of complex behavior
+emerging from a very simple
+
+0:04:46.160,0:04:47.410
+computation.
+
+0:04:47.410,0:04:48.333
+

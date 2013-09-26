@@ -1,0 +1,1153 @@
+0:00:00.000,0:00:01.380
+
+0:00:01.380,0:00:03.110
+DAN KLEIN: All right,
+what are we doing?
+
+0:00:03.110,0:00:05.720
+We got estimates of the
+values of each state.
+
+0:00:05.720,0:00:06.880
+So we've got a table.
+
+0:00:06.880,0:00:09.880
+Each one has a number, which is our
+estimate of the score you will get
+
+0:00:09.880,0:00:12.040
+from that state going forward.
+
+0:00:12.040,0:00:16.810
+What we'd like to do is we'd like to
+make them better by replacing each one
+
+0:00:16.810,0:00:21.280
+with an average of what you'd get in
+the next time step plus the current
+
+0:00:21.280,0:00:22.970
+approximation in the future.
+
+0:00:22.970,0:00:26.400
+That's this Bellman update equation
+that's written here.
+
+0:00:26.400,0:00:29.910
+What we'd like to do is we'd like to
+take that average of our outcomes s
+
+0:00:29.910,0:00:33.260
+prime without knowing how
+likely each s prime is.
+
+0:00:33.260,0:00:35.970
+So what we're going to do is we're going
+to take samples of outcomes.
+
+0:00:35.970,0:00:38.280
+How can we get a sample for s prime?
+
+0:00:38.280,0:00:42.950
+How can we get a sample of what happens
+if you take action pi of s
+
+0:00:42.950,0:00:44.270
+from state s?
+
+0:00:44.270,0:00:46.050
+There's only one way
+to get that sample.
+
+0:00:46.050,0:00:51.370
+Wait until you find yourself in state s,
+do pi of s, and carefully watch the
+
+0:00:51.370,0:00:53.000
+result and record it.
+
+0:00:53.000,0:00:54.660
+You have to do the action.
+
+0:00:54.660,0:00:58.000
+And every time you do the action, the
+environment is nice enough to hand you
+
+0:00:58.000,0:01:01.660
+a sample back, which is one
+of the possible outcomes.
+
+0:01:01.660,0:01:05.489
+So it looks like this in the equation
+that we have and in the diagram that
+
+0:01:05.489,0:01:06.710
+I've been drawing.
+
+0:01:06.710,0:01:08.600
+You have one action that you
+know you're going to take.
+
+0:01:08.600,0:01:10.600
+And you have many s primes
+that can happen.
+
+0:01:10.600,0:01:13.870
+Of course, when you actually take
+the action, only one of
+
+0:01:13.870,0:01:14.880
+those things happens.
+
+0:01:14.880,0:01:16.880
+Let's call it s1 prime.
+
+0:01:16.880,0:01:22.180
+If I'm in state s and I take this
+action, pi of s, and s1 prime happens,
+
+0:01:22.180,0:01:27.710
+now I have an estimate of what my
+score is going to be from s.
+
+0:01:27.710,0:01:31.730
+It's going to be the reward I just got,
+this instantaneous reward here,
+
+0:01:31.730,0:01:35.880
+plus the discounted future
+from the landing state.
+
+0:01:35.880,0:01:37.360
+Well what's the reward I just got?
+
+0:01:37.360,0:01:38.690
+I just got it, right?
+
+0:01:38.690,0:01:39.940
+So I know that number.
+
+0:01:39.940,0:01:41.930
+What's the discounted future value?
+
+0:01:41.930,0:01:44.470
+It's somewhere else in the table
+that I'm maintaining.
+
+0:01:44.470,0:01:45.310
+And it's wrong.
+
+0:01:45.310,0:01:48.160
+But it's just been discounted
+by gamma, so who cares.
+
+0:01:48.160,0:01:51.260
+Now of course, one sample is
+not the same as an average.
+
+0:01:51.260,0:01:52.940
+I need more samples.
+
+0:01:52.940,0:01:57.740
+I need sample 2, I need sample 3, and
+so on all the way up to sample n.
+
+0:01:57.740,0:02:00.970
+Now what would happen if I have
+lots of samples from this
+
+0:02:00.970,0:02:02.350
+same state and action?
+
+0:02:02.350,0:02:07.170
+And for each of these samples I saw
+various outcomes s prime, each one had
+
+0:02:07.170,0:02:10.669
+a reward, and a discounted
+approximate future?
+
+0:02:10.669,0:02:12.110
+What would I do?
+
+0:02:12.110,0:02:16.270
+Well I'd say, really, the most informed
+thing I can say about the
+
+0:02:16.270,0:02:21.180
+state s is that, on average, I'm going
+to get the average of these samples.
+
+0:02:21.180,0:02:25.220
+So I could write down that, on average,
+I get 1/n times the sum of
+
+0:02:25.220,0:02:27.150
+the end samples.
+
+0:02:27.150,0:02:28.610
+We're almost there.
+
+0:02:28.610,0:02:32.010
+If we could do this, we would be,
+essentially, executing the policy
+
+0:02:32.010,0:02:33.190
+evaluation update.
+
+0:02:33.190,0:02:38.680
+We'd be taking that average according
+to T, without knowing T. So it's
+
+0:02:38.680,0:02:42.950
+correct insofar as, with enough samples,
+this implements that update.
+
+0:02:42.950,0:02:44.930
+There's something really wrong
+with this algorithm.
+
+0:02:44.930,0:02:46.940
+What's really wrong with
+this algorithm?
+
+0:02:46.940,0:02:48.940
+How did we get our first sample?
+
+0:02:48.940,0:02:52.320
+We got our first sample by finding
+ourselves in state s and
+
+0:02:52.320,0:02:53.810
+taking the action pi.
+
+0:02:53.810,0:02:57.310
+You can't get your second sample,
+until you're back in state s.
+
+0:02:57.310,0:02:58.850
+Well, how do you do that?
+
+0:02:58.850,0:02:59.580
+Well, you don't know.
+
+0:02:59.580,0:03:00.200
+You don't know what's going on.
+
+0:03:00.200,0:03:01.080
+This is reinforcement learning.
+
+0:03:01.080,0:03:02.310
+You don't even know what
+your actions do.
+
+0:03:02.310,0:03:04.300
+How are you going to get
+back to state s?
+
+0:03:04.300,0:03:05.970
+So you kind of can't do this.
+
+0:03:05.970,0:03:09.820
+Maybe someday you'll be in s again, but
+you can't just keep executing the
+
+0:03:09.820,0:03:11.250
+same action from the same state.
+
+0:03:11.250,0:03:14.520
+Maybe, if you could rewind
+time, you could do it.
+
+0:03:14.520,0:03:17.970
+You execute the action, rewind
+back, and then try again.
+
+0:03:17.970,0:03:20.160
+But you can't do that, right?
+
+0:03:20.160,0:03:23.040
+If you had a crystal ball, maybe
+you could do it going forward.
+
+0:03:23.040,0:03:24.380
+But you can't do that either.
+
+0:03:24.380,0:03:25.580
+So what do we need to do?
+
+0:03:25.580,0:03:29.520
+We need to somehow be satisfied
+with the one sample we get.
+
+0:03:29.520,0:03:31.810
+Because once we get that sample,
+we're off in some other state.
+
+0:03:31.810,0:03:36.380
+And who knows if we'll ever
+be back to state s.
+
+0:03:36.380,0:03:39.880
+So that's the big idea in temporal
+difference learning.
+
+0:03:39.880,0:03:43.040
+In temporal difference learning,
+we learn from every experience.
+
+0:03:43.040,0:03:47.160
+Every time we undergo a transition
+from some state s to some state s
+
+0:03:47.160,0:03:50.120
+prime, we're going to
+update our values.
+
+0:03:50.120,0:03:53.370
+And it's gong to be a little tricky,
+because we only get one sample of what
+
+0:03:53.370,0:03:54.760
+might have happened.
+
+0:03:54.760,0:03:57.840
+So we need to somehow make
+sure that, over time, we
+
+0:03:57.840,0:03:59.895
+accumulate the right averages.
+
+0:03:59.895,0:04:01.720
+But right now, we've got one sample.
+
+0:04:01.720,0:04:04.490
+We've got to incorporate
+it and move on.
+
+0:04:04.490,0:04:07.360
+The reason this is called temporal
+difference learning is because we
+
+0:04:07.360,0:04:12.710
+compare our current estimate of a
+value with what we actually see.
+
+0:04:12.710,0:04:14.850
+All right, so let's take a
+look at how this works.
+
+0:04:14.850,0:04:16.820
+And then we'll see it in a demo.
+
+0:04:16.820,0:04:20.620
+We're doing temporal difference
+learning right now of values.
+
+0:04:20.620,0:04:22.370
+So the policy is still
+going to be fixed.
+
+0:04:22.370,0:04:23.920
+We're still evaluating this policy.
+
+0:04:23.920,0:04:26.120
+We're still not worrying about
+how to choose actions.
+
+0:04:26.120,0:04:27.640
+That will come later.
+
+0:04:27.640,0:04:31.540
+The idea is we're going to move the
+values towards whatever we actually
+
+0:04:31.540,0:04:33.060
+see happen.
+
+0:04:33.060,0:04:37.120
+It's going to be some kind of running
+average, but we've got to be careful.
+
+0:04:37.120,0:04:38.790
+So here's the idea.
+
+0:04:38.790,0:04:41.220
+We imagine we were at state s.
+
+0:04:41.220,0:04:45.610
+Well, before we took any action, we had
+some estimate of how good it was
+
+0:04:45.610,0:04:48.700
+that encapsulates all of
+our knowledge to date.
+
+0:04:48.700,0:04:50.650
+So we've got some estimate V of s.
+
+0:04:50.650,0:04:54.380
+It's not correct, but it's
+an approximation.
+
+0:04:54.380,0:04:56.220
+From s, we take an action.
+
+0:04:56.220,0:04:57.810
+In this case, we do what pi tells us.
+
+0:04:57.810,0:05:01.890
+And we land in some particular
+sample outcome s prime.
+
+0:05:01.890,0:05:04.920
+So we get one of the many possible
+outcomes of our actions.
+
+0:05:04.920,0:05:09.640
+We get the reward that's associated with
+it, that's R. And then we get put
+
+0:05:09.640,0:05:12.910
+in a state s prime for which
+we have an estimated future
+
+0:05:12.910,0:05:15.550
+utility from s prime.
+
+0:05:15.550,0:05:19.020
+So on one hand, we think we're
+going to get V of s.
+
+0:05:19.020,0:05:21.370
+That's what our past experiences
+has told us.
+
+0:05:21.370,0:05:25.690
+On the other hand, this particular time,
+it looks like we're on track to
+
+0:05:25.690,0:05:27.140
+get this sample.
+
+0:05:27.140,0:05:30.030
+It looks like we're on track to
+get the instantaneous reward
+
+0:05:30.030,0:05:32.770
+plus V pi of s prime.
+
+0:05:32.770,0:05:33.670
+So what do we do?
+
+0:05:33.670,0:05:37.250
+We've got our old experiences
+all summarized in our value.
+
+0:05:37.250,0:05:40.870
+But then we have this new experience we
+need to incorporate, which includes
+
+0:05:40.870,0:05:44.520
+a real reward, R, and then an
+approximation that's been discounted
+
+0:05:44.520,0:05:45.790
+into the future.
+
+0:05:45.790,0:05:48.660
+So how do we take the average
+of one thing?
+
+0:05:48.660,0:05:53.160
+What we do is we keep around our
+old value with some weight.
+
+0:05:53.160,0:05:55.310
+And we average in the new
+thing with some weight.
+
+0:05:55.310,0:05:57.000
+So we interpolate.
+
+0:05:57.000,0:05:59.870
+There's going to be some value, alpha,
+called the learning rate.
+
+0:05:59.870,0:06:01.090
+Alpha is usually small.
+
+0:06:01.090,0:06:03.310
+You can imagine it's like
+0.1 or something like
+
+0:06:03.310,0:06:05.340
+that, maybe even smaller.
+
+0:06:05.340,0:06:10.210
+And every time we get a sample of the
+new value, which is a reward plus a
+
+0:06:10.210,0:06:14.640
+discounted future, we average it
+in by interpolating it with
+
+0:06:14.640,0:06:16.730
+the old value estimate.
+
+0:06:16.730,0:06:20.660
+So we mostly keep around our old
+information, but we roll in a tiny bit
+
+0:06:20.660,0:06:21.890
+of this new information.
+
+0:06:21.890,0:06:25.660
+And if we ever come back to here again,
+we'll roll something else in.
+
+0:06:25.660,0:06:27.920
+And we'll end up with a kind
+of running average.
+
+0:06:27.920,0:06:30.830
+So an important question here
+is why we use alpha.
+
+0:06:30.830,0:06:34.730
+Why don't we keep track of every
+experience we've ever had?
+
+0:06:34.730,0:06:39.060
+If we really, really wanted an even
+average, that would be a way to
+
+0:06:39.060,0:06:39.990
+achieve it.
+
+0:06:39.990,0:06:43.970
+It turns out this is not only easier,
+but it's in fact better.
+
+0:06:43.970,0:06:45.850
+We'll see why in a second.
+
+0:06:45.850,0:06:47.560
+Here's one way of writing the update.
+
+0:06:47.560,0:06:49.630
+It says, I have my current estimate.
+
+0:06:49.630,0:06:53.520
+I have my sample, which alone is noisy,
+but which is good because it
+
+0:06:53.520,0:06:55.020
+represents an experience.
+
+0:06:55.020,0:06:58.100
+And I'm going to average them together
+by interpolation where most of the
+
+0:06:58.100,0:07:00.380
+weight is on the old experience.
+
+0:07:00.380,0:07:04.630
+I can also write that by just algebraic
+manipulation like this.
+
+0:07:04.630,0:07:07.630
+And this is another useful way of
+thinking about this update.
+
+0:07:07.630,0:07:13.540
+It says, take your value and add to it
+alpha times the difference between
+
+0:07:13.540,0:07:17.160
+what you thought would happen
+and what actually did.
+
+0:07:17.160,0:07:18.950
+You can think of that as an error.
+
+0:07:18.950,0:07:23.110
+And this says, whenever you see an error
+in your estimates, adjust your
+
+0:07:23.110,0:07:27.210
+estimate in the direction of the error
+by some small step size alpha.
+
+0:07:27.210,0:07:29.390
+Why not step size 1?
+
+0:07:29.390,0:07:31.960
+Well, because then we wouldn't be
+balancing all of our different
+
+0:07:31.960,0:07:32.570
+experiences.
+
+0:07:32.570,0:07:33.690
+So there's a trade-off.
+
+0:07:33.690,0:07:35.240
+Larger alphas learn faster.
+
+0:07:35.240,0:07:39.830
+Smaller alphas do a better job of
+balancing across experiences.
+
+0:07:39.830,0:07:41.860
+OK, let's see a demo of that.
+
+0:07:41.860,0:07:43.110
+Here's a grid world.
+
+0:07:43.110,0:07:45.640
+In this grid world, we are
+about to do temporal
+
+0:07:45.640,0:07:47.450
+difference learning of values.
+
+0:07:47.450,0:07:49.990
+Remember, that means we keep
+a big table of values.
+
+0:07:49.990,0:07:50.480
+And guess what?
+
+0:07:50.480,0:07:52.920
+They all start off with zero, because
+we have no idea what's going on in
+
+0:07:52.920,0:07:53.940
+this grid world.
+
+0:07:53.940,0:07:56.030
+The blue dot represents the agent.
+
+0:07:56.030,0:07:57.490
+And I'm going to issue commands.
+
+0:07:57.490,0:08:00.530
+And the agent will then
+watch what happens.
+
+0:08:00.530,0:08:02.060
+So I'm going to try to go north.
+
+0:08:02.060,0:08:03.300
+I went north.
+
+0:08:03.300,0:08:07.130
+In this version, the living reward is
+set to zero, so that we can see how
+
+0:08:07.130,0:08:09.450
+the exit rewards propagate.
+
+0:08:09.450,0:08:13.480
+In this case, no update happened,
+because I thought that I was going to
+
+0:08:13.480,0:08:16.900
+receive a total utility of zero
+from the start state.
+
+0:08:16.900,0:08:18.850
+I in fact received a zero.
+
+0:08:18.850,0:08:22.200
+And I landed in a state where I thought
+there was zero left to come.
+
+0:08:22.200,0:08:23.660
+So I thought I was going
+to get a zero.
+
+0:08:23.660,0:08:25.800
+I do seem to be on track to get zero.
+
+0:08:25.800,0:08:26.880
+Nothing to do.
+
+0:08:26.880,0:08:30.200
+So nothing interesting happens, until
+I receive a non-zero reward, which I
+
+0:08:30.200,0:08:35.059
+receive not when I enter this square
+here, but when I exit it.
+
+0:08:35.059,0:08:37.980
+Right now, I think I'm going to
+get a zero total future score.
+
+0:08:37.980,0:08:43.179
+When I take the exit action, I will
+in fact receive a plus 1.
+
+0:08:43.179,0:08:47.890
+And then I'll be forced to reconcile
+the plus 1 I got with the zero I
+
+0:08:47.890,0:08:49.300
+thought I was going to get.
+
+0:08:49.300,0:08:51.780
+And right now, alpha is set to 0.5.
+
+0:08:51.780,0:08:54.410
+And so the average value
+will now be 0.5.
+
+0:08:54.410,0:08:56.460
+And I update my array.
+
+0:08:56.460,0:08:57.560
+I play again.
+
+0:08:57.560,0:08:58.415
+So I go north.
+
+0:08:58.415,0:08:58.700
+Nothing happens.
+
+0:08:58.700,0:08:59.210
+Nothing happens.
+
+0:08:59.210,0:08:59.730
+Nothing happens.
+
+0:08:59.730,0:09:00.230
+Nothing happens.
+
+0:09:00.230,0:09:03.890
+All right, what happens when
+I move into this square?
+
+0:09:03.890,0:09:07.330
+From here, I'm about to move east.
+
+0:09:07.330,0:09:09.950
+I think I'm going to get
+a total score of zero.
+
+0:09:09.950,0:09:11.510
+Let's see what actually happens.
+
+0:09:11.510,0:09:13.220
+Well, I go east.
+
+0:09:13.220,0:09:15.740
+What did I receive that time step?
+
+0:09:15.740,0:09:16.480
+Zero.
+
+0:09:16.480,0:09:20.920
+But I landed in a state that looks,
+right now, to be worth 0.5.
+
+0:09:20.920,0:09:23.230
+So on one hand, I thought
+my total would be zero.
+
+0:09:23.230,0:09:27.800
+On the other hand, this experience says
+I'm going to get zero plus 0.5.
+
+0:09:27.800,0:09:28.750
+I average them.
+
+0:09:28.750,0:09:30.770
+And I get the 0.25.
+
+0:09:30.770,0:09:32.700
+Now that's going to continue
+happening.
+
+0:09:32.700,0:09:38.550
+As I exit here, that 0.5 approaches 1,
+because I'm going to get 1 every time.
+
+0:09:38.550,0:09:43.570
+And as I go through here, now, when I
+move into the next square, even though
+
+0:09:43.570,0:09:46.370
+I will receive no reward, I'll
+land in a square which looks
+
+0:09:46.370,0:09:47.890
+like it's worth 0.25.
+
+0:09:47.890,0:09:51.660
+And I'll get half of that
+as my value update.
+
+0:09:51.660,0:09:52.710
+And I'm going to execute this.
+
+0:09:52.710,0:09:57.340
+Notice that we learn about the square
+we leave because, when I leave this
+
+0:09:57.340,0:10:00.130
+square, I'm going to learn the
+my estimate of zero isn't
+
+0:10:00.130,0:10:01.430
+the best I can do.
+
+0:10:01.430,0:10:02.190
+I can do better.
+
+0:10:02.190,0:10:05.070
+I can say it's probably
+more like 0.13.
+
+0:10:05.070,0:10:08.260
+All right, so you learn about
+the state you leave, not the
+
+0:10:08.260,0:10:09.460
+state you land in.
+
+0:10:09.460,0:10:11.620
+And let me just do this a couple of
+times, so you can see the values
+
+0:10:11.620,0:10:12.870
+propagating back.
+
+0:10:12.870,0:10:15.990
+
+0:10:15.990,0:10:17.130
+All right.
+
+0:10:17.130,0:10:18.870
+Now what's the magic of this?
+
+0:10:18.870,0:10:23.550
+The magic of this is I am learning
+the values of these squares.
+
+0:10:23.550,0:10:27.550
+And they're the values under the
+policy that I'm executing.
+
+0:10:27.550,0:10:29.180
+What would happen if I went
+the other way around?
+
+0:10:29.180,0:10:33.040
+Well, that start state looks worse
+because, instead of landing in a nice
+
+0:10:33.040,0:10:35.410
+juicy 0.5, I just landed in zero.
+
+0:10:35.410,0:10:40.080
+On the other hand, when I get to here
+and I go north, even though I've never
+
+0:10:40.080,0:10:43.800
+been in this state before and this is
+my first experience with it, as soon
+
+0:10:43.800,0:10:48.000
+as I see that going north lands me at
+0.98, I know that going north is
+
+0:10:48.000,0:10:49.310
+pretty good.
+
+0:10:49.310,0:10:51.410
+And so I'll have an update.
+
+0:10:51.410,0:10:56.040
+That's exactly the effect that direct
+evaluation didn't have.
+
+0:10:56.040,0:11:00.360
+Now, of course, if I start doing dumb
+things, I'll start getting values the
+
+0:11:00.360,0:11:02.385
+reflect this now dumb policy.
+
+0:11:02.385,0:11:05.890
+
+0:11:05.890,0:11:08.520
+So we only get values that reflect
+what's actually going on.
+
+0:11:08.520,0:11:11.680
+But it does average things
+in the appropriate way.
+
+0:11:11.680,0:11:15.820
+And it does share information across
+episodes in a good way.
+
+0:11:15.820,0:11:17.030
+OK, a couple of quick points.
+
+0:11:17.030,0:11:21.360
+First of all, we're taking an
+exponential moving average here.
+
+0:11:21.360,0:11:23.060
+And that's because we're
+doing this update.
+
+0:11:23.060,0:11:28.030
+We're doing an update that says the new
+value is alpha times some Xn plus
+
+0:11:28.030,0:11:30.980
+1 minus alpha times the old value.
+
+0:11:30.980,0:11:33.490
+And you can think of this as
+averaging things together.
+
+0:11:33.490,0:11:35.660
+But of course, new things
+have more weight.
+
+0:11:35.660,0:11:39.880
+In the extreme case, when alpha is 1,
+new things have all the weight.
+
+0:11:39.880,0:11:43.200
+If we actually worked out the algebra
+and telescoped everything, we would
+
+0:11:43.200,0:11:46.610
+actually see that the form of this tells
+you that most recent samples are
+
+0:11:46.610,0:11:47.600
+more important.
+
+0:11:47.600,0:11:52.750
+So the average here is an average, but
+exponentially weighted where older
+
+0:11:52.750,0:11:53.830
+things are decayed.
+
+0:11:53.830,0:11:58.030
+And so we had a good question before,
+which is, why would we not want to
+
+0:11:58.030,0:12:01.830
+take the extra effort to make sure
+we were averaging things equally?
+
+0:12:01.830,0:12:06.610
+And the answer is, because the things
+we're averaging have two components.
+
+0:12:06.610,0:12:10.730
+They've got the instantaneous reward,
+which is absolutely correct.
+
+0:12:10.730,0:12:13.100
+And they've got an estimate
+of the future.
+
+0:12:13.100,0:12:17.600
+The next time we come back to a state,
+the estimate of the future state will
+
+0:12:17.600,0:12:19.680
+be better than it is now.
+
+0:12:19.680,0:12:23.120
+And so, more recent samples are
+actually better, because they
+
+0:12:23.120,0:12:25.280
+incorporate better estimates
+of the future.
+
+0:12:25.280,0:12:28.870
+And so there's this nice dove-tailing
+of this update that's easy to do.
+
+0:12:28.870,0:12:32.940
+It also has a nice property of
+remembering the past, but also slowly
+
+0:12:32.940,0:12:37.140
+forgetting it and down-weighting it
+as our updates become better.
+
+0:12:37.140,0:12:41.720
+In essence, the Bellman updates have
+been smeared across space and time.
+
+0:12:41.720,0:12:44.580
+We had a question about decreasing
+the learning rate.
+
+0:12:44.580,0:12:46.890
+If you decrease it, then you
+can actually converge
+
+0:12:46.890,0:12:48.510
+to the correct things.
+
+0:12:48.510,0:12:50.010
+But there's an art to decreasing it.
+
+0:12:50.010,0:12:51.740
+It can't go down too fast or too slow.
+
+0:12:51.740,0:12:54.630
+And we'll come back to
+this point later.
+
+0:12:54.630,0:12:59.380
+OK, so we just saw a method of learning
+the values of every state
+
+0:12:59.380,0:13:04.030
+under a policy that's executing, just
+by watching the outcomes of every
+
+0:13:04.030,0:13:06.000
+transition.
+
+0:13:06.000,0:13:06.630
+This is great.
+
+0:13:06.630,0:13:09.550
+It's a model-free way of doing
+policy evaluation.
+
+0:13:09.550,0:13:14.410
+We end up doing the Bellman updates, in
+effect, taking those averages that
+
+0:13:14.410,0:13:16.910
+were hard to take without
+the transition function.
+
+0:13:16.910,0:13:19.760
+And we do it without ever computing
+a transition function.
+
+0:13:19.760,0:13:22.390
+We just let the sample frequencies
+speak for themselves.
+
+0:13:22.390,0:13:23.230
+So that's great.
+
+0:13:23.230,0:13:25.230
+It did what we wanted.
+
+0:13:25.230,0:13:28.830
+But it's not going to work for
+the general problem of active
+
+0:13:28.830,0:13:33.240
+reinforcement learning where we
+want to not only evaluate,
+
+0:13:33.240,0:13:35.490
+but also choose actions.
+
+0:13:35.490,0:13:36.980
+Why is that?
+
+0:13:36.980,0:13:39.180
+Well, let's imagine we've
+run this thing.
+
+0:13:39.180,0:13:41.910
+And we've got this big table
+of state values.
+
+0:13:41.910,0:13:44.820
+For every state, I can tell you,
+according to the policy we've been
+
+0:13:44.820,0:13:48.810
+running, it's worth seven points
+in total and so on.
+
+0:13:48.810,0:13:52.630
+The problem is, if we want to turn
+those values into a policy--
+
+0:13:52.630,0:13:55.920
+and in particular, we'll want to turn
+them into a new policy which is,
+
+0:13:55.920,0:13:57.760
+hopefully, better than
+the old policy--
+
+0:13:57.760,0:13:59.600
+now we're sunk.
+
+0:13:59.600,0:14:04.470
+And the reason why we're sunk is we
+know how to produce a policy from
+
+0:14:04.470,0:14:08.470
+values, but it involves one
+step of expect-a-max.
+
+0:14:08.470,0:14:13.500
+We would say the policy is whatever
+action achieved the largest Q-value
+
+0:14:13.500,0:14:15.050
+for that state.
+
+0:14:15.050,0:14:18.960
+But of course, those Q-values involve
+an average of their outcomes.
+
+0:14:18.960,0:14:22.790
+And we can't do that because, again,
+we don't have T and R.
+
+0:14:22.790,0:14:26.540
+The key idea here is that, if we want
+to be able to do action selection as
+
+0:14:26.540,0:14:30.620
+well, we should be learning not
+just the values as we have
+
+0:14:30.620,0:14:32.570
+been, but the Q-values.
+
+0:14:32.570,0:14:37.420
+And in fact, this is why we even have
+a notion of Q-values in this course.
+
+0:14:37.420,0:14:41.510
+They're critical for choosing actions
+in reinforcement learning.
+
+0:14:41.510,0:14:46.920
+This idea of learning Q-values makes
+action selection model-free as well,
+
+0:14:46.920,0:14:49.650
+because we just look at the Q-values
+and choose whichever one's best.
+
+0:14:49.650,0:14:50.933
+

@@ -1,0 +1,1032 @@
+0:00:00.000,0:00:01.560
+
+0:00:01.560,0:00:03.460
+PROFESSOR: So what about
+utilities in humans?
+
+0:00:03.460,0:00:06.670
+We say there is a utility function that
+can capture all of your rich and
+
+0:00:06.670,0:00:07.900
+nuanced preferences.
+
+0:00:07.900,0:00:09.350
+What is that utility function?
+
+0:00:09.350,0:00:10.380
+How would I get it?
+
+0:00:10.380,0:00:15.430
+How would I figure out that the value
+you associate with Thai food is 3.7?
+
+0:00:15.430,0:00:17.830
+First, we need a utility scale.
+
+0:00:17.830,0:00:20.720
+Often people work with what are called
+normalized utilities, where the best
+
+0:00:20.720,0:00:23.540
+you can get is 1 and the worst
+you can get a zero.
+
+0:00:23.540,0:00:27.630
+But there's a lot of scales people use
+that are adjusted for both reasoning
+
+0:00:27.630,0:00:31.620
+about certain scenarios and also for
+elicitation in those scenarios.
+
+0:00:31.620,0:00:35.280
+So for example, a lot of these utility
+scales are actually kind of morbid,
+
+0:00:35.280,0:00:38.140
+because a lot of the times, by the
+time you're dredging up numerical
+
+0:00:38.140,0:00:41.990
+computations of utilities with humans,
+you're actually talking about very,
+
+0:00:41.990,0:00:45.670
+very difficult decisions that are hard
+because there are very serious
+
+0:00:45.670,0:00:46.980
+consequences.
+
+0:00:46.980,0:00:50.090
+So for example, there's the micromort.
+
+0:00:50.090,0:00:52.330
+The micromort is a one-millionth
+chance of death.
+
+0:00:52.330,0:00:54.220
+I told you this would be morbid.
+
+0:00:54.220,0:00:55.100
+Why is this useful?
+
+0:00:55.100,0:00:58.510
+This is useful because you have to
+reason about things like, should we
+
+0:00:58.510,0:01:00.030
+recall a product?
+
+0:01:00.030,0:01:02.540
+And you want to think about, what are
+the risks and what are the rewards in
+
+0:01:02.540,0:01:04.690
+each scenario and what are
+the probabilities?
+
+0:01:04.690,0:01:05.970
+You need to put these
+things on a scale.
+
+0:01:05.970,0:01:08.780
+And when you're talking about things
+like product safety, often you really
+
+0:01:08.780,0:01:10.620
+are talking about chance of death.
+
+0:01:10.620,0:01:12.380
+And so that's your utility scale.
+
+0:01:12.380,0:01:14.220
+It's not the only one.
+
+0:01:14.220,0:01:16.560
+A lot of the others are also
+morbid but important.
+
+0:01:16.560,0:01:19.040
+So for example, medical reasoning
+is often done in
+
+0:01:19.040,0:01:20.760
+quality-adjusted life years.
+
+0:01:20.760,0:01:23.410
+Unlike a product risk where the danger
+is somebody is going to die and you're
+
+0:01:23.410,0:01:26.860
+looking aggregate safety, now you're
+looking at an individual person and
+
+0:01:26.860,0:01:30.470
+trying to think about balancing the
+fact both that a medical procedure
+
+0:01:30.470,0:01:33.600
+might change the duration of your
+life and also the quality.
+
+0:01:33.600,0:01:37.390
+And so you try to put your utility
+function in a setting where this is
+
+0:01:37.390,0:01:41.560
+captured in as transparent
+a way as possible.
+
+0:01:41.560,0:01:45.000
+The reason why we can have these
+different scales is that behavior is
+
+0:01:45.000,0:01:48.240
+going to be invariant under any positive
+linear transformation.
+
+0:01:48.240,0:01:49.980
+Of course, if you invert the
+sine of the utilities, the
+
+0:01:49.980,0:01:51.220
+behavior is going to change.
+
+0:01:51.220,0:01:54.190
+And we saw earlier that if you square
+them, the behavior will change.
+
+0:01:54.190,0:01:57.430
+But positive linear transformations
+are safe.
+
+0:01:57.430,0:02:00.440
+If all you had when you tried to figure
+out people's utilities was
+
+0:02:00.440,0:02:02.950
+prize choices, if I just went to you
+and say, do you like chocolate or
+
+0:02:02.950,0:02:07.020
+strawberry, then I can get a certain
+degree down the road.
+
+0:02:07.020,0:02:11.570
+I could figure out enough, for
+example, to do minimax.
+
+0:02:11.570,0:02:15.440
+But if I actually want to figure out
+your rich and nuanced preferences, I
+
+0:02:15.440,0:02:18.830
+need to ask you questions
+about lotteries.
+
+0:02:18.830,0:02:22.510
+So how do we actually figure out what
+these numbers are that encode a
+
+0:02:22.510,0:02:23.630
+human's utility?
+
+0:02:23.630,0:02:25.550
+It's really, really hard.
+
+0:02:25.550,0:02:28.240
+So the standard approach
+to assessing utility--
+
+0:02:28.240,0:02:30.340
+it's often called eliciting
+utilities--
+
+0:02:30.340,0:02:32.770
+looks something like this.
+
+0:02:32.770,0:02:36.010
+You take your human and you ask them
+questions about various things.
+
+0:02:36.010,0:02:38.060
+And they get to describe
+their preferences.
+
+0:02:38.060,0:02:39.560
+Remember, that's fundamental.
+
+0:02:39.560,0:02:42.550
+You elicit preferences and then you can
+figure out what the utilities are
+
+0:02:42.550,0:02:44.720
+that encode those preferences.
+
+0:02:44.720,0:02:49.120
+So what you do is you compare some prize
+whose utility you care about to
+
+0:02:49.120,0:02:52.020
+a standard lottery which is between
+something really good and something
+
+0:02:52.020,0:02:53.140
+really bad.
+
+0:02:53.140,0:02:57.890
+And you slide the probability until
+the human becomes indifferent.
+
+0:02:57.890,0:03:01.010
+Wherever that probability lands gives
+you a way of figuring out what the
+
+0:03:01.010,0:03:02.560
+utility is.
+
+0:03:02.560,0:03:05.390
+For example, paying $30.
+
+0:03:05.390,0:03:07.440
+Do you want to pay $30?
+
+0:03:07.440,0:03:08.680
+Probably not.
+
+0:03:08.680,0:03:09.140
+OK.
+
+0:03:09.140,0:03:12.350
+So what exactly is the utility
+we should associate with
+
+0:03:12.350,0:03:14.520
+this mildly bad thing?
+
+0:03:14.520,0:03:16.810
+Well, what I do is I
+pull out a lottery.
+
+0:03:16.810,0:03:20.530
+So I say, all right, let's figure out
+just exactly how much you don't want
+
+0:03:20.530,0:03:22.300
+to pay $30.
+
+0:03:22.300,0:03:26.170
+Well, you're going to have a
+lottery between no change--
+
+0:03:26.170,0:03:29.020
+we're just kidding, you don't
+have to pay the $30.
+
+0:03:29.020,0:03:30.855
+That's better than paying $30.
+
+0:03:30.855,0:03:33.560
+On the other hand, you
+have instant death.
+
+0:03:33.560,0:03:36.730
+That's worse than paying $30.
+
+0:03:36.730,0:03:39.510
+And so what we do is we fiddle
+with the probabilities.
+
+0:03:39.510,0:03:42.830
+And once we find that magic probability
+that tells you that you're
+
+0:03:42.830,0:03:46.790
+indifferent, well, now we have some
+sense of how bad this $30 payment is.
+
+0:03:46.790,0:03:50.920
+You know, for most people it's small.
+
+0:03:50.920,0:03:52.890
+It's a micromort.
+
+0:03:52.890,0:03:57.200
+If pay $30 was really bad, it was pay $3
+million, be in debt for the rest of
+
+0:03:57.200,0:03:59.780
+your life, you'd probably get
+slightly different numbers.
+
+0:03:59.780,0:04:02.560
+And that reflects the fact that the
+utilities of things are going to
+
+0:04:02.560,0:04:07.000
+depend not just on the prizes in the
+lottery, but the probabilities with
+
+0:04:07.000,0:04:09.910
+which you mix them.
+
+0:04:09.910,0:04:10.920
+How about money?
+
+0:04:10.920,0:04:13.580
+As soon as we talk about utilities,
+people think, OK, well, let's encode
+
+0:04:13.580,0:04:15.500
+everything in dollars.
+
+0:04:15.500,0:04:19.000
+Money, it turns out, does not behave
+as a utility function.
+
+0:04:19.000,0:04:21.470
+But of course, we can talk about
+the utility of having money.
+
+0:04:21.470,0:04:23.210
+In fact, we just did.
+
+0:04:23.210,0:04:25.520
+So how do we think about money
+in the context of utility?
+
+0:04:25.520,0:04:26.960
+Money certainly has utility.
+
+0:04:26.960,0:04:28.730
+But it's not a good utility scale.
+
+0:04:28.730,0:04:29.330
+Why not?
+
+0:04:29.330,0:04:31.090
+How do we think about these things?
+
+0:04:31.090,0:04:32.940
+Let's imagine a lottery.
+
+0:04:32.940,0:04:36.580
+This lottery, you're either going
+to get X dollars or Y dollars.
+
+0:04:36.580,0:04:39.580
+And you get X dollars with probability
+p, and Y dollars with the remaining
+
+0:04:39.580,0:04:41.180
+probability.
+
+0:04:41.180,0:04:42.520
+So this is some lottery.
+
+0:04:42.520,0:04:46.170
+Obviously, how good this thing
+is depends on X, Y, and p.
+
+0:04:46.170,0:04:52.950
+Its expected monetary value is simply
+the average of the dollar amounts.
+
+0:04:52.950,0:04:54.750
+I haven't said anything
+about utilities here.
+
+0:04:54.750,0:04:57.500
+I'm just saying there are two dollar
+amounts, a probability, and I can
+
+0:04:57.500,0:05:00.860
+compute the average monetary
+value here.
+
+0:05:00.860,0:05:03.810
+This lottery also has a utility.
+
+0:05:03.810,0:05:07.500
+And we know, because of how utility
+functions work, its utility isn't the
+
+0:05:07.500,0:05:11.510
+average of the utility of X dollars
+and the utility of Y dollars.
+
+0:05:11.510,0:05:15.830
+It is typically the case, though not
+always, that the utility of a lottery
+
+0:05:15.830,0:05:19.820
+over money is worth less
+than the utility of its
+
+0:05:19.820,0:05:23.030
+expected monetary value.
+
+0:05:23.030,0:05:28.890
+In this sense, people are basically
+risk-averse when it comes to money.
+
+0:05:28.890,0:05:29.550
+That's what this means.
+
+0:05:29.550,0:05:35.670
+You'd rather have the smaller value of a
+sure thing than the lottery that has
+
+0:05:35.670,0:05:38.860
+a higher expected monetary value.
+
+0:05:38.860,0:05:42.220
+And when people are in debt,
+they tend to be risk-prone.
+
+0:05:42.220,0:05:43.690
+Why?
+
+0:05:43.690,0:05:44.725
+You might think, OK, well, wait.
+
+0:05:44.725,0:05:46.520
+But some people are more risk-averse
+than others.
+
+0:05:46.520,0:05:47.620
+That's certainly true.
+
+0:05:47.620,0:05:49.130
+But let's think about it.
+
+0:05:49.130,0:05:50.490
+What does this graph look like?
+
+0:05:50.490,0:05:51.670
+You've got money here.
+
+0:05:51.670,0:05:52.880
+So this is the amount of dollars.
+
+0:05:52.880,0:05:54.520
+And you've got utility here.
+
+0:05:54.520,0:05:56.620
+So this is the amount of utility.
+
+0:05:56.620,0:05:58.340
+Let's say this is zero dollars.
+
+0:05:58.340,0:06:00.805
+Well, how many of you would
+like a million dollars?
+
+0:06:00.805,0:06:02.610
+A million dollars is good.
+
+0:06:02.610,0:06:04.700
+It's a little weird that you didn't
+all raise your hands.
+
+0:06:04.700,0:06:06.130
+But a million dollars is pretty good.
+
+0:06:06.130,0:06:09.620
+It would make a pretty big change in
+the quality of most people's lives,
+
+0:06:09.620,0:06:11.310
+big gain in utility.
+
+0:06:11.310,0:06:13.190
+Would you like a billion dollars?
+
+0:06:13.190,0:06:13.460
+Yes.
+
+0:06:13.460,0:06:15.330
+You would like that more than
+a million dollars, please.
+
+0:06:15.330,0:06:17.520
+Let's say I gave you
+a billion dollars.
+
+0:06:17.520,0:06:20.070
+Now how much do you want
+a million dollars?
+
+0:06:20.070,0:06:21.580
+Oh, whatever.
+
+0:06:21.580,0:06:24.060
+A million dollars on top of a
+billion is not so important.
+
+0:06:24.060,0:06:25.970
+And that means there's
+diminishing returns.
+
+0:06:25.970,0:06:31.530
+So in terms of your utility, it
+looks something like this.
+
+0:06:31.530,0:06:35.030
+At the beginning, wherever you
+are, adding money is good.
+
+0:06:35.030,0:06:38.250
+Presumably more money stays better
+for a typical person.
+
+0:06:38.250,0:06:40.200
+But it has to level off.
+
+0:06:40.200,0:06:42.790
+I'm told that after your first trillion
+dollars, the second trillion
+
+0:06:42.790,0:06:44.880
+is of limited utility.
+
+0:06:44.880,0:06:47.020
+Now what happens when it's negative?
+
+0:06:47.020,0:06:50.220
+Well, it's kind of got to look
+the same in the limit.
+
+0:06:50.220,0:06:51.960
+Things can only get so bad.
+
+0:06:51.960,0:06:56.180
+Once you're a billion dollars in debt,
+you know, whatever, right?
+
+0:06:56.180,0:07:00.020
+I mean, presumably at some point
+you're too big to fail.
+
+0:07:00.020,0:07:01.060
+Anyway--
+
+0:07:01.060,0:07:03.150
+But like it's not exactly symmetric.
+
+0:07:03.150,0:07:05.290
+It tends to stay this way
+and then slowly change.
+
+0:07:05.290,0:07:08.220
+But it's going to eventually
+have to level off.
+
+0:07:08.220,0:07:12.540
+So let me replace that with an actual
+graph from actual data elicited from
+
+0:07:12.540,0:07:13.410
+actual people.
+
+0:07:13.410,0:07:14.840
+It looks something like this.
+
+0:07:14.840,0:07:17.390
+It does level off positive.
+
+0:07:17.390,0:07:20.645
+It eventually turns risk-prone negative,
+but not immediately.
+
+0:07:20.645,0:07:23.460
+It's not completely symmetric, because
+zero isn't particularly
+
+0:07:23.460,0:07:24.680
+well-defined here.
+
+0:07:24.680,0:07:28.790
+This is the general behavior of
+money and utility interacting.
+
+0:07:28.790,0:07:31.800
+Because of these kinds of effects with
+money, there's a whole industry of
+
+0:07:31.800,0:07:33.230
+things like insurance.
+
+0:07:33.230,0:07:36.170
+So let's think about a specific
+money lottery.
+
+0:07:36.170,0:07:41.140
+Let's say you have a lottery of having
+a 50/50 chance of either $1,000 or
+
+0:07:41.140,0:07:42.090
+zero dollars.
+
+0:07:42.090,0:07:46.540
+This could be, for example, you have
+a $1,000 computer and there's a 50%
+
+0:07:46.540,0:07:50.130
+chance it's going to get stolen, which
+would leave you with zero computer.
+
+0:07:50.130,0:07:52.130
+So you have this lottery.
+
+0:07:52.130,0:07:52.870
+So lucky you.
+
+0:07:52.870,0:07:55.510
+What's the expected monetary
+value of this lottery.
+
+0:07:55.510,0:07:57.770
+It's $500.
+
+0:07:57.770,0:07:59.200
+You just average the dollar amounts.
+
+0:07:59.200,0:08:03.410
+This lottery that you are currently
+holding, your easily-stolen computer,
+
+0:08:03.410,0:08:06.590
+has expected monetary value of $500.
+
+0:08:06.590,0:08:08.640
+What is its certainty equivalent?
+
+0:08:08.640,0:08:10.130
+What's a certainty equivalent?
+
+0:08:10.130,0:08:14.050
+That is the amount of money that
+would be acceptable to you in
+
+0:08:14.050,0:08:15.270
+place of this lottery.
+
+0:08:15.270,0:08:20.150
+How much money would you trade this
+mixture of $1,000 and zero for?
+
+0:08:20.150,0:08:23.740
+Who would trade this lottery for $10?
+
+0:08:23.740,0:08:24.160
+No one.
+
+0:08:24.160,0:08:26.980
+Who would trade this lottery for $900?
+
+0:08:26.980,0:08:27.490
+Everyone.
+
+0:08:27.490,0:08:27.910
+All right.
+
+0:08:27.910,0:08:31.510
+Who would trade this lottery for $400?
+
+0:08:31.510,0:08:31.670
+OK.
+
+0:08:31.670,0:08:32.880
+Most people.
+
+0:08:32.880,0:08:37.299
+Well, in fact, for most people $400 is
+about the certainty equivalent for
+
+0:08:37.299,0:08:38.130
+this lottery.
+
+0:08:38.130,0:08:40.440
+It's lower than the expected
+monetary value.
+
+0:08:40.440,0:08:42.659
+But it's not ridiculously lower.
+
+0:08:42.659,0:08:47.020
+The difference here, that $100 between
+the certainty equivalent that you
+
+0:08:47.020,0:08:50.820
+would accept in place of the lottery and
+the actual average monetary value
+
+0:08:50.820,0:08:53.520
+of this lottery, that's called
+the insurance premium.
+
+0:08:53.520,0:08:56.460
+And the reason there's an insurance
+industry is because people are willing
+
+0:08:56.460,0:08:57.930
+to pay to reduce their risk.
+
+0:08:57.930,0:09:00.750
+If everyone were completely risk-neutral
+in this sense, we
+
+0:09:00.750,0:09:03.210
+wouldn't need any insurance.
+
+0:09:03.210,0:09:06.080
+Now maybe this is one of these things
+where it's just a scam.
+
+0:09:06.080,0:09:08.740
+You really shouldn't sign up for
+insurance, because really it's just
+
+0:09:08.740,0:09:11.840
+exploiting your human imperfection.
+
+0:09:11.840,0:09:12.510
+Not true.
+
+0:09:12.510,0:09:14.130
+It's win-win.
+
+0:09:14.130,0:09:17.640
+The reason why this insurance can be
+win-win, at least if the numbers work
+
+0:09:17.640,0:09:21.670
+out the right way, is because you would
+actually rather have the $400
+
+0:09:21.670,0:09:23.780
+than this lottery.
+
+0:09:23.780,0:09:27.190
+So in doing this trade, you win.
+
+0:09:27.190,0:09:28.490
+You're happy.
+
+0:09:28.490,0:09:32.180
+The insurance company would rather
+have the lottery than the $400.
+
+0:09:32.180,0:09:32.950
+Why?
+
+0:09:32.950,0:09:36.600
+Well, their utility curve is much
+flatter, because they're zoomed in.
+
+0:09:36.600,0:09:37.970
+$10 is nothing to them.
+
+0:09:37.970,0:09:38.710
+They're zoomed in.
+
+0:09:38.710,0:09:41.120
+When you zoom in on anything,
+it gets pretty flat.
+
+0:09:41.120,0:09:42.420
+It gets pretty linear.
+
+0:09:42.420,0:09:47.110
+Also, remember that the insurance
+company has a lot of lotteries.
+
+0:09:47.110,0:09:50.570
+So essentially they benefit from
+the central limit theorem.
+
+0:09:50.570,0:09:51.660
+You don't.
+
+0:09:51.660,0:09:52.810
+So everybody wins.
+
+0:09:52.810,0:09:53.395
+You win.
+
+0:09:53.395,0:09:54.370
+They win.
+
+0:09:54.370,0:09:59.060
+It's all happy, if the numbers work out
+to reflect everybody's utilities.
+
+0:09:59.060,0:10:01.750
+That's not to say that humans
+are perfectly rational.
+
+0:10:01.750,0:10:04.920
+There are a lot of cases where people
+have tried to show that people are
+
+0:10:04.920,0:10:07.210
+rational where people
+are not rational.
+
+0:10:07.210,0:10:10.260
+And they try to do it with actual
+experiments asking people about
+
+0:10:10.260,0:10:12.480
+questions about their preferences.
+
+0:10:12.480,0:10:13.520
+So let's do this experiment.
+
+0:10:13.520,0:10:15.730
+It's a classic experiment.
+
+0:10:15.730,0:10:17.060
+Here are two lotteries.
+
+0:10:17.060,0:10:22.120
+Lottery A, you have an 80% chance
+of $4,000 or nothing.
+
+0:10:22.120,0:10:27.650
+And Lottery B, you have a 100%
+chance of $3,000 and zero
+
+0:10:27.650,0:10:29.090
+percent chance of nothing.
+
+0:10:29.090,0:10:32.300
+Who prefers Lottery A?
+
+0:10:32.300,0:10:34.470
+Who prefers Lottery B?
+
+0:10:34.470,0:10:34.770
+OK.
+
+0:10:34.770,0:10:40.310
+Overwhelming preference for Lottery B.
+So Lottery B, overwhelming preference.
+
+0:10:40.310,0:10:41.900
+Well, that doesn't seem unreasonable.
+
+0:10:41.900,0:10:43.610
+Let's give you some more lotteries.
+
+0:10:43.610,0:10:48.260
+Here's C versus D. In C, you have
+a 20% chance of $4,000.
+
+0:10:48.260,0:10:53.260
+And in D, you have a 25%
+chance of $3,000.
+
+0:10:53.260,0:10:56.090
+Who prefers Lottery C?
+
+0:10:56.090,0:10:56.850
+Lots of people.
+
+0:10:56.850,0:11:00.060
+Who prefers Lottery D?
+
+0:11:00.060,0:11:01.160
+A couple people.
+
+0:11:01.160,0:11:03.741
+We're going to call C the winner.
+
+0:11:03.741,0:11:05.790
+It turns out that's pretty typical.
+
+0:11:05.790,0:11:10.020
+Most people like B than A. And most
+people like C better than D. What's
+
+0:11:10.020,0:11:11.630
+the problem?
+
+0:11:11.630,0:11:15.590
+Well, I can't tell you what the utility
+of a certain dollar amount is.
+
+0:11:15.590,0:11:18.030
+But I could assume that zero is zero.
+
+0:11:18.030,0:11:19.980
+That's just shifting the scale.
+
+0:11:19.980,0:11:24.400
+And then assuming that more money is
+better here, if B is greater than A,
+
+0:11:24.400,0:11:27.760
+that means that the utility for
+$3k is greater than 0.8 times
+
+0:11:27.760,0:11:29.490
+the utility for $4k.
+
+0:11:29.490,0:11:30.780
+And that's fine.
+
+0:11:30.780,0:11:34.430
+Except if C is better than D, I can look
+at those same numbers and just
+
+0:11:34.430,0:11:39.560
+multiply C and D by four and get
+the opposite conclusion.
+
+0:11:39.560,0:11:42.950
+0.8 times the utility of $4k, whatever
+it is, has to be greater than the
+
+0:11:42.950,0:11:45.040
+utility of $3k.
+
+0:11:45.040,0:11:46.700
+So what the heck?
+
+0:11:46.700,0:11:50.690
+You're in a class that I said could be
+entitled "Computational Rationality"
+
+0:11:50.690,0:11:53.520
+and here you are, irrational
+preferences.
+
+0:11:53.520,0:11:54.350
+Are you irrational?
+
+0:11:54.350,0:11:55.900
+Or did I do something wrong?
+
+0:11:55.900,0:11:57.330
+Of course you think I
+did something wrong.
+
+0:11:57.330,0:12:00.720
+What did I do wrong, because of
+course you're rational, right?
+
+0:12:00.720,0:12:03.720
+What's going on is there's some subtlety
+in how this is phrased.
+
+0:12:03.720,0:12:05.200
+There's actually a lot going on here.
+
+0:12:05.200,0:12:09.000
+You could have a very long and very
+detailed conversation about how human
+
+0:12:09.000,0:12:10.180
+utilities actually work.
+
+0:12:10.180,0:12:13.610
+One important thing that's happening
+here is in A, here, I didn't tell you
+
+0:12:13.610,0:12:14.420
+about the zero.
+
+0:12:14.420,0:12:16.200
+But the zero is actually
+very different.
+
+0:12:16.200,0:12:18.700
+Here, the zero doesn't really matter.
+
+0:12:18.700,0:12:24.780
+Here, you have a 20% chance of getting
+zero and you receive something else if
+
+0:12:24.780,0:12:28.610
+you end up with zero under Lottery
+A. What do you receive?
+
+0:12:28.610,0:12:32.520
+You receive the feeling of stupidity.
+
+0:12:32.520,0:12:34.440
+Nobody likes to feel stupid.
+
+0:12:34.440,0:12:39.620
+And that's part of one explanation of
+why you can look at these outcomes and
+
+0:12:39.620,0:12:41.430
+say that the model is oversimplified.
+
+0:12:41.430,0:12:42.680
+

@@ -1,0 +1,124 @@
+0:00:00.000,0:00:01.420
+
+0:00:01.420,0:00:04.360
+DAN KLEIN: The story is actually
+reversed for the case of values.
+
+0:00:04.360,0:00:07.920
+So for value ordering, what we do is
+we have a variable that we picked.
+
+0:00:07.920,0:00:11.440
+So for example, here on the Australia
+case, we decided that for whatever
+
+0:00:11.440,0:00:14.230
+reason we're assigning
+to this variable.
+
+0:00:14.230,0:00:16.720
+And the question is, what
+should we assign it?
+
+0:00:16.720,0:00:19.980
+And our choice here, we can assign it
+to red, we can assign it to blue.
+
+0:00:19.980,0:00:22.190
+Well, which one should we do?
+
+0:00:22.190,0:00:25.960
+It's kind of hard to tell just
+in terms of the value itself.
+
+0:00:25.960,0:00:30.560
+But if we imagine assigning red and we
+think about the consequences, and we
+
+0:00:30.560,0:00:34.080
+imagine assigning blue and think about
+the consequences, what you'll discover
+
+0:00:34.080,0:00:38.180
+is assigning blue is kind of bad news,
+because this variable here becomes
+
+0:00:38.180,0:00:39.310
+much more constrained.
+
+0:00:39.310,0:00:42.440
+In particular, it becomes
+over-constrained and we would fail.
+
+0:00:42.440,0:00:44.590
+OK, so it's better to assign red here.
+
+0:00:44.590,0:00:49.010
+And the general idea here is, given a
+choice of variable, we should pick the
+
+0:00:49.010,0:00:53.480
+value that is least constraining
+to try first.
+
+0:00:53.480,0:00:58.430
+That is, the value that rules out the
+fewest other values in remaining
+
+0:00:58.430,0:00:59.880
+variables elsewhere.
+
+0:00:59.880,0:01:04.810
+Now of course, computing this may take
+some time, so we might have to assign
+
+0:01:04.810,0:01:08.780
+tentatively each one of these values,
+do our filtering, either forward
+
+0:01:08.780,0:01:13.870
+checking or arc consistency, and
+see how many things vanished.
+
+0:01:13.870,0:01:14.940
+That's expensive.
+
+0:01:14.940,0:01:18.850
+But it helps us be smart about
+what value to take next.
+
+0:01:18.850,0:01:21.030
+Now here, of course, we kind of
+went in the other direction.
+
+0:01:21.030,0:01:24.640
+We went the easy way and the difference
+is, when you're picking a
+
+0:01:24.640,0:01:26.600
+variable, you have to do them all.
+
+0:01:26.600,0:01:28.020
+You want to do the hard ones first.
+
+0:01:28.020,0:01:31.730
+When you're picking a value, you
+don't have to do them all.
+
+0:01:31.730,0:01:33.740
+You only have to do the ones
+that are going to work.
+
+0:01:33.740,0:01:36.880
+So you might as well try the things
+that are likely to work.
+
+0:01:36.880,0:01:41.760
+If you combine these ordering ideas, now
+suddenly you can do 1,000 queens,
+
+0:01:41.760,0:01:43.010
+so much bigger problems.
+
+0:01:43.010,0:01:44.040
+

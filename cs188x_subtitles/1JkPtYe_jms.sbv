@@ -1,0 +1,228 @@
+0:00:00.000,0:00:01.560
+
+0:00:01.560,0:00:03.460
+DAN KLEIN: All right, so how
+well does this thing work?
+
+0:00:03.460,0:00:05.860
+Well, if you start with a random
+initial state for the n-queens
+
+0:00:05.860,0:00:09.430
+problem, then it turns out in basically
+constant time with high
+
+0:00:09.430,0:00:11.860
+probability, you're going to solve it.
+
+0:00:11.860,0:00:16.309
+So before, we were talking about with
+ordering, maybe we can do 25 queens.
+
+0:00:16.309,0:00:18.420
+Maybe with filtering we
+can do 1,000 queens.
+
+0:00:18.420,0:00:22.220
+Well, here we can do like 10 million
+queens more or less instantly with
+
+0:00:22.220,0:00:22.980
+iterate improvement.
+
+0:00:22.980,0:00:23.340
+Why?
+
+0:00:23.340,0:00:25.600
+Because it's mostly OK in
+a random assignment.
+
+0:00:25.600,0:00:27.850
+We fix up the problems, and they're
+relatively local for
+
+0:00:27.850,0:00:29.310
+that particular problem.
+
+0:00:29.310,0:00:32.890
+And this actually seems to be true
+for any randomly generated CSPs.
+
+0:00:32.890,0:00:37.380
+So if you randomly generate a CSP,
+unless you get a particularly bad
+
+0:00:37.380,0:00:41.300
+instance, then you're basically going
+to solve it nearly instantaneously
+
+0:00:41.300,0:00:45.800
+with this iterate improvement
+min-conflict approach.
+
+0:00:45.800,0:00:48.600
+So how does that work exactly?
+
+0:00:48.600,0:00:52.560
+Well, there are hard instances.
+
+0:00:52.560,0:00:53.890
+Why are there hard instances?
+
+0:00:53.890,0:00:56.770
+Well, you can take your CSP and
+look at two quantities.
+
+0:00:56.770,0:01:00.460
+You look at how many constraints there
+are and how many variables there are.
+
+0:01:00.460,0:01:03.720
+And if, for the number of variables
+you have, you have very, very few
+
+0:01:03.720,0:01:07.140
+constraints, is the CSP going
+to be easy or hard?
+
+0:01:07.140,0:01:07.910
+It's going to be easy.
+
+0:01:07.910,0:01:09.210
+You barely have any constraints.
+
+0:01:09.210,0:01:11.230
+You have all these variables and
+they can do whatever they want.
+
+0:01:11.230,0:01:13.760
+You'll solve it almost instantly
+with iterative improvement.
+
+0:01:13.760,0:01:17.710
+What happens if you have absolutely
+tons of constraints?
+
+0:01:17.710,0:01:20.400
+Well, it actually turns out you might
+think, OK, it's going to be really,
+
+0:01:20.400,0:01:21.060
+really hard.
+
+0:01:21.060,0:01:23.070
+Typically, if you have tons of
+constraints, there actually aren't
+
+0:01:23.070,0:01:25.690
+going to be solutions, but if there
+are solutions, everything is so
+
+0:01:25.690,0:01:27.830
+constrained that you just kind of chase
+those solutions down through the
+
+0:01:27.830,0:01:30.260
+constraints very easily.
+
+0:01:30.260,0:01:32.730
+So if there's either very few
+constraints or very many constraints,
+
+0:01:32.730,0:01:33.370
+you're great.
+
+0:01:33.370,0:01:36.700
+There's a magical critical ratio where
+if you look at this ratio of
+
+0:01:36.700,0:01:40.210
+constraints to variables, there's some
+critical value where things suddenly
+
+0:01:40.210,0:01:43.650
+get really, really hard because it's
+just constrained enough and just free
+
+0:01:43.650,0:01:46.510
+enough that you have to do all this work
+only to find that it just barely
+
+0:01:46.510,0:01:47.720
+doesn't work out.
+
+0:01:47.720,0:01:48.300
+OK.
+
+0:01:48.300,0:01:49.140
+So this seems great.
+
+0:01:49.140,0:01:53.480
+We've got this algorithm, which almost
+always solves huge CSPs instantly, and
+
+0:01:53.480,0:01:55.700
+there's only this tiny little
+area that's scary.
+
+0:01:55.700,0:01:55.980
+Right.
+
+0:01:55.980,0:01:57.790
+So here's the land of CSPs.
+
+0:01:57.790,0:02:00.550
+It's almost all beautiful green
+pastures, but you've got this small
+
+0:02:00.550,0:02:02.680
+area of scary volcano land.
+
+0:02:02.680,0:02:03.820
+OK.
+
+0:02:03.820,0:02:04.700
+what are those volcanoes?
+
+0:02:04.700,0:02:06.600
+That's what the hard problems are.
+
+0:02:06.600,0:02:08.870
+So what's the problem?
+
+0:02:08.870,0:02:13.190
+You've got your problem, and your
+problem, well, it's probably not
+
+0:02:13.190,0:02:13.990
+randomly generated.
+
+0:02:13.990,0:02:14.860
+So guess what?
+
+0:02:14.860,0:02:15.820
+You're there too.
+
+0:02:15.820,0:02:17.010
+OK.
+
+0:02:17.010,0:02:19.980
+Basically, naturally occurring problems
+are going to be harder than a
+
+0:02:19.980,0:02:21.540
+randomly generated one.
+
+0:02:21.540,0:02:24.350
+It is, however, still the case that
+min-conflicts and iterative
+
+0:02:24.350,0:02:27.480
+improvement are very powerful in
+practice, and they're very important
+
+0:02:27.480,0:02:29.090
+techniques for solving large CSPs.
+
+0:02:29.090,0:02:30.700
+

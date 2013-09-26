@@ -1,0 +1,55 @@
+0:00:00.000,0:00:00.786
+
+0:00:00.786,0:00:02.550
+PROFESSOR: Let me illustrate
+with a demo here.
+
+0:00:02.550,0:00:08.320
+
+0:00:08.320,0:00:09.430
+Here's a maze.
+
+0:00:09.430,0:00:11.230
+These are, let's say, boats in water.
+
+0:00:11.230,0:00:16.454
+Black means unpassable and this light
+blue is water that you can traverse
+
+0:00:16.454,0:00:18.950
+that, we'll say, costs one.
+
+0:00:18.950,0:00:21.390
+I'm going to run a depth-first
+search and a breadth-first
+
+0:00:21.390,0:00:23.440
+search in some order.
+
+0:00:23.440,0:00:27.230
+And what you're going
+to see is states--
+
+0:00:27.230,0:00:30.520
+x and y-coordinates here, because
+it's pathing problem--
+
+0:00:30.520,0:00:35.510
+lighting up the first time they
+are seen in the process of
+
+0:00:35.510,0:00:36.910
+exploring this tree.
+
+0:00:36.910,0:00:39.520
+OK, so I'm going to do something and
+then I'll ask you which one it is.
+
+0:00:39.520,0:00:45.310
+
+0:00:45.310,0:00:46.560
+What is that, depth-first
+or breadth-first?
+
+0:00:46.560,0:00:50.433
+

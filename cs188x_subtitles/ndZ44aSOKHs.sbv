@@ -1,0 +1,634 @@
+0:00:00.000,0:00:01.670
+
+0:00:01.670,0:00:04.520
+DAN KLEIN: Now let's talk about
+enforcing arc consistency for an
+
+0:00:04.520,0:00:06.460
+entire CSP.
+
+0:00:06.460,0:00:09.090
+Well, this is going to be a simple
+form of propagation.
+
+0:00:09.090,0:00:12.230
+And what we're going to do is we're
+going to make sure all of the arcs are
+
+0:00:12.230,0:00:15.330
+consistent all at once.
+
+0:00:15.330,0:00:18.770
+And when that's done, we will have
+done a more aggressive job than
+
+0:00:18.770,0:00:23.260
+forward checking of pruning down the
+remaining domains, and hopefully saved
+
+0:00:23.260,0:00:24.460
+ourselves some work.
+
+0:00:24.460,0:00:26.850
+So the idea is we're always going
+to delete from the tail.
+
+0:00:26.850,0:00:28.560
+Now let's look at this configuration.
+
+0:00:28.560,0:00:34.780
+Q is green, WA is red, and we know that
+NT and SA can't both be blue in
+
+0:00:34.780,0:00:36.420
+terms of actually getting a solution.
+
+0:00:36.420,0:00:38.430
+Forward checking left us here.
+
+0:00:38.430,0:00:39.760
+It looks like everything's OK.
+
+0:00:39.760,0:00:42.820
+We'll eventually in a backtracking
+search discover were wrong, but let's
+
+0:00:42.820,0:00:45.450
+see if we can figure out an algorithm
+which will detect the
+
+0:00:45.450,0:00:47.140
+failure right away.
+
+0:00:47.140,0:00:50.280
+Well, in order to enforce arc
+consistency, the algorithm's actually
+
+0:00:50.280,0:00:50.980
+pretty simple.
+
+0:00:50.980,0:00:55.170
+We're going to visit every single arc,
+check if it's consistent, and if not,
+
+0:00:55.170,0:00:57.530
+we're going to delete
+stuff from the tail.
+
+0:00:57.530,0:01:00.400
+Hopefully, this whole process will
+converge and we'll end up with
+
+0:01:00.400,0:01:02.510
+something that's consistent
+everywhere.
+
+0:01:02.510,0:01:03.460
+So what can we do?
+
+0:01:03.460,0:01:04.900
+Well, we can look over here.
+
+0:01:04.900,0:01:08.110
+We can say New South
+Wales and Victoria.
+
+0:01:08.110,0:01:11.140
+We could look at them and say,
+is this arc consistent?
+
+0:01:11.140,0:01:12.350
+Well let's think about it.
+
+0:01:12.350,0:01:15.640
+We have to check everything in
+the trunk, that's Victoria.
+
+0:01:15.640,0:01:20.570
+Is there any value in the trunk
+which guarantees us failure?
+
+0:01:20.570,0:01:21.280
+Here?
+
+0:01:21.280,0:01:24.340
+No, because if I pick red in
+the trunk, I can pick blue
+
+0:01:24.340,0:01:25.530
+at New South Wales.
+
+0:01:25.530,0:01:29.970
+If I pick blue at Victoria, then I
+can pick red at New South Wales.
+
+0:01:29.970,0:01:31.460
+And so there's no problem.
+
+0:01:31.460,0:01:35.490
+This constraint, it receives
+the stamp of consistency.
+
+0:01:35.490,0:01:37.630
+All right, so this arc is consistent.
+
+0:01:37.630,0:01:39.060
+Now we can check this arc.
+
+0:01:39.060,0:01:42.450
+So we look at Southern Australia
+and New South Wales.
+
+0:01:42.450,0:01:44.770
+They're adjacent, s they can't
+be the same color.
+
+0:01:44.770,0:01:45.720
+And so we look.
+
+0:01:45.720,0:01:50.300
+And Southern Australia, if we assign
+blue, will it work out?
+
+0:01:50.300,0:01:51.680
+Yes.
+
+0:01:51.680,0:01:52.650
+OK, it's consistent.
+
+0:01:52.650,0:01:54.750
+So, so far, we haven't
+had to do anything.
+
+0:01:54.750,0:01:57.310
+But let's say we look at the
+arc in this direction.
+
+0:01:57.310,0:02:00.130
+Well now we're looking at New South
+Wales and we're asking, are there any
+
+0:02:00.130,0:02:03.030
+values here at the tail that
+will doom us on this arc?
+
+0:02:03.030,0:02:06.900
+The answer now is, yes, we better not
+pick blue because if we do, there's no
+
+0:02:06.900,0:02:09.910
+way to assign at SA without
+violating a constraint.
+
+0:02:09.910,0:02:12.400
+So, we delete it.
+
+0:02:12.400,0:02:15.680
+
+0:02:15.680,0:02:18.610
+Now, of course, we can continue doing
+this for arc after arc after arc.
+
+0:02:18.610,0:02:21.540
+But the interesting thing is, let's
+go back to that arc we just did.
+
+0:02:21.540,0:02:25.710
+We just declared this arc
+here to be consistent.
+
+0:02:25.710,0:02:27.640
+Is it still consistent?
+
+0:02:27.640,0:02:29.350
+No, it just stopped being consistent.
+
+0:02:29.350,0:02:31.120
+And it stopped being consistent
+because something
+
+0:02:31.120,0:02:33.160
+disappeared from its head.
+
+0:02:33.160,0:02:37.420
+And so when blue went out of its
+head, now suddenly red is no
+
+0:02:37.420,0:02:39.040
+longer OK in the tail.
+
+0:02:39.040,0:02:41.850
+And so in order to make this
+arc consistent again, we
+
+0:02:41.850,0:02:43.670
+need to do some deleting.
+
+0:02:43.670,0:02:47.060
+This is basically the algorithm
+for enforcing arc consistency.
+
+0:02:47.060,0:02:50.570
+The important thing to remember is that
+we're going to visit all of the
+
+0:02:50.570,0:02:53.990
+arcs over and over and over again until
+everybody is simultaneously
+
+0:02:53.990,0:02:55.200
+consistent.
+
+0:02:55.200,0:02:56.480
+Why this is a good idea?
+
+0:02:56.480,0:02:59.260
+Well, it prunes things down a lot
+more than forward checking.
+
+0:02:59.260,0:03:00.590
+It also can detect failure.
+
+0:03:00.590,0:03:03.910
+So for example, in the version shown
+here, if we check the arc from
+
+0:03:03.910,0:03:07.760
+Southern Australia to the Northern
+Territory, we would delete blue from
+
+0:03:07.760,0:03:10.790
+Southern Australia and then we would
+see an empty domain and we'd fail.
+
+0:03:10.790,0:03:13.310
+So in fact, it will solve
+our original case.
+
+0:03:13.310,0:03:16.120
+When we check these arcs over and over,
+the reason we have to check them
+
+0:03:16.120,0:03:20.030
+more than once is because whenever a
+variable loses a value, all of the
+
+0:03:20.030,0:03:21.970
+incoming arcs need to be rechecked.
+
+0:03:21.970,0:03:25.540
+So we're going to have to check
+things multiple times.
+
+0:03:25.540,0:03:28.580
+What's the role of this thing
+in the backtracking search?
+
+0:03:28.580,0:03:32.200
+You make an assignment, you enforce the
+consistency of a whole bunch of
+
+0:03:32.200,0:03:34.090
+arcs, it may take awhile.
+
+0:03:34.090,0:03:36.730
+Then you make another assignment, and
+then you enforce the consistency of a
+
+0:03:36.730,0:03:38.540
+whole bunch of stuff,
+it may take a while.
+
+0:03:38.540,0:03:40.220
+And you go on recursing.
+
+0:03:40.220,0:03:43.700
+It makes each step slower, but hopefully
+you'll have to do less
+
+0:03:43.700,0:03:44.500
+backtracking.
+
+0:03:44.500,0:03:46.740
+And this should remind you
+of something from search.
+
+0:03:46.740,0:03:49.630
+What's this remind you of from search?
+
+0:03:49.630,0:03:53.210
+This should remind you of A* from
+search, where computing the heuristic
+
+0:03:53.210,0:03:57.630
+cost time, but hopefully reduced the
+amount of actual search tree action
+
+0:03:57.630,0:03:59.560
+you had to do.
+
+0:03:59.560,0:04:01.850
+All right, so, what's the
+algorithm look like?
+
+0:04:01.850,0:04:03.980
+I'm not going to walk through the
+entire pseudocode because we've
+
+0:04:03.980,0:04:05.220
+already pretty much covered it.
+
+0:04:05.220,0:04:07.460
+But it's in the slides here for you.
+
+0:04:07.460,0:04:11.670
+The important bits are there is going to
+be a queue, which initially is all
+
+0:04:11.670,0:04:13.640
+of the arcs in the CSP.
+
+0:04:13.640,0:04:16.589
+And as long as there's stuff in the
+queue, we're going to take something
+
+0:04:16.589,0:04:20.860
+off the queue, we're going to make that
+arc consistent by removing values
+
+0:04:20.860,0:04:23.010
+from its tail as needed.
+
+0:04:23.010,0:04:26.790
+If anything was actually removed,
+stuff may go back on the queue.
+
+0:04:26.790,0:04:31.790
+Because any time a variable's domain
+shrinks, all of its neighbors pointing
+
+0:04:31.790,0:04:34.160
+to it have to go back on to the queue.
+
+0:04:34.160,0:04:36.640
+And then we'd run this until
+the queue becomes empty.
+
+0:04:36.640,0:04:39.700
+So you have some worries, like maybe
+we'll just run this forever.
+
+0:04:39.700,0:04:41.600
+Can this run forever?
+
+0:04:41.600,0:04:45.810
+This can't run forever, because every
+time an arc goes on the queue, it went
+
+0:04:45.810,0:04:49.860
+on the queue because its
+head's domain shrank.
+
+0:04:49.860,0:04:51.720
+That can only happen so many times.
+
+0:04:51.720,0:04:55.430
+In particular, for a given arc it
+can only happen d many times.
+
+0:04:55.430,0:04:58.230
+How long does it take to remove
+the inconsistent values?
+
+0:04:58.230,0:05:01.470
+Well you have to check everything in the
+head, everything in the tail, and
+
+0:05:01.470,0:05:03.850
+then do a function call to your
+constraint, which, let's say, takes
+
+0:05:03.850,0:05:05.690
+constant time.
+
+0:05:05.690,0:05:11.620
+OK, so removing the inconsistent values
+is going to cost d squared.
+
+0:05:11.620,0:05:14.180
+There are n squared arcs
+to begin with.
+
+0:05:14.180,0:05:16.690
+And each one may have to
+processed d times.
+
+0:05:16.690,0:05:19.620
+So this whole thing, if you kind of
+calculate it in a naive way, it works
+
+0:05:19.620,0:05:21.620
+out to be n squared d cubed.
+
+0:05:21.620,0:05:25.470
+And you can shave off a factor
+of d if you're clever.
+
+0:05:25.470,0:05:27.460
+However, that's polynomial.
+
+0:05:27.460,0:05:31.340
+We know that CSPs are NP-hard, and that
+means that detecting all possible
+
+0:05:31.340,0:05:34.020
+future problems isn't going to work.
+
+0:05:34.020,0:05:36.950
+Let's see this algorithm running.
+
+0:05:36.950,0:05:39.130
+Let's go back to my wonderful
+illustration of the five queens
+
+0:05:39.130,0:05:43.410
+problem and the AI space applet.
+
+0:05:43.410,0:05:47.330
+Right now, looking at this,
+it is in fact consistent.
+
+0:05:47.330,0:05:50.490
+So I could tell this applet to
+make this arc consistent.
+
+0:05:50.490,0:05:52.540
+And if I did that, what would it do?
+
+0:05:52.540,0:05:56.620
+It would visit every arc, turning it
+from blue, meaning it's on the queue,
+
+0:05:56.620,0:06:00.590
+to green, meaning it is
+guaranteed consistent.
+
+0:06:00.590,0:06:01.840
+And it'll check each one.
+
+0:06:01.840,0:06:05.210
+But basically, there's nothing
+to do at the beginning.
+
+0:06:05.210,0:06:08.810
+It's very common, though not always
+true, that the initial CSP will
+
+0:06:08.810,0:06:10.180
+already be arc consistent.
+
+0:06:10.180,0:06:11.710
+Sometimes it's not.
+
+0:06:11.710,0:06:13.220
+All right, so now it's arc consistent.
+
+0:06:13.220,0:06:14.530
+Let me reset that.
+
+0:06:14.530,0:06:16.340
+What would happen in the
+backtracking search?
+
+0:06:16.340,0:06:18.740
+We'd assign something.
+
+0:06:18.740,0:06:24.010
+So we go here and would keep,
+let's say, just the value 1.
+
+0:06:24.010,0:06:27.610
+That's equivalent to putting
+the queen in the corner.
+
+0:06:27.610,0:06:31.390
+So now the domain of A shrinks.
+
+0:06:31.390,0:06:33.760
+Let's run arc consistency here.
+
+0:06:33.760,0:06:37.570
+So once we shrink the domain of A, we
+can enforce arc consistency using the
+
+0:06:37.570,0:06:39.740
+AC-3 algorithm.
+
+0:06:39.740,0:06:43.910
+And I'll do a little bit of it manually
+here, so I can check this arc
+
+0:06:43.910,0:06:48.490
+going from A to B. And it
+was already consistent.
+
+0:06:48.490,0:06:51.880
+But the arc and the other direction,
+think about B here.
+
+0:06:51.880,0:06:53.780
+I just put a queen up here.
+
+0:06:53.780,0:06:56.770
+
+0:06:56.770,0:06:58.450
+So B can't be 1 or 2.
+
+0:06:58.450,0:07:02.290
+And so when I enforce this, some things
+will disappear from the domain.
+
+0:07:02.290,0:07:03.975
+I'm going to do the rest
+automatically.
+
+0:07:03.975,0:07:08.700
+And what you'll see is mostly we go
+along making things consistent and
+
+0:07:08.700,0:07:09.400
+turning them green.
+
+0:07:09.400,0:07:12.220
+Every now and then we'll delete
+some values from a domain.
+
+0:07:12.220,0:07:13.760
+There'll be a flash of red.
+
+0:07:13.760,0:07:18.590
+And the flash of red is something that
+was once consistent becoming no longer
+
+0:07:18.590,0:07:21.020
+guaranteed consistent and
+going back on the queue.
+
+0:07:21.020,0:07:23.970
+
+0:07:23.970,0:07:25.550
+And this is actually a good effect.
+
+0:07:25.550,0:07:29.230
+As things go from consistent or
+inconsistent, and then we process them
+
+0:07:29.230,0:07:32.200
+again, and something else goes from
+consistent to inconsistent, we're
+
+0:07:32.200,0:07:34.330
+essentially chasing down
+the consequences of our
+
+0:07:34.330,0:07:35.930
+constraints across the graph.
+
+0:07:35.930,0:07:40.870
+And now we can see that everything is
+consistent and we could then continue
+
+0:07:40.870,0:07:43.050
+with the backtracking search.
+
+0:07:43.050,0:07:45.760
+But I won't show all of that.
+
+0:07:45.760,0:07:48.790
+What about arc consistency when we have
+constraints that involve more
+
+0:07:48.790,0:07:50.430
+than two variables?
+
+0:07:50.430,0:07:55.140
+At the moment, this algorithm is only
+defined as I've given it to you for
+
+0:07:55.140,0:07:59.360
+binary CSPs, meaning they are at most
+two variables per constraint.
+
+0:07:59.360,0:08:01.980
+There are analogs of this for higher
+order constraints and there are
+
+0:08:01.980,0:08:03.710
+variations of this algorithm.
+
+0:08:03.710,0:08:07.770
+This one, as it's stated here, will
+only work for binary CSPs.
+
+0:08:07.770,0:08:09.333
+

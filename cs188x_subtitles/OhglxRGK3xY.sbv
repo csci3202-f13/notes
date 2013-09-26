@@ -1,0 +1,211 @@
+0:00:00.000,0:00:01.760
+
+0:00:01.760,0:00:03.040
+DAN KLEIN: Today we're going
+to talk about constraint
+
+0:00:03.040,0:00:06.050
+satisfaction problems.
+
+0:00:06.050,0:00:07.870
+Let's take a step back and
+think about search.
+
+0:00:07.870,0:00:10.500
+We've been talking about search
+for the past lectures.
+
+0:00:10.500,0:00:12.060
+And let's think about
+what search is for.
+
+0:00:12.060,0:00:13.750
+It needs to be that you've
+got one agent.
+
+0:00:13.750,0:00:16.190
+So no adversary is trying
+to mess you up.
+
+0:00:16.190,0:00:18.050
+You need to have deterministic
+actions.
+
+0:00:18.050,0:00:20.360
+That means, when you come up with this
+master plan that you're going to
+
+0:00:20.360,0:00:23.570
+execute and sequence, it better do
+what you think it's going to do.
+
+0:00:23.570,0:00:26.130
+There can't be any uncertainty about
+what your actions will actually
+
+0:00:26.130,0:00:27.270
+accomplish.
+
+0:00:27.270,0:00:28.680
+It's also for a fully observed state.
+
+0:00:28.680,0:00:31.410
+You need to know the entire state
+of the world as relevant to
+
+0:00:31.410,0:00:32.860
+your planning problem.
+
+0:00:32.860,0:00:36.730
+And then we've also made an assumption
+that the search space is discrete.
+
+0:00:36.730,0:00:37.470
+OK.
+
+0:00:37.470,0:00:40.670
+So that's the world of search, and
+constraint satisfaction problems are
+
+0:00:40.670,0:00:42.280
+going to fall within that.
+
+0:00:42.280,0:00:46.170
+So let's think a little bit about what
+a search problem looks like.
+
+0:00:46.170,0:00:50.270
+So, the search problems that we've
+seen so far are primarily for
+
+0:00:50.270,0:00:54.270
+planning, and planning is about coming
+up with a sequence of actions.
+
+0:00:54.270,0:00:58.260
+For example, how do I get to the exit
+of the maze or what sequence of
+
+0:00:58.260,0:01:00.730
+pancake flips will be optimal.
+
+0:01:00.730,0:01:04.060
+The important thing in a planning
+problem is that what you're looking
+
+0:01:04.060,0:01:07.190
+for is not the goal itself, but
+the path that gets you there.
+
+0:01:07.190,0:01:08.040
+That's your plan.
+
+0:01:08.040,0:01:10.350
+It's the sequence of actions.
+
+0:01:10.350,0:01:15.470
+And in the context of planning, paths or
+plans have various costs, they have
+
+0:01:15.470,0:01:19.010
+depths, and in order to speed up our
+search, we use things like heuristics
+
+0:01:19.010,0:01:23.600
+and A* search which give us some
+guidance about our specific problem.
+
+0:01:23.600,0:01:26.460
+OK, so the critical thing is, in a
+planning problem, you're looking for a
+
+0:01:26.460,0:01:29.120
+sequence of actions.
+
+0:01:29.120,0:01:31.420
+There's another class of search problems
+which we're going to start
+
+0:01:31.420,0:01:34.380
+thinking about today which are called
+identification problems.
+
+0:01:34.380,0:01:37.940
+In an identification problem, what
+you're really after is something like
+
+0:01:37.940,0:01:39.230
+assignments to variable.
+
+0:01:39.230,0:01:41.440
+You're looking for the goal itself.
+
+0:01:41.440,0:01:45.290
+So the idea is, once you find the goal
+and you find some configuration of the
+
+0:01:45.290,0:01:48.330
+world that passes the goal
+test, you're happy.
+
+0:01:48.330,0:01:51.350
+You don't actually care so
+much how you got there.
+
+0:01:51.350,0:01:53.290
+So you can think about this in
+terms of these cartoons.
+
+0:01:53.290,0:01:57.520
+A planning problem might be the ninja
+robot trying to steal the gem, but an
+
+0:01:57.520,0:02:00.560
+identification problem, the detective
+robot just wants to find it and
+
+0:02:00.560,0:02:02.810
+doesn't actually care the sequence
+of places you looked in
+
+0:02:02.810,0:02:04.310
+order to get there.
+
+0:02:04.310,0:02:05.130
+OK.
+
+0:02:05.130,0:02:08.389
+In the case of an identification
+problem, the goal is what's important.
+
+0:02:08.389,0:02:11.550
+It's very common that for some
+formulation, all paths are going to be
+
+0:02:11.550,0:02:12.330
+at the same depth.
+
+0:02:12.330,0:02:13.930
+We'll see examples of that today.
+
+0:02:13.930,0:02:17.320
+And a particularly important case of
+an identification problem is a
+
+0:02:17.320,0:02:20.680
+constraint satisfaction problem, or a
+CSP, which is what we're going to talk
+
+0:02:20.680,0:02:21.400
+about today.
+
+0:02:21.400,0:02:24.130
+It's a special class for identification
+problems where we'll
+
+0:02:24.130,0:02:26.070
+have special algorithms that
+make things faster.
+
+0:02:26.070,0:02:27.320
+

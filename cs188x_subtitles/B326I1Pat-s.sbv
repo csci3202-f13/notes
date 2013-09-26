@@ -1,0 +1,901 @@
+0:00:00.000,0:00:01.490
+
+0:00:01.490,0:00:04.120
+DAN KLEIN: So before we figure out how
+to do search in the presence of
+
+0:00:04.120,0:00:08.420
+actions, whose outcomes are uncertain,
+we should think why would we ever be
+
+0:00:08.420,0:00:09.250
+in this situation?
+
+0:00:09.250,0:00:11.070
+Is this just some weird
+thing that happens?
+
+0:00:11.070,0:00:14.200
+Well, there's a lot of reasons why you
+could have uncertainty as to the
+
+0:00:14.200,0:00:15.640
+outcome of your action.
+
+0:00:15.640,0:00:17.820
+Sometimes there is explicit
+randomness.
+
+0:00:17.820,0:00:20.470
+And in the case of games, this
+is often intentionally there.
+
+0:00:20.470,0:00:24.370
+For example, you may actually roll
+some dice while playing a game.
+
+0:00:24.370,0:00:28.110
+That's a case where you are explicitly
+taking an action kind of for the whole
+
+0:00:28.110,0:00:31.400
+purpose of injecting randomness
+into the process.
+
+0:00:31.400,0:00:33.420
+But that's not really everything.
+
+0:00:33.420,0:00:35.040
+Sometimes your opponents
+are unpredictable.
+
+0:00:35.040,0:00:38.500
+For example, there might be some
+randomness into how a ghost respond.
+
+0:00:38.500,0:00:41.110
+But in the real world, it's
+even more than that.
+
+0:00:41.110,0:00:44.170
+It's the fact that when you take an
+action, you're never really sure
+
+0:00:44.170,0:00:45.260
+what's going to happen.
+
+0:00:45.260,0:00:49.020
+For example, if you're doing robot
+motion and you tell the robot to move
+
+0:00:49.020,0:00:50.860
+its wheel, well, it might
+move forward.
+
+0:00:50.860,0:00:53.420
+Or the wheels might slip
+or they might jam.
+
+0:00:53.420,0:00:57.700
+And in general, any action you take will
+have some uncertainty in the real
+
+0:00:57.700,0:01:01.130
+world as to what exactly will happen.
+
+0:01:01.130,0:01:05.319
+In the case where your outcomes are
+not worst case, they're just
+
+0:01:05.319,0:01:10.160
+controlled by some element of chance
+that you can't predict, the values we
+
+0:01:10.160,0:01:13.820
+assign to various states should
+take that into account.
+
+0:01:13.820,0:01:17.250
+And the values now should reflect
+an average case rather than
+
+0:01:17.250,0:01:19.810
+a worst case scenario.
+
+0:01:19.810,0:01:22.140
+The worst case-- that's
+minimax reasoning.
+
+0:01:22.140,0:01:25.000
+And today we're going to talk about
+expectimax reasoning, where
+
+0:01:25.000,0:01:29.040
+essentially we replace all of
+the mins with averages.
+
+0:01:29.040,0:01:30.950
+So let's look at this tree over here.
+
+0:01:30.950,0:01:32.030
+What happens on the left?
+
+0:01:32.030,0:01:36.620
+Well, the value of this left node should
+clearly be 10 regardless of the
+
+0:01:36.620,0:01:38.680
+outcome, because both outcomes are 10.
+
+0:01:38.680,0:01:40.030
+How about on the right?
+
+0:01:40.030,0:01:43.190
+How much should we value
+this node on the right?
+
+0:01:43.190,0:01:46.300
+Well, in minimax, it's only worth 9,
+because that's what your opponent's
+
+0:01:46.300,0:01:47.640
+going to force.
+
+0:01:47.640,0:01:50.730
+But now it should probably be bigger
+than 9, because we might get that 100.
+
+0:01:50.730,0:01:51.490
+How much bigger?
+
+0:01:51.490,0:01:54.950
+Well, it's going to depend on how likely
+it is the 9 versus the 100
+
+0:01:54.950,0:01:56.240
+outcome is.
+
+0:01:56.240,0:01:57.950
+Let's say they're equally likely.
+
+0:01:57.950,0:02:04.870
+If they're are equally likely,
+then it's going to be 54.5.
+
+0:02:04.870,0:02:07.710
+And then we should probably take the
+right node, at least if they're
+
+0:02:07.710,0:02:09.410
+equally likely.
+
+0:02:09.410,0:02:11.870
+This is the basic idea
+of expectimax search.
+
+0:02:11.870,0:02:16.010
+What we're going to compute in an
+expectimax search is not the best
+
+0:02:16.010,0:02:18.670
+score under adversarial
+play like minimax.
+
+0:02:18.670,0:02:20.050
+It's not a minimax value.
+
+0:02:20.050,0:02:21.670
+It's an expectimax value.
+
+0:02:21.670,0:02:24.340
+And that's the average score
+under optimal play.
+
+0:02:24.340,0:02:25.410
+Why is it an average?
+
+0:02:25.410,0:02:28.180
+Because no matter how well you play, who
+knows what's going to happen when
+
+0:02:28.180,0:02:29.360
+the dice roll?
+
+0:02:29.360,0:02:33.640
+So what we need to compute is whatever
+actions are going to give me the best
+
+0:02:33.640,0:02:36.090
+outcome on average.
+
+0:02:36.090,0:02:38.500
+Max nodes are just like
+a minimax search.
+
+0:02:38.500,0:02:41.280
+Chances are just like min nodes in the
+sense that they're out of your
+
+0:02:41.280,0:02:44.950
+control, but rather than worst case
+we're going to assume average case.
+
+0:02:44.950,0:02:48.540
+What we will be calculating here
+is expected utilities.
+
+0:02:48.540,0:02:51.970
+If you think about the numbers at the
+bottom of the tree as utilities for
+
+0:02:51.970,0:02:56.540
+the agent, and now we're taking averages
+or expectations, this is this
+
+0:02:56.540,0:02:58.620
+idea of an expected utility.
+
+0:02:58.620,0:03:02.170
+You don't know how good this state is,
+but you can talk about its average
+
+0:03:02.170,0:03:03.370
+utility to you.
+
+0:03:03.370,0:03:06.320
+And that's something if you remember way
+back to the first lecture, and the
+
+0:03:06.320,0:03:08.990
+maximum expected utility principle,
+we're finally getting
+
+0:03:08.990,0:03:11.390
+to be able to unpack.
+
+0:03:11.390,0:03:14.000
+All right, let's take a look at
+why this is important again
+
+0:03:14.000,0:03:15.642
+in the Pac-Man demo.
+
+0:03:15.642,0:03:20.060
+And let's remember what happens
+in this scenario here.
+
+0:03:20.060,0:03:23.590
+This scenario is, in fact, a very simple
+game tree, because the agents
+
+0:03:23.590,0:03:25.190
+are so constrained.
+
+0:03:25.190,0:03:28.800
+And in a minimax scenario, Pac-Man
+sees two options--
+
+0:03:28.800,0:03:33.230
+dive bomb the ghost or make
+a try for the dots.
+
+0:03:33.230,0:03:37.070
+If the ghosts are adversarial, then you
+should dive bomb the close ghost.
+
+0:03:37.070,0:03:40.620
+Because the game's going to end either
+way, and in this variant of Pac-Man,
+
+0:03:40.620,0:03:42.650
+you would lose a point every turn.
+
+0:03:42.650,0:03:45.620
+And so, in fact, in the minimax
+case, you dive bomb the ghost.
+
+0:03:45.620,0:03:48.060
+And, in fact, the game ends.
+
+0:03:48.060,0:03:54.690
+But we also realized that if those
+ghosts were in fact random, o orange
+
+0:03:54.690,0:03:55.810
+ghost doesn't have a choice.
+
+0:03:55.810,0:03:58.960
+The only real choice is what
+b;ue ghost is going to do.
+
+0:03:58.960,0:04:00.715
+So now Pac-Man should
+think average case.
+
+0:04:00.715,0:04:03.650
+Pac-Man should think well, the
+difference between going left and
+
+0:04:03.650,0:04:07.310
+right in the case that the blue ghost
+moves up is not that great.
+
+0:04:07.310,0:04:10.080
+It's one point plus or minus, right?
+
+0:04:10.080,0:04:13.840
+But if the blue ghost happens to move
+down, we can win the game and get a
+
+0:04:13.840,0:04:15.860
+huge bonus at the end.
+
+0:04:15.860,0:04:19.769
+And so in this case, even if we're
+unsuccessful, even if in fact we are
+
+0:04:19.769,0:04:22.600
+not lucky, the action we should
+take now to maximize our
+
+0:04:22.600,0:04:24.430
+utility is to go left.
+
+0:04:24.430,0:04:26.110
+So we're going to go left.
+
+0:04:26.110,0:04:29.360
+And well, it didn't work out.
+
+0:04:29.360,0:04:32.640
+So just because you were rational, just
+because you did the action which
+
+0:04:32.640,0:04:35.980
+maximizes your expected utility, does
+not mean you'll be successful.
+
+0:04:35.980,0:04:37.700
+You can still be unlucky.
+
+0:04:37.700,0:04:41.310
+But if we try this a bunch of times--
+
+0:04:41.310,0:04:43.820
+oh, please, random number generator--
+
+0:04:43.820,0:04:45.070
+it'll work out.
+
+0:04:45.070,0:04:49.140
+
+0:04:49.140,0:04:53.600
+All right, so that's the case
+for expectimax reasoning.
+
+0:04:53.600,0:04:56.530
+The expectimax pseudo code is
+about what you would think.
+
+0:04:56.530,0:04:58.150
+We have a notion of a
+value of the state.
+
+0:04:58.150,0:04:59.440
+It's no longer a minimax value.
+
+0:04:59.440,0:05:01.420
+It's now an expectimax value.
+
+0:05:01.420,0:05:02.840
+And how do we compute that value?
+
+0:05:02.840,0:05:04.800
+Well, we're going to
+do it recursively.
+
+0:05:04.800,0:05:08.090
+If that state is terminal, then it's
+marked with its utility and we just
+
+0:05:08.090,0:05:09.510
+return that.
+
+0:05:09.510,0:05:13.070
+If it's a Max state, meaning in the next
+action is under the control of
+
+0:05:13.070,0:05:16.240
+the agent, then we max
+over the children.
+
+0:05:16.240,0:05:20.900
+If the next agent is the expectation,
+meaning this is the role of a die or
+
+0:05:20.900,0:05:25.710
+an uncertain opponent, then we should
+take some kind of average.
+
+0:05:25.710,0:05:28.200
+Max looks just like it did before.
+
+0:05:28.200,0:05:29.310
+We started at negative infinity.
+
+0:05:29.310,0:05:30.760
+We look at all of the successors.
+
+0:05:30.760,0:05:35.220
+And one by one, we take
+a maximum as we go.
+
+0:05:35.220,0:05:36.570
+What's new here is on the right.
+
+0:05:36.570,0:05:39.840
+How do we compute the average
+value of a state?
+
+0:05:39.840,0:05:42.040
+So let's zoom in on that.
+
+0:05:42.040,0:05:43.860
+Well we have some state.
+
+0:05:43.860,0:05:45.830
+And we're going to take an
+average of its children.
+
+0:05:45.830,0:05:46.670
+So how do we do that?
+
+0:05:46.670,0:05:48.880
+We loop over all the children.
+
+0:05:48.880,0:05:51.410
+For each child, we compute its value.
+
+0:05:51.410,0:05:55.040
+And we figure out the chance of that
+child will happen from here.
+
+0:05:55.040,0:05:57.770
+And so far we've been acting like all
+children are equal, but that's not
+
+0:05:57.770,0:06:00.720
+always going to be true in
+every expectimax search.
+
+0:06:00.720,0:06:04.710
+So for each child, we compute a
+probability and we compute a value.
+
+0:06:04.710,0:06:07.620
+We take the products,
+and we add them up.
+
+0:06:07.620,0:06:10.870
+So, for example, here, we
+might be in the state.
+
+0:06:10.870,0:06:13.970
+We're computing the expectation
+of the children.
+
+0:06:13.970,0:06:16.270
+And so what we do is we visit
+the children one by one.
+
+0:06:16.270,0:06:21.760
+And the first child has value eight,
+but is 50 percent likely to occur.
+
+0:06:21.760,0:06:23.130
+Multiply those together--
+
+0:06:23.130,0:06:26.860
+1/3 times 24, 1/6 times negative 12.
+
+0:06:26.860,0:06:34.240
+And we get 10 there's the
+computation for you.
+
+0:06:34.240,0:06:36.070
+So let's do an example of this.
+
+0:06:36.070,0:06:39.090
+So if we imagine all the children are
+equally likely, we visit the first
+
+0:06:39.090,0:06:43.770
+child, and we see OK 3, OK 12, OK, 9.
+
+0:06:43.770,0:06:45.220
+We compute our average.
+
+0:06:45.220,0:06:46.660
+And we get what?
+
+0:06:46.660,0:06:48.900
+We get eight.
+
+0:06:48.900,0:06:50.140
+We go to the silent child child.
+
+0:06:50.140,0:06:51.260
+We see two, four, and six.
+
+0:06:51.260,0:06:53.110
+We compute the average.
+
+0:06:53.110,0:06:54.190
+We get four.
+
+0:06:54.190,0:06:55.540
+And we visit the last child--
+
+0:06:55.540,0:06:57.670
+we compute the average
+and we get seven.
+
+0:06:57.670,0:07:01.700
+So looking down, yes, we'd like the
+15, no, we wouldn't like the 0.
+
+0:07:01.700,0:07:03.780
+But we don't actually have
+access to these directly.
+
+0:07:03.780,0:07:07.370
+We only get to choose amongst these
+uncertain outcomes whose average
+
+0:07:07.370,0:07:10.480
+scores are listed here, and so what we
+should do is we should take this
+
+0:07:10.480,0:07:14.080
+action and on average get eight
+
+0:07:14.080,0:07:16.230
+Now for minimax, we were able
+to be pretty clever.
+
+0:07:16.230,0:07:20.390
+We were able to do the search, but often
+we're able to just avoid doing
+
+0:07:20.390,0:07:25.860
+work by noticing that we had already
+found a value so good or so bad that
+
+0:07:25.860,0:07:29.060
+the rest of the children didn't
+even need to be explored.
+
+0:07:29.060,0:07:32.370
+Let's see whether or not we can recreate
+this idea for expectimax.
+
+0:07:32.370,0:07:35.800
+So let's imagine we've looked at all
+of the values under the left child,
+
+0:07:35.800,0:07:40.380
+and we've seen that it has value
+8, and we've returned that.
+
+0:07:40.380,0:07:44.920
+Well, now max has an option
+of expected value 8.
+
+0:07:44.920,0:07:47.880
+We go into the second child here
+in the middle, and we look
+
+0:07:47.880,0:07:48.730
+at its first child.
+
+0:07:48.730,0:07:50.470
+And we see a 2.
+
+0:07:50.470,0:07:53.130
+So far, the state looks pretty bad.
+
+0:07:53.130,0:07:55.430
+maximum would not pick a 2.
+
+0:07:55.430,0:07:56.910
+But there are still children to check.
+
+0:07:56.910,0:07:58.880
+Now minimax, we were done.
+
+0:07:58.880,0:08:00.640
+Because it might get lower than
+2, but it certainly wasn't
+
+0:08:00.640,0:08:01.950
+going to get higher.
+
+0:08:01.950,0:08:02.750
+This is an average.
+
+0:08:02.750,0:08:05.290
+Can this get higher than 2?
+
+0:08:05.290,0:08:06.350
+Absolutely.
+
+0:08:06.350,0:08:07.980
+How much higher?
+
+0:08:07.980,0:08:09.610
+Arbitrarily high.
+
+0:08:09.610,0:08:13.870
+So unless we actually have some kind of
+bound on the range of these values,
+
+0:08:13.870,0:08:17.710
+we have to keep going, because even if
+there's only one child left, and this
+
+0:08:17.710,0:08:21.800
+node looks terrible, that last child
+could be a million dollars.
+
+0:08:21.800,0:08:25.230
+If you have bounds, that does change.
+
+0:08:25.230,0:08:28.700
+So in general, with expectimax, it's
+just a lot harder to prune.
+
+0:08:28.700,0:08:32.460
+And the reason it's hard to prune is
+because the values of a state--
+
+0:08:32.460,0:08:34.570
+it's kind of all of the
+children tangled up.
+
+0:08:34.570,0:08:37.309
+You can no longer isolate individual
+children and use them to bound the
+
+0:08:37.309,0:08:40.460
+rest very easily.
+
+0:08:40.460,0:08:42.450
+How do you use this in practice?
+
+0:08:42.450,0:08:47.310
+Well, it's a big game tree, so just like
+in the minimax case, you can't
+
+0:08:47.310,0:08:49.990
+really search all the
+way to the bottom.
+
+0:08:49.990,0:08:53.380
+This particular expectimax tree is a
+little more complicated than the
+
+0:08:53.380,0:08:54.830
+alternating layers we've seen--
+
+0:08:54.830,0:08:57.440
+so that the agent-- in this case,
+it's just shown as Pac-Man-- is
+
+0:08:57.440,0:08:58.490
+moving at the root.
+
+0:08:58.490,0:08:59.400
+And then the ghosts move.
+
+0:08:59.400,0:09:01.450
+And let's imagine they are
+actually random shorts.
+
+0:09:01.450,0:09:04.020
+They picked randomly amongst
+their legal actions.
+
+0:09:04.020,0:09:07.020
+In that case, we would actually have
+two layers corresponding to the
+
+0:09:07.020,0:09:11.790
+sequence of two random ghost actions,
+before Pac-Man moves again.
+
+0:09:11.790,0:09:14.720
+At the actual end of the game, we
+know what the states are worth.
+
+0:09:14.720,0:09:18.165
+This is a game that's defined by its
+score so you would just look at the
+
+0:09:18.165,0:09:19.470
+score of those states.
+
+0:09:19.470,0:09:21.980
+In any case, we're not going to be able
+to go all the way down to the end
+
+0:09:21.980,0:09:24.830
+of the game, so at some point
+we have to cut this off.
+
+0:09:24.830,0:09:27.880
+When we cut this process offered at some
+limited depth, we don't actually
+
+0:09:27.880,0:09:33.280
+know what you will achieve on average
+from that state under optimal play.
+
+0:09:33.280,0:09:34.080
+We like that.
+
+0:09:34.080,0:09:37.640
+We'd like to have some estimate of that
+value instead, the true value but
+
+0:09:37.640,0:09:39.570
+true valley would take a lot of work to
+compute, so we're going to plug-in
+
+0:09:39.570,0:09:43.156
+our best guess, just like
+we did with minimax.
+
+0:09:43.156,0:09:46.320
+It's a little bit harder than it was in
+minimax to get that process right.
+
+0:09:46.320,0:09:47.940
+And why is that?
+
+0:09:47.940,0:09:49.890
+Well let's think about minimax
+again for a second.
+
+0:09:49.890,0:09:51.710
+And let's think about worst
+case reasoning.
+
+0:09:51.710,0:09:55.790
+And let's think about the minimax
+tree shown on the left here.
+
+0:09:55.790,0:09:57.280
+Minimax, this is pretty
+straightforward.
+
+0:09:57.280,0:09:58.910
+We look at this tree and
+we say all right.
+
+0:09:58.910,0:10:00.630
+On the left I get 0.
+
+0:10:00.630,0:10:01.790
+On the right, I get 20.
+
+0:10:01.790,0:10:04.020
+So I should go to the right.
+
+0:10:04.020,0:10:07.000
+What would happen if we got
+those numbers wrong?
+
+0:10:07.000,0:10:09.450
+What would happen if we squared them?
+
+0:10:09.450,0:10:13.400
+Well, on the left, I would get 0,
+and on the right I get 400.
+
+0:10:13.400,0:10:15.966
+So I should go right.
+
+0:10:15.966,0:10:18.110
+So nothing really changed.
+
+0:10:18.110,0:10:20.750
+minimax is really about the
+ordering of the states.
+
+0:10:20.750,0:10:24.620
+As long as you get your numbers wrong
+but you preserve that ordering,
+
+0:10:24.620,0:10:26.490
+minimax will be fine.
+
+0:10:26.490,0:10:30.200
+Expectimax is a little more fragile,
+because of how these averages work.
+
+0:10:30.200,0:10:35.030
+So in particular, let's imagine these
+are now average case expectimax trees,
+
+0:10:35.030,0:10:37.070
+and let's think again what happens.
+
+0:10:37.070,0:10:41.770
+Well, over on the left, the left branch
+gives me 20, if the children
+
+0:10:41.770,0:10:44.770
+are even, and 25 over here.
+
+0:10:44.770,0:10:45.730
+What would I do?
+
+0:10:45.730,0:10:48.870
+I'd go right and get that 25.
+
+0:10:48.870,0:10:52.540
+How about in the left version where all
+I've done is square the values?
+
+0:10:52.540,0:10:54.940
+I haven't changed their ordering?
+
+0:10:54.940,0:10:56.440
+What about the left?
+
+0:10:56.440,0:11:00.260
+Numbers are bigger, so it's 800.
+
+0:11:00.260,0:11:01.860
+And how about on the other side?
+
+0:11:01.860,0:11:03.100
+What are we going to get there?
+
+0:11:03.100,0:11:05.960
+That's 650.
+
+0:11:05.960,0:11:06.490
+What should we do?
+
+0:11:06.490,0:11:09.020
+We should go left.
+
+0:11:09.020,0:11:12.780
+So in this case, squaring these
+things changed the answer.
+
+0:11:12.780,0:11:16.130
+Expectimax is much more dependent
+on the scale and the
+
+0:11:16.130,0:11:18.220
+shape of these utilities.
+
+0:11:18.220,0:11:20.300
+And so it's something we're going to
+have to get right if we want the
+
+0:11:20.300,0:11:21.740
+results to be meaningful.
+
+0:11:21.740,0:11:24.210
+The magnitudes are important,
+not just their order.
+
+0:11:24.210,0:11:25.620
+And we're going to come back
+to that later today.
+
+0:11:25.620,0:11:26.870
+

@@ -1,0 +1,1511 @@
+0:00:00.000,0:00:01.281
+
+0:00:01.281,0:00:03.500
+DAN KLEIN: Now we're going to think
+about the problem of what you do in a
+
+0:00:03.500,0:00:06.770
+game like Pacman where there are
+so many states that you can't
+
+0:00:06.770,0:00:08.380
+learn about each one.
+
+0:00:08.380,0:00:11.500
+The basic idea we're going to have here
+is called approximate Q-Learning
+
+0:00:11.500,0:00:14.870
+and boils down to the fact that, when
+you learn that a ghost is scary
+
+0:00:14.870,0:00:17.870
+through one experience, you should
+transfer that to all other states that
+
+0:00:17.870,0:00:19.670
+are similar.
+
+0:00:19.670,0:00:22.460
+So we want to be able to generalize
+across states because there's just so
+
+0:00:22.460,0:00:23.360
+many of them.
+
+0:00:23.360,0:00:27.530
+In basic Q-Learning, if you think about
+the algorithm, it keeps a table
+
+0:00:27.530,0:00:29.230
+of all of the Q-values.
+
+0:00:29.230,0:00:30.950
+That looks something like this.
+
+0:00:30.950,0:00:34.630
+You have your agent and, for every
+cell of grid world and for every
+
+0:00:34.630,0:00:37.240
+action, you have a number
+that you're storing.
+
+0:00:37.240,0:00:40.670
+That's fine when there are
+too many Q-states.
+
+0:00:40.670,0:00:44.270
+In any kind of realistic situation,
+this won't actually work.
+
+0:00:44.270,0:00:46.710
+And the reason it won't work is because
+we can't learn about every
+
+0:00:46.710,0:00:48.030
+single state.
+
+0:00:48.030,0:00:51.320
+There are multiple reasons why we can't
+learn about every single state.
+
+0:00:51.320,0:00:54.010
+There are too many of them to
+visit them all in training.
+
+0:00:54.010,0:00:58.260
+You just can't get yourself in every
+configuration of Pacman.
+
+0:00:58.260,0:01:01.540
+In addition, even if you could, there's
+too many states even hold the
+
+0:01:01.540,0:01:02.800
+Q-values in memory.
+
+0:01:02.800,0:01:06.790
+So even if you wanted to do exhaustive
+Q-Learning, it's not an option.
+
+0:01:06.790,0:01:10.100
+In general, for a game like Pacman, if
+you had the Q-tables, it would just be
+
+0:01:10.100,0:01:11.430
+this infinite library.
+
+0:01:11.430,0:01:13.680
+And that's not going to work.
+
+0:01:13.680,0:01:16.180
+So what we want to do is
+we want to generalize.
+
+0:01:16.180,0:01:20.500
+We'd like to be able to take some small
+number of training examples, our
+
+0:01:20.500,0:01:24.920
+experiences in some small number of
+games, and generalize them to similar
+
+0:01:24.920,0:01:26.780
+situations.
+
+0:01:26.780,0:01:29.230
+This is actually a fundamental
+idea in machine learning.
+
+0:01:29.230,0:01:32.230
+We'll see it over and over
+again in this course.
+
+0:01:32.230,0:01:35.570
+You actually want to be able to
+generalize not just to save on time
+
+0:01:35.570,0:01:38.470
+and storage, but also because
+it's just better.
+
+0:01:38.470,0:01:41.920
+You're going to learn faster, if you
+don't have to repeat the lessons in
+
+0:01:41.920,0:01:44.860
+every similar state.
+
+0:01:44.860,0:01:48.530
+For example, let's imagine that we
+discover, through experience, that
+
+0:01:48.530,0:01:49.930
+this state is bad.
+
+0:01:49.930,0:01:51.210
+This is not a good state.
+
+0:01:51.210,0:01:53.760
+And in fact, we're going to
+discover that very soon.
+
+0:01:53.760,0:01:57.400
+So we learn that this state is bad with
+our reinforcement learning magic.
+
+0:01:57.400,0:02:01.620
+In basic Q-Learning, we know nothing at
+all about this state, even though,
+
+0:02:01.620,0:02:05.470
+as a human, you look at that and think,
+yeah, that's probably bad too.
+
+0:02:05.470,0:02:08.039
+In fact, it's kind of
+bad in the same way.
+
+0:02:08.039,0:02:09.310
+But it's a different state.
+
+0:02:09.310,0:02:12.180
+And so you know nothing about
+it in naive Q-Learning.
+
+0:02:12.180,0:02:13.510
+It's actually even worse than that.
+
+0:02:13.510,0:02:15.290
+You also know nothing
+about this state.
+
+0:02:15.290,0:02:16.080
+What's wrong with this state?
+
+0:02:16.080,0:02:17.340
+It's missing a dot.
+
+0:02:17.340,0:02:21.100
+It is a totally different state, as
+far as Q-Learning is concerned.
+
+0:02:21.100,0:02:24.960
+Something's wrong here, if you've got
+to learn about the ghosts in every
+
+0:02:24.960,0:02:28.210
+configuration of not only
+ghost, but also dot.
+
+0:02:28.210,0:02:29.730
+Let's look at what this would do.
+
+0:02:29.730,0:02:33.100
+So what happens when we run
+reinforcement learning in Pacman?
+
+0:02:33.100,0:02:35.290
+So this is going to be a very
+small Pacman board.
+
+0:02:35.290,0:02:38.170
+And what you're going to see is you're
+going to see a bunch of states fly by.
+
+0:02:38.170,0:02:41.140
+Each state is going to have
+a Q-value for each action.
+
+0:02:41.140,0:02:45.130
+And we're going to slowly
+learn, so here we go.
+
+0:02:45.130,0:02:45.878
+Tiny little board.
+
+0:02:45.878,0:02:46.714
+We died.
+
+0:02:46.714,0:02:47.550
+We died.
+
+0:02:47.550,0:02:49.145
+Oh, we won.
+
+0:02:49.145,0:02:49.570
+We died.
+
+0:02:49.570,0:02:50.420
+We died.
+
+0:02:50.420,0:02:53.050
+You mostly die.
+
+0:02:53.050,0:02:54.130
+Why?
+
+0:02:54.130,0:02:55.240
+Because you don't know
+what's going on.
+
+0:02:55.240,0:02:56.160
+You're like, I've never
+seen this state.
+
+0:02:56.160,0:02:56.770
+Let's go left.
+
+0:02:56.770,0:02:58.930
+And meanwhile, the ghost is like yum.
+
+0:02:58.930,0:03:00.840
+[LAUGHTER]
+
+0:03:00.840,0:03:02.630
+DAN KLEIN: Every now and then you
+accidentally eat the dot.
+
+0:03:02.630,0:03:07.890
+
+0:03:07.890,0:03:09.990
+You lose a lot at Pacman this way.
+
+0:03:09.990,0:03:11.680
+The regret is very high.
+
+0:03:11.680,0:03:14.560
+Now what I'm going to do is I'm going
+to let it run 2,000 times before we
+
+0:03:14.560,0:03:15.610
+see anything.
+
+0:03:15.610,0:03:18.690
+After 2,000 times, you've seen
+all these states before.
+
+0:03:18.690,0:03:20.590
+You know exactly which
+ones are good or bad.
+
+0:03:20.590,0:03:26.030
+And now you can do some amazing
+gymnastics and dodge the ghost.
+
+0:03:26.030,0:03:27.280
+And in fact, that was a win.
+
+0:03:27.280,0:03:30.390
+
+0:03:30.390,0:03:31.880
+So you win, and you win, and
+you win, and you win.
+
+0:03:31.880,0:03:37.460
+
+0:03:37.460,0:03:38.540
+So that's great.
+
+0:03:38.540,0:03:40.290
+Q-Learning on Pacman.
+
+0:03:40.290,0:03:42.000
+Or does it?
+
+0:03:42.000,0:03:43.390
+What about this?
+
+0:03:43.390,0:03:49.160
+This board isn't much bigger, but it
+just takes a long time before you find
+
+0:03:49.160,0:03:51.620
+your way to that dot.
+
+0:03:51.620,0:03:54.850
+And the ghost just isn't
+going to let you do it.
+
+0:03:54.850,0:03:55.640
+And what are you learning?
+
+0:03:55.640,0:03:59.100
+You're like, oh, in square 2,
+comma 3, it's kind of bad to
+
+0:03:59.100,0:04:00.240
+run into the ghost.
+
+0:04:00.240,0:04:05.122
+Oh, in square 1, comma 2, maybe I
+shouldn't run into the ghost.
+
+0:04:05.122,0:04:14.086
+[LAUGHTER]
+
+0:04:14.086,0:04:14.900
+DAN KLEIN: Yeah.
+
+0:04:14.900,0:04:17.100
+So that's basically not going to work.
+
+0:04:17.100,0:04:18.200
+So what's the solution?
+
+0:04:18.200,0:04:20.730
+You actually already know the solution,
+because you already
+
+0:04:20.730,0:04:22.660
+implement it in project two.
+
+0:04:22.660,0:04:26.490
+The solution is to take a state and,
+rather than thinking about it as its
+
+0:04:26.490,0:04:30.800
+own black box whose Q-values values
+are special and unlike any other
+
+0:04:30.800,0:04:34.920
+state's Q-values, instead, what we say
+is, really, states boil down to a
+
+0:04:34.920,0:04:37.460
+small number of properties, which
+we will call features.
+
+0:04:37.460,0:04:40.870
+So we describe a state using a vector
+of features, just like we did for
+
+0:04:40.870,0:04:42.210
+evaluation functions.
+
+0:04:42.210,0:04:43.430
+So what are features?
+
+0:04:43.430,0:04:45.630
+They take a state and they
+return a real number.
+
+0:04:45.630,0:04:48.110
+Sometimes it's 0/1, indicating
+something.
+
+0:04:48.110,0:04:51.600
+And sometimes it's a number indicating
+something that's a real number.
+
+0:04:51.600,0:04:54.990
+And so, for example, we might have the
+distance to the closest ghost, or the
+
+0:04:54.990,0:04:58.040
+reciprocal of the distance to the
+closest ghost, or the number of
+
+0:04:58.040,0:05:01.670
+ghosts, or 1 over the squared
+distance to a dot.
+
+0:05:01.670,0:05:03.080
+Is Pacman in a tunnel?
+
+0:05:03.080,0:05:04.280
+That might be a 0/1 thing.
+
+0:05:04.280,0:05:06.970
+So you could learn that being
+in a tunnel is dangerous.
+
+0:05:06.970,0:05:10.540
+You could conceivably have a feature
+which says, is it the exact state
+
+0:05:10.540,0:05:11.960
+that's shown on this slide?
+
+0:05:11.960,0:05:14.000
+Of course, if you did that, you
+wouldn't have 10 features.
+
+0:05:14.000,0:05:15.810
+You'd have 10 billion features.
+
+0:05:15.810,0:05:18.670
+And then it would be a lot harder to
+learn, even though you're using a
+
+0:05:18.670,0:05:20.700
+feature-based representation.
+
+0:05:20.700,0:05:23.490
+In your project twos, the
+thing you described with
+
+0:05:23.490,0:05:26.270
+features was a state value.
+
+0:05:26.270,0:05:27.610
+So you described a state.
+
+0:05:27.610,0:05:30.940
+You computed a value for that state by
+taking your features and doing some
+
+0:05:30.940,0:05:33.000
+weighted linear combination.
+
+0:05:33.000,0:05:36.170
+Of course, now we're going to have to
+describe Q-states, which gives us
+
+0:05:36.170,0:05:40.110
+features like, am I moving towards
+the ghost with this action?
+
+0:05:40.110,0:05:41.870
+This gives you linear value functions.
+
+0:05:41.870,0:05:44.830
+In project two, this was your
+linear value function.
+
+0:05:44.830,0:05:48.450
+It said, the value of a state is some
+weighted combination of the features.
+
+0:05:48.450,0:05:51.680
+And at the time we said, you
+come up with the features.
+
+0:05:51.680,0:05:54.050
+And once you have the features, you
+should fiddle around with the weights
+
+0:05:54.050,0:05:55.490
+until it basically works.
+
+0:05:55.490,0:05:58.470
+Now, you're going to still come up with
+the features, but the learning
+
+0:05:58.470,0:06:00.880
+algorithm is going to fiddle around
+with the weights for you.
+
+0:06:00.880,0:06:04.490
+For reinforcement learning, we
+have Q-values and not values.
+
+0:06:04.490,0:06:08.610
+And so what we have is Q-values that
+are weighted linear combinations of
+
+0:06:08.610,0:06:10.650
+functions over state action pairs.
+
+0:06:10.650,0:06:13.430
+The advantage of having a linear
+representation of your feature
+
+0:06:13.430,0:06:17.450
+function is that your experience is
+now summed up with a few powerful
+
+0:06:17.450,0:06:20.040
+numbers, like ghosts are bad.
+
+0:06:20.040,0:06:23.050
+The disadvantage is you can have states
+which are very similar in terms
+
+0:06:23.050,0:06:25.480
+of their features, but are
+very different in value.
+
+0:06:25.480,0:06:28.810
+For example, if there are two ghosts
+close to you, it matters a lot whether
+
+0:06:28.810,0:06:31.990
+they're on either side of you or both on
+the same side, because in one case
+
+0:06:31.990,0:06:33.020
+you're pinned and you're a goner.
+
+0:06:33.020,0:06:35.850
+And in the other case, you
+can kite them around.
+
+0:06:35.850,0:06:39.680
+Your job is to come up with features
+that make sure that important
+
+0:06:39.680,0:06:43.310
+differences in value are reflected in
+differences in features, so the
+
+0:06:43.310,0:06:45.750
+learning algorithm can do its job.
+
+0:06:45.750,0:06:47.320
+So how does approximate
+Q-Learning work?
+
+0:06:47.320,0:06:49.010
+Well, here's the magic equation.
+
+0:06:49.010,0:06:53.650
+This equation tells us, on the basis of
+the features of a state action pair
+
+0:06:53.650,0:06:57.060
+and some weights which are, for the
+moment, known and fixed so we're going
+
+0:06:57.060,0:07:00.430
+to update them, it lets us
+compute the Q-value.
+
+0:07:00.430,0:07:01.550
+So I give you a state.
+
+0:07:01.550,0:07:02.670
+You compute this function.
+
+0:07:02.670,0:07:04.740
+And out pops the Q-value.
+
+0:07:04.740,0:07:07.600
+How are we going to do Q-Learning
+with these Q-functions?
+
+0:07:07.600,0:07:11.170
+Well, the first part of the Q-Learning
+algorithm doesn't actually care where
+
+0:07:11.170,0:07:12.660
+the Q-value came from.
+
+0:07:12.660,0:07:16.060
+It says, give me a transition
+so that I can learn.
+
+0:07:16.060,0:07:17.210
+And you say, all right.
+
+0:07:17.210,0:07:18.290
+I was in state, s.
+
+0:07:18.290,0:07:19.145
+I chose action, a.
+
+0:07:19.145,0:07:20.540
+And I received reward, r.
+
+0:07:20.540,0:07:23.130
+And I landed in outcome s prime.
+
+0:07:23.130,0:07:23.730
+OK.
+
+0:07:23.730,0:07:25.520
+Well, I take a difference.
+
+0:07:25.520,0:07:28.760
+I say all right, I thought I
+was going to get Q of s, a.
+
+0:07:28.760,0:07:30.790
+That was my old guess on one hand.
+
+0:07:30.790,0:07:35.180
+And on the other hand, I now think I'm
+going to get this reward plus my
+
+0:07:35.180,0:07:37.950
+estimate of the value of the
+landing state, which is a
+
+0:07:37.950,0:07:40.060
+max over its actions.
+
+0:07:40.060,0:07:42.880
+So you compute this kind of error term,
+the difference between what you
+
+0:07:42.880,0:07:46.100
+thought you were going to get and what
+you actually seem to be about to get,
+
+0:07:46.100,0:07:50.030
+on the basis of this one
+step ahead experience.
+
+0:07:50.030,0:07:51.850
+Now what's the update?
+
+0:07:51.850,0:07:54.700
+For an exact Q-Learner, the
+update looks like this.
+
+0:07:54.700,0:07:59.340
+This is just an algebraic rewrite of
+the update that says, take alpha of
+
+0:07:59.340,0:08:02.430
+one and 1 minus alpha of the other.
+
+0:08:02.430,0:08:07.080
+So what we basically do is we keep our
+Q-value around, but we nudge it in the
+
+0:08:07.080,0:08:10.370
+direction of this difference, the
+difference between what we thought we
+
+0:08:10.370,0:08:12.930
+would get and what we appear
+to be getting.
+
+0:08:12.930,0:08:15.170
+So if we appear to be getting something
+a lot higher than we
+
+0:08:15.170,0:08:17.850
+thought, well, we should
+raise our estimate.
+
+0:08:17.850,0:08:23.040
+Now if your Q-values are a big table,
+you simply look up this entry, s, a.
+
+0:08:23.040,0:08:24.780
+You see it's 9.3.
+
+0:08:24.780,0:08:28.010
+You cross out the 9.3, and
+you replace it with 9.8.
+
+0:08:28.010,0:08:30.840
+It's really easy to increment a table.
+
+0:08:30.840,0:08:34.990
+The problem is now the only knobs
+we have are the weights.
+
+0:08:34.990,0:08:38.370
+You can't increment a single
+value in the Q-function.
+
+0:08:38.370,0:08:41.919
+But what you can do is you can say,
+all right, my Q-value wasn't high
+
+0:08:41.919,0:08:45.650
+enough for this state, so what I need to
+do is change the weights so that it
+
+0:08:45.650,0:08:46.820
+will be higher.
+
+0:08:46.820,0:08:50.640
+And the way we do that is, instead of
+increasing the Q-value directly, we
+
+0:08:50.640,0:08:51.670
+increase the weights.
+
+0:08:51.670,0:08:54.060
+But which weights should we increase?
+
+0:08:54.060,0:08:57.970
+You increase all of them, but in
+proportion to the feature value.
+
+0:08:57.970,0:09:00.900
+So if a certain feature is off,
+we don't change its weight.
+
+0:09:00.900,0:09:03.620
+If it's negative, we're actually going
+to decrease its weight, because of the
+
+0:09:03.620,0:09:04.730
+sign change.
+
+0:09:04.730,0:09:07.200
+And then, features that fire
+more strongly have a bigger
+
+0:09:07.200,0:09:10.160
+effect on the update.
+
+0:09:10.160,0:09:11.180
+So this is the difference.
+
+0:09:11.180,0:09:12.180
+It's the same idea.
+
+0:09:12.180,0:09:14.100
+You compute how wrong you were.
+
+0:09:14.100,0:09:16.470
+And then you try to make
+that error less.
+
+0:09:16.470,0:09:19.140
+Except now, we are tweaking
+the weights, rather than
+
+0:09:19.140,0:09:20.580
+the Q-values directly.
+
+0:09:20.580,0:09:21.800
+That looks like this.
+
+0:09:21.800,0:09:25.760
+That looks like you've got these
+sliders, like how bad is a ghost?
+
+0:09:25.760,0:09:27.680
+And whenever you're near a
+ghost and something bad
+
+0:09:27.680,0:09:30.010
+happens, blame the ghost.
+
+0:09:30.010,0:09:32.920
+And so you write down ghosts are a
+little worse than they were before.
+
+0:09:32.920,0:09:35.940
+The intuitive interpretation is we're
+adjusting these weights so that, if
+
+0:09:35.940,0:09:39.210
+something bad happens, all of the
+features that are active get a
+
+0:09:39.210,0:09:41.930
+penalty and so on.
+
+0:09:41.930,0:09:46.600
+OK, let's see an example of Q-Learning
+with feature-based approximations
+
+0:09:46.600,0:09:48.040
+being applied to Pacman.
+
+0:09:48.040,0:09:52.980
+So here's a very simplistic version
+of a Q-function for Pacman.
+
+0:09:52.980,0:09:56.740
+It says, in a given state, s, and for
+a given action, a, I'm going to
+
+0:09:56.740,0:10:00.370
+compute how close will I be to
+the dot, if I take action a.
+
+0:10:00.370,0:10:02.720
+And then I'll take the reciprocal
+of that distance.
+
+0:10:02.720,0:10:05.140
+That's fDOT, the DOT feature.
+
+0:10:05.140,0:10:08.760
+So a big number means I'm basically
+getting close to a dot.
+
+0:10:08.760,0:10:11.980
+There's also a GST feature which
+computes the same thing for the ghost.
+
+0:10:11.980,0:10:15.750
+So as I get closer to the ghost,
+f sub GST gets bigger.
+
+0:10:15.750,0:10:20.580
+And we've learned a Q-function that says
+multiply the DOT feature by 4.
+
+0:10:20.580,0:10:22.430
+So basically, dots are very good.
+
+0:10:22.430,0:10:24.450
+But subtract off the GST feature.
+
+0:10:24.450,0:10:27.370
+So a state that has ghosts
+nearby is very bad.
+
+0:10:27.370,0:10:31.960
+And let's see what happens, if we have
+an experience with this Q-function.
+
+0:10:31.960,0:10:33.790
+Well, here's a state.
+
+0:10:33.790,0:10:35.450
+It's not the best state to be in.
+
+0:10:35.450,0:10:39.410
+And here, fDot is 0.5, because
+the closest dot is two away.
+
+0:10:39.410,0:10:42.750
+And fGST might be 1.0, because
+the ghosts are one away.
+
+0:10:42.750,0:10:46.900
+When we plug these features into the
+Q-function with our current values of
+
+0:10:46.900,0:10:52.130
+4 and 1, we compute that our approximate
+Q is plus 1 for this
+
+0:10:52.130,0:10:55.820
+Q-state, so for this state
+and for the action NORTH.
+
+0:10:55.820,0:10:57.200
+What does that mean?
+
+0:10:57.200,0:11:00.720
+That means that, according to our
+approximate Q-value, we think our
+
+0:11:00.720,0:11:04.763
+score for the game from this point
+forward is going to be plus 1.
+
+0:11:04.763,0:11:06.560
+Well, what happens?
+
+0:11:06.560,0:11:08.210
+Well, reality happens.
+
+0:11:08.210,0:11:10.300
+You move NORTH, you die.
+
+0:11:10.300,0:11:12.300
+You receive a negative 500 reward.
+
+0:11:12.300,0:11:14.590
+And you end up in a state
+where the game is over.
+
+0:11:14.590,0:11:17.120
+And therefore, the Q-values
+are all 0, by definition.
+
+0:11:17.120,0:11:20.480
+So now we think hard and we say, well,
+I used to think, before I had this
+
+0:11:20.480,0:11:23.690
+experience, that this state on
+the left was worth plus 1.
+
+0:11:23.690,0:11:26.840
+Apparently, that isn't what
+happened this time.
+
+0:11:26.840,0:11:31.620
+This time, it looks like I'm on track
+for the negative 500 I received plus a
+
+0:11:31.620,0:11:35.850
+future discounted reward of
+0 when the game ended.
+
+0:11:35.850,0:11:37.880
+All right, so I compare
+these two things.
+
+0:11:37.880,0:11:42.400
+And I say, well, it looks like
+I overestimated by 501.
+
+0:11:42.400,0:11:44.940
+So my difference here is negative 501.
+
+0:11:44.940,0:11:47.670
+And that means I should probably
+lower the Q-value.
+
+0:11:47.670,0:11:50.130
+Now remember, I can't lower
+the Q-value directly.
+
+0:11:50.130,0:11:52.390
+I have to lower it via the weights.
+
+0:11:52.390,0:11:53.450
+And so I do this update.
+
+0:11:53.450,0:11:55.720
+The weights mostly stay the same.
+
+0:11:55.720,0:11:58.980
+But I move them in the appropriate
+direction by an amount that is
+
+0:11:58.980,0:12:02.500
+proportional to my error, the
+learning rate, alpha--
+
+0:12:02.500,0:12:03.980
+that's a step size here--
+
+0:12:03.980,0:12:05.890
+and deactivation of the feature.
+
+0:12:05.890,0:12:09.220
+So the GST feature was more active here
+than the DOT feature, so it's
+
+0:12:09.220,0:12:11.800
+going to receive a larger update.
+
+0:12:11.800,0:12:16.070
+When I execute these updates, I end up
+with a new Q-function which has the
+
+0:12:16.070,0:12:20.830
+same functional form, uses the same
+features, but has different weights.
+
+0:12:20.830,0:12:25.450
+We like dots slightly less, because
+there was a dot relatively nearby at
+
+0:12:25.450,0:12:26.780
+our tragic demise.
+
+0:12:26.780,0:12:30.130
+And we really don't like ghosts now,
+because they were right there when all
+
+0:12:30.130,0:12:31.970
+the bad stuff happened.
+
+0:12:31.970,0:12:34.250
+Now we'll continue acting, but
+it seems reasonable that
+
+0:12:34.250,0:12:35.320
+this is what we learn.
+
+0:12:35.320,0:12:38.390
+We still like the dots, but now
+we're more scared of ghosts.
+
+0:12:38.390,0:12:39.790
+It seems like a good outcome.
+
+0:12:39.790,0:12:42.150
+Let's see what happens in practice.
+
+0:12:42.150,0:12:44.760
+What's nice about this is
+you learn so quickly.
+
+0:12:44.760,0:12:47.300
+From even one experience, you can
+learn that ghosts are bad.
+
+0:12:47.300,0:12:50.330
+So what you're going to see is you're
+going to see a game of Pacman in a
+
+0:12:50.330,0:12:52.440
+reasonable board with ghosts.
+
+0:12:52.440,0:12:55.920
+And what you should realize is, the
+first time you eat a dot, you get a
+
+0:12:55.920,0:12:58.960
+feedback that lets you learn
+that maybe dots are good.
+
+0:12:58.960,0:13:01.790
+And the first time you hit a ghost, you
+have an opportunity to learn that
+
+0:13:01.790,0:13:02.750
+ghosts are bad.
+
+0:13:02.750,0:13:05.940
+So instead of that kind of error and
+error and error and finally, after
+
+0:13:05.940,0:13:10.400
+2,000 tries, we master a 2x2 board,
+let's see what happens.
+
+0:13:10.400,0:13:12.160
+So mm, dots are good.
+
+0:13:12.160,0:13:13.130
+Ghosts are bad.
+
+0:13:13.130,0:13:16.152
+OK, dots are good.
+
+0:13:16.152,0:13:17.070
+Ghosts are bad.
+
+0:13:17.070,0:13:19.250
+You see it tried to run away.
+
+0:13:19.250,0:13:31.450
+And now, pretty good.
+
+0:13:31.450,0:13:40.570
+
+0:13:40.570,0:13:43.830
+Here, it's not eating
+the power pellets.
+
+0:13:43.830,0:13:46.800
+If it ate them, it would have a chance
+to learn that they're good, if the
+
+0:13:46.800,0:13:49.010
+feature functions allow that
+to be represented.
+
+0:13:49.010,0:13:50.760
+In this case, those features
+aren't present.
+
+0:13:50.760,0:13:55.700
+
+0:13:55.700,0:13:58.940
+What we're going to do now is we're
+going to take a quick look and see why
+
+0:13:58.940,0:14:01.040
+this update makes sense.
+
+0:14:01.040,0:14:05.000
+I told you this intuitive explanation,
+which was look at your error and
+
+0:14:05.000,0:14:07.380
+adjust the weight so that
+the error gets smaller.
+
+0:14:07.380,0:14:11.880
+In fact, we can use that idea to
+formally justify this approximate
+
+0:14:11.880,0:14:13.040
+Q-Learning update.
+
+0:14:13.040,0:14:16.260
+And the way we do that is we think
+back to a more general
+
+0:14:16.260,0:14:18.850
+case of least squares.
+
+0:14:18.850,0:14:21.950
+So in general, we might want to do some
+kind of linear approximation.
+
+0:14:21.950,0:14:23.790
+In particular, we have
+some feature vector.
+
+0:14:23.790,0:14:27.520
+Maybe we've only got one feature,
+f1 of our input x.
+
+0:14:27.520,0:14:29.930
+And we can have a prediction
+function which is linear.
+
+0:14:29.930,0:14:32.790
+In this case, there's a w0, which
+is an intercept term.
+
+0:14:32.790,0:14:34.870
+That will correspond to what's
+called a Bias feature that's
+
+0:14:34.870,0:14:36.290
+always equal to 1.
+
+0:14:36.290,0:14:38.590
+And here we have one real feature.
+
+0:14:38.590,0:14:42.070
+And in a linear function, I always
+have a prediction that's a linear
+
+0:14:42.070,0:14:43.420
+function of my input.
+
+0:14:43.420,0:14:44.820
+So the prediction here is y hat.
+
+0:14:44.820,0:14:47.620
+This can happen in multiple
+dimensions as well.
+
+0:14:47.620,0:14:50.390
+The dimension gets higher,
+as I have more features.
+
+0:14:50.390,0:14:52.610
+So this is a linear prediction
+function.
+
+0:14:52.610,0:14:56.600
+How do we figure out what weights we
+should use in this simple case where
+
+0:14:56.600,0:14:59.590
+we simply have inputs, outputs
+and some data points?
+
+0:14:59.590,0:15:02.370
+No Q-Learning, no robots,
+none of that.
+
+0:15:02.370,0:15:04.425
+Well, we say all right, we've
+got these data points that
+
+0:15:04.425,0:15:05.510
+are shown in red.
+
+0:15:05.510,0:15:08.810
+I've got some predictor, which
+is determined by the weights.
+
+0:15:08.810,0:15:12.300
+And my predictor makes mistakes, in
+particular, on a given data point.
+
+0:15:12.300,0:15:16.690
+Our actual value is y, but we predict
+y hat on the basis of our weights.
+
+0:15:16.690,0:15:20.360
+Now better weights will get the
+y's and the y hats closer.
+
+0:15:20.360,0:15:21.590
+Formally, we could write this down.
+
+0:15:21.590,0:15:24.590
+We could say the total error in
+our predictor is a sum over
+
+0:15:24.590,0:15:25.570
+all the data points.
+
+0:15:25.570,0:15:28.490
+For each data point, we look at the
+difference between the prediction and
+
+0:15:28.490,0:15:29.380
+the target.
+
+0:15:29.380,0:15:32.250
+And we square it, because being negative
+is bad, and being positive is
+
+0:15:32.250,0:15:33.240
+bad as well.
+
+0:15:33.240,0:15:34.830
+So that's our total error.
+
+0:15:34.830,0:15:37.470
+Remember that our predictor
+has this linear form.
+
+0:15:37.470,0:15:41.650
+For us, this linear form is with
+respect to the features of x.
+
+0:15:41.650,0:15:43.710
+And that's why you see these feature
+functions here that you wouldn't
+
+0:15:43.710,0:15:46.070
+normally see in a linear regression.
+
+0:15:46.070,0:15:48.300
+So we have this expression
+that is our total error.
+
+0:15:48.300,0:15:51.570
+And we should move the weights around
+to make this error small.
+
+0:15:51.570,0:15:54.350
+This is just how you drive
+linear regression.
+
+0:15:54.350,0:15:56.170
+Well, let's think about
+a particular case.
+
+0:15:56.170,0:15:59.120
+Let's say we wanted to minimize
+the error on one data point.
+
+0:15:59.120,0:16:01.610
+So we imagine we have one point x.
+
+0:16:01.610,0:16:03.940
+And this point x has some
+features f of x.
+
+0:16:03.940,0:16:07.820
+It's got some target value y that
+we'd like the linear function to
+
+0:16:07.820,0:16:08.950
+approximate.
+
+0:16:08.950,0:16:11.310
+And we've got some weights w.
+
+0:16:11.310,0:16:14.320
+So we can write out the error
+on just this one point.
+
+0:16:14.320,0:16:15.330
+So what's the error?
+
+0:16:15.330,0:16:20.300
+It's the difference between the
+target and the approximation.
+
+0:16:20.300,0:16:23.070
+We square it, because negative
+and positive are both bad.
+
+0:16:23.070,0:16:25.900
+And we stick a 1/2 there, because we
+think ahead to how the calculus is
+
+0:16:25.900,0:16:26.760
+going to work out.
+
+0:16:26.760,0:16:28.500
+But 1/2 doesn't do anything.
+
+0:16:28.500,0:16:31.060
+So what we could do, if we wanted to
+make this error small, is we could
+
+0:16:31.060,0:16:32.160
+pull out our calculus.
+
+0:16:32.160,0:16:35.540
+And we could take a derivative with
+respect to a certain weight, like w
+
+0:16:35.540,0:16:38.230
+sub m for the m feature vector.
+
+0:16:38.230,0:16:40.990
+And if we did that, we'd chug through
+the calculus and we'd get the
+
+0:16:40.990,0:16:45.070
+expression that says the derivative
+of the error is this expression.
+
+0:16:45.070,0:16:48.690
+So to make the error big, you want to
+go in the direction of the feature
+
+0:16:48.690,0:16:52.480
+vectors that are contributing
+to this mistake.
+
+0:16:52.480,0:16:54.600
+What you really want to do
+is make the error small.
+
+0:16:54.600,0:16:56.390
+So you go in the other direction.
+
+0:16:56.390,0:17:00.600
+And really, what that means is, for a
+small step size, alpha, you take your
+
+0:17:00.600,0:17:04.000
+weight and you take a step in the
+direction away from the derivative of
+
+0:17:04.000,0:17:05.770
+the error with respect to the weight.
+
+0:17:05.770,0:17:09.550
+And that is exactly our online Q-update,
+which corresponds to
+
+0:17:09.550,0:17:11.720
+fiddling this line up and down.
+
+0:17:11.720,0:17:13.180
+Now how does this work in Q-Learning?
+
+0:17:13.180,0:17:14.720
+Well, the weights are the weights.
+
+0:17:14.720,0:17:18.200
+The target that you're trying to
+reach is your experience from a
+
+0:17:18.200,0:17:19.329
+one-step-look-ahead.
+
+0:17:19.329,0:17:22.579
+And your prediction is
+your linear function.
+
+0:17:22.579,0:17:25.170
+So in fact, this approximate Q-Learning
+that had an intuitive
+
+0:17:25.170,0:17:29.780
+explanation, but came out of nowhere, it
+in fact corresponds to exactly the
+
+0:17:29.780,0:17:33.190
+case of online least squares.
+
+0:17:33.190,0:17:36.450
+Now we had this question of why we want
+to stick to linear things, why we
+
+0:17:36.450,0:17:39.200
+want to stick to some reasonably
+small amount of features.
+
+0:17:39.200,0:17:41.160
+Well, let's say you have this data.
+
+0:17:41.160,0:17:42.990
+What are you going to do with it?
+
+0:17:42.990,0:17:45.280
+Well, in general, linear
+is reasonably safe.
+
+0:17:45.280,0:17:46.990
+Let's imagine that was straight.
+
+0:17:46.990,0:17:48.880
+You might want to do something richer.
+
+0:17:48.880,0:17:53.040
+Like you might want to have not only
+x as a feature, but x squared.
+
+0:17:53.040,0:17:56.200
+And if you add x and x squared as
+features and you took linear
+
+0:17:56.200,0:17:59.360
+combinations of x and x squared,
+in fact, you would get
+
+0:17:59.360,0:18:01.730
+quadratic fits, right?
+
+0:18:01.730,0:18:03.640
+Let's imagine that's a quadratic.
+
+0:18:03.640,0:18:05.130
+And that might be better.
+
+0:18:05.130,0:18:07.020
+And so you think this is great.
+
+0:18:07.020,0:18:10.310
+With a linear combination, because I
+can be non-linear in my features, I
+
+0:18:10.310,0:18:11.990
+can fit more complicated things.
+
+0:18:11.990,0:18:15.010
+Let's throw in all kinds of
+crazy non-linearities.
+
+0:18:15.010,0:18:17.640
+And let's throw in all kinds of
+features, as many things as we can
+
+0:18:17.640,0:18:19.590
+possibly think of.
+
+0:18:19.590,0:18:20.490
+Well, what happens?
+
+0:18:20.490,0:18:23.510
+Well, what would happen if you tried
+to fit this thing with a degree 15
+
+0:18:23.510,0:18:25.080
+polynomial?
+
+0:18:25.080,0:18:25.970
+Well, guess what?
+
+0:18:25.970,0:18:27.590
+You can fit it.
+
+0:18:27.590,0:18:28.970
+Good job.
+
+0:18:28.970,0:18:31.990
+And this isn't very good because,
+although it gives you the right answer
+
+0:18:31.990,0:18:35.840
+on your data points, it's totally
+useless in between.
+
+0:18:35.840,0:18:37.690
+You might as well have given it
+to this guy and just said
+
+0:18:37.690,0:18:38.930
+connect these up.
+
+0:18:38.930,0:18:43.000
+This idea that you might do better, if
+you limit the capacity of your model
+
+0:18:43.000,0:18:47.100
+in some way, is a general idea in
+reinforcement learning where you want
+
+0:18:47.100,0:18:49.100
+to generalize and you don't
+want to over-fit.
+
+0:18:49.100,0:18:51.100
+

@@ -1,0 +1,309 @@
+0:00:01.089,0:00:02.500
+Alright, so you say,
+
+0:00:02.500,0:00:05.350
+what the heck am I talking about. What it
+means have an unintentionally funny story?
+
+0:00:05.350,0:00:06.509
+
+0:00:06.509,0:00:10.410
+Well, people did work on storytelling.
+Why do we want to have AIs that tell stories?
+
+0:00:10.410,0:00:13.979
+Because we want to figure
+out what it means to communicate
+
+0:00:13.979,0:00:18.080
+kind of a coherent description of some
+sequence of events.
+
+0:00:18.080,0:00:21.189
+That would like telling a story, right--Describe what you saw.
+
+0:00:21.189,0:00:24.310
+And so people worked in the eighties--and
+they still work on this though with a very
+
+0:00:24.310,0:00:25.410
+different techniques
+
+0:00:25.410,0:00:27.279
+--people worked in the eighties on
+
+0:00:27.279,0:00:30.739
+taking a representation of the world and
+turning it into language through
+
+0:00:30.739,0:00:34.900
+some storytelling device. A famous
+example of this was the TALE-SPIN system of Shank,
+
+0:00:34.900,0:00:35.630
+
+0:00:35.630,0:00:39.070
+and I'm gonna show you some of its
+output. It's gonna do, I think a good job of illustrating
+
+0:00:39.070,0:00:40.760
+
+0:00:40.760,0:00:45.330
+why this endeavor of logic-based, representation-heavy AI,
+
+0:00:45.330,0:00:46.400
+
+0:00:46.400,0:00:48.999
+even people were trying and doing really clever stuff,
+
+0:00:48.999,0:00:50.129
+why it hit some walls.
+
+0:00:50.129,0:00:53.660
+So let's see some unintentionally funny
+stories.
+
+0:00:53.660,0:00:55.340
+I'll read them for you.
+
+0:00:55.340,0:00:57.030
+One day Joe Bear was hungry.
+0:00:57.030,0:00:59.810
+He asked his friend Irving Bird where some honey was.
+0:00:59.810,0:01:02.560
+Irving told him there was a beehive in the oak tree.
+0:01:02.560,0:01:06.780
+Joe walked to the oak tree. He ate the beehive.
+0:01:06.780,0:01:09.290
+the End.
+0:01:09.290,0:01:12.650
+Okay, like, I can just see these kind
+of systems in the eighties trying to
+
+0:01:12.650,0:01:14.650
+like describe the stuff to people.
+
+0:01:14.650,0:01:17.030
+And here's the important point under all of this.
+
+0:01:17.030,0:01:19.300
+It is amazingly close.
+
+0:01:19.300,0:01:20.740
+It does so much right,
+
+0:01:20.740,0:01:24.050
+and it's funny because there's like one
+link missing.
+
+0:01:24.050,0:01:29.200
+So, the bear is hungry, he talks to somebody
+about where the honey is because honey will
+
+0:01:29.200,0:01:33.650
+fix his hunger.  The friend replies there's this beehive, it's in the oak tree, that's a
+
+0:01:33.650,0:01:35.020
+useful answer, right.
+
+0:01:35.020,0:01:38.500
+Irving could have said "I have a
+foot", right, that wouldn't have been helpful.
+
+0:01:38.500,0:01:42.040
+Joe walks over because you can't eat
+unless you're there, and then he eats the beehive.
+
+0:01:42.040,0:01:43.330
+It was so close.
+
+0:01:43.330,0:01:47.900
+And what went wrong was simply in all of
+this knowledge was missing the fact that
+
+0:01:47.900,0:01:50.670
+if you want what's in the container, the
+honey,
+
+0:01:50.670,0:01:52.880
+you have to first remove it from the
+container,
+
+0:01:52.880,0:01:55.690
+and not simply eat the container.
+
+0:01:55.690,0:01:58.980
+One piece in a chain missing, and the
+whole chain falls apart.
+
+0:01:58.980,0:02:02.310
+This is why logical systems were too
+fragile, and this is why people realize
+
+0:02:02.310,0:02:04.689
+that uncertainty was just fact of life.
+
+0:02:04.689,0:02:07.390
+You were always gonna be missing
+some piece.
+
+0:02:07.390,0:02:10.629
+Okay, here's another unintentionally funny
+story.
+
+0:02:10.629,0:02:14.429
+Henry Squirrel was thirsty. He walked over to the river bank where
+his good friend
+0:02:14.429,0:02:15.510
+Bill Bird was sitting.
+0:02:15.510,0:02:17.760
+Henry slipped and fell in the river.
+0:02:17.760,0:02:20.729
+Gravity drowned.
+0:02:20.729,0:02:24.769
+The End.
+0:02:24.769,0:02:26.959
+It's sooo close.
+
+0:02:26.959,0:02:30.469
+I mean, I guess it's kind of a weird story to begin
+with even without the gravity thing but,
+
+0:02:30.469,0:02:32.449
+um...
+
+0:02:32.449,0:02:34.659
+What went wrong here?
+
+0:02:34.659,0:02:37.299
+Well, it's in fact describing a rather
+unfortunate
+
+0:02:37.299,0:02:42.129
+squirrel drowning, right, and what happened
+was there was a drowning event.
+
+0:02:42.129,0:02:43.249
+The squirrel,
+
+0:02:43.249,0:02:44.040
+was kind of
+
+0:02:44.040,0:02:47.299
+the "drownee", right, that's what drowned, and
+
+0:02:47.299,0:02:49.529
+what caused the drowning?
+
+0:02:49.529,0:02:52.609
+Well, gravity. I mean something's got to cause the drowning, right?
+
+0:02:52.609,0:02:56.469
+In rendering this into language, the
+system had all the information but it
+
+0:02:56.469,0:02:59.579
+didn't realize that for a drowning event
+it's really important that you say who drowned,
+
+0:02:59.579,0:03:02.979
+and it's not so important that
+you say what force of nature
+
+0:03:02.979,0:03:05.579
+caused the drowning.
+
+0:03:05.579,0:03:09.449
+So we were so close, one little mess up.
+The information was there and suddenly
+
+0:03:09.449,0:03:12.269
+it's a funny story rather than a
+demonstration of a successful
+
+0:03:12.269,0:03:13.719
+storytelling system.
+
+0:03:13.719,0:03:16.139
+I'll give you one more.
+
+0:03:16.139,0:03:19.449
+
+0:03:19.449,0:03:23.129
+
+0:03:23.129,0:03:26.419
+
+0:03:26.419,0:03:29.279
+
+0:03:29.279,0:03:35.579
+
+0:03:35.579,0:03:39.189
+There's no language problem here, there's
+no like
+
+0:03:39.189,0:03:44.119
+physics violation. It's just kind of
+weird. It's like, the
+
+0:03:44.119,0:03:45.539
+fox is dishonest.
+
+0:03:45.539,0:03:48.809
+Why did you tell me that. There's this whole digression about the piece of cheese.
+
+0:03:48.809,0:03:53.349
+This is a story about a fox walking over
+to a crow.
+
+0:03:53.349,0:03:54.579
+So it's a little weird.
+
+0:03:54.579,0:03:58.809
+And the failing here is not a failing of
+representing the world, or rendering it into language.
+
+0:03:58.809,0:04:02.959
+It's a failing of knowing what is
+worth saying in the context.
+
+0:04:02.959,0:04:06.549
+That's the same issue of context again. Very challenging. There are so many
+
+0:04:06.549,0:04:10.169
+ways has to go wrong and we've had to
+deal with these things in building modern systems.
+
+0:04:10.169,0:04:12.830
+Part of the way we've dealt with them is by changing our tools.
+
+0:04:12.830,0:04:16.100
+Part of the way we've dealt with them is by changing the way we formulate the problems,
+
+0:04:16.100,0:04:22.979
+and part of the way we've dealt with them is just by making things robust in various ways.
+
+0:04:22.979,0:04:25.310
+Okay, you say we can do better now.
+
+0:04:25.310,0:04:27.439
+Well, can we?
+
+0:04:27.439,0:04:32.110
+So, what's this, this is Siri, and what happens when you tell Siri, "Tell me a story"?
+
+0:04:32.110,0:04:33.909
+How does Siri do?
+
+0:04:33.909,0:04:36.460
+Once upon a time... no it's too silly.
+
+0:04:36.460,0:04:39.800
+Right, so at least we now know that the
+story is going to be silly and
+
+0:04:39.800,0:04:40.610
+do not try to say it.
+
+0:04:40.610,0:04:43.029
+So is that progress uh... I don't know.
+

@@ -1,0 +1,209 @@
+0:00:00.000,0:00:00.770
+
+0:00:00.770,0:00:02.040
+DAN KLEIN: Here's something else
+that you can do that's a
+
+0:00:02.040,0:00:03.780
+variant of local search.
+
+0:00:03.780,0:00:05.690
+These are called genetic algorithms.
+
+0:00:05.690,0:00:07.710
+Genetic algorithms are a
+kind of local search.
+
+0:00:07.710,0:00:10.310
+You got, in this case, not one
+hypothesis, but you've got a
+
+0:00:10.310,0:00:12.640
+hypothesis population.
+
+0:00:12.640,0:00:16.950
+You've got a bunch of hypotheses, and
+rather than just locally improving all
+
+0:00:16.950,0:00:20.720
+of them, which in genetic algorithms
+nomenclature is just mere mutation,
+
+0:00:20.720,0:00:23.740
+you're just mutating these things, they
+would say, mutation's not enough.
+
+0:00:23.740,0:00:25.010
+We've got to do more stuff.
+
+0:00:25.010,0:00:26.690
+We've got to make it even
+more like biology here.
+
+0:00:26.690,0:00:28.550
+So there's a natural
+selection metaphor.
+
+0:00:28.550,0:00:32.310
+You keep the best end hypotheses at each
+step, but you do more than that.
+
+0:00:32.310,0:00:36.510
+So in addition to just keeping the best
+one, then you find pairs and you
+
+0:00:36.510,0:00:37.130
+do crossover.
+
+0:00:37.130,0:00:38.430
+Essentially, you mate them.
+
+0:00:38.430,0:00:41.480
+You take hypotheses, and
+you breed hypotheses.
+
+0:00:41.480,0:00:42.250
+Here's what it looks like.
+
+0:00:42.250,0:00:42.985
+You have this robot.
+
+0:00:42.985,0:00:43.960
+You have this robot.
+
+0:00:43.960,0:00:45.910
+Up comes some weird hypothesis robot.
+
+0:00:45.910,0:00:49.100
+And then, in addition to breeding them,
+which is called crossover, you
+
+0:00:49.100,0:00:50.906
+then mutate them as well, which
+is what we were doing all
+
+0:00:50.906,0:00:51.880
+along in local search.
+
+0:00:51.880,0:00:55.470
+So it's a little bit more complicated,
+but it gets out a few more ideas that
+
+0:00:55.470,0:00:58.230
+might actually be these kinds
+of ridge operators.
+
+0:00:58.230,0:01:01.800
+So the selection part, that's basically
+just like going uphill.
+
+0:01:01.800,0:01:05.970
+The mutation part, that's basically
+looking around in your neighborhood.
+
+0:01:05.970,0:01:08.910
+Although mutation and selection look
+a lot like local search, we have to
+
+0:01:08.910,0:01:10.840
+think really hard about this
+crossover operation.
+
+0:01:10.840,0:01:13.980
+What does it mean to take two
+hypotheses and combine them?
+
+0:01:13.980,0:01:15.820
+Well, that's really the key.
+
+0:01:15.820,0:01:18.460
+That might be what gets you
+out of a local optimum.
+
+0:01:18.460,0:01:21.520
+And well, it might look like this.
+
+0:01:21.520,0:01:25.370
+In n-queens, we might say, well, here's
+one hypothesis, and maybe this
+
+0:01:25.370,0:01:28.350
+hypothesis has basically got the
+left half of the board right.
+
+0:01:28.350,0:01:31.450
+And here's another hypothesis, and maybe
+this hypothesis has basically
+
+0:01:31.450,0:01:33.050
+got the right half of the board right.
+
+0:01:33.050,0:01:36.990
+And if we mutate them, we're just going
+to move one piece at a time and
+
+0:01:36.990,0:01:38.640
+maybe both of them are pretty far.
+
+0:01:38.640,0:01:40.040
+But if only we combine them.
+
+0:01:40.040,0:01:43.420
+We take the left half from one, right
+half of the other, we get this new
+
+0:01:43.420,0:01:47.220
+species of queen solution, and
+suddenly we're solved, maybe.
+
+0:01:47.220,0:01:50.830
+And so here, crossover makes sense
+because we've got a way of encoding
+
+0:01:50.830,0:01:54.890
+the solution where really to have the
+prefix of one and the suffix of the
+
+0:01:54.890,0:01:57.440
+other actually makes sense.
+
+0:01:57.440,0:02:00.810
+This kind of crossover doesn't make
+sense when your solutions aren't
+
+0:02:00.810,0:02:05.180
+naturally encoded like this, or where a
+good left half and a good right half
+
+0:02:05.180,0:02:06.500
+don't really work together.
+
+0:02:06.500,0:02:08.389
+And you can imagine some
+of those problems here.
+
+0:02:08.389,0:02:11.015
+It could be that the left half is
+perfectly good, and the right have is
+
+0:02:11.015,0:02:14.250
+perfectly good, but they both use the
+bottom of the board, and then the
+
+0:02:14.250,0:02:17.200
+crossover would not be effective.
+
+0:02:17.200,0:02:19.620
+One more thing to say about these
+variance of local search.
+
+0:02:19.620,0:02:23.990
+They're very powerful in practice, but
+they're also pretty easy to misuse.
+
+0:02:23.990,0:02:26.750
+So for things like genetic algorithms,
+they're very often misapplied.
+
+0:02:26.750,0:02:28.000
+

@@ -1,0 +1,284 @@
+0:00:01.999,0:00:05.600
+Alright, so we're not yet to the point where we
+can tell intentionally funny stories.
+
+0:00:05.600,0:00:07.270
+What can we do with language?
+
+0:00:07.270,0:00:11.260
+Well I mentioned Siri. Siri may not be
+the best at telling bedtime stories
+
+0:00:11.260,0:00:14.960
+but Siri does some amazing things, and the
+pieces that make that up are
+
+0:00:14.960,0:00:18.450
+actually used in many places in industry.
+There's automatic speech recognition,
+
+0:00:18.450,0:00:22.040
+where you go from speech to text.
+There's text-to-speech synthesis which
+
+0:00:22.040,0:00:26.180
+is an easier problem where you go from the text
+to the speech. And then there's dialogue systems
+
+0:00:26.180,0:00:28.740
+that integrate all this together,
+linguistic analysis.
+
+0:00:28.740,0:00:30.349
+Let me show you what a
+
+0:00:30.349,0:00:32.270
+speech recognition system looks like
+
+0:00:32.270,0:00:36.400
+just kind of when you point it at the TV.
+So this is not customized to a
+
+0:00:36.400,0:00:39.930
+specific speaker, this is not over some
+great microphone like how your phones
+
+0:00:39.930,0:00:42.640
+have really sophisticated microphones
+these days.
+
+0:00:42.640,0:00:45.920
+This is just plugged straight into the TV as essentially
+automatic transcription. Let's see
+
+0:00:45.920,0:00:50.530
+how well it does, and in particular watch the
+errors.
+
+0:00:50.530,0:00:54.429
+
+0:00:54.429,0:00:59.289
+
+0:00:59.289,0:01:03.579
+
+0:01:03.579,0:01:07.520
+
+0:01:07.520,0:01:11.290
+
+0:01:11.290,0:01:13.960
+So, what's interesting about this. First of all,
+
+0:01:13.960,0:01:16.340
+is it good? Is it bad?
+
+0:01:16.340,0:01:18.310
+It does a lot of stuff.
+
+0:01:18.310,0:01:20.369
+It does a lot of things right. It makes some
+mistakes.
+
+0:01:20.369,0:01:24.290
+The mistakes are of multiple kinds, so for example, here
+
+0:01:24.290,0:01:26.690
+"The classmates said their final goodbyes".
+
+0:01:26.690,0:01:30.280
+That's like good buys like Best Buy.
+right. That is exactly the sounds that
+
+0:01:30.280,0:01:31.670
+the reporter said.
+
+0:01:31.670,0:01:34.659
+The failing here in this case was not
+in the acoustic modeling which tries to
+
+0:01:34.659,0:01:35.420
+connect
+
+0:01:35.420,0:01:37.869
+the wave forms to the underlying
+linguistic sounds.
+
+0:01:37.869,0:01:40.479
+Here the failing is there multiple
+things that sound the same.
+
+0:01:40.479,0:01:45.040
+You gotta figure which one the reporter
+could possibly mean in the context.
+
+0:01:45.040,0:01:48.840
+This is a sad story right. Somebody died,
+people are not going shopping, right, and
+
+0:01:48.840,0:01:52.230
+we know this is humans, but the
+system does not and so in this case this
+
+0:01:52.230,0:01:55.070
+isn't a problem the language model. there
+are other cases here where the problem is
+
+0:01:55.070,0:01:58.270
+more in the acoustics and putting all the stuff
+together in some probabilistic framework
+
+0:01:58.270,0:02:00.060
+that lets you reconcile it all,
+
+0:02:00.060,0:02:01.949
+that's a big part of how speech
+recognition works.
+
+0:02:01.949,0:02:04.720
+We'll have more discussion on that later.
+
+0:02:04.720,0:02:08.120
+We can do more with language than just
+manipulate the signal from speech to text.
+
+0:02:08.120,0:02:11.830
+This is actually my research area. We
+can do things like question answering.
+
+0:02:11.830,0:02:14.390
+We talked a little about Watson and
+we'll have a lot more
+
+0:02:14.390,0:02:15.430
+later in the course about Watson.
+
+0:02:15.430,0:02:18.549
+So Watson is basically a question answering system.
+
+0:02:18.549,0:02:22.189
+Like, yeah, there's this layer of remembering
+to phrase it as a question 'cause
+
+0:02:22.189,0:02:25.049
+you're on Jeopardy and making sure you
+wager the right amount on the
+
+0:02:25.049,0:02:28.680
+Daily Double and that kinda stuff but to
+a first approximation a question comes in,
+
+0:02:28.680,0:02:30.540
+Watson kind of has to
+
+0:02:30.540,0:02:33.839
+dig through a lot of information like
+you know largely Wikipedia
+
+0:02:33.839,0:02:36.010
+and connect up some answer to the
+question,
+
+0:02:36.010,0:02:39.670
+so that you know how to respond.
+Basically a question answering system,
+
+0:02:39.670,0:02:42.420
+although an amazingly cool demonstration
+of a very good one.
+
+0:02:42.420,0:02:45.730
+Another thing we can do is machine
+translation. How many of you have used
+
+0:02:45.730,0:02:47.390
+a tool like Google translate?
+
+0:02:47.390,0:02:51.859
+So, you know, again, C-3PO. How good
+is machine translation?
+
+0:02:51.859,0:02:56.529
+Well, depends on the language pair. I mean,
+if I'm looking at a page, say in Chinese,
+
+0:02:56.529,0:03:00.159
+and I don't speak any Chinese, the machine
+translation's pretty good because I was kind
+
+0:03:00.159,0:03:03.359
+of starting with nothing. But if I
+actually speak the language maybe
+
+0:03:03.359,0:03:06.749
+I'm better off reading reading it in its natural form.
+You can see some of these problems if
+
+0:03:06.749,0:03:10.479
+you do round trip from say, English to Chinese and back, and you can see how
+
+0:03:10.479,0:03:13.389
+good what comes back--actually that's a
+good way to make an unintentionally funny story.
+
+0:03:13.389,0:03:14.409
+
+0:03:14.409,0:03:18.459
+What else can we do: things like web
+search, really are about a lot of things.
+
+0:03:18.459,0:03:21.159
+It has something to do with the
+words but also kind of click stream information,
+
+0:03:21.159,0:03:22.340
+
+0:03:22.340,0:03:25.370
+and kind of a local search and things
+like that. And so there's a lot that goes into
+
+0:03:25.370,0:03:27.400
+web search. A big part of that is the
+language.
+
+0:03:27.400,0:03:30.670
+Text classification, spam filtering.
+Again, spam filtering is a case where it's
+
+0:03:30.670,0:03:33.579
+part language, part not language. We'll
+talk more about spam filtering later
+
+0:03:33.579,0:03:36.349
+--and so on. These are the kinds of things
+you can do in the domain of natural language.
+
+0:03:36.349,0:03:40.260
+We're no longer trying so hard
+to tell stories funny or otherwise.
+
+0:03:40.260,0:03:41.610
+We're trying to build things like this.
+
+0:03:41.610,0:03:44.459
+And there has been a lot of traction.
+There's a lot of stuff we can build.
+
+0:03:44.459,0:03:46.999
+We're not yet to C-3PO, but
+
+0:03:46.999,0:03:49.499
+we actually can now translate Russian,
+
+0:03:49.499,0:03:51.949
+which we couldn't do in the fifties even
+though they thought would be able to do
+
+0:03:51.949,0:03:55.409
+it by the sixties. But now, today, we can.
+
+0:03:55.409,0:03:56.959
+It only took
+
+0:03:56.959,0:03:59.289
+something like twelve times longer than
+they thought it would.
+

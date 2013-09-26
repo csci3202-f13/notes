@@ -1,0 +1,431 @@
+0:00:00.000,0:00:01.780
+
+0:00:01.780,0:00:03.580
+PROFESSOR: So today we're going
+to be adding to this the
+
+0:00:03.580,0:00:05.140
+idea of informed search.
+
+0:00:05.140,0:00:08.380
+And informed search, we're going to add
+one key idea, which is in addition
+
+0:00:08.380,0:00:11.300
+to whatever else the search algorithm
+is doing, we're going to have a
+
+0:00:11.300,0:00:14.770
+function that let's look at a state and
+see whether or not we're kind of
+
+0:00:14.770,0:00:17.650
+hot or cold, are we getting
+close to the goal?
+
+0:00:17.650,0:00:18.410
+OK.
+
+0:00:18.410,0:00:21.460
+And there are good heuristics
+and bad heuristics.
+
+0:00:21.460,0:00:23.430
+We'll talk about how that
+all works today.
+
+0:00:23.430,0:00:27.350
+But this is the key idea in informed
+search, something tells you not just
+
+0:00:27.350,0:00:29.910
+is it a goal or not, but
+are you getting close.
+
+0:00:29.910,0:00:31.733
+
+0:00:32.480,0:00:35.430
+PROFESSOR: So the key object
+is a search heuristic.
+
+0:00:35.430,0:00:36.770
+What is a search heuristic?
+
+0:00:36.770,0:00:39.670
+It is not what you think of when you
+think of the word heuristic.
+
+0:00:39.670,0:00:43.130
+So just like we use rational in a very
+specific way, we use heuristic in a
+
+0:00:43.130,0:00:44.260
+very specific way.
+
+0:00:44.260,0:00:46.820
+In common language a heuristic
+is a rule of thumb.
+
+0:00:46.820,0:00:50.650
+It's kind of a generic plan that
+you should generally follow--
+
+0:00:50.650,0:00:53.550
+like look both ways before
+you cross the street.
+
+0:00:53.550,0:00:56.300
+A heuristic for us is something
+completely different in
+
+0:00:56.300,0:00:57.410
+terms of its structure.
+
+0:00:57.410,0:00:58.920
+A heuristic is a function.
+
+0:00:58.920,0:01:01.950
+It takes a state of the world
+and it returns a number.
+
+0:01:01.950,0:01:03.830
+So it's a function from
+states to numbers.
+
+0:01:03.830,0:01:05.030
+It doesn't tell you what to do.
+
+0:01:05.030,0:01:07.480
+It doesn't tell you to look both ways
+before you cross the street.
+
+0:01:07.480,0:01:11.780
+It just tells you whether or
+not you're close to a goal.
+
+0:01:11.780,0:01:15.170
+The heuristic, unlike a search algorithm
+which just does its thing--
+
+0:01:15.170,0:01:16.260
+successor functions.
+
+0:01:16.260,0:01:19.600
+It doesn't know whether it's a pathing
+problem or a pancake problem.
+
+0:01:19.600,0:01:22.460
+The heuristic knows exactly what's
+going on in your search problem.
+
+0:01:22.460,0:01:27.750
+And it knows about things like
+positions and pancakes.
+
+0:01:27.750,0:01:29.080
+So what does a heuristic do?
+
+0:01:29.080,0:01:32.240
+If can look at the state of the world
+and say, you're really, really far.
+
+0:01:32.240,0:01:34.440
+In that case it will return
+a big number.
+
+0:01:34.440,0:01:36.810
+It can say, oh, you're getting
+close to your goal.
+
+0:01:36.810,0:01:38.640
+In that case it's going to
+return a small number.
+
+0:01:38.640,0:01:40.790
+And you can already imagine how
+this will help us do a search.
+
+0:01:40.790,0:01:44.610
+We could prioritize on the fringe in
+areas where the heuristic tells us
+
+0:01:44.610,0:01:46.860
+we're kind of getting close.
+
+0:01:46.860,0:01:48.930
+So let's look at an example
+of a heuristic.
+
+0:01:48.930,0:01:50.130
+Here's a Pac-Man board.
+
+0:01:50.130,0:01:52.330
+If that's my search problem--
+get to the dot--
+
+0:01:52.330,0:01:56.220
+then I want a function that looks
+at the state says how far I am.
+
+0:01:56.220,0:01:58.520
+Well, I don't know how far I am.
+
+0:01:58.520,0:02:00.580
+How could I find out how far I am?
+
+0:02:00.580,0:02:02.570
+I could run the search
+problem and find out.
+
+0:02:02.570,0:02:03.790
+Well that would defeat
+the whole point.
+
+0:02:03.790,0:02:07.410
+So I need some kind of general sense
+of whether or not I'm close.
+
+0:02:07.410,0:02:07.940
+Right?
+
+0:02:07.940,0:02:10.270
+How am I going to do that?
+
+0:02:10.270,0:02:13.650
+Well I could do something like, look
+at the Manhattan distance--
+
+0:02:13.650,0:02:14.600
+like this.
+
+0:02:14.600,0:02:17.940
+I could say, well in order to get there,
+if I ignore the walls, I need
+
+0:02:17.940,0:02:20.740
+to least go 10 to the left
+and then five down.
+
+0:02:20.740,0:02:23.020
+Maybe there's some walls in the way
+and I'll have to go further.
+
+0:02:23.020,0:02:27.340
+But more or less if I'm close to the
+dot, in general the Manhattan distance
+
+0:02:27.340,0:02:28.270
+will be smaller.
+
+0:02:28.270,0:02:29.940
+If I'm far, in general
+it will be bigger.
+
+0:02:29.940,0:02:31.970
+It's not perfect, but it's something.
+
+0:02:31.970,0:02:33.460
+And that's in general what heuristics
+are going to be.
+
+0:02:33.460,0:02:36.640
+They're not going to be perfect but
+they're going to be something.
+
+0:02:36.640,0:02:39.030
+You could use the Euclidean distance.
+
+0:02:39.030,0:02:42.100
+This is even less like the game because
+can't go on the diagonal.
+
+0:02:42.100,0:02:45.930
+But it's still the case that, however
+you get to that dot-- including the
+
+0:02:45.930,0:02:47.780
+fact that you can't move diagonally
+and the walls are going
+
+0:02:47.780,0:02:48.710
+to get in your way--
+
+0:02:48.710,0:02:51.670
+you still aren't any closer than 11.2.
+
+0:02:51.670,0:02:54.560
+So these are the kinds of things when we
+talk about a heuristic-- a function
+
+0:02:54.560,0:02:58.620
+from states to real numbers.
+
+0:02:58.620,0:02:59.730
+Here's another heuristic function.
+
+0:02:59.730,0:03:00.120
+Remember?
+
+0:03:00.120,0:03:04.250
+We were in Romania trying to get
+to the airport at Bucharest.
+
+0:03:04.250,0:03:07.900
+And there were a bunch of cities
+that we could drive between.
+
+0:03:07.900,0:03:12.560
+And one thing we could use as a
+heuristic of how far we would have to
+
+0:03:12.560,0:03:16.590
+drive along the roads, is what is the
+straight line distance from where we
+
+0:03:16.590,0:03:19.240
+are to our goal, which is Bucharest?
+
+0:03:19.240,0:03:21.630
+The graph isn't specific to the goal.
+
+0:03:21.630,0:03:25.130
+The heuristic is.
+
+0:03:25.130,0:03:29.270
+So in particular you'll notice things
+like, Bucharest is zero distance away
+
+0:03:29.270,0:03:29.870
+from Bucharest.
+
+0:03:29.870,0:03:31.460
+That's the kind of thing you
+want your heuristic to do.
+
+0:03:31.460,0:03:33.070
+You want to be zero at the goal.
+
+0:03:33.070,0:03:36.420
+And Arad, which is about as
+far as you get, is far.
+
+0:03:36.420,0:03:37.510
+And as you get closer--
+
+0:03:37.510,0:03:39.840
+so closer as this place Sibiu--
+
+0:03:39.840,0:03:41.200
+you can look it up, it's closer.
+
+0:03:41.200,0:03:43.290
+So the heuristic is generally telling
+us whether they're heading in the
+
+0:03:43.290,0:03:44.040
+right direction.
+
+0:03:44.040,0:03:47.520
+And this will help us build
+a better algorithm.
+
+0:03:47.520,0:03:49.120
+How about Pancakes?
+
+0:03:49.120,0:03:51.600
+Well now you're maybe going to start
+to see that heuristic functions are
+
+0:03:51.600,0:03:54.310
+not as simple as Euclidean
+distance on a map.
+
+0:03:54.310,0:03:57.120
+And then sometimes the map is Pac-Man,
+and sometimes the map is Romania, and
+
+0:03:57.120,0:03:59.900
+sometimes there are some things that
+are neither Pac-Man nor Romania.
+
+0:03:59.900,0:04:01.770
+Heuristic functions on pancakes
+is a little harder.
+
+0:04:01.770,0:04:06.450
+How could I know, say, from a given
+pancake stack, how far I am?
+
+0:04:06.450,0:04:08.240
+That's a little hard.
+
+0:04:08.240,0:04:11.340
+I know if it's right
+then I'm zero away.
+
+0:04:11.340,0:04:12.750
+But how about here?
+
+0:04:12.750,0:04:15.220
+How many weighted flip
+costs away am I?
+
+0:04:15.220,0:04:16.490
+I don't know.
+
+0:04:16.490,0:04:18.060
+So you would have to
+think really hard.
+
+0:04:18.060,0:04:21.910
+And one thing you might come up with is
+the number of the largest package
+
+0:04:21.910,0:04:22.950
+that's still out of place.
+
+0:04:22.950,0:04:26.000
+The idea being if, the fourth largest
+pancake is out of place--
+
+0:04:26.000,0:04:27.360
+wherever it is--
+
+0:04:27.360,0:04:30.860
+the only way to get it in place is to
+somehow get it to the top, and then
+
+0:04:30.860,0:04:32.710
+from the top flip the whole stack--
+
+0:04:32.710,0:04:35.540
+or four and above, if there's
+more than four.
+
+0:04:35.540,0:04:38.110
+So you can convince yourself that,
+in fact, this is a heuristic.
+
+0:04:38.110,0:04:42.110
+And the further I am from a solution in
+general, the bigger this number is.
+
+0:04:42.110,0:04:44.150
+We're going to talk later today more
+about how you come up with these
+
+0:04:44.150,0:04:44.720
+heuristics.
+
+0:04:44.720,0:04:46.930
+But the point is, it's not always
+Euclidean distance.
+
+0:04:46.930,0:04:50.440
+It is, however, always a function
+from states to real numbers.
+
+0:04:50.440,0:04:52.900
+And smaller means closer to
+the goal, in general.
+

@@ -1,0 +1,1261 @@
+0:00:00.000,0:00:01.450
+
+0:00:01.450,0:00:04.000
+DAN KLEIN: Today we're going to talk
+about methods that put the policies at
+
+0:00:04.000,0:00:05.260
+the forefront.
+
+0:00:05.260,0:00:08.630
+And rather than really talking only
+about values and finding optimal
+
+0:00:08.630,0:00:11.870
+values, we're going to think hard
+about the policies themselves--
+
+0:00:11.870,0:00:15.890
+this idea that there are good policies
+and there are bad policies.
+
+0:00:15.890,0:00:19.630
+And then we're even going to have
+methods of finding optimal policies
+
+0:00:19.630,0:00:23.300
+that work over the policies themselves
+and make the policies better, rather
+
+0:00:23.300,0:00:28.740
+than simply working over the values,
+trying to make the values better.
+
+0:00:28.740,0:00:32.479
+The first idea we're going to need
+is the idea of policy evaluation.
+
+0:00:32.479,0:00:35.050
+And you can think of this as you've
+got a policy in your hand.
+
+0:00:35.050,0:00:35.760
+Maybe it's good.
+
+0:00:35.760,0:00:36.980
+Maybe it's bad.
+
+0:00:36.980,0:00:39.690
+And what you want to know is for this
+policy, which is presumably
+
+0:00:39.690,0:00:42.030
+suboptimal, how good is it?
+
+0:00:42.030,0:00:44.530
+How well will I perform
+if I follow it?
+
+0:00:44.530,0:00:48.880
+For each state, what will the value
+be, not under optimal action, but
+
+0:00:48.880,0:00:51.280
+under this specific policy?
+
+0:00:51.280,0:00:56.460
+So this is figuring out for a
+policy what the values are.
+
+0:00:56.460,0:00:59.930
+So far we've been talking as if the
+only thing we would ever want to
+
+0:00:59.930,0:01:01.790
+consider is doing the optimal action.
+
+0:01:01.790,0:01:04.970
+In the end, you usually do want
+to do the optimal action.
+
+0:01:04.970,0:01:08.130
+When you consider optimal actions,
+the outcome tree looks like this.
+
+0:01:08.130,0:01:11.690
+There are many actions you can take.
+
+0:01:11.690,0:01:15.420
+For each one, you figure out how good
+it is and then you take the maximum.
+
+0:01:15.420,0:01:18.860
+So you consider all those actions,
+and you pick the best one.
+
+0:01:18.860,0:01:21.440
+And so essentially, you
+get a max node.
+
+0:01:21.440,0:01:22.760
+Expectimax did that.
+
+0:01:22.760,0:01:26.900
+It maxed over all of the actions, and
+that gave you optimal values, and
+
+0:01:26.900,0:01:28.860
+therefore optimal behaviors.
+
+0:01:28.860,0:01:33.240
+So if I have a policy pi which tells
+me what action to take, I no longer
+
+0:01:33.240,0:01:36.020
+have all of these choices a.
+
+0:01:36.020,0:01:37.960
+The tree looks like this.
+
+0:01:37.960,0:01:42.740
+Right now, I'm only doing what pi
+tells me, not the optimal thing.
+
+0:01:42.740,0:01:45.670
+And that means the max nodes just
+got a whole lot simpler.
+
+0:01:45.670,0:01:49.080
+Rather than having a whole set of
+actions that they have to consider,
+
+0:01:49.080,0:01:50.910
+there's only one action permitted.
+
+0:01:50.910,0:01:52.730
+That's whatever pi says to do.
+
+0:01:52.730,0:01:55.590
+And so the tree doesn't branch
+at the max node.
+
+0:01:55.590,0:01:58.360
+Of course, it still branches at the
+chance node, because we don't know
+
+0:01:58.360,0:02:01.890
+what's going to happen when we
+execute the action pi of s.
+
+0:02:01.890,0:02:04.550
+But from a state s, there's
+only one action allowed.
+
+0:02:04.550,0:02:05.540
+It's pi of s.
+
+0:02:05.540,0:02:06.940
+That makes the tree simpler.
+
+0:02:06.940,0:02:09.590
+And it means the algorithms we're going
+to have for computing values are
+
+0:02:09.590,0:02:12.360
+going to be simpler and faster, because
+we don't have to worry about
+
+0:02:12.360,0:02:14.470
+maxing over the alternatives anymore.
+
+0:02:14.470,0:02:18.370
+Of course, the value at the root is
+presumably going to be worse for the
+
+0:02:18.370,0:02:22.320
+tree on the right, unless pi is,
+in fact, the optimal policy.
+
+0:02:22.320,0:02:24.700
+So the value you get out
+depends on the policy.
+
+0:02:24.700,0:02:27.480
+But this process of computing the value
+is simpler because we just prune
+
+0:02:27.480,0:02:28.730
+the tree in essence.
+
+0:02:28.730,0:02:30.900
+
+0:02:30.900,0:02:35.200
+So one of the basic operations we had
+for optimal quantities was to compute
+
+0:02:35.200,0:02:37.260
+the optimal utility of a state.
+
+0:02:37.260,0:02:40.540
+And now we're going to do that same
+thing for a fixed policy.
+
+0:02:40.540,0:02:42.340
+And in a way, this is
+going to be easier.
+
+0:02:42.340,0:02:45.000
+This is easier than what
+we've already done.
+
+0:02:45.000,0:02:46.880
+So we imagine we've got
+some policy pi.
+
+0:02:46.880,0:02:49.200
+It's presumably bad, but
+we're stuck with it.
+
+0:02:49.200,0:02:53.400
+And what we're trying to do is compute
+for every state s, what score I will
+
+0:02:53.400,0:02:57.880
+get, on average of course,
+if I follow pi.
+
+0:02:57.880,0:03:01.850
+So the quantity we get
+now is V pi of s.
+
+0:03:01.850,0:03:03.890
+The pi indicates that
+we're following pi.
+
+0:03:03.890,0:03:06.610
+It used to be a star, which meant
+we were acting optimally.
+
+0:03:06.610,0:03:08.360
+Now we're acting pi-like.
+
+0:03:08.360,0:03:12.460
+And this is the expected, total,
+discounted rewards, cumulative until
+
+0:03:12.460,0:03:17.210
+the end of time but discounted for
+starting an s and following pi.
+
+0:03:17.210,0:03:18.640
+What's this going to work out to?
+
+0:03:18.640,0:03:20.510
+Well, let's write it down.
+
+0:03:20.510,0:03:25.330
+We'd like to figure out what
+V pi is for a state s.
+
+0:03:25.330,0:03:28.460
+And we need to write some equation
+that's going to be a Bellman equation.
+
+0:03:28.460,0:03:32.330
+It's going to define this value in terms
+of values of other states but
+
+0:03:32.330,0:03:34.500
+unrolled one level of expectimax.
+
+0:03:34.500,0:03:37.210
+That's a one-step look ahead process.
+
+0:03:37.210,0:03:41.210
+Well, the first thing we used to do is
+we used to write out a maximum over
+
+0:03:41.210,0:03:42.410
+the actions.
+
+0:03:42.410,0:03:43.240
+We don't have to do that.
+
+0:03:43.240,0:03:45.050
+Because we know what action
+you take from s.
+
+0:03:45.050,0:03:46.460
+You take pi of s.
+
+0:03:46.460,0:03:49.740
+What we don't know is what's going
+to happen when we take it.
+
+0:03:49.740,0:03:53.260
+So we still need to consider
+all the possible outcomes.
+
+0:03:53.260,0:03:54.660
+They're s prime.
+
+0:03:54.660,0:03:58.690
+When we consider all of the possible
+outcomes, they each have a weight
+
+0:03:58.690,0:04:00.630
+which is still the transition
+function.
+
+0:04:00.630,0:04:04.450
+The transition function takes the
+state s, the action we took--
+
+0:04:04.450,0:04:06.870
+and the action we took was pi of s--
+
+0:04:06.870,0:04:10.740
+and the outcome, s prime, and it
+tells us how likely s prime is.
+
+0:04:10.740,0:04:13.820
+If we land in s prime,
+what will happen?
+
+0:04:13.820,0:04:16.750
+Well, we will immediately
+receive a reward.
+
+0:04:16.750,0:04:20.490
+That reward depends on the state,
+the action-- which is pi of s--
+
+0:04:20.490,0:04:22.780
+and the result state s prime.
+
+0:04:22.780,0:04:25.560
+And it depends on the
+discounted future.
+
+0:04:25.560,0:04:27.240
+So I discount everything by gamma.
+
+0:04:27.240,0:04:32.390
+And then I plug in the value of
+the landing state, s prime.
+
+0:04:32.390,0:04:36.270
+But because I'm acting according to
+pi, I do not assume that I act
+
+0:04:36.270,0:04:37.770
+optimally in the future.
+
+0:04:37.770,0:04:40.820
+I assume I act pi-like in the future.
+
+0:04:40.820,0:04:43.100
+And so that's a V pi.
+
+0:04:43.100,0:04:45.710
+So again, it's the same kind of
+Bellman equation, but the
+
+0:04:45.710,0:04:48.430
+max over a is gone.
+
+0:04:48.430,0:04:52.030
+OK, so now we have a recursive
+relation, which is a one-step
+
+0:04:52.030,0:04:56.080
+look-ahead for the case where the policy
+is fixed, and we want to figure
+
+0:04:56.080,0:04:57.800
+out what the values are.
+
+0:04:57.800,0:04:58.820
+We start at the top.
+
+0:04:58.820,0:05:01.520
+We don't max over a, because
+we're stuck with pi.
+
+0:05:01.520,0:05:05.680
+But we do still average over
+the outcomes s prime.
+
+0:05:05.680,0:05:08.750
+Let's take a look at an example
+of policy evaluation.
+
+0:05:08.750,0:05:12.430
+You could have an agent here which
+has the policy always go right.
+
+0:05:12.430,0:05:13.420
+How's this going to go.
+
+0:05:13.420,0:05:15.290
+This is going to go badly.
+
+0:05:15.290,0:05:19.260
+And you can see that agent's looking at
+this map, and in its head, looking
+
+0:05:19.260,0:05:22.430
+at this map, it can run
+policy evaluation.
+
+0:05:22.430,0:05:26.830
+And without actually stepping into the
+fire pit, it can simulate, it could
+
+0:05:26.830,0:05:29.880
+run say value iteration or expectimax
+and see that things
+
+0:05:29.880,0:05:31.460
+are going to be bad.
+
+0:05:31.460,0:05:34.350
+OK, but this is a fixed policy.
+
+0:05:34.350,0:05:36.080
+We could use this policy.
+
+0:05:36.080,0:05:37.420
+There would be outcomes.
+
+0:05:37.420,0:05:39.490
+Presumably, they'd be quite bad.
+
+0:05:39.490,0:05:40.890
+Here's another policy.
+
+0:05:40.890,0:05:43.000
+This is the policy always go forward.
+
+0:05:43.000,0:05:45.880
+In fact, this is probably
+the optimal policy.
+
+0:05:45.880,0:05:47.770
+But when you have this policy in front
+of you, you don't actually
+
+0:05:47.770,0:05:49.280
+know that right now.
+
+0:05:49.280,0:05:52.370
+All you know is you've got some policy
+and you're supposed to evaluate it.
+
+0:05:52.370,0:05:54.420
+And so you look in your head, and
+you think what will happen
+
+0:05:54.420,0:05:55.860
+if I use this policy?
+
+0:05:55.860,0:05:58.170
+And presumably the outcomes will
+be better, and therefore the
+
+0:05:58.170,0:05:59.620
+values will be higher.
+
+0:05:59.620,0:06:00.630
+So here are two policies.
+
+0:06:00.630,0:06:01.740
+And I could compare them.
+
+0:06:01.740,0:06:05.770
+And for example, if one had higher
+values, I could choose it, if this
+
+0:06:05.770,0:06:08.160
+were a choice I had to make.
+
+0:06:08.160,0:06:11.030
+So what are the actual values
+under these policies?
+
+0:06:11.030,0:06:14.130
+We just saw a way of thinking
+about the Bellman equations.
+
+0:06:14.130,0:06:16.192
+Let's see what the values
+turn out to be.
+
+0:06:16.192,0:06:17.310
+Well, here they are.
+
+0:06:17.310,0:06:20.980
+These are all of the states on a grid
+world, where basically the kind of
+
+0:06:20.980,0:06:24.720
+center corridor is a bridge
+where you can move safely.
+
+0:06:24.720,0:06:26.710
+There's a reward at the
+end at the top.
+
+0:06:26.710,0:06:30.760
+And if you fall to the left or the
+right, then you receive a negative 10
+
+0:06:30.760,0:06:32.910
+when you fall onto to the firepit.
+
+0:06:32.910,0:06:36.210
+And so what you can see here is you can
+see the policy always goes right.
+
+0:06:36.210,0:06:39.410
+It's not so bad, if you're on
+the exit, where you have no
+
+0:06:39.410,0:06:40.540
+choice but to exit.
+
+0:06:40.540,0:06:42.550
+But anywhere else, it's pretty bad.
+
+0:06:42.550,0:06:45.730
+It's not a very good policy,
+but it has values.
+
+0:06:45.730,0:06:46.340
+Super important.
+
+0:06:46.340,0:06:50.070
+States have optimal values, and they
+also have values high or low for any
+
+0:06:50.070,0:06:51.240
+specific policy.
+
+0:06:51.240,0:06:53.400
+On the right, there's the policy
+always go forward,
+
+0:06:53.400,0:06:55.260
+which is also optimal.
+
+0:06:55.260,0:06:57.370
+And you can see the values there.
+
+0:06:57.370,0:06:59.790
+And here the values are much better,
+because they reflect
+
+0:06:59.790,0:07:01.600
+actually good actions.
+
+0:07:01.600,0:07:04.690
+They happen to be the same as the
+optimal values, because this policy is
+
+0:07:04.690,0:07:06.790
+the optimal policy in this case.
+
+0:07:06.790,0:07:09.330
+OK, now how do we calculate
+those values we just saw?
+
+0:07:09.330,0:07:13.260
+We basically already have the answer,
+because we know if we have Bellman
+
+0:07:13.260,0:07:17.640
+equations which characterize optimal
+or fixed policy values, we can
+
+0:07:17.640,0:07:21.800
+operationalize them by changing the
+qualities into an assignment and then
+
+0:07:21.800,0:07:24.950
+having an iterative process that
+starts at depth zero and
+
+0:07:24.950,0:07:26.170
+works its way to higher.
+
+0:07:26.170,0:07:28.060
+Depth.
+
+0:07:28.060,0:07:31.740
+So one way of computing the values
+under a policy is to take these
+
+0:07:31.740,0:07:34.240
+recursive Bellman equations
+and make them updates.
+
+0:07:34.240,0:07:35.810
+It's just like value iteration.
+
+0:07:35.810,0:07:37.860
+It would look like this.
+
+0:07:37.860,0:07:39.370
+You started at depth zero.
+
+0:07:39.370,0:07:43.340
+You say if I had zero time steps left,
+and I was forced to follow pi, I would
+
+0:07:43.340,0:07:45.540
+receive, of course, from
+any state zero.
+
+0:07:45.540,0:07:49.400
+So I create this vector of zeros,
+those are V zero values,
+
+0:07:49.400,0:07:51.640
+when I follow pi.
+
+0:07:51.640,0:07:57.490
+Then I say well, if I had Vk for pi
+already computed, I knew what the
+
+0:07:57.490,0:08:01.540
+score is if I follow i pi for
+k time-steps averaging
+
+0:08:01.540,0:08:03.410
+over all that chance.
+
+0:08:03.410,0:08:06.800
+If I knew that, I could figure out
+what it would be like to follow
+
+0:08:06.800,0:08:08.030
+it for k plus 1.
+
+0:08:08.030,0:08:10.150
+I imagine starting at some state s.
+
+0:08:10.150,0:08:12.470
+I imagine I have k plus
+1 times steps left.
+
+0:08:12.470,0:08:14.230
+And I think what will happen to me?
+
+0:08:14.230,0:08:16.135
+Well, I'll take pi of s.
+
+0:08:16.135,0:08:17.730
+I don't need to max anymore.
+
+0:08:17.730,0:08:19.290
+I'll take the action pi of s.
+
+0:08:19.290,0:08:22.740
+I'll have to average over all
+the outcomes, s prime.
+
+0:08:22.740,0:08:26.290
+And for each outcome, I add up the
+instantaneous reward from that time
+
+0:08:26.290,0:08:31.190
+step with the discounted future rewards
+from the landing state s prime
+
+0:08:31.190,0:08:34.360
+when the action resolves
+until the end of time.
+
+0:08:34.360,0:08:38.260
+That's just the Bellman equation turned
+into an assignment, but now
+
+0:08:38.260,0:08:41.429
+there's also these subscripts that allow
+me to have a base case and work
+
+0:08:41.429,0:08:44.250
+my way up in a dynamic
+programming fashion.
+
+0:08:44.250,0:08:45.990
+So that's a perfectly good idea.
+
+0:08:45.990,0:08:49.450
+This is sometimes called simplified
+value iteration, because you don't max
+
+0:08:49.450,0:08:51.872
+over all of the actions.
+
+0:08:51.872,0:08:54.995
+And if you think about this, it's
+actually a lot more efficient that
+
+0:08:54.995,0:08:56.640
+value iteration was.
+
+0:08:56.640,0:08:58.920
+How much time does it
+take per iteration?
+
+0:08:58.920,0:09:02.120
+Well, this thing we do, we
+have to do this s times--
+
+0:09:02.120,0:09:04.150
+1 for every state.
+
+0:09:04.150,0:09:06.410
+So these methods only make sense
+when the number of states
+
+0:09:06.410,0:09:07.710
+is relatively small.
+
+0:09:07.710,0:09:10.350
+So you have to do this thing
+for every state.
+
+0:09:10.350,0:09:12.920
+And for each state, what do you do?
+
+0:09:12.920,0:09:15.900
+You take an average over all
+the possible results.
+
+0:09:15.900,0:09:18.490
+How many results could there
+be from taking pi of s?
+
+0:09:18.490,0:09:19.400
+Well, there could be s of them.
+
+0:09:19.400,0:09:22.140
+It could be that every state is
+connected to every state.
+
+0:09:22.140,0:09:23.350
+Usually that's not true.
+
+0:09:23.350,0:09:26.220
+Usually the actions have a smaller
+number of outcomes.
+
+0:09:26.220,0:09:29.800
+But in the worst case, for every
+iteration, we visit each state to do
+
+0:09:29.800,0:09:33.650
+this update, and this update has
+a for loop over s primes.
+
+0:09:33.650,0:09:35.690
+And they're s many of them as well.
+
+0:09:35.690,0:09:38.410
+And so the efficiency of
+this is s squared.
+
+0:09:38.410,0:09:41.780
+If you remember back to value iteration,
+it was s squared a.
+
+0:09:41.780,0:09:45.510
+Because we needed to do this for every
+action a from every state.
+
+0:09:45.510,0:09:47.210
+So we did it a times more.
+
+0:09:47.210,0:09:50.570
+And if you had 100 actions, it meant
+it was 100 times slower.
+
+0:09:50.570,0:09:53.740
+So on the plus side valuation iteration
+computed optimal values.
+
+0:09:53.740,0:09:56.840
+On the minus side, it was a factor
+of a slower, which could
+
+0:09:56.840,0:09:58.850
+be very, very slow.
+
+0:09:58.850,0:10:01.350
+Of course, there are other ways to
+solve this system of equations.
+
+0:10:01.350,0:10:06.870
+Because the maxes are gone, this is now
+just a linear system of equations.
+
+0:10:06.870,0:10:08.260
+So actually we don't need any of this.
+
+0:10:08.260,0:10:12.130
+We can just take any system solver for
+linear equations, like Matlab, and
+
+0:10:12.130,0:10:13.850
+plug them in.
+
+0:10:13.850,0:10:17.440
+Now, of course, if you think about how
+you solve very large linear systems,
+
+0:10:17.440,0:10:20.580
+often the way you solve them is with
+fixed point methods, which turned out
+
+0:10:20.580,0:10:23.210
+to look more or less exactly
+like what we're doing here.
+
+0:10:23.210,0:10:24.480
+So there's no real magic.
+
+0:10:24.480,0:10:27.800
+But the point is once the maxes are
+gone, the thing that drove us to this
+
+0:10:27.800,0:10:33.150
+particular class of solutions
+actually is gone as well.
+
+0:10:33.150,0:10:33.340
+OK.
+
+0:10:33.340,0:10:38.580
+Policy evaluation was about taking a
+policy and figuring out for each state
+
+0:10:38.580,0:10:40.710
+how good it was.
+
+0:10:40.710,0:10:42.830
+Now we're going to look at
+the opposite direction.
+
+0:10:42.830,0:10:47.490
+What happens if I give you the values
+and I ask you the question what policy
+
+0:10:47.490,0:10:51.420
+should I use if these
+values are correct?
+
+0:10:51.420,0:10:56.790
+Let's think about how we would compute
+the actions to take from values.
+
+0:10:56.790,0:11:00.250
+So let's imagine that somebody handed
+us the optimal values V star.
+
+0:11:00.250,0:11:03.710
+So for a particular setting of grid
+world, what you see here are the
+
+0:11:03.710,0:11:05.280
+optimal values.
+
+0:11:05.280,0:11:08.770
+And then we can ask questions
+like how should I act?
+
+0:11:08.770,0:11:12.280
+Let's look at the interesting square
+here, which is this one.
+
+0:11:12.280,0:11:12.790
+Right?
+
+0:11:12.790,0:11:14.890
+I look at that and I think, hmm, 0.89.
+
+0:11:14.890,0:11:16.680
+That's not too bad.
+
+0:11:16.680,0:11:18.130
+What should I do?
+
+0:11:18.130,0:11:20.360
+Should I choose the action north?
+
+0:11:20.360,0:11:22.460
+Should I choose the action west?
+
+0:11:22.460,0:11:27.430
+You can see for this particular setting,
+this is a setting of the MDP
+
+0:11:27.430,0:11:31.230
+where you should choose to move into the
+wall and do it over and over again
+
+0:11:31.230,0:11:34.110
+until you either sneak north
+or south through the noise.
+
+0:11:34.110,0:11:37.570
+| kind of a weird case, but I think it
+shows that you can't look at these
+
+0:11:37.570,0:11:38.960
+numbers and just tell what to do.
+
+0:11:38.960,0:11:42.030
+Because I look at these numbers, and I'd
+be like oh, 0.98, that looks good.
+
+0:11:42.030,0:11:43.140
+Let's go north.
+
+0:11:43.140,0:11:45.750
+Well, it'd be great to be in
+the square to the north.
+
+0:11:45.750,0:11:48.690
+The values let you figure out that
+the square to the north of you
+
+0:11:48.690,0:11:50.310
+is better than you.
+
+0:11:50.310,0:11:52.980
+But they don't tell you
+how to get there.
+
+0:11:52.980,0:11:57.730
+So it's actually not obvious at all,
+given the values, what actions you
+
+0:11:57.730,0:12:00.870
+should take to even achieve
+those values?
+
+0:12:00.870,0:12:04.820
+So how if I gave you the values and you
+didn't have this helpful diagram
+
+0:12:04.820,0:12:09.200
+that also shows the policy, how would
+you figure out from optimal
+
+0:12:09.200,0:12:11.610
+values how to act?
+
+0:12:11.610,0:12:16.070
+And the answer to that is basically
+you've got to do expectimax.
+
+0:12:16.070,0:12:19.810
+You've got to actually unroll this thing
+and figure out which was the
+
+0:12:19.810,0:12:23.400
+good action that gave rise
+to these values.
+
+0:12:23.400,0:12:27.140
+Now, of course, you don't have to do
+expectimax very deep, because as soon
+
+0:12:27.140,0:12:30.700
+as you start recursing into expectimax,
+very soon you're going to
+
+0:12:30.700,0:12:34.370
+find that you need to plug in
+some values or recurse.
+
+0:12:34.370,0:12:36.040
+And luckily, you've already
+got values.
+
+0:12:36.040,0:12:40.370
+So what I'll do is I'll say I need to
+consider every action a from this
+
+0:12:40.370,0:12:43.300
+state s and figure out which
+is the good one.
+
+0:12:43.300,0:12:45.840
+So I need to consider every action a.
+
+0:12:45.840,0:12:49.690
+And then, for each action, I need to
+consider all of the results, s prime,
+
+0:12:49.690,0:12:51.670
+that that action could have.
+
+0:12:51.670,0:12:55.710
+Now for each action a, we know the score
+is going to be an average over
+
+0:12:55.710,0:12:57.000
+the s primes.
+
+0:12:57.000,0:13:00.040
+That average is going to be weighted
+by the transition function.
+
+0:13:00.040,0:13:03.660
+
+0:13:03.660,0:13:06.870
+The transition function here references
+a, which is the action that
+
+0:13:06.870,0:13:07.590
+I'm considering.
+
+0:13:07.590,0:13:10.650
+And I'm going to need to try them
+all, just like in expectimax.
+
+0:13:10.650,0:13:14.780
+I get a reward for the
+first time-step.
+
+0:13:14.780,0:13:17.200
+And then I have my discounted future.
+
+0:13:17.200,0:13:24.440
+Now luckily the discounted future, I've
+assumed I actually have already.
+
+0:13:24.440,0:13:27.400
+So this is all the expectimax
+I need to do.
+
+0:13:27.400,0:13:31.710
+Now I left a space over the a, because
+I'm going to compute this average,
+
+0:13:31.710,0:13:36.160
+this chance node q value,
+for every action a.
+
+0:13:36.160,0:13:39.540
+Now I'm not going to actually maximize
+over them, in that the
+
+0:13:39.540,0:13:41.820
+policy isn't 7.3.
+
+0:13:41.820,0:13:44.340
+It's the action that
+yields the maximum.
+
+0:13:44.340,0:13:47.570
+The notation we have for that is called
+arg max, which you may have
+
+0:13:47.570,0:13:48.960
+seen before.
+
+0:13:48.960,0:13:54.590
+Arg max means consider all the values,
+and rather than taking the maximum,
+
+0:13:54.590,0:13:58.970
+give me the value of a, which
+achieved the maximum.
+
+0:13:58.970,0:14:00.310
+OK, so here it is.
+
+0:14:00.310,0:14:06.710
+The way I get actions out of values is
+I unroll one-step look-ahead for
+
+0:14:06.710,0:14:08.230
+expectimax.
+
+0:14:08.230,0:14:12.320
+And then I plug in as my evaluation
+function those optimal values.
+
+0:14:12.320,0:14:16.030
+So I have to do work, because I have
+to reconsider all the actions and I
+
+0:14:16.030,0:14:18.310
+need to reconsider all the
+transition probabilities.
+
+0:14:18.310,0:14:22.300
+And only then can I plug in
+those optimal things.
+
+0:14:22.300,0:14:26.670
+Action selection from values is
+kind of a pain in the butt.
+
+0:14:26.670,0:14:31.240
+This process, by which I take values,
+which may be optimal or may not, and I
+
+0:14:31.240,0:14:36.390
+compute a one-step look-ahead policy
+according to them is called policy
+
+0:14:36.390,0:14:37.460
+extraction.
+
+0:14:37.460,0:14:42.660
+Because what it does is it digs out the
+policy that those values imply.
+
+0:14:42.660,0:14:44.910
+However, it requires work.
+
+0:14:44.910,0:14:50.760
+It requires a one-step expectimax
+from every state to reconstruct.
+
+0:14:50.760,0:14:52.500
+What about q-values.
+
+0:14:52.500,0:14:54.305
+Q-values are kind of weird.
+
+0:14:54.305,0:14:57.500
+When you think about values, you think
+OK, expectimax from a state.
+
+0:14:57.500,0:14:57.840
+Great.
+
+0:14:57.840,0:15:00.500
+Then we say q-values, and
+you think q-state?
+
+0:15:00.500,0:15:01.510
+What's a q-state?
+
+0:15:01.510,0:15:04.520
+A state action pair-- why am I pairing
+a state and an action?
+
+0:15:04.520,0:15:07.990
+A q-state is a much less intuitive
+quantity than a state.
+
+0:15:07.990,0:15:09.470
+Here's why we have a name for it.
+
+0:15:09.470,0:15:11.600
+Here's why it exists at all.
+
+0:15:11.600,0:15:15.505
+Let's imagine that we have the optimal
+q-values, which means for each state
+
+0:15:15.505,0:15:20.060
+and action pair we know what we will
+achieve if we choose that action.
+
+0:15:20.060,0:15:22.160
+This is what the q-values
+look like in grid world.
+
+0:15:22.160,0:15:25.090
+For each state, we had four of them, at
+least for the states for which we
+
+0:15:25.090,0:15:27.550
+have the four options available.
+
+0:15:27.550,0:15:28.730
+How should we act?
+
+0:15:28.730,0:15:31.120
+Let's go back to that interesting
+case right here.
+
+0:15:31.120,0:15:34.980
+Here's the interesting square, where we
+knew there was some way to get 0.89
+
+0:15:34.980,0:15:38.630
+and we had to reroll this expectimax
+search to figure out that the way you
+
+0:15:38.630,0:15:42.520
+end up going north is actually to bang
+into the wall over and over again.
+
+0:15:42.520,0:15:45.990
+Here, that's totally obvious
+from the q-values.
+
+0:15:45.990,0:15:49.870
+You look north, and you say
+oh, north is only 0.76.
+
+0:15:49.870,0:15:53.160
+But if I go into the
+wall, that's 0.89.
+
+0:15:53.160,0:15:57.000
+The q-values make it super
+easy to decide actions.
+
+0:15:57.000,0:15:58.830
+And that's why they're useful.
+
+0:15:58.830,0:16:01.860
+It is completely trivial to
+do action selection when
+
+0:16:01.860,0:16:03.090
+presented with q-values.
+
+0:16:03.090,0:16:07.190
+They've essentially already unrolled
+that critical layer of the max step
+
+0:16:07.190,0:16:08.310
+that you needed.
+
+0:16:08.310,0:16:09.850
+Basically you look at your state.
+
+0:16:09.850,0:16:12.930
+You take the arg max over
+a of the q-values.
+
+0:16:12.930,0:16:13.680
+That's it.
+
+0:16:13.680,0:16:16.020
+Super easy.
+
+0:16:16.020,0:16:17.210
+This is an important lesson.
+
+0:16:17.210,0:16:19.500
+It's going to be especially
+important next week.
+
+0:16:19.500,0:16:23.280
+It is much easier to select actions
+from q-values than from values.
+
+0:16:23.280,0:16:24.900
+

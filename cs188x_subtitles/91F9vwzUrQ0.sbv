@@ -1,0 +1,793 @@
+0:00:00.000,0:00:00.800
+
+0:00:00.800,0:00:03.210
+PROFESSOR: Let's do an interlude, which
+is going to help us see how
+
+0:00:03.210,0:00:07.840
+MDPs, which we've just studied for a
+unit here and reinforcement learning,
+
+0:00:07.840,0:00:09.030
+which we're about to do--
+
+0:00:09.030,0:00:10.560
+how they connect.
+
+0:00:10.560,0:00:14.900
+So let's imagine the agent, which is
+basically us, for this interlude,
+
+0:00:14.900,0:00:19.630
+walks into a game where there are two
+slot machines that it can play.
+
+0:00:19.630,0:00:22.280
+There's a blue slot machine
+and a red slot machine.
+
+0:00:22.280,0:00:24.330
+And they behave a little
+bit differently.
+
+0:00:24.330,0:00:28.230
+When you pull the handle on the blue
+slot machine, you receive $1.
+
+0:00:28.230,0:00:30.590
+So this is basically a
+good slot machine.
+
+0:00:30.590,0:00:32.460
+Real slot machines aren't
+quite so nice.
+
+0:00:32.460,0:00:34.220
+You pull the handle, you get $1.
+
+0:00:34.220,0:00:35.580
+What about the red slot machine?
+
+0:00:35.580,0:00:38.995
+You pull the handle, and you're
+either going to get $2 or $0.
+
+0:00:38.995,0:00:41.220
+It's a little more exciting, right?
+
+0:00:41.220,0:00:43.840
+How should the agent act?
+
+0:00:43.840,0:00:46.090
+Well, let me tell you the MDP then
+we'll figure out how the
+
+0:00:46.090,0:00:47.500
+agent should act.
+
+0:00:47.500,0:00:50.130
+You can think of this as a
+Markov decision process.
+
+0:00:50.130,0:00:52.140
+It's actually a super boring one.
+
+0:00:52.140,0:00:54.300
+The state structure isn't
+very interesting.
+
+0:00:54.300,0:00:56.150
+The interesting thing is the actions.
+
+0:00:56.150,0:00:59.450
+You've got the blue action, where you
+play the blue bandit, and you've got
+
+0:00:59.450,0:01:02.320
+the red action, where you
+play the red bandit.
+
+0:01:02.320,0:01:04.060
+There are two states in this.
+
+0:01:04.060,0:01:05.349
+But they're really shouldn't be.
+
+0:01:05.349,0:01:08.670
+In essence, you're always in the same
+state, which is, what should I do?
+
+0:01:08.670,0:01:12.760
+The reason why we have two states in
+this formalization is because, in
+
+0:01:12.760,0:01:16.950
+order to actually make this idea work
+out, that you might get $0 or you
+
+0:01:16.950,0:01:21.160
+might get $2, it's a little tricky
+because the rewards so far haven't
+
+0:01:21.160,0:01:22.440
+been non-deterministic.
+
+0:01:22.440,0:01:26.130
+They're deterministic, it's a result
+state that is not deterministic.
+
+0:01:26.130,0:01:29.200
+So in order to have different rewards
+for winning and losing, I need
+
+0:01:29.200,0:01:31.080
+different states for winning
+and missing.
+
+0:01:31.080,0:01:33.940
+So here's one way to
+formalize this MDP.
+
+0:01:33.940,0:01:35.600
+The actions are blue and red.
+
+0:01:35.600,0:01:39.680
+And the states are, I just won
+or I just lost the last pool.
+
+0:01:39.680,0:01:42.560
+So if you look at this, let's first
+look at the blue action.
+
+0:01:42.560,0:01:46.480
+Remember the blue bandit, the blue
+slot machine, always wins.
+
+0:01:46.480,0:01:50.780
+So with probability 1, you get $1 and
+transition to the I just won state.
+
+0:01:50.780,0:01:57.150
+The red bandit wins 75% of the time and
+gives you $2 and loses 25% of the
+
+0:01:57.150,0:01:58.940
+time and gives you zero dollars.
+
+0:01:58.940,0:02:01.140
+And so transition structure
+reflects that.
+
+0:02:01.140,0:02:04.640
+It's a little redundant because the red
+action does the same thing whether
+
+0:02:04.640,0:02:06.460
+you just won or just lost.
+
+0:02:06.460,0:02:10.370
+That's the kind of independence that you
+can't see from the diagram here.
+
+0:02:10.370,0:02:12.390
+Let's say there's no discount
+because then things are just
+
+0:02:12.390,0:02:13.310
+going to get messy.
+
+0:02:13.310,0:02:16.390
+Let's say there's 100 times step, so
+that the answer isn't that everything
+
+0:02:16.390,0:02:17.990
+has infinite value.
+
+0:02:17.990,0:02:19.860
+No discount, 100 time steps.
+
+0:02:19.860,0:02:22.400
+And if we look at this, we can
+see that win and loss, really
+
+0:02:22.400,0:02:23.360
+there's only one value.
+
+0:02:23.360,0:02:25.990
+It doesn't matter which state you're
+at because the actions do the same
+
+0:02:25.990,0:02:27.260
+thing from the states.
+
+0:02:27.260,0:02:29.800
+So let's think about this MDP.
+
+0:02:29.800,0:02:32.530
+We are going to do offline planning.
+
+0:02:32.530,0:02:34.420
+So we're going to solve this MDP.
+
+0:02:34.420,0:02:36.630
+And we're going to solve
+it in our heads.
+
+0:02:36.630,0:02:39.730
+So let's think, you know the MDP.
+
+0:02:39.730,0:02:41.870
+We can determine things
+through computation.
+
+0:02:41.870,0:02:43.510
+What the value for playing blue?
+
+0:02:43.510,0:02:44.930
+You always get $1.
+
+0:02:44.930,0:02:48.330
+And if you only play blue, that's a
+policy, if you only play blue, you're
+
+0:02:48.330,0:02:50.620
+going to play it 100
+times and get $100.
+
+0:02:50.620,0:02:54.780
+So assuming dollars here are the
+utilities for this agent, the value of
+
+0:02:54.780,0:02:57.240
+the play blue policy is 100.
+
+0:02:57.240,0:03:00.640
+The value of the play
+red policy is 150.
+
+0:03:00.640,0:03:01.510
+Why?
+
+0:03:01.510,0:03:04.430
+Because we're going to play 100 times,
+and on average, I mean, who knows what
+
+0:03:04.430,0:03:05.470
+will actually happen.
+
+0:03:05.470,0:03:09.560
+But on average, 3/4 of those
+are going to be $2.
+
+0:03:09.560,0:03:12.400
+And when we multiply all that
+together, we get 150.
+
+0:03:12.400,0:03:14.050
+So here's two policies
+and their values.
+
+0:03:14.050,0:03:15.650
+How do I figure out those values?
+
+0:03:15.650,0:03:16.640
+I did the math, right?
+
+0:03:16.640,0:03:17.600
+I thought about the MDP.
+
+0:03:17.600,0:03:18.530
+I did some computation.
+
+0:03:18.530,0:03:21.470
+In principle, I ran value iteration, but
+this is so simple an MDP I didn't
+
+0:03:21.470,0:03:22.930
+even have to do that.
+
+0:03:22.930,0:03:26.650
+OK, so I used math and my knowledge of
+the MDP to figure out the values.
+
+0:03:26.650,0:03:28.590
+Did we actually play this game yet?
+
+0:03:28.590,0:03:29.760
+No, we have not played this game.
+
+0:03:29.760,0:03:32.550
+We have just thought deep and
+profound thoughts about it.
+
+0:03:32.550,0:03:33.660
+I know the optimal policy.
+
+0:03:33.660,0:03:35.080
+What's the optimal policy?
+
+0:03:35.080,0:03:37.040
+It's always play red.
+
+0:03:37.040,0:03:38.850
+OK, that was offline planning.
+
+0:03:38.850,0:03:40.230
+We did not play the game.
+
+0:03:40.230,0:03:43.720
+We used our knowledge of the MDP to
+figure out various things, such as
+
+0:03:43.720,0:03:46.860
+values of policies, optimal
+actions, and so on.
+
+0:03:46.860,0:03:48.160
+Now let's actually play.
+
+0:03:48.160,0:03:49.652
+And remember that 150,000?
+
+0:03:49.652,0:03:50.760
+That was an average, right?
+
+0:03:50.760,0:03:51.810
+Let's see what actually happens.
+
+0:03:51.810,0:03:52.600
+So we're going to play.
+
+0:03:52.600,0:03:55.830
+And we decided that the awesome
+policy is to play red.
+
+0:03:55.830,0:03:58.650
+So we're not even going to look
+at the blue slot machine here.
+
+0:03:58.650,0:03:59.350
+So let's play.
+
+0:03:59.350,0:04:00.670
+We pull the lever.
+
+0:04:00.670,0:04:02.250
+We get $2, great.
+
+0:04:02.250,0:04:03.620
+What happens next?
+
+0:04:03.620,0:04:05.370
+We play red again, $2.
+
+0:04:05.370,0:04:11.110
+And again, $0, $2, $2,
+$2, $2, $0, $0, $0.
+
+0:04:11.110,0:04:13.340
+OK, well we just played 10 times.
+
+0:04:13.340,0:04:16.510
+We could imagine that that was
+100, but we played 10 times.
+
+0:04:16.510,0:04:18.440
+So we just played our policy.
+
+0:04:18.440,0:04:19.720
+How did we do?
+
+0:04:19.720,0:04:22.160
+Looks like we got $12.
+
+0:04:22.160,0:04:24.610
+What did the values suggest
+we would get?
+
+0:04:24.610,0:04:26.650
+Well, on average, we should
+have gotten 15.
+
+0:04:26.650,0:04:29.530
+So we were a little bit unlucky,
+but not ridiculously unlucky.
+
+0:04:29.530,0:04:31.130
+Here, it's very important.
+
+0:04:31.130,0:04:33.610
+We solved it offline, in our heads.
+
+0:04:33.610,0:04:38.430
+We actually played in the real world,
+using the policy that we determined to
+
+0:04:38.430,0:04:40.800
+be optimal in our heads.
+
+0:04:40.800,0:04:43.520
+This playing, where we got the two and
+the zero, and we were slightly
+
+0:04:43.520,0:04:45.560
+unlucky, that actually happened.
+
+0:04:45.560,0:04:49.830
+We actually won real fake money, OK?
+
+0:04:49.830,0:04:51.550
+Let's change the rules.
+
+0:04:51.550,0:04:53.960
+You still have these
+two slot machines.
+
+0:04:53.960,0:04:56.100
+Blue always pays out $1.
+
+0:04:56.100,0:04:58.290
+Red always pays out $0 or $2.
+
+0:04:58.290,0:05:00.370
+But we don't know the probabilities.
+
+0:05:00.370,0:05:02.410
+All right, whats the optimal policy?
+
+0:05:02.410,0:05:03.375
+What should I do?
+
+0:05:03.375,0:05:05.000
+You 're like, I don't know, right?
+
+0:05:05.000,0:05:06.420
+We don't know the MDP.
+
+0:05:06.420,0:05:08.630
+And if you don't know the MDP,
+you can't figure out the
+
+0:05:08.630,0:05:10.050
+values in your head.
+
+0:05:10.050,0:05:12.470
+And you can't figure out whether playing
+red or playing blue is the
+
+0:05:12.470,0:05:13.400
+better policy.
+
+0:05:13.400,0:05:16.040
+You can could only use those offline
+planning methods when
+
+0:05:16.040,0:05:17.522
+you know the MDP.
+
+0:05:17.522,0:05:19.110
+And you don't.
+
+0:05:19.110,0:05:20.240
+OK, so what do we do?
+
+0:05:20.240,0:05:21.370
+Do we give up and go home?
+
+0:05:21.370,0:05:23.550
+Or do we play some slots?
+
+0:05:23.550,0:05:24.910
+Let's play.
+
+0:05:24.910,0:05:26.010
+All right, what would you like to do.
+
+0:05:26.010,0:05:26.845
+What should you do?
+
+0:05:26.845,0:05:28.390
+Everyone wants to play red.
+
+0:05:28.390,0:05:31.440
+Are you sure that is
+the optimal policy?
+
+0:05:31.440,0:05:32.530
+I mean, who knows, right?
+
+0:05:32.530,0:05:35.260
+So what we're going to play red.
+
+0:05:35.260,0:05:35.400
+Why?
+
+0:05:35.400,0:05:36.755
+Why are we doing this?
+
+0:05:36.755,0:05:37.760
+Because red might be good.
+
+0:05:37.760,0:05:38.910
+And we're not going to
+know until we try.
+
+0:05:38.910,0:05:39.920
+So we play red.
+
+0:05:39.920,0:05:40.790
+$0.
+
+0:05:40.790,0:05:43.510
+Player red again, $0.
+
+0:05:43.510,0:05:45.620
+Red, $0.
+
+0:05:45.620,0:05:46.980
+Now what you want to do?
+
+0:05:46.980,0:05:48.110
+Who wants red?
+
+0:05:48.110,0:05:49.140
+$2.
+
+0:05:49.140,0:05:50.490
+Who wants red?
+
+0:05:50.490,0:05:51.680
+$0.
+
+0:05:51.680,0:05:52.030
+Blue?
+
+0:05:52.030,0:05:52.770
+All right.
+
+0:05:52.770,0:05:54.160
+Blue gets you $1.
+
+0:05:54.160,0:05:56.410
+[LAUGHTER]
+
+0:05:56.410,0:05:57.910
+What's next?
+
+0:05:57.910,0:05:59.080
+Blue, ok it got you $1.
+
+0:05:59.080,0:06:01.830
+What's next Red, we got $2.
+
+0:06:01.830,0:06:03.860
+Red, we got $0.
+
+0:06:03.860,0:06:06.780
+$0, $0, are you ever going
+to give up on red?
+
+0:06:06.780,0:06:08.150
+OK, maybe you will eventually give up.
+
+0:06:08.150,0:06:09.115
+Smart move.
+
+0:06:09.115,0:06:11.570
+OK, so this is a different setting.
+
+0:06:11.570,0:06:14.750
+This is a setting where
+there is an MDP.
+
+0:06:14.750,0:06:16.240
+Red has a payoff.
+
+0:06:16.240,0:06:18.070
+And you know that it has a payoff.
+
+0:06:18.070,0:06:19.850
+But you don't know what it is.
+
+0:06:19.850,0:06:23.990
+So in essence, there's an MDP, but
+you don't know its parameters.
+
+0:06:23.990,0:06:26.210
+How are you going to figure
+out what to do?
+
+0:06:26.210,0:06:29.350
+Well, it's no longer the case that you
+can close your eyes, and meditate, and
+
+0:06:29.350,0:06:31.850
+figure out what's optimal
+for that MDP.
+
+0:06:31.850,0:06:35.960
+What you have to do is, you have to do
+a kind of optimal amount of discovery
+
+0:06:35.960,0:06:39.350
+mixed in with trying not
+to lose all your money.
+
+0:06:39.350,0:06:41.850
+What just happened here when
+we played that game?
+
+0:06:41.850,0:06:44.510
+What happened was not planning.
+
+0:06:44.510,0:06:45.870
+It was learning.
+
+0:06:45.870,0:06:50.450
+So this is the first time in this course
+where we see not just this idea
+
+0:06:50.450,0:06:54.690
+of planning on the basis of something
+that you know, but learning from
+
+0:06:54.690,0:06:58.020
+experiences that you have, specifically,
+you just did
+
+0:06:58.020,0:06:59.060
+reinforcement learning.
+
+0:06:59.060,0:07:01.390
+You took actions and received
+rewards, and thereby
+
+0:07:01.390,0:07:03.850
+learned how to act optimally.
+
+0:07:03.850,0:07:08.580
+There was an MDP, but you couldn't solve
+it with pure computation because
+
+0:07:08.580,0:07:10.720
+you didn't know all of its parameters.
+
+0:07:10.720,0:07:15.050
+You needed to actually act and pull
+the lever to figure it out.
+
+0:07:15.050,0:07:18.430
+Because of that, you just saw all
+of the important ideas in
+
+0:07:18.430,0:07:20.070
+reinforcement learning.
+
+0:07:20.070,0:07:21.330
+So let me go through some of them now.
+
+0:07:21.330,0:07:22.710
+We'll see all of these again.
+
+0:07:22.710,0:07:25.030
+One of this idea of exploration.
+
+0:07:25.030,0:07:29.470
+And that is, you have to try unknown
+actions to gather information.
+
+0:07:29.470,0:07:31.830
+Another idea is exploitation.
+
+0:07:31.830,0:07:35.260
+And exploitation says, eventually,
+you have to use what you know.
+
+0:07:35.260,0:07:39.030
+You can't just keep pulling the red
+lever forever out of curiosity of just
+
+0:07:39.030,0:07:40.520
+exactly how bad it is.
+
+0:07:40.520,0:07:44.020
+At some point, you have to do things
+that you know are successful.
+
+0:07:44.020,0:07:47.430
+And balancing exploration and
+exploitation is a big problem in
+
+0:07:47.430,0:07:48.970
+reinforcement learning.
+
+0:07:48.970,0:07:50.720
+There's an idea of regret.
+
+0:07:50.720,0:07:53.910
+And that is, even though that you all
+did the right thing, you played red
+
+0:07:53.910,0:07:57.710
+for a while until it was obvious that it
+was not very good, even though you
+
+0:07:57.710,0:08:01.430
+acted optimally, in the sense that
+given what you knew, that was the
+
+0:08:01.430,0:08:05.030
+right thing to do, you still incurred
+what's called regret, which is you
+
+0:08:05.030,0:08:09.790
+didn't do as well as if you would
+actually known the MDP and used the
+
+0:08:09.790,0:08:12.560
+optimal policy with respect
+to the actual in MDP.
+
+0:08:12.560,0:08:16.160
+And of course, there's always going to
+be regret against perfect knowledge
+
+0:08:16.160,0:08:18.630
+because you need to make some
+mistakes in order to figure
+
+0:08:18.630,0:08:20.980
+out how to be optimal.
+
+0:08:20.980,0:08:22.470
+You observed sampling.
+
+0:08:22.470,0:08:26.680
+Because there's chance involved, you
+have to try things many times before
+
+0:08:26.680,0:08:29.540
+you actually know how they're
+going to shake out.
+
+0:08:29.540,0:08:32.100
+And you still never really know.
+
+0:08:32.100,0:08:33.679
+You also saw it was more difficult.
+
+0:08:33.679,0:08:36.980
+This is the simplest MDP you
+could possibly imagine.
+
+0:08:36.980,0:08:39.679
+And it was instantly obvious when I
+showed you the numbers that you should
+
+0:08:39.679,0:08:42.140
+always play red in the original case.
+
+0:08:42.140,0:08:46.220
+All I have to do is take that payoff
+probability away, and suddenly we have
+
+0:08:46.220,0:08:49.960
+a hard problem of how long to play
+red, and when to give up,
+
+0:08:49.960,0:08:51.840
+or if to give up.
+
+0:08:51.840,0:08:55.740
+So these problems become much more
+difficult, even the MDP is simple,
+
+0:08:55.740,0:09:00.060
+your lack of knowledge then triggers a
+much more difficult reasoning problem
+
+0:09:00.060,0:09:01.310
+about how you should act.
+
+0:09:01.310,0:09:02.500
+

@@ -1,0 +1,444 @@
+0:00:00.000,0:00:00.970
+
+0:00:00.970,0:00:01.460
+DAN KLEIN: All right.
+
+0:00:01.460,0:00:04.350
+So how are we going to solve
+a tree structured CSP?
+
+0:00:04.350,0:00:06.560
+We can't just break it into two
+pieces like we did with
+
+0:00:06.560,0:00:07.980
+independence sub problems.
+
+0:00:07.980,0:00:10.490
+OK, here's an algorithm for
+a tree structured CSP.
+
+0:00:10.490,0:00:12.970
+The first step is to take this
+tree structure and order it.
+
+0:00:12.970,0:00:13.890
+What does that mean?
+
+0:00:13.890,0:00:15.280
+It means you pick a root variable.
+
+0:00:15.280,0:00:16.340
+Any variable works.
+
+0:00:16.340,0:00:19.760
+So you grab this CSP by some root
+variable, and you kind of pick it up
+
+0:00:19.760,0:00:22.400
+by its ankle, and let everything
+else hang down.
+
+0:00:22.400,0:00:25.780
+OK, now you've got the CSP starting
+at some variable, and there's a
+
+0:00:25.780,0:00:26.960
+direction to it.
+
+0:00:26.960,0:00:30.260
+Everything else is below, and
+according to some order.
+
+0:00:30.260,0:00:33.780
+And we end up with some linear order,
+and there are multiple choices.
+
+0:00:33.780,0:00:38.260
+And here is a linearization starting
+at A, and you'll notice that all of
+
+0:00:38.260,0:00:41.760
+these constraints, which do not have
+direction, have been replaced
+
+0:00:41.760,0:00:43.780
+by arcs which do.
+
+0:00:43.780,0:00:47.010
+It's still the same CSP, but these
+directed arcs are going to help me
+
+0:00:47.010,0:00:50.660
+think about something very much
+like arc consistency.
+
+0:00:50.660,0:00:57.120
+OK, so here is an ordering, starting at
+A, and linearizing with that CSP.
+
+0:00:57.120,0:00:59.360
+Let's imagine we're still
+in map coloring.
+
+0:00:59.360,0:01:00.560
+OK, very important.
+
+0:01:00.560,0:01:02.450
+Most CSPs are not map coloring.
+
+0:01:02.450,0:01:05.000
+Most constraints are not inequality
+constraints, but that
+
+0:01:05.000,0:01:06.410
+is our running example.
+
+0:01:06.410,0:01:08.590
+So let's say these are the domains.
+
+0:01:08.590,0:01:11.740
+So for whatever reason, unary
+constraints or whatever, these are the
+
+0:01:11.740,0:01:14.500
+domains at this point in time.
+
+0:01:14.500,0:01:16.890
+And we can put those domains
+over here vertically.
+
+0:01:16.890,0:01:19.920
+So red and blue below A are
+its remaining domains.
+
+0:01:19.920,0:01:24.520
+So we'd like to solve this CSP,
+and it's tree structured.
+
+0:01:24.520,0:01:25.550
+We've ordered it.
+
+0:01:25.550,0:01:28.250
+Step two is to do a removal pass.
+
+0:01:28.250,0:01:30.210
+That's a lot like arc consistency.
+
+0:01:30.210,0:01:34.280
+So what we're going to do is we're
+going to visit each arc once, and
+
+0:01:34.280,0:01:36.550
+we're going to make that
+arc consistent.
+
+0:01:36.550,0:01:37.375
+How do we make it consistent?
+
+0:01:37.375,0:01:40.780
+The way we always make it consistent,
+which is we pull the arc over, we
+
+0:01:40.780,0:01:43.930
+check to see what's in its trunk, and
+we cross things off if needed.
+
+0:01:43.930,0:01:45.430
+All right, so let's do that here.
+
+0:01:45.430,0:01:48.630
+Let's actually make these
+arcs consistent.
+
+0:01:48.630,0:01:54.190
+So the way we'll do this is we will
+start with F, and we will
+
+0:01:54.190,0:01:55.880
+work our way leftward.
+
+0:01:55.880,0:01:59.440
+When we visit F, we're going to
+say what arc comes into you?
+
+0:01:59.440,0:02:01.480
+How many arcs can come into F?
+
+0:02:01.480,0:02:02.990
+One, because it's a three.
+
+0:02:02.990,0:02:03.790
+Very important.
+
+0:02:03.790,0:02:06.950
+So I look at the arc coming into F. It's
+D to F. And I look in its trunk.
+
+0:02:06.950,0:02:10.620
+So I look in D, and I say are there any
+values in D which are guaranteed
+
+0:02:10.620,0:02:12.770
+to create a constraint violation?
+
+0:02:12.770,0:02:16.330
+And I say, well, at D, if I assigned
+blue, I'd be in trouble.
+
+0:02:16.330,0:02:18.160
+So let's remove that.
+
+0:02:18.160,0:02:18.800
+All right.
+
+0:02:18.800,0:02:21.800
+Now the arc coming into F, D to
+F has been made consistent.
+
+0:02:21.800,0:02:25.690
+Now we go to E. We look at the arc
+coming into E. So that's D to E, and I
+
+0:02:25.690,0:02:29.015
+say, are there any values at D that
+guarantee a constraint violation?
+
+0:02:29.015,0:02:30.050
+And it looks pretty good.
+
+0:02:30.050,0:02:31.720
+If I choose red, I'll be able
+to choose anything.
+
+0:02:31.720,0:02:34.170
+If I choose green, I'll still
+have the option of blue.
+
+0:02:34.170,0:02:37.050
+So now that arc is also consistent.
+
+0:02:37.050,0:02:40.060
+Now I go to D. What arc comes into D?
+
+0:02:40.060,0:02:43.310
+Well, it's B to D. So I look
+at B to D, and I say do I
+
+0:02:43.310,0:02:44.960
+need to remove anything?
+
+0:02:44.960,0:02:46.860
+No.
+
+0:02:46.860,0:02:50.620
+I look at the arc coming into C. That's
+B to C, and I see that if B
+
+0:02:50.620,0:02:55.310
+were assigned green, I'd be toast,
+so let's remove green.
+
+0:02:55.310,0:02:59.060
+Now I look at the arc coming
+into B, which is A to B.
+
+0:02:59.060,0:03:02.898
+And I see that blue has
+to be removed there.
+
+0:03:02.898,0:03:05.320
+All right, so what have we done?
+
+0:03:05.320,0:03:08.730
+We have not done the full algorithm
+for enforcing arc consistency.
+
+0:03:08.730,0:03:11.520
+We have not visited nodes over and
+over again with a whole queue.
+
+0:03:11.520,0:03:15.650
+We have enforced the consistency of
+arcs in a very particular pattern,
+
+0:03:15.650,0:03:18.690
+starting essentially at the right
+and working leftward.
+
+0:03:18.690,0:03:21.630
+Now, the question is, is that enough?
+
+0:03:21.630,0:03:25.260
+Well, let's see what happens, and then
+we'll see whether or not it's enough.
+
+0:03:25.260,0:03:29.850
+The next step after we've order
+these nodes, we've done a
+
+0:03:29.850,0:03:31.900
+removal pass going backwards.
+
+0:03:31.900,0:03:33.650
+Now we do an assignment
+pass going forward.
+
+0:03:33.650,0:03:36.930
+So we started A, and we
+go left to right.
+
+0:03:36.930,0:03:39.110
+And we assign in any way we like.
+
+0:03:39.110,0:03:40.890
+Let's see what happens.
+
+0:03:40.890,0:03:45.100
+So I look at A, and it's only got one
+choice left, so I'll take it.
+
+0:03:45.100,0:03:49.230
+Now I go to B. Is it possible
+that I'm in trouble?
+
+0:03:49.230,0:03:53.230
+Is it possible that I've just made a
+choice at A, such that at B I will
+
+0:03:53.230,0:03:55.370
+have no options left?
+
+0:03:55.370,0:03:57.075
+Well, it's not, because this
+arc is consistent.
+
+0:03:57.075,0:03:58.400
+That's what consistency means.
+
+0:03:58.400,0:04:01.180
+The troublesome thing at
+A, blue, got removed.
+
+0:04:01.180,0:04:04.590
+So what it means to say that A B is
+currently consistent is whatever I
+
+0:04:04.590,0:04:08.620
+picked, including red, has an extension,
+and I'll take one.
+
+0:04:08.620,0:04:09.540
+So I take blue.
+
+0:04:09.540,0:04:13.760
+And whatever I did at B, now I can
+move on to C and I know I'm safe.
+
+0:04:13.760,0:04:15.310
+So when I get to C, I'll
+pick something.
+
+0:04:15.310,0:04:16.870
+And so far, there's not
+a lot of choice.
+
+0:04:16.870,0:04:19.100
+Now I get to D, I've actually
+got a choice.
+
+0:04:19.100,0:04:22.710
+And what I choose, it may not be that
+everything is safe, but I chose
+
+0:04:22.710,0:04:28.200
+something at B. The arc from B to D is
+consistent, and so whatever I chose at
+
+0:04:28.200,0:04:30.162
+B has an extension.
+
+0:04:30.162,0:04:30.650
+All right.
+
+0:04:30.650,0:04:33.370
+To keep it interesting,
+I will choose green.
+
+0:04:33.370,0:04:36.450
+Now I get to E, you see I can't choose
+anything at E, but I'm guaranteed
+
+0:04:36.450,0:04:40.510
+something by the consistency of the
+D to E arc, so I choose it.
+
+0:04:40.510,0:04:41.930
+And then again, I choose this here.
+
+0:04:41.930,0:04:44.770
+And it turns out that this algorithm
+guarantees you that in this forward
+
+0:04:44.770,0:04:48.950
+assignment phase, there will always be
+a consistent solution at each point.
+
+0:04:48.950,0:04:51.920
+You'll pick it and you'll move on,
+which means no backtracking.
+
+0:04:51.920,0:04:54.940
+And so this whole thing was
+pretty efficient, right?
+
+0:04:54.940,0:04:56.300
+What was the run time?
+
+0:04:56.300,0:04:58.840
+Well, I did something to
+each arc going left.
+
+0:04:58.840,0:05:00.810
+And I did something to
+each arc going right.
+
+0:05:00.810,0:05:04.450
+And so basically, it's order n from
+the fact that I visit each arc a
+
+0:05:04.450,0:05:05.620
+constant number of times.
+
+0:05:05.620,0:05:06.950
+And at each arc, what did I do?
+
+0:05:06.950,0:05:09.530
+Well, I looked at all the pairs of
+domain values in the head and the
+
+0:05:09.530,0:05:11.390
+tail, and then I checked
+whether they're OK.
+
+0:05:11.390,0:05:12.700
+That's D squared.
+
+0:05:12.700,0:05:14.990
+So it's a linear algorithm,
+just like I promised.
+
+0:05:14.990,0:05:19.000
+Now there's this important question,
+which is am I sure it was enough to
+
+0:05:19.000,0:05:21.570
+just kind of enforce consistency
+of the arcs once?
+
+0:05:21.570,0:05:23.870
+I have worries, like that so
+I should prove something.
+
+0:05:23.870,0:05:25.120
+

@@ -1,0 +1,462 @@
+0:00:01.050,0:00:05.180
+Let's talk about what AI actually
+is. So, what is a AI--well
+
+0:00:05.180,0:00:07.970
+actually this is a big discussion we
+have to have
+
+0:00:07.970,0:00:12.030
+as a field--what is AI? Well, we're
+going to be building machines, software,
+
+0:00:12.030,0:00:12.469
+you know,
+
+0:00:12.469,0:00:13.700
+that does something.
+
+0:00:13.700,0:00:17.320
+What's our goal, what does it mean to
+build an artificial intelligence.
+
+0:00:17.320,0:00:19.699
+Well there have been multiple schools of thought on
+this.
+
+0:00:19.699,0:00:22.230
+One school of thought is what we
+should really be doing is building machines
+
+0:00:22.230,0:00:22.949
+
+0:00:22.949,0:00:26.739
+that think like people, right. Intelligence is
+about thinking, and this is artificial.
+
+0:00:26.739,0:00:28.940
+What's the natural intelligence--I guess
+that's us.
+
+0:00:28.940,0:00:31.930
+So we want to build these machines that
+somehow go through the thinking
+
+0:00:31.930,0:00:34.810
+processes that people do.
+
+0:00:34.810,0:00:37.620
+Alright,  there is actually a science that studies this,
+
+0:00:37.620,0:00:40.090
+and it's not really AI anymore.
+
+0:00:40.090,0:00:43.890
+This is some mix of cognitive
+science and computational neuroscience
+
+0:00:43.890,0:00:45.770
+really trying to understand the brain.
+
+0:00:45.770,0:00:48.700
+And it's very important but it's not what this
+course is going to be about.
+
+0:00:48.700,0:00:51.910
+So another thing that people at times have
+thought AI should be, is we should be
+
+0:00:51.910,0:00:54.330
+building machines that act like people.
+
+0:00:54.330,0:00:56.980
+Okay, so we should say: who cares
+about how they think, they can think in some
+
+0:00:56.980,0:01:03.190
+strange, alien, silicon way, but the action,
+the behavior has to be like what we know from people.
+
+0:01:03.190,0:01:06.750
+This is actually a very early definition.
+This is straight from, uh, Alan Turing,
+
+0:01:06.750,0:01:11.040
+the definition that really, all you can
+really do is check behavior. Is the behavior
+
+0:01:11.040,0:01:12.610
+like an intelligent human?
+
+0:01:12.610,0:01:16.469
+So this led to things like the Turing test where you put a robot on one
+
+0:01:16.469,0:01:20.090
+chat channel and a human on the other and
+then you have an interrogator who chats
+
+0:01:20.090,0:01:23.760
+with both of them and tries to say that one
+was the robot and that one was the human.
+
+0:01:23.760,0:01:26.840
+And this is a really good idea because
+provided you can't actually see them--there's no
+
+0:01:26.840,0:01:29.580
+video right ..., where you know the robot's the one with the blinking lights right.
+
+0:01:29.580,0:01:30.429
+
+0:01:30.429,0:01:32.049
+So provided it's just over chat
+
+0:01:32.049,0:01:35.060
+you can really kind of test anything.
+It's open-ended: do they have hobbies,
+
+0:01:35.060,0:01:38.719
+can they answer a general question
+about a chess configuration,
+
+0:01:38.719,0:01:42.669
+right. The problem was, the Turing test, in
+order to really do well,
+
+0:01:42.669,0:01:45.969
+you don't just really concentrate on
+programming intelligence, you concentrate
+
+0:01:45.969,0:01:46.729
+on things like,
+
+0:01:46.729,0:01:48.040
+don't spell too well,
+
+0:01:48.040,0:01:51.079
+humans don't do that. And so you build in
+some type of typo Turing machines
+
+0:01:51.079,0:01:54.299
+and then you think, wait a minute, if i get
+asked about the square root of thirty-five,
+
+0:01:54.299,0:01:56.920
+I better not have an answer.
+
+0:01:56.920,0:02:00.829
+And so you go through basically trying to
+mimic things that probably you didn't
+
+0:02:00.829,0:02:03.920
+really value in the human in the first
+place. On the other hand, you got to be
+
+0:02:03.920,0:02:06.240
+really sure that you have a favorite
+Shakespeare play
+
+0:02:06.240,0:02:08.989
+'cause the interrogator always asked
+that.
+
+0:02:08.989,0:02:12.159
+Okay, that's thinking like people and acting like
+people and the realization was this
+
+0:02:12.159,0:02:15.510
+really wasn't going anywhere in terms of
+building machines that were useful in
+
+0:02:15.510,0:02:16.849
+say industry,
+
+0:02:16.849,0:02:19.650
+and so the realization was maybe it's
+not about mimicking people.
+
+0:02:19.650,0:02:23.240
+We've already got those, right. Maybe we
+should do something else. Maybe what we should
+
+0:02:23.240,0:02:26.500
+be doing is building machines that think
+rationally. So, whatever thought
+
+0:02:26.500,0:02:29.580
+processes are, they should be correct.
+What does it mean to have a correct thought process,
+
+0:02:29.580,0:02:32.189
+it's a very kind of a prescriptive
+thing.
+
+0:02:32.189,0:02:36.189
+And this actually has a long history in the
+logicist and philosophy tradition
+
+0:02:36.189,0:02:39.139
+going all the way back, say to
+Aristotle's laws of thought.
+
+0:02:39.139,0:02:39.830
+This is how you think
+
+0:02:39.830,0:02:43.209
+in order to kind of not make a mistake
+in your deductions.
+
+0:02:43.209,0:02:47.290
+And this tradition actually still shows
+up in various places of AI.
+
+0:02:47.290,0:02:48.380
+By and large,
+
+0:02:48.380,0:02:52.400
+this wasn't the winner, and the reason it
+wasn't the winner is because our ability
+
+0:02:52.400,0:02:55.779
+to write down how to do logical
+deduction
+
+0:02:55.779,0:02:57.809
+turned out to be relatively fragile,
+
+0:02:57.809,0:03:01.629
+and it any case when we're learning
+about how to incorporate uncertainty we
+
+0:03:01.629,0:03:04.849
+also had this realization that really it
+wasn't about how you think, but about the
+
+0:03:04.849,0:03:06.289
+actions you take in the end.
+
+0:03:06.289,0:03:09.370
+So the winner for this course is that AI, for us,
+
+0:03:09.370,0:03:12.509
+is the science of making machines, that act
+rationally.
+
+0:03:12.509,0:03:15.329
+So what's that mean? We only care about what they do,
+
+0:03:15.329,0:03:19.419
+and our requirement on what they do is
+the that they achieve their goals optimally.
+
+0:03:19.419,0:03:22.829
+You may be looking at this, and you maybe be thinking, okay rational, rational means I have a
+
+0:03:22.829,0:03:26.719
+level-headed decision, I don't get angry. So we want to build machines that don't get angry.
+
+0:03:26.719,0:03:28.689
+Well you know, I don't know, uh...
+
+0:03:28.689,0:03:31.230
+if you think back to GLaDOS maybe
+that's good, maybe we shouldn't
+
+0:03:31.230,0:03:34.819
+build machines that get angry. Um... Skynet
+got a little angry.
+
+0:03:34.819,0:03:38.229
+So maybe we shouldn't build machines that get angry.
+
+0:03:38.229,0:03:38.919
+But when we say rational that's not what we mean.
+
+0:03:38.919,0:03:42.369
+Rational has a very technical meaning. It
+means that you maximally achieve your pre-defined goals.
+
+0:03:42.369,0:03:46.069
+So the input to an AI
+is a goal,
+
+0:03:46.069,0:03:50.299
+and rationality means you achieve it in
+the best possible way.
+
+0:03:50.299,0:03:52.749
+Rationality--only matters what you do.
+
+0:03:52.749,0:03:56.269
+It doesn't matter the thought process
+you go through, right. If I have a
+
+0:03:56.269,0:03:57.099
+robot vacuum cleaner,
+
+0:03:57.099,0:04:02.279
+and it just makes some optimal grid on
+the ground, and cleans up all the dirt, great.
+
+0:04:02.279,0:04:06.229
+If it sits in the corner and thinks, alright, where
+shall I clean? Well if I go diagonally
+
+0:04:06.229,0:04:09.289
+there will be a place left over. And then
+it cleans everything up--fine, it doesn't matter.
+
+0:04:09.289,0:04:10.760
+They're equally rational
+
+0:04:10.760,0:04:12.560
+for that task in that context.
+
+0:04:12.560,0:04:14.470
+There may be advantages to the thinking
+robot,
+
+0:04:14.470,0:04:17.389
+there may be advantages to the kind of
+more reactive reflex robot.
+
+0:04:17.389,0:04:19.949
+We'll talk about that in the next class.
+
+0:04:19.949,0:04:23.169
+Goals are all expressed through utilities. So
+we're going to spend a lot of time in this course talking
+
+0:04:23.169,0:04:25.270
+about what a utility is.
+
+0:04:25.270,0:04:28.659
+And in the end remember that being
+rational means maximizing your expected utility.
+
+0:04:28.659,0:04:31.199
+
+0:04:31.199,0:04:34.330
+Okay, so this course, really, we should have called it computational rationality. We're going to teach you
+
+0:04:34.330,0:04:36.669
+computational methods--this is a computer
+science course, and
+
+0:04:36.669,0:04:38.820
+it's all going to be about this idea of
+rationality:
+
+0:04:38.820,0:04:40.879
+maximally achieving your goals.
+
+0:04:40.879,0:04:44.169
+Okay, you say what about artificial? I didn't really say anything about artificiality,
+
+0:04:44.169,0:04:45.580
+that's kind of orthogonal.
+
+0:04:45.580,0:04:47.000
+And what about intelligence? Well,
+
+0:04:47.000,0:04:49.930
+intelligence is a tricky thing. The
+philosophers are still working on that.
+
+0:04:49.930,0:04:52.970
+When they get back to us on what intelligence is, well probably we'll just
+
+0:04:52.970,0:04:53.760
+ask them then what consciousness is.
+
+0:04:53.760,0:04:56.680
+but when they get back to us on
+intelligence, we're gonna say,
+
+0:04:56.680,0:05:00.599
+that's great but we're working on rationality right now.
+
+0:05:00.599,0:05:03.270
+Okay, so if you remember nothing else in the
+course,
+
+0:05:03.270,0:05:06.779
+or if you decide that you really want an AI tattoo,
+
+0:05:06.779,0:05:09.639
+and you needed to distill the course down to one thing,
+
+0:05:09.639,0:05:10.540
+it would be this:
+
+0:05:10.540,0:05:13.099
+it would be maximize your expected utility.
+
+0:05:13.099,0:05:16.789
+Aand we're gonna spend this entire course
+thinking about computational systems
+
+0:05:16.789,0:05:17.780
+that do this.
+
+0:05:17.780,0:05:21.830
+And in order to do that we've got, you
+know, however many weeks left in which we
+
+0:05:21.830,0:05:23.400
+will unpack this definition
+
+0:05:23.400,0:05:25.560
+The first part of the course deals with
+the maximize:
+
+0:05:25.560,0:05:28.970
+How do I figure out which action is best?
+That has to do with the consequences of
+
+0:05:28.970,0:05:32.180
+that action, the context of that action,
+are there adversaries.
+
+0:05:32.180,0:05:35.240
+We're then going to have to  unpack this idea of utility. What is utility?
+
+0:05:35.240,0:05:37.840
+What does it mean to have a function that
+describes my goals.
+
+0:05:37.840,0:05:40.569
+And then, kind of the kicker in here
+that's a little bit hidden is what is
+
+0:05:40.569,0:05:40.830
+
+0:05:40.830,0:05:42.379
+this deal about expectation?
+
+0:05:42.379,0:05:44.570
+Well if I take an action I don't know
+what's gonna happen.
+
+0:05:44.570,0:05:48.530
+So my optimization of goals
+rationally doesn't deal being successful.
+
+0:05:48.530,0:05:52.070
+Life is full of risks. It has to do with
+doing the right thing in kind of the
+
+0:05:52.070,0:05:54.260
+appropriate kind of weighted average.
+
+0:05:54.260,0:05:57.080
+And so we're going to have to unpack this
+notion of what it means to do the right
+
+0:05:57.080,0:06:00.729
+thing on average, and that'll get us into
+probabilistic inference, and that will
+
+0:06:00.729,0:06:01.909
+occupy the middle third of the course.
+

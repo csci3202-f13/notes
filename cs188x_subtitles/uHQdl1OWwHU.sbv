@@ -1,0 +1,706 @@
+0:00:00.000,0:00:01.470
+
+0:00:01.470,0:00:05.390
+DAN KLEIN: So, we know that if we want
+to do well, we have to use depth
+
+0:00:05.390,0:00:07.640
+limited search in order to
+make this practical.
+
+0:00:07.640,0:00:11.360
+We have to plug in a good evaluation
+function but still, because minimax is
+
+0:00:11.360,0:00:14.650
+so good at these kinds of tactical
+decisions, we'd like to go as deeply
+
+0:00:14.650,0:00:16.379
+into the tree as possible.
+
+0:00:16.379,0:00:18.530
+And what we're going to do is we're
+going to look for ways to prune the
+
+0:00:18.530,0:00:23.000
+tree to look for branches that
+do not have to be analyzed.
+
+0:00:23.000,0:00:25.790
+So let's go back to the minimax example
+where the tree is slowly
+
+0:00:25.790,0:00:27.270
+revealed to us.
+
+0:00:27.270,0:00:27.680
+Right.
+
+0:00:27.680,0:00:31.720
+In this example, we went to the first
+child and we saw by examining its
+
+0:00:31.720,0:00:34.490
+children that it's minimax
+value is three.
+
+0:00:34.490,0:00:38.150
+So we know here that this minimax
+value here is three.
+
+0:00:38.150,0:00:40.380
+Now, let's think about
+what happened here.
+
+0:00:40.380,0:00:42.625
+This node ended up being a two.
+
+0:00:42.625,0:00:46.730
+When we saw that first child, we
+didn't yet know what its min
+
+0:00:46.730,0:00:47.480
+was going to be.
+
+0:00:47.480,0:00:47.650
+Right?
+
+0:00:47.650,0:00:49.050
+Its min could be two.
+
+0:00:49.050,0:00:50.180
+It could be negative 10.
+
+0:00:50.180,0:00:51.890
+It could be negative a million.
+
+0:00:51.890,0:00:53.990
+But we know it's two or lower.
+
+0:00:53.990,0:00:58.130
+Now we kept doing the computation to
+see that yes, indeed, it's two.
+
+0:00:58.130,0:01:00.210
+But we knew from that very first
+child it was already going
+
+0:01:00.210,0:01:01.880
+to be two or lower.
+
+0:01:01.880,0:01:05.700
+Over here, we didn't actually know
+until the end that it was
+
+0:01:05.700,0:01:08.070
+also going to be two.
+
+0:01:08.070,0:01:09.450
+So let's think about whether
+or not we could have
+
+0:01:09.450,0:01:11.490
+accomplished any pruning there.
+
+0:01:11.490,0:01:16.045
+Well, for the first child, you got to
+look at all the children to see that
+
+0:01:16.045,0:01:18.500
+this is a three.
+
+0:01:18.500,0:01:19.750
+Right?
+
+0:01:19.750,0:01:22.340
+What I mean by you have to look at all
+the children, is that eight could have
+
+0:01:22.340,0:01:26.656
+been a negative 10 and we don't know
+what to return unless we see it.
+
+0:01:26.656,0:01:30.050
+When we get to the second child,
+the situation's very different.
+
+0:01:30.050,0:01:32.680
+So as soon as we see this two,
+what are we going to return?
+
+0:01:32.680,0:01:34.970
+Well, I don't know what we're going to
+return, but it's going to be less than
+
+0:01:34.970,0:01:36.270
+or equal to two.
+
+0:01:36.270,0:01:37.975
+And what's the guy up top doing?
+
+0:01:37.975,0:01:42.410
+The guy up top's picking the maximum
+of these, which means two, one,
+
+0:01:42.410,0:01:46.200
+negative a billion, it's all equally
+going to be unchosen.
+
+0:01:46.200,0:01:46.770
+Right?
+
+0:01:46.770,0:01:47.680
+Two or lower?
+
+0:01:47.680,0:01:51.120
+Why are we even wasting time figuring
+out just exactly how cataclysmically
+
+0:01:51.120,0:01:52.450
+bad this is for MAX?
+
+0:01:52.450,0:01:54.900
+MAX is already not going to choose it.
+
+0:01:54.900,0:01:57.240
+So we can just keep going.
+
+0:01:57.240,0:02:01.130
+As long as we know that the number we
+returned isn't necessarily the minimax
+
+0:02:01.130,0:02:05.040
+value, it's just a value that we know is
+good enough to let the rest of the
+
+0:02:05.040,0:02:07.270
+computation go through.
+
+0:02:07.270,0:02:08.650
+So we get to this last child.
+
+0:02:08.650,0:02:10.880
+Let's see if we can save any work.
+
+0:02:10.880,0:02:11.990
+Well, here's a 14.
+
+0:02:11.990,0:02:13.950
+What do we know?
+
+0:02:13.950,0:02:16.025
+We know less than or equal to 14.
+
+0:02:16.025,0:02:19.630
+Well, if it's 14, MAX
+is going to pick it.
+
+0:02:19.630,0:02:21.260
+So we got to keep going.
+
+0:02:21.260,0:02:21.910
+Right?
+
+0:02:21.910,0:02:23.090
+What's five?
+
+0:02:23.090,0:02:27.390
+That means we scratch that out and
+we say less than or equal to 5.
+
+0:02:27.390,0:02:29.650
+Well MAX is still going to pick it.
+
+0:02:29.650,0:02:30.830
+So we can't stop.
+
+0:02:30.830,0:02:31.790
+Because it could be five.
+
+0:02:31.790,0:02:32.995
+It could be the best thing for MAX.
+
+0:02:32.995,0:02:36.130
+Or it could still be negative a million
+and MAX won't touch it.
+
+0:02:36.130,0:02:39.210
+So we have to actually look at that
+last child and now we see that, in
+
+0:02:39.210,0:02:41.240
+fact, it's a two.
+
+0:02:41.240,0:02:45.020
+And we can continue on at the
+root and return three.
+
+0:02:45.020,0:02:47.870
+So sometimes we can prune
+and sometimes we can't.
+
+0:02:47.870,0:02:51.430
+And the key idea is you can
+prune after that two--
+
+0:02:51.430,0:02:56.930
+right here, you can prune this stuff,
+because you know this node, which is a
+
+0:02:56.930,0:03:01.430
+candidate for MAX, you know it's already
+worse than another candidate.
+
+0:03:01.430,0:03:03.720
+You know it's worse then this three.
+
+0:03:03.720,0:03:07.850
+So as soon as one of these nodes that's
+minimizing drops below three,
+
+0:03:07.850,0:03:09.590
+we can just stop.
+
+0:03:09.590,0:03:12.280
+That's the key idea about minimax
+pruning, and will give us the
+
+0:03:12.280,0:03:14.980
+algorithm of alpha-beta planning.
+
+0:03:14.980,0:03:17.630
+Here's the general case for
+alpha-beta pruning.
+
+0:03:17.630,0:03:22.990
+Let's think about what computation we
+do in this minimax style search.
+
+0:03:22.990,0:03:26.320
+Well, let's think about the case where
+we're computing the MIN value at some
+
+0:03:26.320,0:03:29.350
+note N. So that's this
+node right here.
+
+0:03:29.350,0:03:33.130
+What do we do when we compute
+the minimum value?
+
+0:03:33.130,0:03:35.730
+Well, we loop over N's children.
+
+0:03:35.730,0:03:39.580
+As we loop over the children, what
+happens to this running MIN?
+
+0:03:39.580,0:03:41.020
+We saw this earlier.
+
+0:03:41.020,0:03:44.430
+That MIN start at positive infinity
+and it slowly ticks down as I see
+
+0:03:44.430,0:03:46.220
+smaller and smaller children.
+
+0:03:46.220,0:03:47.950
+So we've got some estimate of the MIN.
+
+0:03:47.950,0:03:49.710
+It's an estimate.
+
+0:03:49.710,0:03:52.320
+And it's dropping, dropping,
+dropping, dropping.
+
+0:03:52.320,0:03:54.010
+So that's what happens in MIN value.
+
+0:03:54.010,0:03:55.800
+You have an estimate and it drops.
+
+0:03:55.800,0:03:59.310
+Well, who cares about the
+value of this node?
+
+0:03:59.310,0:04:01.330
+Well, this node.
+
+0:04:01.330,0:04:03.360
+MAX cares about it.
+
+0:04:03.360,0:04:08.420
+So we're computing some value for N,
+that MAX is going to use to decide
+
+0:04:08.420,0:04:11.980
+whether or not this is going to
+be a choice that's going to
+
+0:04:11.980,0:04:14.870
+be the minimax choice.
+
+0:04:14.870,0:04:19.790
+So let's imagine that somewhere higher
+in the tree, MAX can achieve A. So
+
+0:04:19.790,0:04:27.010
+here's a place where MAX, by choosing
+this action here, can force a value of
+
+0:04:27.010,0:04:33.040
+A. In particular, let's let
+A be the best such thing.
+
+0:04:33.040,0:04:37.990
+So A is the best choice for MAX anywhere
+along the path to the root.
+
+0:04:37.990,0:04:42.150
+So now here we're computing N.
+We know the MAX can choose A
+
+0:04:42.150,0:04:44.200
+somewhere else in the tree.
+
+0:04:44.200,0:04:48.610
+As soon as N becomes worse than
+A, MAX will not choose it.
+
+0:04:48.610,0:04:51.590
+Now the reason MAX doesn't choose it
+may be that we choose another child
+
+0:04:51.590,0:04:54.590
+here, or another child here,
+or another child all the
+
+0:04:54.590,0:04:56.710
+way up where A was.
+
+0:04:56.710,0:04:59.690
+So we don't know exactly where N is
+going to be out of the running.
+
+0:04:59.690,0:05:05.200
+But we know that since MAX can force
+at least a value of A right here,
+
+0:05:05.200,0:05:10.230
+there is no chance that N is going to
+be the value the propagates up.
+
+0:05:10.230,0:05:14.780
+In essence, if N becomes worse than A
+because MAX will avoid it, we can stop
+
+0:05:14.780,0:05:19.080
+considering the other children and we
+can just cut off the search there.
+
+0:05:19.080,0:05:22.940
+There's a symmetric version to MAX where
+we keep track of B, which is
+
+0:05:22.940,0:05:26.830
+going to be the best choice higher
+in the tree for MIN and we do the
+
+0:05:26.830,0:05:28.590
+symmetric computation.
+
+0:05:28.590,0:05:32.390
+But I think the MIN version
+is easier to think about.
+
+0:05:32.390,0:05:33.685
+How do we build this thing?
+
+0:05:33.685,0:05:35.750
+Well it's called alpha-beta pruning.
+
+0:05:35.750,0:05:38.640
+You always keep track of
+two important numbers.
+
+0:05:38.640,0:05:42.050
+Alpha is the best option for MAX.
+
+0:05:42.050,0:05:45.530
+Not anywhere in the tree that we've ever
+seen in depth research, is the
+
+0:05:45.530,0:05:48.160
+best option on the way to the root.
+
+0:05:48.160,0:05:51.060
+So it's kind of still active
+on this game path.
+
+0:05:51.060,0:05:54.240
+So alpha is the best option for
+MAX on the way to the root.
+
+0:05:54.240,0:05:57.680
+Beta is the best option for MIN
+on the way to the root.
+
+0:05:57.680,0:06:00.800
+And so we still have this MAX and
+MIN value computation and
+
+0:06:00.800,0:06:03.380
+they look the same.
+
+0:06:03.380,0:06:04.680
+Let's look at the MAX version.
+
+0:06:04.680,0:06:07.340
+They initialize some counter.
+
+0:06:07.340,0:06:11.550
+They go through the children improving
+that bound, except now they have a
+
+0:06:11.550,0:06:17.890
+short circuit that says for MAX, if this
+thing ever gets so large that MIN
+
+0:06:17.890,0:06:21.800
+prefers beta elsewhere in
+the tree, just stop.
+
+0:06:21.800,0:06:25.800
+In addition to having a short circuit
+that compares against beta, we also
+
+0:06:25.800,0:06:28.900
+need to keep track of the fact that
+alpha is actually increasing as we see
+
+0:06:28.900,0:06:32.700
+these children, or at least it's
+increasing for things lower in the
+
+0:06:32.700,0:06:33.950
+tree when we recurse.
+
+0:06:33.950,0:06:36.920
+
+0:06:36.920,0:06:39.160
+So alpha-beta's a pretty
+cool algorithm.
+
+0:06:39.160,0:06:42.100
+Doing all of this running-- and it can
+be a lot of pruning, you'll see in
+
+0:06:42.100,0:06:43.200
+your projects--
+
+0:06:43.200,0:06:46.940
+it has no effect on the minimax value
+you compute for the root.
+
+0:06:46.940,0:06:49.600
+So you're ignoring branches
+all over the place.
+
+0:06:49.600,0:06:52.890
+You're cutting things off left and
+right, mostly right, actually.
+
+0:06:52.890,0:06:53.980
+You'll see why.
+
+0:06:53.980,0:06:56.930
+You're cutting off all of these branches
+and yet you still return the
+
+0:06:56.930,0:06:58.620
+same value at the root.
+
+0:06:58.620,0:07:02.070
+However, as we saw, the values
+of nodes other than the
+
+0:07:02.070,0:07:04.940
+root may not be correct.
+
+0:07:04.940,0:07:08.660
+Remember we returned a value that
+said two, maybe smaller?
+
+0:07:08.660,0:07:10.830
+We don't actually know the
+value in those cases.
+
+0:07:10.830,0:07:13.340
+So although the value at the root would
+be correct, the value of other
+
+0:07:13.340,0:07:14.970
+nodes may be wrong.
+
+0:07:14.970,0:07:15.960
+Who cares?
+
+0:07:15.960,0:07:17.310
+This is why we care.
+
+0:07:17.310,0:07:18.580
+Let's look at this little tree.
+
+0:07:18.580,0:07:22.655
+If we run minimax, we'll compute the
+whole tree, which is really big.
+
+0:07:22.655,0:07:22.790
+Right?
+
+0:07:22.790,0:07:23.790
+Look, three nodes.
+
+0:07:23.790,0:07:24.210
+OK.
+
+0:07:24.210,0:07:29.190
+So what we do in alpha-beta is we say,
+all right, here you're a 10.
+
+0:07:29.190,0:07:33.250
+When I recurse into the right child, I'm
+going to look at the first child
+
+0:07:33.250,0:07:35.940
+and say, OK, that's a 10.
+
+0:07:35.940,0:07:42.760
+According to the rule, we can actually
+end right now, return 10, cut off this
+
+0:07:42.760,0:07:47.570
+branch, and we'll be sure that the
+number at the root is not changed from
+
+0:07:47.570,0:07:50.470
+if we had actually done the full minimax
+computation, which would have
+
+0:07:50.470,0:07:54.330
+had a zero on the right but it still
+would have had a ten at the root.
+
+0:07:54.330,0:07:58.240
+So cutting off that zero didn't change
+the value of the root, but if what I
+
+0:07:58.240,0:08:01.320
+wanted was not the minimax value of the
+root, which is rarely what you're
+
+0:08:01.320,0:08:03.420
+after, but rather to know
+the optimal action.
+
+0:08:03.420,0:08:06.830
+Well, there's only one optimal
+action and it's to go left.
+
+0:08:06.830,0:08:11.160
+Whereas under alpha-beta, actually
+they look the same.
+
+0:08:11.160,0:08:14.620
+So you can't just apply this naively
+for action selection.
+
+0:08:14.620,0:08:16.280
+There are various ways
+you can modify it.
+
+0:08:16.280,0:08:20.640
+You reinforce inequality in the check
+you can run each child separately.
+
+0:08:20.640,0:08:23.040
+There are fancier ways to string
+them together, but you'll have
+
+0:08:23.040,0:08:23.930
+to be aware of this.
+
+0:08:23.930,0:08:25.760
+This is one of the complexities
+of your project.
+
+0:08:25.760,0:08:27.500
+It's not enough to be
+right at the root.
+
+0:08:27.500,0:08:30.190
+You have to be right at the children of
+the root because they're the ones
+
+0:08:30.190,0:08:33.549
+you're going to use to
+pick your action.
+
+0:08:33.549,0:08:37.250
+If you build alpha-beta pruning and
+you do a pretty good job of trying
+
+0:08:37.250,0:08:40.760
+that good children before the bad
+children, you can get much more
+
+0:08:40.760,0:08:44.179
+effective at going deeper into the tree
+because you're basically reducing
+
+0:08:44.179,0:08:45.710
+the branching factor.
+
+0:08:45.710,0:08:49.220
+With perfect ordering, effectively,
+you take the square root of the
+
+0:08:49.220,0:08:52.050
+branching factor, which means you
+double the depth that you're
+
+0:08:52.050,0:08:54.170
+able to search to.
+
+0:08:54.170,0:08:56.580
+Now, of course, you're still not going
+to go to a full depth of something
+
+0:08:56.580,0:09:01.140
+like chess, but going twice as deep
+is a big deal for these games.
+
+0:09:01.140,0:09:04.530
+This algorithm is also cool because it's
+a simple example of what's called
+
+0:09:04.530,0:09:08.940
+metareasoning or metacomputation, which
+is doing computation to figure
+
+0:09:08.940,0:09:11.120
+out what computation you should do.
+
+0:09:11.120,0:09:13.800
+Here we're keeping track of all these
+alphas and betas so that we can decide
+
+0:09:13.800,0:09:16.080
+whether or not to recurse
+and that's awesome.
+
+0:09:16.080,0:09:17.330
+

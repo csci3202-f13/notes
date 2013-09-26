@@ -1,0 +1,809 @@
+0:00:00.000,0:00:00.972
+
+0:00:00.972,0:00:03.780
+DAN KLEIN: This is active
+reinforcement learning.
+
+0:00:03.780,0:00:05.220
+You have to try things.
+
+0:00:05.220,0:00:07.210
+Sometimes, when you try
+something, it's bad.
+
+0:00:07.210,0:00:09.970
+You get a negative reward,
+and you keep on going.
+
+0:00:09.970,0:00:15.000
+You probably won't try that thing
+again, but you paid the price.
+
+0:00:15.000,0:00:18.610
+In full reinforcement learning, we
+would like to be able to compute
+
+0:00:18.610,0:00:21.180
+optimal policies like
+value iteration did.
+
+0:00:21.180,0:00:23.240
+Now, of course, we're going to
+make mistakes along the way.
+
+0:00:23.240,0:00:25.900
+That's going to a notion that we'll
+talk about later, called regret.
+
+0:00:25.900,0:00:28.290
+But we'd like to eventually
+learn the optimal thing.
+
+0:00:28.290,0:00:31.670
+So full reinforcement learning, we'd
+like to produce optimal policies.
+
+0:00:31.670,0:00:34.160
+We still don't know the transition
+or the rewards.
+
+0:00:34.160,0:00:36.230
+But now we're choosing the actions.
+
+0:00:36.230,0:00:39.190
+Our goal is to learn optimal things.
+
+0:00:39.190,0:00:41.990
+Eventually, we'd like to have the
+optimal policy and the optimal values
+
+0:00:41.990,0:00:43.040
+in our hands.
+
+0:00:43.040,0:00:45.780
+In this case, the learner
+is making choices.
+
+0:00:45.780,0:00:48.520
+And there's going to be a fundamental
+trade-off of doing things that are
+
+0:00:48.520,0:00:52.570
+known to be pretty good, versus learning
+about things like what
+
+0:00:52.570,0:00:54.900
+happens when I jump off the cliff.
+
+0:00:54.900,0:00:57.910
+That's a trade-off between what's called
+exploration and exploitation,
+
+0:00:57.910,0:01:00.630
+which we'll talk about more later.
+
+0:01:00.630,0:01:03.650
+In order to do this, we need
+to take a little detour.
+
+0:01:03.650,0:01:07.370
+In particular, let's remember back to
+the algorithm we have for computing
+
+0:01:07.370,0:01:08.550
+optimal values.
+
+0:01:08.550,0:01:09.940
+What does it do?
+
+0:01:09.940,0:01:11.480
+We had value iteration.
+
+0:01:11.480,0:01:13.290
+It starts with a vector of zeros.
+
+0:01:13.290,0:01:18.270
+And it computes new approximations to
+the values which converge to the
+
+0:01:18.270,0:01:19.430
+optimal values.
+
+0:01:19.430,0:01:20.740
+How did that work?
+
+0:01:20.740,0:01:26.490
+Well, what we do is we would take our
+current values, Vk, and we do a layer
+
+0:01:26.490,0:01:30.890
+of expectamax from every state,
+plugging those values in.
+
+0:01:30.890,0:01:32.800
+What's that layer of expectamax
+look like?
+
+0:01:32.800,0:01:35.180
+It looks like how expectamax
+always does.
+
+0:01:35.180,0:01:39.100
+We take a maximum over all of the
+actions available from s.
+
+0:01:39.100,0:01:41.610
+We average all the outcomes.
+
+0:01:41.610,0:01:47.260
+And then, for each outcome, we compute
+the utility as the instantaneous or
+
+0:01:47.260,0:01:50.420
+word plus the discounted future.
+
+0:01:50.420,0:01:52.230
+So this was correct.
+
+0:01:52.230,0:01:56.290
+Because it stuck a layer of expectamax,
+that's a one layer of
+
+0:01:56.290,0:02:00.020
+optimality, on top of whatever
+our old approximations were.
+
+0:02:00.020,0:02:05.380
+It buried those old approximations
+under one layer of optimality.
+
+0:02:05.380,0:02:08.090
+We can't do this update with samples.
+
+0:02:08.090,0:02:09.070
+Why not?
+
+0:02:09.070,0:02:11.370
+We can't do this because
+it's not an average.
+
+0:02:11.370,0:02:14.680
+And the only thing we can do with
+samples is compute averages of things.
+
+0:02:14.680,0:02:16.050
+And why isn't this an average?
+
+0:02:16.050,0:02:17.370
+It's because there's a max.
+
+0:02:17.370,0:02:21.520
+And we don't of a way to use
+samples to maximize.
+
+0:02:21.520,0:02:25.160
+The key idea here, in essence the
+biggest advance in reinforcement
+
+0:02:25.160,0:02:29.240
+learning in decades, was a breakthrough
+here where people
+
+0:02:29.240,0:02:34.010
+noticed, if you just shift down a half
+a layer in the tree and look at the
+
+0:02:34.010,0:02:38.390
+expectamax recurrence from a chance
+node, everything's different.
+
+0:02:38.390,0:02:41.570
+In particular, we know Q-values are
+going to be useful, because it's
+
+0:02:41.570,0:02:43.480
+easier to choose actions for them.
+
+0:02:43.480,0:02:46.570
+And we can write down a version
+of value iteration
+
+0:02:46.570,0:02:48.600
+that works with Q-values.
+
+0:02:48.600,0:02:50.500
+And let's think about
+what it would be.
+
+0:02:50.500,0:02:54.610
+Well, we imagine we start out with some
+approximation, Qk, which is the
+
+0:02:54.610,0:02:57.890
+Q-values in particular to depth k.
+
+0:02:57.890,0:03:01.910
+And so we think, all right, how am I
+going to figure out the Q-value for
+
+0:03:01.910,0:03:06.230
+depth k plus 1 from some state,
+s, and some action, a?
+
+0:03:06.230,0:03:11.020
+Well, if we knew the MDP and we had T
+and we had R, we would say, all, right
+
+0:03:11.020,0:03:12.630
+what is this thing?
+
+0:03:12.630,0:03:13.580
+Well, let's think.
+
+0:03:13.580,0:03:16.100
+What happens at a chance node?
+
+0:03:16.100,0:03:19.160
+What happens is you have
+some outcome s prime.
+
+0:03:19.160,0:03:27.170
+And for each outcome s prime, we have
+to average together according to T,
+
+0:03:27.170,0:03:31.520
+the utility we will receive, if
+this action leads to s prime.
+
+0:03:31.520,0:03:35.120
+Well, if this actually leads to s prime,
+what utility will we receive?
+
+0:03:35.120,0:03:41.060
+We'll receive an instantaneous reward,
+which is the reward of SaS prime.
+
+0:03:41.060,0:03:45.240
+And then we will receive a discount on
+our future value from the landing
+
+0:03:45.240,0:03:46.620
+state, s prime.
+
+0:03:46.620,0:03:49.440
+And so I might be tempted to
+write V of s prime here.
+
+0:03:49.440,0:03:50.690
+But I'm not learning values.
+
+0:03:50.690,0:03:53.210
+I'm learning Q-values, so I
+need to do one more layer.
+
+0:03:53.210,0:03:55.360
+What is the value?
+
+0:03:55.360,0:04:03.130
+The value of the state is just the
+maximum of all the Q-values going out
+
+0:04:03.130,0:04:04.140
+of that state.
+
+0:04:04.140,0:04:06.710
+And I have to maximize over all
+of the actions that I could
+
+0:04:06.710,0:04:08.910
+take from that state.
+
+0:04:08.910,0:04:09.820
+So here it is.
+
+0:04:09.820,0:04:13.260
+It's almost exactly like the other
+equation, but the recurrence has been
+
+0:04:13.260,0:04:14.840
+shifted a half a level.
+
+0:04:14.840,0:04:16.660
+The max is still there, right?
+
+0:04:16.660,0:04:18.050
+Here it is.
+
+0:04:18.050,0:04:20.579
+The average is still there.
+
+0:04:20.579,0:04:22.019
+There it is.
+
+0:04:22.019,0:04:25.950
+And there's still this flavor of taking
+reward plus discounted future.
+
+0:04:25.950,0:04:28.940
+The critical difference here
+is with this equation.
+
+0:04:28.940,0:04:31.650
+The thing in the front is an average.
+
+0:04:31.650,0:04:33.090
+This equation is an average.
+
+0:04:33.090,0:04:35.970
+And therefore, this equation
+we can do with samples.
+
+0:04:35.970,0:04:39.190
+That gives rise to an algorithm
+called Q-Learning.
+
+0:04:39.190,0:04:40.220
+So let's see Q-Learning.
+
+0:04:40.220,0:04:43.360
+And essentially, Q-Learning is this key
+algorithm that allows us to do a
+
+0:04:43.360,0:04:45.710
+lot of great things with
+reinforcement learning.
+
+0:04:45.710,0:04:49.130
+In Q-Learning, we're going to do Q-value
+iteration, that is execute
+
+0:04:49.130,0:04:54.270
+this update where we replace a Q-value
+with a one-step-look-ahead sample.
+
+0:04:54.270,0:04:56.340
+And we're going to do it as we go.
+
+0:04:56.340,0:05:00.460
+So every time we're in a state,
+s, we take some action, a.
+
+0:05:00.460,0:05:04.740
+When we do that, we're going to learn
+something about how good s, a is.
+
+0:05:04.740,0:05:06.960
+So what we're going to do is we're going
+to maintain a table that looks
+
+0:05:06.960,0:05:08.120
+something like this.
+
+0:05:08.120,0:05:11.490
+For every state and every action, it's
+going to maintain a number, which is
+
+0:05:11.490,0:05:13.640
+the Q-value approximation.
+
+0:05:13.640,0:05:16.800
+We're going to get some sample on the
+basis of the action we picked.
+
+0:05:16.800,0:05:18.960
+The Q-Learning algorithm doesn't
+actually care how
+
+0:05:18.960,0:05:19.940
+the action was chosen.
+
+0:05:19.940,0:05:22.380
+It does the same update, no
+matter how it was chosen.
+
+0:05:22.380,0:05:23.490
+So what do we get?
+
+0:05:23.490,0:05:24.200
+We get a sample.
+
+0:05:24.200,0:05:25.270
+We were in s.
+
+0:05:25.270,0:05:26.580
+We chose action a.
+
+0:05:26.580,0:05:29.760
+And so we're going to learn something
+about Q of s,a, that is, how good is
+
+0:05:29.760,0:05:31.750
+this action from this state?
+
+0:05:31.750,0:05:34.170
+We landed in s prime this time.
+
+0:05:34.170,0:05:36.100
+And we received reward r.
+
+0:05:36.100,0:05:37.440
+So what do we do?
+
+0:05:37.440,0:05:40.000
+Well, we consider, on one hand,
+we have this old estimate.
+
+0:05:40.000,0:05:43.250
+On the basis of all of our past
+experience, we are currently
+
+0:05:43.250,0:05:48.960
+estimating that action a from state
+s is worth this value Q of s, a.
+
+0:05:48.960,0:05:52.680
+On the other hand, we've just received
+some evidence from the world.
+
+0:05:52.680,0:05:57.410
+We've gotten the sample that says, on
+the basis of this particular outcome,
+
+0:05:57.410,0:06:01.660
+it looks like what we're on track to
+receive from s, a is the instantaneous
+
+0:06:01.660,0:06:05.840
+reward we just got, that's of
+R of s, a, s prime, plus
+
+0:06:05.840,0:06:07.000
+the discounted future.
+
+0:06:07.000,0:06:09.800
+And the discounted future depends
+on the s prime we land in.
+
+0:06:09.800,0:06:13.710
+And whatever s prime it is, we just
+maximize overall of the a primes that
+
+0:06:13.710,0:06:15.080
+are possible from there.
+
+0:06:15.080,0:06:17.610
+So here is our discounted future.
+
+0:06:17.610,0:06:22.070
+All right, so on one hand, we have the
+old estimate of how good Q of s, a is,
+
+0:06:22.070,0:06:23.730
+how good is this action
+from this state.
+
+0:06:23.730,0:06:27.760
+On the other hand, we see what we're
+on track to receive this time.
+
+0:06:27.760,0:06:28.920
+And we're going to balance them.
+
+0:06:28.920,0:06:29.930
+And it's just like before.
+
+0:06:29.930,0:06:32.400
+We're going to incorporate this new
+sample estimate into the running
+
+0:06:32.400,0:06:36.510
+average by saying, mostly, we're going
+to keep the old estimate, but with
+
+0:06:36.510,0:06:39.480
+some small weight we incorporate
+this new sample.
+
+0:06:39.480,0:06:42.750
+And as we do this over and over again,
+the samples, more or less, average
+
+0:06:42.750,0:06:45.130
+together where the recent ones
+are up-weighted a little bit.
+
+0:06:45.130,0:06:46.470
+And we learn over time.
+
+0:06:46.470,0:06:47.750
+This is Q-Learning.
+
+0:06:47.750,0:06:49.320
+And it's pretty awesome what it does.
+
+0:06:49.320,0:06:51.060
+Let's take a look.
+
+0:06:51.060,0:06:53.000
+All right, first, I'm going
+to execute it by hand.
+
+0:06:53.000,0:06:54.810
+So here is that cliff.
+
+0:06:54.810,0:06:56.540
+Everything on the bottom is bad.
+
+0:06:56.540,0:06:58.470
+And the exit on the right is good.
+
+0:06:58.470,0:06:59.790
+So watch as I go.
+
+0:06:59.790,0:07:04.630
+As I go, nothing really happens, until
+I receive a non-zero reward.
+
+0:07:04.630,0:07:08.220
+And as I receive the exit from here,
+in this case, it was plus 10.
+
+0:07:08.220,0:07:10.300
+And because my learning rate
+is still set to 0.5--
+
+0:07:10.300,0:07:12.470
+which is not a good learning rate,
+it's way too high, but it's
+
+0:07:12.470,0:07:13.560
+good for the demo--
+
+0:07:13.560,0:07:17.780
+if I keep doing this, we'll see that, as
+I leave here I will learn something
+
+0:07:17.780,0:07:20.030
+about what east does from this state.
+
+0:07:20.030,0:07:22.260
+And you can see I update east.
+
+0:07:22.260,0:07:26.260
+The other actions haven't been updated,
+because I didn't do them.
+
+0:07:26.260,0:07:27.470
+If I go here--
+
+0:07:27.470,0:07:28.600
+let's just do this for a while.
+
+0:07:28.600,0:07:31.030
+Let's build up some information
+about going east.
+
+0:07:31.030,0:07:33.610
+
+0:07:33.610,0:07:36.440
+So it looks like going
+east is pretty good.
+
+0:07:36.440,0:07:40.360
+What happens if I jump off a cliff?
+
+0:07:40.360,0:07:42.440
+I learn that the fire pit is bad.
+
+0:07:42.440,0:07:45.250
+And if I do it again, I learn that
+jumping off the cliff is bad.
+
+0:07:45.250,0:07:45.570
+[LAUGHTER]
+
+0:07:45.570,0:07:51.240
+DAN KLEIN: But I can do this all day
+long, and I will never learn that the
+
+0:07:51.240,0:07:52.670
+start state is bad.
+
+0:07:52.670,0:07:53.840
+Why?
+
+0:07:53.840,0:07:59.220
+I guess the important thing here is,
+when I move from here east, I land in
+
+0:07:59.220,0:08:02.690
+a state which has some good options
+and some bad options.
+
+0:08:02.690,0:08:05.870
+But when I do my Q update,
+I maximize over them.
+
+0:08:05.870,0:08:10.290
+And so I only incorporate that
+9.8, not the negative 89.
+
+0:08:10.290,0:08:14.870
+So you can see that, even though I am
+jumping off the cliff every time, in
+
+0:08:14.870,0:08:18.740
+fact, the east Q-values are going
+up, because they look
+
+0:08:18.740,0:08:21.150
+at the optimal thing.
+
+0:08:21.150,0:08:23.200
+You can do that from
+the start here too.
+
+0:08:23.200,0:08:26.810
+Let's look at the crawler
+and its Q-values.
+
+0:08:26.810,0:08:27.230
+All right.
+
+0:08:27.230,0:08:28.320
+Ooh, flashy.
+
+0:08:28.320,0:08:31.720
+OK, do your best.
+
+0:08:31.720,0:08:33.600
+All right, so what's it doing?
+
+0:08:33.600,0:08:36.640
+Down here is, essentially,
+the two angles it has.
+
+0:08:36.640,0:08:38.830
+And that's its action space.
+
+0:08:38.830,0:08:42.110
+This is its state space down here.
+
+0:08:42.110,0:08:43.709
+And I'm going to skip
+a bunch of steps.
+
+0:08:43.709,0:08:46.670
+
+0:08:46.670,0:08:52.230
+And now what you can see is green means
+high Q-value over on the right
+
+0:08:52.230,0:08:54.230
+and high value over on the left.
+
+0:08:54.230,0:08:59.480
+And the little blue lines are
+the currently optimizing
+
+0:08:59.480,0:09:01.470
+action for each state.
+
+0:09:01.470,0:09:06.980
+So if I turn off all randomness, you'll
+see that what it's learned is
+
+0:09:06.980,0:09:10.090
+to execute the policy that's
+shown in the Q-values.
+
+0:09:10.090,0:09:14.670
+And that gives rise to a small loop,
+which gives it higher rewards, because
+
+0:09:14.670,0:09:16.170
+look at that thing trucking
+off to the right.
+
+0:09:16.170,0:09:19.100
+
+0:09:19.100,0:09:20.350
+There he goes.
+
+0:09:20.350,0:09:22.640
+
+0:09:22.640,0:09:24.140
+Let's talk about the
+properties of this.
+
+0:09:24.140,0:09:26.120
+There is an amazing result here.
+
+0:09:26.120,0:09:27.800
+Q-Learning, it looks just
+like value learning.
+
+0:09:27.800,0:09:28.170
+It's not.
+
+0:09:28.170,0:09:29.120
+It's so much cooler
+
+0:09:29.120,0:09:30.030
+This is amazing.
+
+0:09:30.030,0:09:34.230
+Q-Learning will converge to the
+optimal policy, even if you
+
+0:09:34.230,0:09:36.410
+do not follow it.
+
+0:09:36.410,0:09:38.380
+This is called off-policy learning.
+
+0:09:38.380,0:09:40.930
+You're doing whatever crazy
+stuff you're doing.
+
+0:09:40.930,0:09:43.500
+And it's still learning optimal values,
+even though you occasionally
+
+0:09:43.500,0:09:44.680
+jump off a cliff.
+
+0:09:44.680,0:09:45.460
+There's some caveats.
+
+0:09:45.460,0:09:47.370
+You have to explore enough, because
+you're never going to learn about a
+
+0:09:47.370,0:09:49.350
+state or an action you don't visit.
+
+0:09:49.350,0:09:52.580
+You have to eventually make the
+learning rate small enough.
+
+0:09:52.580,0:09:55.830
+But you can't make it decrease too
+quickly, or eventually it will stop
+
+0:09:55.830,0:09:57.330
+learning things.
+
+0:09:57.330,0:10:02.080
+Basically, in the limit, it does not
+matter how you select actions.
+
+0:10:02.080,0:10:04.640
+As long as you try lots of
+stuff, you'll eventually
+
+0:10:04.640,0:10:05.520
+learn the right thing.
+
+0:10:05.520,0:10:08.980
+Now selecting actions poorly may incur
+a large amount of regret, because you
+
+0:10:08.980,0:10:11.540
+jump off the cliff a little
+more often than was wise.
+
+0:10:11.540,0:10:15.050
+But in the end, you will still learn
+that cliff jumping is bad.
+
+0:10:15.050,0:10:20.030
+OK, next time we will talk about how to
+select actions and what to do when
+
+0:10:20.030,0:10:23.380
+your state space is so large that you
+can't keep a big table around.
+
+0:10:23.380,0:10:25.100
+

@@ -1,0 +1,814 @@
+0:00:00.000,0:00:01.490
+
+0:00:01.490,0:00:05.440
+PROFESSOR: So the planning agent comes
+up with a better plan, but of course
+
+0:00:05.440,0:00:07.250
+it's a complex planning problem.
+
+0:00:07.250,0:00:10.510
+And in general, we're going to have to
+be able to formulate what we mean by a
+
+0:00:10.510,0:00:11.520
+planning problem.
+
+0:00:11.520,0:00:14.050
+Or the problems themselves, we
+call them search problems.
+
+0:00:14.050,0:00:15.145
+So what is a search problem?
+
+0:00:15.145,0:00:17.650
+Well, a search problem can be
+for something like get me
+
+0:00:17.650,0:00:18.810
+to the closest dot.
+
+0:00:18.810,0:00:19.960
+Get me to any dot.
+
+0:00:19.960,0:00:22.540
+Eat all the dots in as short
+a time as possible.
+
+0:00:22.540,0:00:24.820
+These are the kinds of problems we
+want to be able to formulate.
+
+0:00:24.820,0:00:26.310
+So what are they formally?
+
+0:00:26.310,0:00:29.350
+Well, you need a state space.
+
+0:00:29.350,0:00:34.840
+The state space is essentially in codes
+how the world is at a certain
+
+0:00:34.840,0:00:37.340
+point along the progression
+of your plan.
+
+0:00:37.340,0:00:38.670
+It is an abstraction of the world.
+
+0:00:38.670,0:00:39.710
+We'll come back to this.
+
+0:00:39.710,0:00:43.290
+So for the case of eating all of the
+dots, your state space might be a
+
+0:00:43.290,0:00:47.800
+position for Pac-Man, and the collection
+of dots which remain
+
+0:00:47.800,0:00:49.270
+encoded in some way.
+
+0:00:49.270,0:00:51.160
+So that's your state space.
+
+0:00:51.160,0:00:52.630
+You then need a successor function.
+
+0:00:52.630,0:00:56.970
+The successor function in some sense
+models how you think the world works.
+
+0:00:56.970,0:01:01.030
+It tells you, all right, from this state
+here, if I go north, I'll end up
+
+0:01:01.030,0:01:04.400
+in a state where the Pac-Man position
+has moved one north, and one of the
+
+0:01:04.400,0:01:05.530
+dots has been eaten.
+
+0:01:05.530,0:01:07.800
+OK, in particular, that
+dot has been eaten.
+
+0:01:07.800,0:01:09.950
+If I go east, I'll get
+some other position.
+
+0:01:09.950,0:01:14.600
+OK, the successor function takes a state
+in the state space, and then
+
+0:01:14.600,0:01:18.490
+what it does is it tells you where you
+can get to immediately, what actions
+
+0:01:18.490,0:01:22.100
+achieve that, and how much they cost
+in the case you have cost.
+
+0:01:22.100,0:01:24.890
+If you don't have cost, maybe
+all the costs are one.
+
+0:01:24.890,0:01:27.940
+So the states space models how the
+world is, the successor function
+
+0:01:27.940,0:01:31.080
+models how it evolves in response
+to your actions.
+
+0:01:31.080,0:01:34.670
+You need a start state, which is right
+now I'm in the lower left hand corner.
+
+0:01:34.670,0:01:37.990
+The start state model is where you
+begin, and you need a goal test.
+
+0:01:37.990,0:01:40.610
+The goal test looks at a sate and
+tells you whether or not you've
+
+0:01:40.610,0:01:41.430
+achieved your goals.
+
+0:01:41.430,0:01:44.470
+So if you're trying to eat all of the
+dots, the goals might be something
+
+0:01:44.470,0:01:46.300
+like all dots are gone.
+
+0:01:46.300,0:01:48.270
+But maybe you don't actually
+care where Pac-Man is.
+
+0:01:48.270,0:01:51.270
+Or maybe you're like a type a Pac-Man,
+and you want to eat all the dots and
+
+0:01:51.270,0:01:53.110
+end up in the middle, right?
+
+0:01:53.110,0:01:57.090
+Well, now your goal state has
+to mention Pac-Man as well.
+
+0:01:57.090,0:01:58.290
+OK, that's the search problem.
+
+0:01:58.290,0:02:01.660
+State space successor function,
+start state and goal test.
+
+0:02:01.660,0:02:03.610
+What is a solution to such a problem?
+
+0:02:03.610,0:02:05.940
+A solution is a sequence of actions.
+
+0:02:05.940,0:02:07.420
+We can call it a plan.
+
+0:02:07.420,0:02:11.570
+A sequence of actions which transforms
+the start state into a state that
+
+0:02:11.570,0:02:12.860
+passes the goal test.
+
+0:02:12.860,0:02:17.090
+So it might be from the start state,
+your solution is north, north, east,
+
+0:02:17.090,0:02:20.550
+south, south, and so on.
+
+0:02:20.550,0:02:21.430
+All right.
+
+0:02:21.430,0:02:22.730
+Remember, this is very important.
+
+0:02:22.730,0:02:24.400
+This will come up over and
+over in this course.
+
+0:02:24.400,0:02:26.160
+Search problems are just models.
+
+0:02:26.160,0:02:28.470
+So you've got the real world,
+that's complicated.
+
+0:02:28.470,0:02:29.730
+You've got your agent.
+
+0:02:29.730,0:02:33.970
+And your agent has some kind of very
+rough model of the world that's used
+
+0:02:33.970,0:02:34.670
+for this problem.
+
+0:02:34.670,0:02:38.080
+And always remember that your search
+is only going to be good, and only
+
+0:02:38.080,0:02:40.740
+correct if your model is appropriate
+for the search problem.
+
+0:02:40.740,0:02:44.000
+You don't want to abstract too much,
+because if you abstract too much, then
+
+0:02:44.000,0:02:45.340
+you can't actually solve your problem.
+
+0:02:45.340,0:02:46.440
+We'll see examples of that.
+
+0:02:46.440,0:02:48.300
+And if you abstract too little, you
+end up dealing with all the
+
+0:02:48.300,0:02:51.820
+complexities of the world,
+and that's bad news.
+
+0:02:51.820,0:02:53.370
+Search problems are always models.
+
+0:02:53.370,0:02:54.620
+
+0:02:54.000,0:02:55.270
+Here's an example.
+
+0:02:55.270,0:02:57.120
+Let's say I'm traveling in Romania.
+
+0:02:57.120,0:03:00.880
+And let's say I'm at the city of Arad,
+and I'm trying to get to the airport
+
+0:03:00.880,0:03:02.370
+at Bucharest, OK?
+
+0:03:02.370,0:03:03.800
+I have in front of me a map.
+
+0:03:03.800,0:03:06.430
+And map is a good example of
+an abstraction of how the
+
+0:03:06.430,0:03:07.320
+world actually is.
+
+0:03:07.320,0:03:10.900
+The real world has actual roads with
+actual cars on them, some of them
+
+0:03:10.900,0:03:11.970
+happened to be closed.
+
+0:03:11.970,0:03:12.980
+There's some speed bumps.
+
+0:03:12.980,0:03:14.910
+There's birds flying overhead.
+
+0:03:14.910,0:03:16.570
+Any number of things going
+on in the real world.
+
+0:03:16.570,0:03:20.230
+In your abstraction, they're simply
+cities connected by roads with say,
+
+0:03:20.230,0:03:23.000
+mileage or times connecting them.
+
+0:03:23.000,0:03:28.490
+So here's a model, if I want to get from
+Arad to Bucharest, what does my
+
+0:03:28.490,0:03:29.520
+search probably need to include?
+
+0:03:29.520,0:03:31.540
+Well, it probably doesn't need to
+include the birds overhead.
+
+0:03:31.540,0:03:33.850
+They're probably not relevant.
+
+0:03:33.850,0:03:35.440
+But what does it need to have?
+
+0:03:35.440,0:03:37.200
+Well, there's a little bit
+of an art to this.
+
+0:03:37.200,0:03:40.590
+You're going to do a bunch of examples,
+working through on your own,
+
+0:03:40.590,0:03:44.430
+how to formulate a search problem, but
+let's talk through some together.
+
+0:03:44.430,0:03:45.920
+So what are the states need to be?
+
+0:03:45.920,0:03:49.200
+Minimally, my state space needs to
+support a goal test, and in the goal
+
+0:03:49.200,0:03:50.080
+I'm at Bucharest.
+
+0:03:50.080,0:03:52.300
+So I need to be able to look at my
+state, figure out whether or not I'm
+
+0:03:52.300,0:03:52.820
+at Bucharest.
+
+0:03:52.820,0:03:56.620
+So minimally, the state space
+needs to be a set of cities.
+
+0:03:56.620,0:03:58.760
+We'll see whether that's enough.
+
+0:03:58.760,0:04:01.340
+We need a successor function, which
+is what are the things I can do?
+
+0:04:01.340,0:04:03.700
+Well, my actions are to take roads.
+
+0:04:03.700,0:04:07.940
+So the successor function has, from
+any given city, I can go to some
+
+0:04:07.940,0:04:11.130
+adjacent city, and here there's a
+natural cost function, which is for
+
+0:04:11.130,0:04:13.270
+example the distance.
+
+0:04:13.270,0:04:14.750
+So from Arad I have three actions.
+
+0:04:14.750,0:04:18.640
+I have the go to Zerind action, the go
+to Sibiu action, and the go to the
+
+0:04:18.640,0:04:20.510
+Timisoara action.
+
+0:04:20.510,0:04:22.130
+And where's my start state?
+
+0:04:22.130,0:04:22.990
+In this case, Arad.
+
+0:04:22.990,0:04:24.120
+What's my goal test?
+
+0:04:24.120,0:04:25.880
+Is the state equal to Bucharest?
+
+0:04:25.880,0:04:29.030
+So in this case, the goal test is really
+just a goal state, but in many
+
+0:04:29.030,0:04:31.570
+cases it's a test.
+
+0:04:31.570,0:04:32.860
+So what does the solution look like?
+
+0:04:32.860,0:04:34.440
+Well, it some sequence of roads.
+
+0:04:36.020,0:04:37.350
+So what goes into a state space?
+
+0:04:37.350,0:04:40.500
+How did I know that it was cities and
+not pairs of cities and not cities
+
+0:04:40.500,0:04:42.080
+plus birds or whatever?
+
+0:04:42.080,0:04:46.230
+Well, an important distinction that
+we've been alluding to so far is this
+
+0:04:46.230,0:04:49.280
+notion of world state versus
+search or model state.
+
+0:04:49.280,0:04:52.020
+So the world state includes every
+last detail of the environment.
+
+0:04:52.020,0:04:55.590
+In Pac-Man, it's got where you are,
+where the dots are, where the power
+
+0:04:55.590,0:05:01.370
+pellets are, ghosts, walls, score,
+whatever you could possibly have in
+
+0:05:01.370,0:05:03.920
+the world, that's the
+entire world state.
+
+0:05:03.920,0:05:05.780
+In general, you don't want to plan
+over that because that's
+
+0:05:05.780,0:05:09.050
+a very large set.
+
+0:05:09.050,0:05:12.480
+The search state keeps only the
+details needed for planning.
+
+0:05:12.480,0:05:15.720
+So it's an abstraction, and the amount
+of abstraction your safe getting away
+
+0:05:15.720,0:05:17.930
+with depends on the problem
+you're solving.
+
+0:05:17.930,0:05:21.110
+So for example, if I just want to pass,
+I'd like to get my agent from
+
+0:05:21.110,0:05:23.630
+one x,y coordinate to another,
+it's actually a lot
+
+0:05:23.630,0:05:25.110
+like getting to Bucharest.
+
+0:05:25.110,0:05:28.500
+Then well, you're states could just
+be the x,y location, right?
+
+0:05:28.500,0:05:31.860
+I can check at the goal, am
+I at the right location?
+
+0:05:31.860,0:05:36.170
+And these states are enough to take my
+actions North, South, East and West
+
+0:05:36.170,0:05:38.770
+and evolve the relevant
+parts of the world.
+
+0:05:38.770,0:05:42.030
+So for example, if I go East for this
+problem, it doesn't matter whether I
+
+0:05:42.030,0:05:46.130
+eat a dot, and so I can just
+change my x, y coordinate.
+
+0:05:46.130,0:05:49.440
+So in this case, the successor function
+updates your location only,
+
+0:05:49.440,0:05:52.170
+and so again, we can see that
+the state just being an x,y
+
+0:05:52.170,0:05:54.360
+pair is good enough.
+
+0:05:54.360,0:05:56.440
+The goal test is, are we
+at the goal position?
+
+0:05:56.440,0:05:57.250
+So that pathing.
+
+0:05:57.250,0:06:00.360
+We'll actually talk more
+about pathing later.
+
+0:06:00.360,0:06:03.230
+It's a very common search problem
+that you'll see a lot.
+
+0:06:03.230,0:06:06.290
+Let's say however, my problem is the
+much more difficult problem that
+
+0:06:06.290,0:06:09.170
+mastermind Pac-Man might solve,
+and that is the problem
+
+0:06:09.170,0:06:11.390
+of eat all the dots.
+
+0:06:11.390,0:06:15.360
+Well, now your states can't
+just be an x,y coordinate.
+
+0:06:15.360,0:06:17.780
+Because, for example, you can't
+run your goal test.
+
+0:06:17.780,0:06:22.250
+If I tell you, hey, I figured out
+a plan to get to 4,7, did
+
+0:06:22.250,0:06:23.000
+I eat all the dots?
+
+0:06:23.000,0:06:25.560
+You'll say, I don't know,
+tell me about the dots.
+
+0:06:25.560,0:06:27.730
+So if you're going to eat all the dots,
+probably the dots need to make
+
+0:06:27.730,0:06:30.390
+it into the formulation.
+
+0:06:30.390,0:06:34.150
+So in particular, one thing that will
+work for this problem is if your
+
+0:06:34.150,0:06:37.510
+states in the state space are a pair
+where on one hand you've got your
+
+0:06:37.510,0:06:40.300
+position, the x,y coordinate, and on
+the other pair you've got some
+
+0:06:40.300,0:06:43.670
+encoding of what dots are left like say,
+a boolean for each dot whether
+
+0:06:43.670,0:06:45.580
+it's been eaten or not.
+
+0:06:45.580,0:06:48.920
+Your actions are the same, but now the
+successor function updates your
+
+0:06:48.920,0:06:51.580
+location and also the set of dots.
+
+0:06:54.260,0:06:55.560
+What's your goal test now?
+
+0:06:55.560,0:06:57.370
+Your goal test is going to
+be something like, are
+
+0:06:57.370,0:06:58.780
+all the dots false?
+
+0:06:58.780,0:07:00.600
+What about my position?
+
+0:07:00.600,0:07:01.790
+It's not relevant to the goal.
+
+0:07:01.790,0:07:02.950
+Well, why do I even have it?
+
+0:07:02.950,0:07:06.810
+Well, you can't actually use your
+successor function properly and figure
+
+0:07:06.810,0:07:09.200
+out whether you've just eaten a dot
+unless you know where you are.
+
+0:07:09.200,0:07:12.410
+So the requirements on the state space
+partly come from the ability to run
+
+0:07:12.410,0:07:15.090
+the goal test, they partly come from
+the ability to find the correct
+
+0:07:15.090,0:07:18.810
+successor function, and you'll have a
+lot of practice formulating these
+
+0:07:18.810,0:07:20.060
+kinds of problems.
+
+0:07:20.870,0:07:22.670
+Lets talk quickly about
+state space sizes.
+
+0:07:22.670,0:07:24.620
+Why don't I just search
+over the world state?
+
+0:07:24.620,0:07:25.860
+Well, here it is.
+
+0:07:25.860,0:07:26.640
+So here's a grid.
+
+0:07:26.640,0:07:28.610
+It's kind of a weird grid.
+
+0:07:28.610,0:07:30.210
+There aren't dots on every position.
+
+0:07:30.210,0:07:33.940
+But on this grid, there are
+120 agent positions.
+
+0:07:33.940,0:07:36.960
+OK, places where we could
+stick the Pac-Man.
+
+0:07:36.960,0:07:39.480
+There are 30 food dots.
+
+0:07:39.480,0:07:41.870
+There are 12 positions the
+ghosts could be in.
+
+0:07:41.870,0:07:44.550
+And the agent could be facing
+north, south, east, or west.
+
+0:07:44.550,0:07:46.680
+That matters for, say, the graphics.
+
+0:07:46.680,0:07:47.170
+OK.
+
+0:07:47.170,0:07:48.910
+So that's the full world state.
+
+0:07:48.910,0:07:51.120
+Let's think about how many of
+various things there are.
+
+0:07:51.120,0:07:54.750
+Well, how many world states are there?
+
+0:07:54.750,0:07:55.700
+Well lets think.
+
+0:07:55.700,0:07:58.200
+The world state has to encode
+the agent positions.
+
+0:07:58.200,0:07:59.960
+That's 120.
+
+0:07:59.960,0:08:03.100
+And then, it has to encode which
+direction the agents facing.
+
+0:08:03.100,0:08:04.200
+So that's four.
+
+0:08:04.200,0:08:05.480
+That's not super interesting.
+
+0:08:05.480,0:08:07.150
+And we've got two ghosts.
+
+0:08:07.150,0:08:09.840
+One ghost could be in
+any of 12 positions.
+
+0:08:09.840,0:08:10.740
+And so could the other ghost.
+
+0:08:10.740,0:08:12.260
+So, 12 squared.
+
+0:08:12.260,0:08:17.260
+And then, kind of the killer here, is
+the world state encode the exact
+
+0:08:17.260,0:08:19.770
+configuration of which dots
+are present or absent.
+
+0:08:19.770,0:08:21.780
+So what's that?
+
+0:08:21.780,0:08:24.920
+That is 2 to the 30th.
+
+0:08:24.920,0:08:26.580
+OK.
+
+0:08:26.580,0:08:27.960
+That's bad.
+
+0:08:27.960,0:08:29.290
+So this is a lot of world states.
+
+0:08:29.290,0:08:32.590
+We would rather not have any procedure
+which enumerates these or even
+
+0:08:32.590,0:08:34.650
+threatens that it might
+enumerate them.
+
+0:08:34.650,0:08:35.320
+OK?
+
+0:08:35.320,0:08:36.890
+So, lots of world states.
+
+0:08:36.890,0:08:38.420
+That's why we don't plan
+over world states.
+
+0:08:38.420,0:08:41.170
+However, how many states are
+there required for pathing?
+
+0:08:41.170,0:08:43.790
+Well, it's just the Pac-Man position.
+
+0:08:43.790,0:08:47.060
+So how many?
+
+0:08:47.060,0:08:48.650
+Just the 120.
+
+0:08:48.650,0:08:49.780
+Much, much better.
+
+0:08:49.780,0:08:51.140
+That's why we abstract.
+
+0:08:51.140,0:08:53.200
+How about the states for
+eat all the dots?
+
+0:08:53.200,0:08:55.480
+It had a position 120.
+
+0:08:55.480,0:08:58.400
+Doesn't care about the ghosts, doesn't
+care about the facing, but it does
+
+0:08:58.400,0:09:00.280
+care about the dot configuration.
+
+0:09:00.280,0:09:02.560
+So, it's actually pretty big.
+
+0:09:02.560,0:09:05.400
+Turns out, almost any search problem you
+could possibly care about in the
+
+0:09:05.400,0:09:08.790
+real world has some huge exponential
+search space.
+
+0:09:08.790,0:09:10.930
+So in general, always remember that.
+
+0:09:10.930,0:09:15.430
+The search space is so large that you
+will never be able to a enumerate it.
+
+0:09:15.430,0:09:18.450
+And all we're going to be talking about
+is algorithms that, hopefully,
+
+0:09:18.450,0:09:21.910
+find you a solution, while avoiding
+enumerating the entire search space.
+
+0:09:21.910,0:09:24.290
+And in general, we'd like to the
+enumerate as little of it as possible.
+

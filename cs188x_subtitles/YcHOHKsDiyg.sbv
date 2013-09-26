@@ -1,0 +1,653 @@
+0:00:00.000,0:00:01.690
+
+0:00:01.690,0:00:03.610
+PROFESSOR: Because this is going to be
+an important concept we're going to
+
+0:00:03.610,0:00:09.290
+build on today, let's remind ourselves
+what arc consistency is all about.
+
+0:00:09.290,0:00:12.380
+So we know how to enforce the
+consistency of a single arc.
+
+0:00:12.380,0:00:16.394
+With arc consistency, what we'd like to
+do is we'd like to look at all of
+
+0:00:16.394,0:00:21.700
+the unassigned variables and make all
+of the arcs consistent at once.
+
+0:00:21.700,0:00:25.520
+And in doing this, we'll be deleting
+values here and there from domains in
+
+0:00:25.520,0:00:27.600
+a way that will detect failure.
+
+0:00:27.600,0:00:30.130
+So first, let's remember what
+it means to enforce the
+
+0:00:30.130,0:00:31.850
+consistency of a single arc.
+
+0:00:31.850,0:00:33.070
+Well, here's a single arc.
+
+0:00:33.070,0:00:35.070
+What does it mean to enforce
+its consistency?
+
+0:00:35.070,0:00:37.800
+What it means is it means we have
+to look at the tail of the arc--
+
+0:00:37.800,0:00:40.360
+remember, we always delete
+from the tail.
+
+0:00:40.360,0:00:43.420
+Remember the constraint satisfaction
+police pull this arc over, and they're
+
+0:00:43.420,0:00:44.880
+going to look and see
+what's in the trunk.
+
+0:00:44.880,0:00:48.350
+So you look at everything in the tail,
+and you ask the question, are any of
+
+0:00:48.350,0:00:51.760
+these values in the tail guaranteed
+to trigger a constraint
+
+0:00:51.760,0:00:54.240
+violation on this arc?
+
+0:00:54.240,0:00:55.900
+And so we say, well, what about red?
+
+0:00:55.900,0:00:59.660
+Well, if I chose red at V, then
+at NSW I could choose blue.
+
+0:00:59.660,0:01:00.330
+What about green?
+
+0:01:00.330,0:01:02.460
+Well if I chose green, I could
+choose either, and so on.
+
+0:01:02.460,0:01:07.670
+So this arc is, in fact, consistent,
+because for any value at V, there's a
+
+0:01:07.670,0:01:11.270
+possibility of avoiding a constraint
+violation left.
+
+0:01:11.270,0:01:14.860
+If we look at this arc, then we can go
+through the same reasoning process.
+
+0:01:14.860,0:01:19.630
+At SA, if we choose blue, we'll be fine,
+so the value blue gets to say.
+
+0:01:19.630,0:01:22.420
+If we flip this arc around, even
+though the constraint is not
+
+0:01:22.420,0:01:25.460
+directional, the arcs that
+we make consistent are.
+
+0:01:25.460,0:01:28.630
+And in this direction, the story
+is a little different.
+
+0:01:28.630,0:01:32.640
+So at NSW, if we choose red, we can
+avoid a constraint violation, for
+
+0:01:32.640,0:01:35.010
+example, by picking blue,
+our only choice.
+
+0:01:35.010,0:01:38.210
+If we choose blue, then we're guaranteed
+a constraint violation.
+
+0:01:38.210,0:01:42.260
+So the way we enforce arc consistency
+for a single arc is, in this case, we
+
+0:01:42.260,0:01:46.960
+would delete blue from
+the domain of NSW.
+
+0:01:46.960,0:01:51.160
+If we then look here, this arc used to
+be consistent, but it can stop being
+
+0:01:51.160,0:01:54.000
+consistent if values are
+removed from the head.
+
+0:01:54.000,0:01:57.920
+For example, the reason why it was safe
+to have red at V is because blue
+
+0:01:57.920,0:01:58.900
+was available.
+
+0:01:58.900,0:02:02.910
+Blue is not available, and so now if we
+choose red at V, then we'll have a
+
+0:02:02.910,0:02:04.850
+constraint violation guaranteed.
+
+0:02:04.850,0:02:08.430
+And so we can fix that-- we can
+make this arc consistent
+
+0:02:08.430,0:02:11.290
+now by deleting red.
+
+0:02:11.290,0:02:16.300
+Now, the big idea with enforcing arc
+consistency of the entire graph was if
+
+0:02:16.300,0:02:19.870
+you look at this particular graph here,
+you'll see that because WA is
+
+0:02:19.870,0:02:25.250
+red and Q is green, NT and SA
+both have to be blue, right?
+
+0:02:25.250,0:02:29.460
+And when we check the consistency of
+the arc between SA and NT in either
+
+0:02:29.460,0:02:33.260
+direction, we'll look at it and we'll
+say, all right, well, if I choose blue
+
+0:02:33.260,0:02:36.690
+at SA, then I'm guaranteed
+a constraint violation.
+
+0:02:36.690,0:02:40.290
+The way I fix that is by deleting from
+the tail-- so I delete this--
+
+0:02:40.290,0:02:45.270
+but now I see that there are, in fact,
+no legal values left at SA.
+
+0:02:45.270,0:02:49.320
+And so I know that this configuration
+here, even though I've only assigned
+
+0:02:49.320,0:02:52.800
+two variables, arc consistency
+guarantees me that there is no
+
+0:02:52.800,0:02:58.160
+solution left, and so I can just
+stop the backtracking search.
+
+0:02:58.160,0:03:03.070
+OK, so as soon as a domain goes empty in
+filtering, we know that this branch
+
+0:03:03.070,0:03:07.740
+of the tree is doomed, and we
+can back up in the search.
+
+0:03:07.740,0:03:11.240
+Arc consistency detects failure earlier
+than forward checking does,
+
+0:03:11.240,0:03:12.790
+but, of course, it's more work.
+
+0:03:12.790,0:03:16.750
+You have to enforce the consistency
+of possibly a lot of arcs.
+
+0:03:16.750,0:03:20.940
+The important thing here you need to
+remember is if a variable X loses a
+
+0:03:20.940,0:03:24.650
+value, all incoming arcs need to be
+rechecked, and that means you might
+
+0:03:24.650,0:03:26.110
+have to check arcs multiple times.
+
+0:03:26.110,0:03:28.340
+This will be important.
+
+0:03:28.340,0:03:31.750
+In addition, there's still a
+backtracking search going on, so you
+
+0:03:31.750,0:03:33.030
+don't run this thing once.
+
+0:03:33.030,0:03:37.110
+You run it after every assignment at
+every step in the backtracking search.
+
+0:03:37.110,0:03:39.820
+So you run arc consistency
+enforcement many times.
+
+0:03:39.820,0:03:42.720
+
+0:03:42.720,0:03:44.430
+OK, well, that's all great.
+
+0:03:44.430,0:03:47.270
+Arc consistency is much more powerful
+than forward checking at a
+
+0:03:47.270,0:03:50.160
+computational cost, but what
+does it do for you?
+
+0:03:50.160,0:03:53.670
+It doesn't remove the need for
+the backtracking search, OK?
+
+0:03:53.670,0:03:56.600
+After you enforce arc consistency,
+you can be in a couple different
+
+0:03:56.600,0:03:57.750
+configurations.
+
+0:03:57.750,0:04:01.740
+It's possible you'll have one solution
+left, and you'll just be able to see
+
+0:04:01.740,0:04:05.870
+that every domain has one value, and
+you won't have to backtrack again.
+
+0:04:05.870,0:04:07.900
+That's great.
+
+0:04:07.900,0:04:11.380
+It also could be the case that you
+have multiple solutions left.
+
+0:04:11.380,0:04:13.570
+It could also be the case that
+you have no solutions left
+
+0:04:13.570,0:04:14.280
+and don't know it.
+
+0:04:14.280,0:04:17.430
+So, for example, if you look over on
+the right and you look at these two
+
+0:04:17.430,0:04:20.740
+graphs, this one's got
+two solutions left.
+
+0:04:20.740,0:04:24.400
+Arc consistency isn't going to
+pick amongst them in any way.
+
+0:04:24.400,0:04:27.360
+Here, this graph is arc consistent,
+but there are no solutions left,
+
+0:04:27.360,0:04:30.990
+because in order to see the problem,
+you have to look at three
+
+0:04:30.990,0:04:33.740
+variables at a time.
+
+0:04:33.740,0:04:34.810
+So what went wrong?
+
+0:04:34.810,0:04:38.530
+The reason why arc consistency in this
+bottom case wasn't sufficient to
+
+0:04:38.530,0:04:41.840
+discover the inevitable failures is
+because it only looks at pairs.
+
+0:04:41.840,0:04:45.290
+So you might think, maybe we need a
+stronger notion than arc consistency.
+
+0:04:45.290,0:04:47.820
+Maybe we need to look beyond pairs.
+
+0:04:47.820,0:04:48.910
+And there is such a notion.
+
+0:04:48.910,0:04:52.290
+There's a generalized notion called
+K-consistency, where instead of
+
+0:04:52.290,0:04:55.590
+getting pulled over by this little arc
+consistency guy, you get pulled over
+
+0:04:55.590,0:04:59.220
+by this RoboCop thing.
+
+0:04:59.220,0:05:01.390
+So what does this K-consistency
+look like?
+
+0:05:01.390,0:05:04.560
+Well, it's basically like arc
+consistency, but we can
+
+0:05:04.560,0:05:06.100
+generalize that idea.
+
+0:05:06.100,0:05:08.490
+So we can have increasing
+degrees of consistency.
+
+0:05:08.490,0:05:10.550
+So for example, what about
+1-consistency?
+
+0:05:10.550,0:05:11.550
+We didn't even talk about this.
+
+0:05:11.550,0:05:14.260
+1-consistency is sometimes
+called node consistency.
+
+0:05:14.260,0:05:18.440
+That's the property that every node's
+domain has a value which meets the
+
+0:05:18.440,0:05:20.430
+node's unary constraints.
+
+0:05:20.430,0:05:22.570
+That's not really useful, because when
+you actually solve these things,
+
+0:05:22.570,0:05:24.990
+pretty much the first thing you do is
+enforce your unary constraints.
+
+0:05:24.990,0:05:28.200
+A unary constraint really is the
+same as a restricted domain.
+
+0:05:28.200,0:05:30.740
+Unary constraints aren't terribly
+interesting in that sense.
+
+0:05:30.740,0:05:32.240
+What about 2-consistency?
+
+0:05:32.240,0:05:33.200
+Well, we have a name for that.
+
+0:05:33.200,0:05:34.210
+That's arc consistency.
+
+0:05:34.210,0:05:37.110
+But let me state it in a way
+that will generalize.
+
+0:05:37.110,0:05:40.780
+Arc consistency says for every
+pair of nodes, right-- so
+
+0:05:40.780,0:05:42.710
+two nodes at a time--
+
+0:05:42.710,0:05:44.920
+any consistent assignment to one--
+
+0:05:44.920,0:05:47.200
+OK, so you pick a value for the tail--
+
+0:05:47.200,0:05:50.400
+can be extended to the other, meaning
+there's some value at the head
+
+0:05:50.400,0:05:52.860
+available that doesn't violate
+the constraint.
+
+0:05:52.860,0:05:54.640
+And that's this diagram right here.
+
+0:05:54.640,0:05:58.700
+Whatever I do at the tail, there is some
+choice at the head that avoids
+
+0:05:58.700,0:06:00.470
+the constraint.
+
+0:06:00.470,0:06:01.870
+What about K-consistency?
+
+0:06:01.870,0:06:03.280
+We can generalize that statement.
+
+0:06:03.280,0:06:06.370
+We can say arc consistency is about a
+pair of nodes, K-consistency must be
+
+0:06:06.370,0:06:07.640
+about k nodes.
+
+0:06:07.640,0:06:11.145
+And what it says is if I pick up k
+nodes-- and in this diagram here there
+
+0:06:11.145,0:06:12.470
+are four nodes--
+
+0:06:12.470,0:06:17.840
+and I take k minus one of them and find
+a consistent assignment, then for
+
+0:06:17.840,0:06:23.760
+any consistent assignment to k minus
+1, I have a choice at the kth node
+
+0:06:23.760,0:06:26.710
+here that will not violate
+a constraint.
+
+0:06:26.710,0:06:30.460
+Essentially, K-consistency says that
+whatever you do at the tail-- and
+
+0:06:30.460,0:06:33.110
+here, the tail's all but
+one of the nodes--
+
+0:06:33.110,0:06:36.550
+you'll be able to safely extend it.
+
+0:06:36.550,0:06:39.980
+Now, enforcing K-consistency, making
+sure that your domains are such that
+
+0:06:39.980,0:06:42.280
+this property holds, that's tricky.
+
+0:06:42.280,0:06:45.690
+And just like arc consistency takes a
+fair amount of computation, the higher
+
+0:06:45.690,0:06:48.470
+the k gets, the more computation
+you have to do.
+
+0:06:48.470,0:06:51.750
+For this class, I will assume that you
+have mastery of the case for k equals
+
+0:06:51.750,0:06:53.210
+2-- that's arc consistency--
+
+0:06:53.210,0:06:55.960
+but the general idea is important.
+
+0:06:55.960,0:06:59.760
+There's an even stronger notion of k
+consistency, and in some sense, this
+
+0:06:59.760,0:07:01.780
+is really a mathematical distinction.
+
+0:07:01.780,0:07:06.840
+K-consistency says if you can assign
+k minus 1, you can assign k.
+
+0:07:06.840,0:07:07.910
+For example, arc consistency--
+
+0:07:07.910,0:07:11.120
+if you can assign one, then
+you can assign a second.
+
+0:07:11.120,0:07:13.700
+Strong K-consistency means
+all the lower orders of
+
+0:07:13.700,0:07:15.750
+K-consistency are also satisfied.
+
+0:07:15.750,0:07:18.620
+So strong consistency is kind
+of a mythical thing.
+
+0:07:18.620,0:07:19.670
+If you had it, be great.
+
+0:07:19.670,0:07:22.670
+If you had strong inconsistency,
+you'd never have to backtrack.
+
+0:07:22.670,0:07:24.500
+You'd be living in a wonderful place.
+
+0:07:24.500,0:07:26.790
+And the reason for this is you
+could choose any assignment
+
+0:07:26.790,0:07:28.370
+to some first variable.
+
+0:07:28.370,0:07:29.800
+And then you pick another variable.
+
+0:07:29.800,0:07:31.040
+And because of 2-consistency--
+
+0:07:31.040,0:07:31.780
+arc consistency--
+
+0:07:31.780,0:07:34.180
+we know that whatever you do with that
+one variable, you can assign
+
+0:07:34.180,0:07:35.230
+it to the next one.
+
+0:07:35.230,0:07:37.560
+You've deleted domains in such a
+way that that's going to work.
+
+0:07:37.560,0:07:38.900
+That's arc consistency.
+
+0:07:38.900,0:07:41.690
+But now you've got two variables that
+are assigned without violating
+
+0:07:41.690,0:07:42.380
+constraints.
+
+0:07:42.380,0:07:45.270
+And now 3-consistency comes in and says,
+well, if you've managed to get
+
+0:07:45.270,0:07:47.820
+two, I guarantee you that when
+you pick up a third,
+
+0:07:47.820,0:07:48.990
+there's a legal extension.
+
+0:07:48.990,0:07:51.650
+So great, now I've got three assignments
+the don't violate a
+
+0:07:51.650,0:07:55.710
+constraint, and I can keep doing this
+using higher orders of consistency.
+
+0:07:55.710,0:07:58.560
+So it must be that these higher orders
+of consistency are impractical,
+
+0:07:58.560,0:08:01.600
+because if we had them, then we
+wouldn't have to backtrack.
+
+0:08:01.600,0:08:03.020
+And in fact, this is true.
+
+0:08:03.020,0:08:06.760
+Full inconsistency is just as hard as
+solving the CSP in the first place.
+
+0:08:06.760,0:08:09.700
+Arc consistency is pretty manageable,
+and there are things in between that
+
+0:08:09.700,0:08:10.710
+are useful.
+
+0:08:10.710,0:08:13.270
+The most common one is, as you
+might expect, k equals 3.
+
+0:08:13.270,0:08:15.850
+It's something called path consistency,
+because you think about
+
+0:08:15.850,0:08:20.000
+three nodes as kind of forming
+a path, right?
+
+0:08:20.000,0:08:22.470
+Path consistency is much more expensive
+than arc consistency, but it
+
+0:08:22.470,0:08:23.720
+can be very powerful.
+
+0:08:23.720,0:08:24.420
+

@@ -1,0 +1,27 @@
+0:00:00.000,0:00:00.400
+
+0:00:00.400,0:00:01.470
+PROFESSOR: So A star.
+
+0:00:01.470,0:00:02.310
+It hedges its bets.
+
+0:00:02.310,0:00:05.700
+It explores kind of a little bit in the
+wrong direction, just to be sure
+
+0:00:05.700,0:00:07.150
+because the heuristic is imperfect.
+
+0:00:07.150,0:00:11.350
+But by and large it does a very small
+amount of work, not much worse than
+
+0:00:11.350,0:00:14.430
+greedy, and it's optimal.
+
+0:00:14.430,0:00:15.680
+So, great.
+
+0:00:15.680,0:00:16.219
+

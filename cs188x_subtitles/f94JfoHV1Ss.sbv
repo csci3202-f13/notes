@@ -1,0 +1,158 @@
+0:00:00.000,0:00:02.130
+
+0:00:02.130,0:00:05.230
+PROFESSOR: Today we're going to talk
+about how to do search in the presence
+
+0:00:05.230,0:00:07.770
+of uncertainty.
+
+0:00:07.770,0:00:11.430
+In particular, we're going to think
+about how you should plan when the
+
+0:00:11.430,0:00:14.530
+outcome of your actions is not
+entirely under your control.
+
+0:00:14.530,0:00:17.400
+
+0:00:17.400,0:00:20.010
+We've actually already seen
+an example of this.
+
+0:00:20.010,0:00:23.540
+If you think about an adversarial
+context, you can think about that as a
+
+0:00:23.540,0:00:25.240
+case where you take an action.
+
+0:00:25.240,0:00:26.640
+You make your move.
+
+0:00:26.640,0:00:29.370
+And the outcome of that action,
+you can think of that as
+
+0:00:29.370,0:00:31.260
+your opponent's response.
+
+0:00:31.260,0:00:34.360
+And your opponent isn't entirely
+under your control.
+
+0:00:34.360,0:00:38.700
+And we thought about last time was how
+to reason when your opponent's
+
+0:00:38.700,0:00:42.190
+response could be assumed
+to be adversarial.
+
+0:00:42.190,0:00:45.760
+And we thought about minimax
+trees and minimax values.
+
+0:00:45.760,0:00:50.600
+So for example, in a tree like this,
+we would say, well, let's imagine
+
+0:00:50.600,0:00:53.780
+we're playing against
+a perfect adversary.
+
+0:00:53.780,0:00:58.570
+A perfect adversary would say, if
+I make the left move, then I can
+
+0:00:58.570,0:01:01.390
+actually predict what the
+adversary will do.
+
+0:01:01.390,0:01:04.870
+If I make the right move, again, I can
+predict what the adversary will do.
+
+0:01:04.870,0:01:08.700
+And the adversary will choose 9, even
+though I would really like that 100.
+
+0:01:08.700,0:01:10.690
+The adversary is just not
+going to let it happen.
+
+0:01:10.690,0:01:14.510
+And that 100 doesn't contribute to the
+minimax value of the right node.
+
+0:01:14.510,0:01:18.170
+That is the correct reasoning when
+you're facing an adversary.
+
+0:01:18.170,0:01:21.040
+Or at least when you're facing
+a perfect adversary.
+
+0:01:21.040,0:01:23.920
+What happens when you're
+facing this guy?
+
+0:01:23.920,0:01:27.220
+This guy may be generally trying to
+win, but maybe he's not perfect.
+
+0:01:27.220,0:01:28.160
+Maybe he makes mistakes.
+
+0:01:28.160,0:01:29.850
+Sometimes he makes the wrong move.
+
+0:01:29.850,0:01:33.360
+Well now maybe making that right action
+is kind of appealing, because
+
+0:01:33.360,0:01:37.770
+you've got a decent shot at the
+100, and the 9 is not so bad.
+
+0:01:37.770,0:01:41.530
+Or even more, what if the response
+to your action--
+
+0:01:41.530,0:01:42.670
+the outcome--
+
+0:01:42.670,0:01:47.280
+isn't adversarial at all, it's just
+the result of rolling some die?
+
+0:01:47.280,0:01:50.520
+In this case, we should still think
+about our actions having unknown
+
+0:01:50.520,0:01:54.100
+results, but rather than thinking that
+the results are worst case, we should
+
+0:01:54.100,0:01:56.410
+be thinking about some
+kind of average case.
+
+0:01:56.410,0:01:59.270
+And we should be thinking that those
+aren't really min nodes, but they're
+
+0:01:59.270,0:02:01.860
+some kind of chance node.
+
+0:02:01.860,0:02:04.800
+And the general idea for today is going
+to be to think about the case
+
+0:02:04.800,0:02:09.309
+where all uncertainty is controlled by
+chance, and not by an adversary.
+
+0:02:09.309,0:02:10.733
+

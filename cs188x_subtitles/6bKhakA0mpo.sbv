@@ -1,0 +1,370 @@
+0:00:00.000,0:00:01.860
+
+0:00:01.860,0:00:03.630
+PROFESSOR: So let's talk
+about probabilities.
+
+0:00:03.630,0:00:06.010
+This whole Expectimax thing isn't
+going to work unless we've got
+
+0:00:06.010,0:00:08.810
+probabilities in there that we know
+what to do with, we know what they
+
+0:00:08.810,0:00:11.240
+are, they represent the right thing.
+
+0:00:11.240,0:00:13.290
+And that's going to be a theme going
+forward in this course--
+
+0:00:13.290,0:00:15.750
+that we're going to need to be able to
+assign probabilities to various things
+
+0:00:15.750,0:00:18.246
+and do computations with them.
+
+0:00:18.246,0:00:20.345
+Let's remember what probabilities are.
+
+0:00:20.345,0:00:22.320
+So here's some key concepts.
+
+0:00:22.320,0:00:24.200
+We have this notion of
+a random variable.
+
+0:00:24.200,0:00:27.110
+A random variable is our way
+of representing an event
+
+0:00:27.110,0:00:28.920
+whose outcome is unknown.
+
+0:00:28.920,0:00:32.860
+However, while the outcome is unknown,
+we have a probability distribution,
+
+0:00:32.860,0:00:36.280
+which is an assignment of weights
+to the various outcomes.
+
+0:00:36.280,0:00:37.980
+See the example shown
+here on the right?
+
+0:00:37.980,0:00:41.230
+This is a model of traffic where traffic
+can take on three different
+
+0:00:41.230,0:00:43.380
+values, none light or heavy.
+
+0:00:43.380,0:00:44.740
+Notice this is already a model.
+
+0:00:44.740,0:00:45.470
+You might disagree.
+
+0:00:45.470,0:00:47.400
+You might want this to be
+a continuous value.
+
+0:00:47.400,0:00:49.390
+Density of cars, something like that.
+
+0:00:49.390,0:00:50.550
+I've made a modeling choice.
+
+0:00:50.550,0:00:52.300
+There are three outcomes here.
+
+0:00:52.300,0:00:55.970
+Given these three outcomes, I've picked
+one particular probability
+
+0:00:55.970,0:00:57.030
+distribution.
+
+0:00:57.030,0:01:00.640
+This probability distribution says, half
+the time there is light traffic,
+
+0:01:00.640,0:01:03.660
+a quarter of the time there is no
+traffic, and a quarter of the time
+
+0:01:03.660,0:01:06.060
+there is heavy traffic.
+
+0:01:06.060,0:01:08.800
+There are different possible choices
+for this distribution.
+
+0:01:08.800,0:01:12.570
+For example, if this road is
+the 880 with probability 1,
+
+0:01:12.570,0:01:13.850
+there's heavy track.
+
+0:01:13.850,0:01:16.980
+Now, these numbers that we assign
+have to obey certain laws.
+
+0:01:16.980,0:01:19.690
+We're going to get to more of this
+later, but for now, all we really need
+
+0:01:19.690,0:01:22.700
+is that the probabilities have to be
+non-negative, and they have to add up
+
+0:01:22.700,0:01:24.750
+to 1 over all of the options.
+
+0:01:24.750,0:01:27.430
+And these probabilities
+shown here obey that.
+
+0:01:27.430,0:01:29.010
+Now in general--
+
+0:01:29.010,0:01:32.130
+and we'll spend a lot of this
+course unpacking this idea--
+
+0:01:32.130,0:01:34.320
+we'll be computing these
+probabilities.
+
+0:01:34.320,0:01:37.630
+And as we get more evidence, the
+probabilities will change.
+
+0:01:37.630,0:01:41.360
+So for example, it may be that all else
+equal, the probability of heavy
+
+0:01:41.360,0:01:45.840
+traffic might be 20%, but the
+probability of heavy traffic at 8 AM
+
+0:01:45.840,0:01:47.480
+may be 60%.
+
+0:01:47.480,0:01:52.120
+And this process of, given information
+that we know, computing the
+
+0:01:52.120,0:01:55.260
+appropriate probabilities, is
+probabilistic inference, and we will
+
+0:01:55.260,0:01:59.160
+spend a great deal of time on
+that later in this course.
+
+0:01:59.160,0:02:02.640
+The one other thing that we need for
+Expectimax is the expecti- part.
+
+0:02:02.640,0:02:04.320
+That's expectations.
+
+0:02:04.320,0:02:08.000
+And the expected value of a function
+of a random variable is just an
+
+0:02:08.000,0:02:12.430
+average, and it's a weighted average
+where the outcomes, function values,
+
+0:02:12.430,0:02:16.260
+are all weighted by whatever the
+probability distribution says.
+
+0:02:16.260,0:02:19.850
+So for example, if we wanted to know how
+long it would take to get to the
+
+0:02:19.850,0:02:23.230
+airport, that's going to be
+a function of the traffic.
+
+0:02:23.230,0:02:25.300
+And so what I would do is I'd say,
+all right, it's going to
+
+0:02:25.300,0:02:26.180
+depend on the traffic.
+
+0:02:26.180,0:02:29.080
+And here the three values
+and their probabilities.
+
+0:02:29.080,0:02:32.140
+For each of those values, there's some
+associated function value-- in this
+
+0:02:32.140,0:02:34.100
+case, the time.
+
+0:02:34.100,0:02:37.700
+And then to compute the expectation, I
+just multiply each probability times
+
+0:02:37.700,0:02:42.120
+function value, add them up, and I
+end up with my expected value.
+
+0:02:42.120,0:02:44.280
+That's exactly what we've been
+doing at these chance nodes.
+
+0:02:44.280,0:02:47.540
+They're simply expectations
+of the children's values--
+
+0:02:47.540,0:02:48.930
+Expectimax values--
+
+0:02:48.930,0:02:51.570
+weighted by the probabilities.
+
+0:02:51.570,0:02:52.500
+OK.
+
+0:02:52.500,0:02:53.350
+So great.
+
+0:02:53.350,0:02:55.370
+What probabilities should we use?
+
+0:02:55.370,0:03:00.960
+Well, in an Expectimax search, these
+chance nodes reflect what we think the
+
+0:03:00.960,0:03:04.290
+relative chances are of
+the various outcomes.
+
+0:03:04.290,0:03:05.780
+Sometimes that's easy.
+
+0:03:05.780,0:03:08.900
+For example, sometimes I'm going to roll
+a die, and I know that each of
+
+0:03:08.900,0:03:12.110
+the six outcomes on a six-sided die
+are equally likely, and then I can
+
+0:03:12.110,0:03:13.690
+just use even weights.
+
+0:03:13.690,0:03:16.070
+But sometimes it can be
+very sophisticated.
+
+0:03:16.070,0:03:19.290
+For example, if I'm trying to figure
+out what a ghost is doing, I might
+
+0:03:19.290,0:03:23.980
+observe the ghost, I might take some
+notes, I might take the temperature of
+
+0:03:23.980,0:03:27.640
+the air, and then I might do some
+computation and say, under these
+
+0:03:27.640,0:03:33.460
+circumstances, I think the chance that
+the ghost will go left is 30%.
+
+0:03:33.460,0:03:36.110
+We'll get to how to do that later,
+but for now, realize that these
+
+0:03:36.110,0:03:39.340
+probabilities can require a
+lot of work to compute.
+
+0:03:39.340,0:03:42.450
+Every single outcome that's out of our
+control, whether it's an opponent our
+
+0:03:42.450,0:03:45.760
+an environment, has a chance node
+in the Expectimax tree.
+
+0:03:45.760,0:03:50.250
+The probabilities reflect our belief
+as to what will happen.
+
+0:03:50.250,0:03:53.640
+There's nothing to say that our
+belief, and therefore those
+
+0:03:53.640,0:03:58.550
+probabilities, shouldn't put a lot of
+probability on the adversarial action.
+
+0:03:58.550,0:04:01.300
+And we'll talk about this relationship
+a little later.
+
+0:04:01.300,0:04:05.060
+One important thing to remember
+is that just because we assign
+
+0:04:05.060,0:04:09.100
+probabilities that reflect our beliefs
+as to the outcome does not mean that
+
+0:04:09.100,0:04:11.150
+the thing on the other side
+is flipping coins.
+
+0:04:11.150,0:04:16.240
+If I think there is a 20% chance that
+the ghost is going to go to the left,
+
+0:04:16.240,0:04:18.990
+it doesn't mean that the ghost has
+a random number generator.
+
+0:04:18.990,0:04:23.300
+It just means that given my model, which
+may be a simplification, that's
+
+0:04:23.300,0:04:26.350
+the best I can say, given my evidence.
+
+0:04:26.350,0:04:27.800
+So where do the probabilities
+come from?
+
+0:04:27.800,0:04:31.520
+Well, for today, they come from
+the probability fairy.
+
+0:04:31.520,0:04:35.370
+We think for today that the definition
+of the problem includes the
+
+0:04:35.370,0:04:36.750
+probabilities.
+
+0:04:36.750,0:04:39.300
+Later in the course, we'll have to
+figure out ways to really compute them
+
+0:04:39.300,0:04:40.550
+in a given context.
+
+0:04:40.550,0:04:42.533
+

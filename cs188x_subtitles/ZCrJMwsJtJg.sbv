@@ -1,0 +1,973 @@
+0:00:00.000,0:00:01.320
+
+0:00:01.320,0:00:01.930
+PROFESSOR: All right.
+
+0:00:01.930,0:00:06.100
+So in order to make this depth limited
+search work, when we decide we've gone
+
+0:00:06.100,0:00:10.000
+as deeply as we can, and we're faced
+with a state which is not a terminal
+
+0:00:10.000,0:00:14.920
+state, we need to have the ability
+to decide is it good or bad.
+
+0:00:14.920,0:00:17.440
+So what we have is an
+evaluation function.
+
+0:00:17.440,0:00:21.830
+What an evaluation function is, is a
+function which takes a non-terminal
+
+0:00:21.830,0:00:24.040
+state, and returns some number.
+
+0:00:24.040,0:00:27.340
+Now we know we want out of this number,
+just like we knew what we want
+
+0:00:27.340,0:00:29.430
+it out of a heuristic
+and A-star search.
+
+0:00:29.430,0:00:32.930
+In this case, we want the number to
+return the actual minimax value of
+
+0:00:32.930,0:00:34.440
+that position.
+
+0:00:34.440,0:00:35.450
+Now that's not going to happen.
+
+0:00:35.450,0:00:36.150
+Right?
+
+0:00:36.150,0:00:39.330
+That's the problem that's too hard
+to solve in the first place.
+
+0:00:39.330,0:00:43.410
+In practice, what people do is they
+try to come up with some function
+
+0:00:43.410,0:00:47.920
+which, on average, is positive when
+the minimax value is positive.
+
+0:00:47.920,0:00:49.835
+It's negative when the minimax
+value is negative.
+
+0:00:49.835,0:00:53.320
+It is in the ballpark to the extent
+that that's possible.
+
+0:00:53.320,0:00:55.330
+So you look at this case.
+
+0:00:55.330,0:00:56.280
+Here's a check tree.
+
+0:00:56.280,0:00:58.200
+A very small piece of a chess tree.
+
+0:00:58.200,0:00:59.800
+And you might have the root.
+
+0:00:59.800,0:01:00.200
+Right?
+
+0:01:00.200,0:01:01.580
+And so here's at the root.
+
+0:01:01.580,0:01:04.450
+And at the root, you could just apply
+your evaluation function.
+
+0:01:04.450,0:01:05.550
+You don't even need to do minimax.
+
+0:01:05.550,0:01:09.050
+You could just do a one step look ahead,
+and then apply your evaluation
+
+0:01:09.050,0:01:12.400
+function and just be greedy and hill
+climb your evaluation function.
+
+0:01:12.400,0:01:14.330
+In general, that's going
+to be very bad.
+
+0:01:14.330,0:01:18.150
+Even if your evaluation function is
+decent, you gain so much power by
+
+0:01:18.150,0:01:20.280
+embedding it in a minimax tree.
+
+0:01:20.280,0:01:21.990
+Here's another position.
+
+0:01:21.990,0:01:24.730
+This position might apply the same
+evaluation function, but
+
+0:01:24.730,0:01:25.770
+deeper in the tree.
+
+0:01:25.770,0:01:28.560
+So as long as the evaluation function's
+in the ballpark, it's much
+
+0:01:28.560,0:01:30.290
+safer to apply it down here.
+
+0:01:30.290,0:01:32.330
+Now what are these evaluation
+functions?
+
+0:01:32.330,0:01:35.090
+Well in the case of chess, we might
+say well there are some properties
+
+0:01:35.090,0:01:36.330
+that are important.
+
+0:01:36.330,0:01:40.710
+Like if white has more queens than
+black, that's probably a
+
+0:01:40.710,0:01:42.010
+good sign for white.
+
+0:01:42.010,0:01:45.280
+If white has more knights than black,
+that's a good sign for white.
+
+0:01:45.280,0:01:47.130
+But maybe not quite as important.
+
+0:01:47.130,0:01:49.790
+We might encapsulate some
+notion of board control.
+
+0:01:49.790,0:01:52.350
+We might have to consult with chess
+experts to figure out what these
+
+0:01:52.350,0:01:53.460
+features should be.
+
+0:01:53.460,0:01:56.400
+But what we do is we come up with
+a bunch of features, which are
+
+0:01:56.400,0:02:01.840
+themselves functions which look at the
+state and return some indicator.
+
+0:02:01.840,0:02:03.600
+So what we would have then
+is a bunch of features.
+
+0:02:03.600,0:02:07.130
+Maybe queen advantage, knight advantage,
+a bunch of things.
+
+0:02:07.130,0:02:09.740
+And then some measure
+of board control.
+
+0:02:09.740,0:02:11.790
+Now each of them contributes.
+
+0:02:11.790,0:02:14.540
+And the typical thing to do is
+combine them in a linear way.
+
+0:02:14.540,0:02:16.620
+More complicated things are
+absolutely possible.
+
+0:02:16.620,0:02:19.340
+There are some nice properties you get
+when you combine them linearly, which
+
+0:02:19.340,0:02:21.260
+we'll see later in the course.
+
+0:02:21.260,0:02:23.420
+So we might say, the queen advantage
+is more important.
+
+0:02:23.420,0:02:26.300
+It gets a coefficient of 10, whereas
+the knight advantage only gets a
+
+0:02:26.300,0:02:27.580
+coefficient of three.
+
+0:02:27.580,0:02:29.600
+And maybe board control
+is really important.
+
+0:02:29.600,0:02:32.850
+And maybe that gets a
+coefficient of 20.
+
+0:02:32.850,0:02:35.210
+So let's figure out what this
+actually looks like.
+
+0:02:35.210,0:02:39.190
+An evaluation function takes the state
+and returns a number that represents
+
+0:02:39.190,0:02:40.810
+the minimax value.
+
+0:02:40.810,0:02:43.990
+For something like PAC-MAN strictly
+speaking it should be a score.
+
+0:02:43.990,0:02:44.230
+Right?
+
+0:02:44.230,0:02:46.660
+Because that's what you would compute if
+you actually looked at the minimax
+
+0:02:46.660,0:02:47.420
+value of the game.
+
+0:02:47.420,0:02:50.010
+The terminal utilities are
+marked the scores.
+
+0:02:50.010,0:02:51.750
+So let's think about something
+like this.
+
+0:02:51.750,0:02:54.780
+You look at this and you think, what's
+the minimax value of that?
+
+0:02:54.780,0:02:55.810
+Well I mean, I don't know.
+
+0:02:55.810,0:02:56.970
+I'll eat a bunch of those dots, right.
+
+0:02:56.970,0:02:59.420
+It doesn't look particularly
+good or bad.
+
+0:02:59.420,0:03:00.160
+What about this?
+
+0:03:00.160,0:03:01.890
+Is it better or worse?
+
+0:03:01.890,0:03:03.020
+Yeah, it looks worse.
+
+0:03:03.020,0:03:06.140
+Now it may turn out that in fact it's
+not worse because over here, the ghost
+
+0:03:06.140,0:03:07.360
+may yet blank you.
+
+0:03:07.360,0:03:09.820
+Here they're basically been
+reduced to one ghost.
+
+0:03:09.820,0:03:12.750
+These are the ways in which it's
+a little bit subtle, right?
+
+0:03:12.750,0:03:14.810
+But at least on the surface, this
+looks a little worse because the
+
+0:03:14.810,0:03:16.630
+ghosts are closer.
+
+0:03:16.630,0:03:17.670
+OK, how about this?
+
+0:03:17.670,0:03:19.270
+Better or worse?
+
+0:03:19.270,0:03:20.010
+Looks worse.
+
+0:03:20.010,0:03:22.750
+There's a couple reasons why you
+might say this is worst.
+
+0:03:22.750,0:03:24.860
+One is that the dots have been eaten.
+
+0:03:24.860,0:03:25.210
+All right.
+
+0:03:25.210,0:03:26.770
+So there's fewer points left to get.
+
+0:03:26.770,0:03:28.320
+So depending on how you
+deal with the score.
+
+0:03:28.320,0:03:31.210
+Also you're kind of getting towards dead
+ends, and that's a little scary
+
+0:03:31.210,0:03:33.022
+when there are ghosts on your tail.
+
+0:03:33.022,0:03:35.220
+How about this?
+
+0:03:35.220,0:03:39.260
+Presumably our function should
+return that this is bad.
+
+0:03:39.260,0:03:40.770
+How about this?
+
+0:03:40.770,0:03:42.130
+Also bad.
+
+0:03:42.130,0:03:42.660
+OK.
+
+0:03:42.660,0:03:46.520
+So let's see what happens when you
+do evaluation functions in
+
+0:03:46.520,0:03:47.910
+the context of PAC-MAN.
+
+0:03:47.910,0:03:52.380
+So first, let's take a look
+at a simple board.
+
+0:03:52.380,0:03:54.140
+There aren't even any ghosts.
+
+0:03:54.140,0:03:55.330
+So you think this should be easy.
+
+0:03:55.330,0:03:57.750
+I'm going to do something
+like a depth two search.
+
+0:03:57.750,0:04:00.340
+And no ghosts are going to get
+in my way, and I'm going
+
+0:04:00.340,0:04:01.960
+to win really easily.
+
+0:04:01.960,0:04:06.220
+So let's think about what PAC-MAN does
+here in the case where you do a depth
+
+0:04:06.220,0:04:06.890
+two search.
+
+0:04:06.890,0:04:08.570
+And we need to truncation function.
+
+0:04:08.570,0:04:09.800
+So what's the truncation function?
+
+0:04:09.800,0:04:11.110
+Let's just use the score.
+
+0:04:11.110,0:04:11.710
+Right?
+
+0:04:11.710,0:04:12.680
+That's a pretty good indicator.
+
+0:04:12.680,0:04:14.480
+If the score is high, that's good.
+
+0:04:14.480,0:04:16.589
+If the score is bad, that's less good.
+
+0:04:16.589,0:04:18.649
+And so we're going to try to
+kind of maximize our score.
+
+0:04:18.649,0:04:21.690
+Not purely greedily, but based
+on a 2-step look ahead.
+
+0:04:21.690,0:04:22.340
+So here we go.
+
+0:04:22.340,0:04:23.790
+Here's the first step we take.
+
+0:04:23.790,0:04:25.100
+So far so good.
+
+0:04:25.100,0:04:26.350
+And then--
+
+0:04:26.350,0:04:28.850
+
+0:04:28.850,0:04:30.662
+OK.
+
+0:04:30.662,0:04:31.570
+OK.
+
+0:04:31.570,0:04:34.405
+And you're starting to
+doubt the agent here.
+
+0:04:34.405,0:04:37.210
+
+0:04:37.210,0:04:40.900
+Somehow, even though we've got a
+basically plausible evaluation
+
+0:04:40.900,0:04:44.400
+function, the score, and we're doing a
+little bit of look ahead, he's just
+
+0:04:44.400,0:04:44.950
+wigging out.
+
+0:04:44.950,0:04:46.280
+What's going on here?
+
+0:04:46.280,0:04:46.950
+OK.
+
+0:04:46.950,0:04:49.500
+So what is going on here?
+
+0:04:49.500,0:04:51.340
+Let's take a look.
+
+0:04:51.340,0:04:54.340
+Why does PAC-MAN starve?
+
+0:04:54.340,0:04:54.970
+OK.
+
+0:04:54.970,0:04:58.140
+Well this is actually a danger
+of replanting agents.
+
+0:04:58.140,0:05:01.040
+All of these agents that you're seeing
+here that do depth limited search,
+
+0:05:01.040,0:05:01.770
+they do that search.
+
+0:05:01.770,0:05:05.760
+They take a move, and then they do the
+search again from the next position.
+
+0:05:05.760,0:05:06.150
+Right?
+
+0:05:06.150,0:05:09.710
+That means the plan they have in their
+head doesn't really have to be
+
+0:05:09.710,0:05:10.050
+consistent.
+
+0:05:10.050,0:05:10.390
+Right?
+
+0:05:10.390,0:05:14.070
+It's just at every step,
+you do a new plan.
+
+0:05:14.070,0:05:17.350
+So let's take a look about what this
+search tree looks like where PAC-MAN
+
+0:05:17.350,0:05:19.680
+has, say, two dots to eat.
+
+0:05:19.680,0:05:21.220
+Well, what can we do?
+
+0:05:21.220,0:05:23.810
+Well, intuitively, you look at it
+and you're like, eat the dot.
+
+0:05:23.810,0:05:24.170
+Right?
+
+0:05:24.170,0:05:25.370
+But he's actually got two choices.
+
+0:05:25.370,0:05:28.420
+He could eat the dot, or you
+can head off to the right.
+
+0:05:28.420,0:05:32.310
+Well, eating the dot is actually
+better for the score right now.
+
+0:05:32.310,0:05:35.380
+So if we marked these with their current
+score, and we just went off of
+
+0:05:35.380,0:05:37.570
+that, we would actually
+go eat the dot.
+
+0:05:37.570,0:05:39.810
+But remember, there's more of
+a look ahead than that.
+
+0:05:39.810,0:05:42.850
+What can you do from the left tree?
+
+0:05:42.850,0:05:44.540
+You could kind of go back.
+
+0:05:44.540,0:05:47.170
+So you're in the position of being kind
+of in the middle of the board and
+
+0:05:47.170,0:05:49.830
+having eaten a dot.
+
+0:05:49.830,0:05:52.520
+What can you do from the right tree?
+
+0:05:52.520,0:05:58.480
+Well you can go left, which will put
+you back where you started, and you
+
+0:05:58.480,0:05:59.830
+haven't eaten any dots.
+
+0:05:59.830,0:06:01.380
+You could go right and
+you can eat a dot.
+
+0:06:01.380,0:06:02.780
+So you've got two futures here.
+
+0:06:02.780,0:06:04.210
+What will minimax do?
+
+0:06:04.210,0:06:06.020
+It's not really much of
+a minimax, right?
+
+0:06:06.020,0:06:07.930
+Because there's no min.
+
+0:06:07.930,0:06:09.120
+But we can write down the points.
+
+0:06:09.120,0:06:14.780
+So if you get 10 points for a dot,
+then here we'll have 10 points.
+
+0:06:14.780,0:06:18.140
+And zero points and 10 points.
+
+0:06:18.140,0:06:22.100
+So if we run minimax, we'll see all
+right, this will be 10, this will be
+
+0:06:22.100,0:06:24.290
+10, the root will be 10.
+
+0:06:24.290,0:06:27.160
+So from the root, you look and you say,
+east, west, it's all the same.
+
+0:06:27.160,0:06:30.410
+Because in two steps, under optimal
+play, I'm going to get 10 points
+
+0:06:30.410,0:06:31.850
+either way.
+
+0:06:31.850,0:06:35.140
+And so there's no reason for PAC-MAN in
+two steps to eat the dot and then
+
+0:06:35.140,0:06:39.910
+come back when it could just as
+easily go for the other dot.
+
+0:06:39.910,0:06:41.810
+So what's wrong with that?
+
+0:06:41.810,0:06:45.460
+Well the problem is if we take this
+branch, look at that state.
+
+0:06:45.460,0:06:47.700
+It's just like the state at the root.
+
+0:06:47.700,0:06:52.360
+And it's just as good from that state
+to go left as to go right.
+
+0:06:52.360,0:06:54.780
+So we thrash.
+
+0:06:54.780,0:06:56.160
+What's the problem?
+
+0:06:56.160,0:07:00.340
+Everybody agrees that this
+state here is bad.
+
+0:07:00.340,0:07:00.630
+Right?
+
+0:07:00.630,0:07:02.370
+But let's look at these other states.
+
+0:07:02.370,0:07:09.920
+Let's look at here is A and here's B.
+The score says these are equally good.
+
+0:07:09.920,0:07:10.580
+But are they?
+
+0:07:10.580,0:07:12.230
+Are they really equally good?
+
+0:07:12.230,0:07:13.455
+In both cases we've eaten a dot.
+
+0:07:13.455,0:07:15.835
+But which one's better, A or B?
+
+0:07:15.835,0:07:16.930
+A is better.
+
+0:07:16.930,0:07:18.800
+Why is A better?
+
+0:07:18.800,0:07:20.600
+We're closer to the next dot.
+
+0:07:20.600,0:07:24.520
+So this is why the score function here,
+it is an evaluation function,
+
+0:07:24.520,0:07:25.940
+but it can be improved.
+
+0:07:25.940,0:07:29.060
+And so if what we had is-- we could
+maybe get some partial credit.
+
+0:07:29.060,0:07:32.130
+Like maybe we can get a point for having
+been a little bit closer to
+
+0:07:32.130,0:07:33.680
+that next dot.
+
+0:07:33.680,0:07:34.990
+Well now A will look better.
+
+0:07:34.990,0:07:39.200
+And now with the root, this will be
+11, this will be 11, and now we're
+
+0:07:39.200,0:07:41.040
+going to go for the close dot.
+
+0:07:41.040,0:07:42.500
+And it's not a tie.
+
+0:07:42.500,0:07:42.670
+Right?
+
+0:07:42.670,0:07:44.590
+There is a better sequence now.
+
+0:07:44.590,0:07:45.880
+So let's see what that does.
+
+0:07:45.880,0:07:48.120
+So here's that same configuration.
+
+0:07:48.120,0:07:49.820
+Still looking ahead, too.
+
+0:07:49.820,0:07:52.490
+But now the truncation
+function is score.
+
+0:07:52.490,0:07:56.640
+But you get increasing credit
+for being closer to a dot.
+
+0:07:56.640,0:07:59.480
+So now we take the same first step.
+
+0:07:59.480,0:08:06.920
+But now we go straight to the
+end and don't thrash.
+
+0:08:06.920,0:08:09.510
+Many of you will see thrashing
+in your projects.
+
+0:08:09.510,0:08:12.580
+When you see thrashing, it is usually
+not a bug in minimax.
+
+0:08:12.580,0:08:16.510
+It's usually a deficiency in
+your evaluation function.
+
+0:08:16.510,0:08:17.290
+All right.
+
+0:08:17.290,0:08:20.310
+So back to this case of evaluation
+for PAC-MAN.
+
+0:08:20.310,0:08:23.470
+What about when it is adversarial?
+
+0:08:23.470,0:08:26.190
+Well you'll get a chance to play
+with this kind of evaluation
+
+0:08:26.190,0:08:27.680
+function for the agent.
+
+0:08:27.680,0:08:30.470
+So what I'm going to show you is I'm
+going to show you the flip side.
+
+0:08:30.470,0:08:33.549
+I'm going to show you the evaluation
+function for the ghosts.
+
+0:08:33.549,0:08:36.880
+Now these ghosts may have a kind of deer
+in the headlights look in their
+
+0:08:36.880,0:08:40.520
+eyes, but they are in fact
+now running minimax.
+
+0:08:40.520,0:08:41.770
+They are adversarial.
+
+0:08:41.770,0:08:43.530
+And they have an evaluation function.
+
+0:08:43.530,0:08:44.810
+Let's think about it for a second.
+
+0:08:44.810,0:08:47.370
+They don't get points for eating
+dots or anything like that.
+
+0:08:47.370,0:08:48.860
+They're not trying to
+get close to dots.
+
+0:08:48.860,0:08:51.750
+What they're trying to do is they're
+trying to defeat PAC-MAN.
+
+0:08:51.750,0:08:54.780
+So they've got things like,
+am I getting close?
+
+0:08:54.780,0:08:57.520
+At the end, of course, they can
+see the game actually end.
+
+0:08:57.520,0:09:02.270
+And if they get within a horizon where
+they can see the end of the game,
+
+0:09:02.270,0:09:05.930
+they're going to take the appropriate
+tactical action to bring it about.
+
+0:09:05.930,0:09:07.790
+So let's take a look and
+see what they do.
+
+0:09:07.790,0:09:11.320
+You will have seen before the ghosts
+kind of milling about and wandering
+
+0:09:11.320,0:09:12.180
+kind of randomly.
+
+0:09:12.180,0:09:15.950
+These are mastermind ghosts,
+so let's take a look.
+
+0:09:15.950,0:09:18.460
+Slower because every agent
+has to do this stuff.
+
+0:09:18.460,0:09:22.210
+And oh.
+
+0:09:22.210,0:09:24.680
+Let's see it again.
+
+0:09:24.680,0:09:25.940
+So watch.
+
+0:09:25.940,0:09:28.265
+They generally move towards
+PAC-MAN, largely based on
+
+0:09:28.265,0:09:29.050
+the evaluation function.
+
+0:09:29.050,0:09:32.510
+And at the end they can see what's going
+to happen, and they take some
+
+0:09:32.510,0:09:35.850
+fancy tactical action, not because
+of the evaluation function.
+
+0:09:35.850,0:09:39.690
+But because minimax can see how they
+have to move in order to successfully
+
+0:09:39.690,0:09:40.810
+pin PAC-MAN.
+
+0:09:40.810,0:09:41.970
+Let's zoom in.
+
+0:09:41.970,0:09:44.610
+Sometimes I feel bad for PAC-MAN.
+
+0:09:44.610,0:09:44.970
+OK.
+
+0:09:44.970,0:09:47.360
+So the question is what's
+going on here?
+
+0:09:47.360,0:09:49.270
+And there's actually two agents here.
+
+0:09:49.270,0:09:52.790
+They are separately doing
+their own searches.
+
+0:09:52.790,0:09:56.350
+But when they see a node that the other
+one controls, they treat it like
+
+0:09:56.350,0:09:57.200
+a min node.
+
+0:09:57.200,0:10:01.680
+So even though each agent is actually
+doing its own search, because they are
+
+0:10:01.680,0:10:06.730
+both assuming the other one shares its
+evaluation function, that is, is also
+
+0:10:06.730,0:10:10.060
+a minimizing agent, we're going
+to see cooperation emerge.
+
+0:10:10.060,0:10:13.470
+So this is really pure two player
+minimax in the sense that there are
+
+0:10:13.470,0:10:15.520
+actually two minimizing agents.
+
+0:10:15.520,0:10:19.380
+What's cool about is this shows you how
+you can get cooperation without
+
+0:10:19.380,0:10:20.410
+programming it in.
+
+0:10:20.410,0:10:23.990
+Simply because they're both trying to
+achieve the same goal, as soon as the
+
+0:10:23.990,0:10:27.900
+orange agent goes in one direction, the
+blue agent will compute and see
+
+0:10:27.900,0:10:31.960
+that the way you can force PAC-MAN to
+lose is by going the other direction.
+
+0:10:31.960,0:10:33.210
+And so they're going to flank.
+
+0:10:33.210,0:10:36.580
+
+0:10:36.580,0:10:36.810
+OK.
+
+0:10:36.810,0:10:37.720
+One more time.
+
+0:10:37.720,0:10:39.330
+This is not program behavior.
+
+0:10:39.330,0:10:41.310
+This is a consequence of minimax.
+
+0:10:41.310,0:10:41.630
+Right?
+
+0:10:41.630,0:10:44.270
+Minimax does tactical
+things very well.
+
+0:10:44.270,0:10:47.290
+The evaluation function generally
+determines your strategy.
+
+0:10:47.290,0:10:49.280
+So here's that flanking tactic again.
+
+0:10:49.280,0:10:50.590
+They split up.
+
+0:10:50.590,0:10:51.980
+It's not a joint decision.
+
+0:10:51.980,0:10:54.740
+It's just they both know that they're
+trying to achieve the same thing.
+
+0:10:54.740,0:10:56.100
+

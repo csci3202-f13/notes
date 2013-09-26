@@ -1,0 +1,105 @@
+0:00:00.000,0:00:00.270
+
+0:00:00.270,0:00:02.460
+PROFESSOR: You can combine the
+advantages of depth-first search and
+
+0:00:02.460,0:00:04.040
+breadth-first search.
+
+0:00:04.040,0:00:06.590
+One way to combine the advantages of
+depth-first and breadth-first search
+
+0:00:06.590,0:00:08.330
+is something called iterative
+deepening.
+
+0:00:08.330,0:00:11.300
+The idea is you get depth-first search
+space advantages with breadth-first
+
+0:00:11.300,0:00:14.630
+search's time and shallow
+solution guarantees.
+
+0:00:14.630,0:00:18.290
+And the way you do this, it's super
+simple, you run depth-first search but
+
+0:00:18.290,0:00:19.700
+you limit it to depth one.
+
+0:00:19.700,0:00:21.940
+That means you try everything at
+depth one, but use depth-first
+
+0:00:21.940,0:00:23.490
+search to do it.
+
+0:00:23.490,0:00:25.060
+Well, if you find the solution, great.
+
+0:00:25.060,0:00:26.585
+It's a depth one, you return it.
+
+0:00:26.585,0:00:29.950
+If you didn't, then you try depth-first
+search with limit two.
+
+0:00:29.950,0:00:31.510
+You know you're not going to find
+a solution at depth one because
+
+0:00:31.510,0:00:32.680
+you just did that.
+
+0:00:32.680,0:00:36.560
+So if you do find the solution at
+this new depth, and if you find
+
+0:00:36.560,0:00:37.270
+it, you return it.
+
+0:00:37.270,0:00:38.510
+And it's a depth two solution.
+
+0:00:38.510,0:00:41.970
+If that doesn't work, you do depth
+three, and so on, until one of these
+
+0:00:41.970,0:00:45.890
+rounds returns a solution, and then
+you'll know that, in fact, it's the
+
+0:00:45.890,0:00:47.580
+shallowest solution.
+
+0:00:47.580,0:00:50.630
+So you could worry, well, isn't
+that kind of redundant?
+
+0:00:50.630,0:00:54.600
+I'm doing a search over and over
+again but it's actually OK.
+
+0:00:54.600,0:00:55.890
+Why is it OK?
+
+0:00:55.890,0:00:58.670
+The reason it's OK is you're going to do
+almost all of your work in the last
+
+0:00:58.670,0:01:03.150
+layer anyway, so everything above
+that, that's just warm up.
+
+0:01:03.150,0:01:04.540
+So it's not too redundant.
+
+0:01:04.540,0:01:06.850
+In general, most of the work happens
+in the lowest level.
+
+0:01:06.850,0:01:08.100
+

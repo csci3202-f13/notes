@@ -1,0 +1,295 @@
+0:00:00.000,0:00:01.670
+
+0:00:01.670,0:00:06.620
+PROFESSOR: So far, the big ways we have
+accelerated our CSP solvers have
+
+0:00:06.620,0:00:08.750
+been to exploit ordering--
+
+0:00:08.750,0:00:12.530
+try good variables first, try good
+values first; filtering--
+
+0:00:12.530,0:00:17.490
+rule out elements of the unassigned
+domains based on propagation of
+
+0:00:17.490,0:00:20.440
+constraints; and now we can do
+something very different.
+
+0:00:20.440,0:00:22.680
+We can look at the structure
+of the CSP.
+
+0:00:22.680,0:00:25.130
+Sometimes you look at a CSP that you're
+trying to solve, and you see it
+
+0:00:25.130,0:00:27.750
+has some special graph structure.
+
+0:00:27.750,0:00:30.570
+And based on that graph structure,
+there'll be some technique available
+
+0:00:30.570,0:00:34.130
+to you that allows you to solve it
+in a particularly efficient way.
+
+0:00:34.130,0:00:36.990
+And we're going to see a couple
+examples of that now.
+
+0:00:36.990,0:00:41.650
+So for example, if your CSP involves
+this giant criminal robot network, you
+
+0:00:41.650,0:00:43.790
+might think you should go after
+the guy in the center.
+
+0:00:43.790,0:00:48.010
+That would be an example of
+exploiting structure.
+
+0:00:48.010,0:00:49.890
+Let's make that concrete.
+
+0:00:49.890,0:00:55.830
+So here is the constraint graph for the
+problem of map coloring Australia.
+
+0:00:55.830,0:00:58.610
+And an extreme case of problem structure
+is when you look at your
+
+0:00:58.610,0:00:59.610
+constraint graph--
+
+0:00:59.610,0:01:03.280
+remember, the constraint graph tells you
+which variables have constraints,
+
+0:01:03.280,0:01:04.769
+it doesn't tell you what those are.
+
+0:01:04.769,0:01:08.100
+We know in this particular case, they're
+inequality constraints, but
+
+0:01:08.100,0:01:10.720
+the constraint graph doesn't
+tell you that.
+
+0:01:10.720,0:01:14.010
+In this particular case, we look at it
+and we see that this graph is broken
+
+0:01:14.010,0:01:16.880
+into two pieces-- there's the mainland,
+and then there's this tiny
+
+0:01:16.880,0:01:19.640
+little CSP of a single
+mode for Tasmania.
+
+0:01:19.640,0:01:23.010
+That's an extreme case of structure
+where we have independent subproblems.
+
+0:01:23.010,0:01:25.850
+Independent subproblems are great,
+because you can solve them separately.
+
+0:01:25.850,0:01:27.980
+Divide and conquer.
+
+0:01:27.980,0:01:30.380
+How do we tell when we have
+independent subproblems?
+
+0:01:30.380,0:01:32.750
+You can tell you have independent
+subproblems when you look at your
+
+0:01:32.750,0:01:35.770
+constraint graph, you can do a connected
+component analysis of it--
+
+0:01:35.770,0:01:38.650
+for example, start at some
+node and do search--
+
+0:01:38.650,0:01:42.490
+and when you have multiple connected
+components, then they can be solved
+
+0:01:42.490,0:01:43.320
+independently.
+
+0:01:43.320,0:01:44.510
+Now, why is this so great?
+
+0:01:44.510,0:01:45.600
+So here's the good part.
+
+0:01:45.600,0:01:49.380
+The good part is that if you had n
+variables, but you could break it into
+
+0:01:49.380,0:01:51.530
+a bunch of subproblems with
+c variables each.
+
+0:01:51.530,0:01:53.310
+So n is a big number, but c is small.
+
+0:01:53.310,0:01:54.740
+You have a bunch of little problems.
+
+0:01:54.740,0:01:57.440
+Well, then the worst case
+solution is much better.
+
+0:01:57.440,0:02:01.200
+So in particular, you've got a bunch
+of problems of size c, and if the
+
+0:02:01.200,0:02:04.030
+domain size is d, then d to
+the c is the expense of
+
+0:02:04.030,0:02:06.520
+solving each one, right?
+
+0:02:06.520,0:02:07.840
+And how many of them do you have?
+
+0:02:07.840,0:02:10.919
+Well, you have n divided by c of them.
+
+0:02:10.919,0:02:12.450
+So it's now linear in n.
+
+0:02:12.450,0:02:14.580
+As the problem grows and grows and
+grows, you just get more of these
+
+0:02:14.580,0:02:16.340
+little things, and then
+you all get solved
+
+0:02:16.340,0:02:18.180
+independently, and that's great.
+
+0:02:18.180,0:02:21.520
+And that's a whole lot better, for
+example, than the original case, where
+
+0:02:21.520,0:02:24.590
+it would have been d to the
+n for the whole CSP.
+
+0:02:24.590,0:02:26.550
+So let's do some back of the envelope.
+
+0:02:26.550,0:02:30.320
+Let's imagine that n were 80, which
+is not that big for a CSP.
+
+0:02:30.320,0:02:33.420
+d is 2, so all of the domains
+are binary-- true/false, or
+
+0:02:33.420,0:02:34.420
+something like that.
+
+0:02:34.420,0:02:37.130
+And we can break it up into problems
+of size 20, so we get four
+
+0:02:37.130,0:02:38.720
+problems of size 20.
+
+0:02:38.720,0:02:41.890
+Well, if we had to solve the whole
+thing by enumerating all of the
+
+0:02:41.890,0:02:45.610
+possible configurations, than we'd
+have 2 to the 80 configurations.
+
+0:02:45.610,0:02:49.130
+If you can do 10 million a second, then
+that'll take four billion years,
+
+0:02:49.130,0:02:52.050
+which is probably an unacceptable
+run time.
+
+0:02:52.050,0:02:55.580
+If instead, you only have to solve four
+things, each of which is 2 to the
+
+0:02:55.580,0:02:58.980
+20th, well, now it's 0.4 seconds,
+which sounds a whole lot better.
+
+0:02:58.980,0:03:00.510
+So there you go.
+
+0:03:00.510,0:03:03.060
+Galactic time scales, or seconds.
+
+0:03:03.060,0:03:04.970
+That's the difference when you
+have independent subproblems.
+
+0:03:04.970,0:03:07.090
+So independent subproblems are great.
+
+0:03:07.090,0:03:09.320
+What's the problem with independent
+subproblems?
+
+0:03:09.320,0:03:10.700
+There are no independent subproblems.
+
+0:03:10.700,0:03:12.550
+You're never going to look at your
+constraint graph and say,
+
+0:03:12.550,0:03:13.750
+oh, isn't this nice?
+
+0:03:13.750,0:03:15.950
+I have five different subproblems
+that don't interact.
+
+0:03:15.950,0:03:20.450
+Typically, the problem you set out to
+solve is a whole connected thing, and
+
+0:03:20.450,0:03:24.430
+imposing the problem, you've kind of
+already separated off whatever the
+
+0:03:24.430,0:03:26.900
+separate subproblems are before
+you even formulate it.
+
+0:03:26.900,0:03:30.720
+So this is rare to actually
+see separate subproblems.
+
+0:03:30.720,0:03:33.290
+OK, so let's see if we can come up
+with some methods that are more
+
+0:03:33.290,0:03:34.540
+broadly applicable.
+
+0:03:34.540,0:03:35.400
+

@@ -1,0 +1,674 @@
+0:00:00.000,0:00:02.090
+
+0:00:02.090,0:00:04.830
+DAN KLEIN: Today, we'll be talking
+about reinforcement learning.
+
+0:00:04.830,0:00:08.430
+Reinforcement learning has a long
+history, including in the area of
+
+0:00:08.430,0:00:11.310
+animal reinforcement learning, for
+example, in psychology and behavioral
+
+0:00:11.310,0:00:12.240
+psychology.
+
+0:00:12.240,0:00:16.420
+And people have thought long and hard
+about what could the mechanisms be by
+
+0:00:16.420,0:00:20.240
+which, based on feedback from our
+actions and our environment, we learn
+
+0:00:20.240,0:00:22.160
+how to act over time.
+
+0:00:22.160,0:00:24.740
+And today, we'll talk about how we might
+operationalize some of these
+
+0:00:24.740,0:00:27.600
+ideas in code.
+
+0:00:27.600,0:00:29.780
+Here's the schematic for
+reinforcement learning.
+
+0:00:29.780,0:00:32.910
+The basic idea is you have an agent
+who is acting as always.
+
+0:00:32.910,0:00:36.510
+So the agent has actions available
+to it and chooses an action.
+
+0:00:36.510,0:00:39.620
+The environment then does what it always
+does, which is it resolves in
+
+0:00:39.620,0:00:42.880
+some way that's not entirely
+determined by the action.
+
+0:00:42.880,0:00:47.130
+For example, there may be some
+nondeterminism or uncertainty.
+
+0:00:47.130,0:00:51.550
+When the action resolves, what the agent
+receives back is two things.
+
+0:00:51.550,0:00:55.560
+One is a reward that could be kind of
+a bonus or a penalty, and these are
+
+0:00:55.560,0:00:58.370
+the things we want to learn
+to maximize over time.
+
+0:00:58.370,0:01:02.320
+The other thing the agent receives in
+response to its actions is a percept.
+
+0:01:02.320,0:01:03.860
+We see what happens.
+
+0:01:03.860,0:01:06.530
+So we get a state back in the
+simplest formulation.
+
+0:01:06.530,0:01:08.940
+Later on, we'll see how
+we can relax this.
+
+0:01:08.940,0:01:11.810
+But for now, we take an action which
+we essentially submit to the
+
+0:01:11.810,0:01:15.170
+environment by doing it, and the
+environment returns to us a state,
+
+0:01:15.170,0:01:18.460
+which is the result, and a reward,
+which we want to maximize.
+
+0:01:18.460,0:01:18.780
+We
+
+0:01:18.780,0:01:22.150
+Want to act to maximize our rewards, but
+of course, we have to learn to do
+
+0:01:22.150,0:01:25.760
+that, because in this setting, we won't
+know what actions will produce
+
+0:01:25.760,0:01:27.770
+rewards until we try them.
+
+0:01:27.770,0:01:30.690
+Because we're actually trying things
+in the environment, all of the
+
+0:01:30.690,0:01:35.210
+learning, all of the ways we have
+available to us to make good decisions
+
+0:01:35.210,0:01:39.270
+are mediated by what we experience
+which are samples of outcomes.
+
+0:01:39.270,0:01:41.270
+When you take an action,
+you see what happens.
+
+0:01:41.270,0:01:44.860
+But you don't see everything
+that might have happened.
+
+0:01:44.860,0:01:47.320
+So let's see some examples of
+what this can actually do.
+
+0:01:47.320,0:01:50.180
+This first example is from Peter
+Stone's group at UT Austin.
+
+0:01:50.180,0:01:53.410
+And the story here is they have
+these AIBOs that play soccer.
+
+0:01:53.410,0:01:56.520
+And of course, every match is in a
+different stadium, they go on their
+
+0:01:56.520,0:01:57.790
+world tour.
+
+0:01:57.790,0:02:01.140
+And when you're a soccer playing AIBO,
+at least if you're on this team, you
+
+0:02:01.140,0:02:02.220
+have this ritual.
+
+0:02:02.220,0:02:06.610
+At the beginning of every match, you go
+to this new stadium and you have to
+
+0:02:06.610,0:02:10.150
+learn how to walk again because the
+surface is a little bit different.
+
+0:02:10.150,0:02:11.660
+You get a different vibe
+from the crowd.
+
+0:02:11.660,0:02:13.570
+It changes everything.
+
+0:02:13.570,0:02:14.990
+So let's see what happens.
+
+0:02:14.990,0:02:17.140
+The robots are not just
+flailing around.
+
+0:02:17.140,0:02:20.400
+They have a gait that's programmed
+that allows them to walk.
+
+0:02:20.400,0:02:25.270
+But on a new surface, it initially
+does something like this.
+
+0:02:25.270,0:02:28.340
+It does what you think-- one leg moves
+and the opposite back leg moves.
+
+0:02:28.340,0:02:31.140
+And it more or less makes progress in
+the direction that it's trying to go.
+
+0:02:31.140,0:02:36.550
+
+0:02:36.550,0:02:41.500
+As this is happening, it collects
+information through a camera that
+
+0:02:41.500,0:02:42.920
+shows what's actually going on.
+
+0:02:42.920,0:02:44.270
+Is it making forward progress?
+
+0:02:44.270,0:02:48.410
+Is the world shaking left to right
+because it's unstable?
+
+0:02:48.410,0:02:51.530
+It then continues training which
+essentially boils down to trying
+
+0:02:51.530,0:02:55.180
+variations and learning responses
+based on what it's seeing.
+
+0:02:55.180,0:02:59.310
+During training, it looks a little
+bit like this which is better.
+
+0:02:59.310,0:03:04.720
+
+0:03:04.720,0:03:09.140
+They let these AIBOs walk back and forth
+along this new floor until this
+
+0:03:09.140,0:03:10.290
+process completes.
+
+0:03:10.290,0:03:14.520
+And when this process completes,
+you have this.
+
+0:03:14.520,0:03:15.550
+You have the ninja dog.
+
+0:03:15.550,0:03:18.800
+It's amazingly smooth.
+
+0:03:18.800,0:03:21.710
+And then they go and they crush their
+competition and all that.
+
+0:03:21.710,0:03:25.790
+In this particular case, not only do
+you move faster, but it's important
+
+0:03:25.790,0:03:30.180
+for how these soccer playing robots work
+that the camera, the vision they
+
+0:03:30.180,0:03:31.840
+have not shake around like crazy.
+
+0:03:31.840,0:03:34.320
+That makes it very hard to figure
+out what's going on.
+
+0:03:34.320,0:03:35.850
+You think the ball's kind of
+shaking through the air.
+
+0:03:35.850,0:03:37.200
+No, you're shaking.
+
+0:03:37.200,0:03:37.820
+Right?
+
+0:03:37.820,0:03:41.890
+So in addition to trying to go fast, the
+reward signal also should include
+
+0:03:41.890,0:03:43.790
+something about going stably.
+
+0:03:43.790,0:03:46.310
+And that's all mixed together here.
+
+0:03:46.310,0:03:47.870
+Here's another example.
+
+0:03:47.870,0:03:51.500
+People wondered how you might be able
+to learn to walk in a way that's
+
+0:03:51.500,0:03:54.230
+partially mediated by the
+structure, right?
+
+0:03:54.230,0:03:58.000
+You've been given this body that has
+joints in places that work for
+
+0:03:58.000,0:04:01.460
+walking, and also based on some
+experiences you have.
+
+0:04:01.460,0:04:05.350
+And this is Russ Tedrake's group at MIT,
+and here is essentially a toddler
+
+0:04:05.350,0:04:06.380
+robot learning to walk.
+
+0:04:06.380,0:04:07.485
+Let's take a look.
+
+0:04:07.485,0:04:13.310
+So at the beginning, it kind of wobbles
+back and forth and maybe it's
+
+0:04:13.310,0:04:15.570
+making forward-- no--
+backward progress.
+
+0:04:15.570,0:04:17.820
+And maybe it should wobble
+a little harder.
+
+0:04:17.820,0:04:19.070
+Maybe that'll work.
+
+0:04:19.070,0:04:21.100
+
+0:04:21.100,0:04:24.290
+And then over time, it starts
+kind of moving in a not
+
+0:04:24.290,0:04:25.540
+entirely straight line.
+
+0:04:25.540,0:04:31.040
+
+0:04:31.040,0:04:34.990
+And then the next thing you know, it's
+moving purposefully around the room in
+
+0:04:34.990,0:04:36.240
+a pretty straight line.
+
+0:04:36.240,0:04:40.322
+
+0:04:40.322,0:04:42.130
+And before you know it,
+it's off to college.
+
+0:04:42.130,0:04:47.860
+
+0:04:47.860,0:04:51.690
+So that's a case of, again, trying
+various actions, seeing what's
+
+0:04:51.690,0:04:57.300
+working, improving those through
+interactions with the environment.
+
+0:04:57.300,0:05:00.230
+You're actually going to get a chance to
+do this as well which is I'm going
+
+0:05:00.230,0:05:02.640
+to show you today a crawler robot.
+
+0:05:02.640,0:05:06.520
+It's not quite as complex as these other
+robots, but if you squint, it's
+
+0:05:06.520,0:05:07.490
+basically there.
+
+0:05:07.490,0:05:10.260
+It's got two joints, and the goal
+is for it to learn to walk.
+
+0:05:10.260,0:05:12.210
+You'll build this in your
+project threes.
+
+0:05:12.210,0:05:15.380
+Actually, let's see an
+example right now.
+
+0:05:15.380,0:05:17.960
+OK, so here, what do we see?
+
+0:05:17.960,0:05:19.210
+We see a crawler robot.
+
+0:05:19.210,0:05:25.880
+
+0:05:25.880,0:05:29.210
+Its goal, in case you can't tell because
+it's kind of inept right now,
+
+0:05:29.210,0:05:31.150
+is to move to the right.
+
+0:05:31.150,0:05:35.230
+Whenever it moves to the right, it
+receives a reward of plus one.
+
+0:05:35.230,0:05:39.250
+Whenever it moves to the left, it
+receives a reward of minus one.
+
+0:05:39.250,0:05:42.430
+And its goal is to over time
+maximize its rewards.
+
+0:05:42.430,0:05:44.800
+So it should tend to move
+right over time.
+
+0:05:44.800,0:05:49.180
+Problem is, it doesn't exactly know what
+actions make it move right and
+
+0:05:49.180,0:05:50.740
+thereby give it rewards.
+
+0:05:50.740,0:05:54.250
+And it's trickier than you might think,
+because in order to move right,
+
+0:05:54.250,0:05:57.650
+you have to spend some time not moving
+at all as you reset your arm.
+
+0:05:57.650,0:06:05.850
+
+0:06:05.850,0:06:09.580
+There are some controls here
+I'll tell you about later.
+
+0:06:09.580,0:06:15.010
+But essentially, it's kind
+of figuring it out.
+
+0:06:15.010,0:06:25.700
+And if I skip a lot of time,
+it's going, right?
+
+0:06:25.700,0:06:27.010
+It's off to college.
+
+0:06:27.010,0:06:27.870
+OK.
+
+0:06:27.870,0:06:31.150
+So you guys will get to build that.
+
+0:06:31.150,0:06:33.070
+How was all of this done?
+
+0:06:33.070,0:06:36.680
+The framework we're going to work
+in is reinforcement learning.
+
+0:06:36.680,0:06:40.730
+In reinforcement learning formally, we
+still imagine that there is a Markov
+
+0:06:40.730,0:06:41.530
+decision process.
+
+0:06:41.530,0:06:43.940
+So just like the MDPs
+we've seen before.
+
+0:06:43.940,0:06:45.940
+And we already saw that in
+the general diagram.
+
+0:06:45.940,0:06:49.700
+We take actions and there is some state
+and reward that comes back, but
+
+0:06:49.700,0:06:51.400
+it's not entirely deterministic.
+
+0:06:51.400,0:06:53.020
+So it's just an MDP.
+
+0:06:53.020,0:06:54.600
+There's still a set of states.
+
+0:06:54.600,0:06:58.250
+There are still a set of actions which
+might depend on the state we're in.
+
+0:06:58.250,0:07:03.550
+And there's still some kind of model in
+principle that is determining which
+
+0:07:03.550,0:07:06.700
+state results and rewards we get back.
+
+0:07:06.700,0:07:10.880
+And there's still a reward function
+associated with the outcomes.
+
+0:07:10.880,0:07:14.650
+We're still trying to learn a policy
+which is essentially figuring out how
+
+0:07:14.650,0:07:16.680
+we should act in a given state.
+
+0:07:16.680,0:07:19.830
+The new twist in reinforcement learning
+and what makes this so much
+
+0:07:19.830,0:07:23.190
+harder than just solving an
+MDP is that we do not know
+
+0:07:23.190,0:07:24.520
+the transition function.
+
+0:07:24.520,0:07:26.070
+We don't know the rewards.
+
+0:07:26.070,0:07:29.580
+And that is even though based on my
+state and my action, there's a certain
+
+0:07:29.580,0:07:32.350
+set of outcomes with a certain
+probability distribution.
+
+0:07:32.350,0:07:35.580
+I don't know which probability
+distribution it is.
+
+0:07:35.580,0:07:39.510
+And so the only way to really know
+what our actions do and where the
+
+0:07:39.510,0:07:43.650
+rewards come from is to try things out,
+and then learn from our samples
+
+0:07:43.650,0:07:45.270
+that we experience.
+
+0:07:45.270,0:07:48.390
+Now, of course, because we're trying
+things out from a state of partial
+
+0:07:48.390,0:07:51.000
+information, we're going
+to make some mistakes.
+
+0:07:51.000,0:07:54.910
+And so there is always going to be this
+process of trying things out not
+
+0:07:54.910,0:07:58.050
+all of which work optimally.
+
+0:07:58.050,0:07:59.440
+So here's an MDP.
+
+0:07:59.440,0:08:01.150
+This is, again, the race car.
+
+0:08:01.150,0:08:02.760
+You see the three states
+of the race car.
+
+0:08:02.760,0:08:05.010
+And if I gave you this MDP,
+you could just solve it.
+
+0:08:05.010,0:08:08.710
+You could value iteration or
+expectimax for that matter.
+
+0:08:08.710,0:08:11.960
+If you were going to reinforcement learn
+how to be this car that tries
+
+0:08:11.960,0:08:15.390
+not to overeat, the difference would be
+you still know whether you're cool,
+
+0:08:15.390,0:08:19.100
+warm, or overheated, and you still know
+that you can move fast or slow.
+
+0:08:19.100,0:08:21.880
+What you don't know is what
+fast and slow do.
+
+0:08:21.880,0:08:25.080
+So for all you know, fast is the
+best idea ever, or slow is
+
+0:08:25.080,0:08:26.110
+the best idea ever.
+
+0:08:26.110,0:08:28.970
+You try some things, maybe you end up
+going too slow or maybe you overheat.
+
+0:08:28.970,0:08:32.140
+And you have to try things again and
+slowly learn what these actions do
+
+0:08:32.140,0:08:33.750
+from each state.
+
+0:08:33.750,0:08:37.190
+A critical difference, now that we're
+thinking about reinforcement learning,
+
+0:08:37.190,0:08:40.490
+is the difference between what we're
+doing now and what we were doing in
+
+0:08:40.490,0:08:44.900
+the last unit on solving Markov decision
+processes, especially since
+
+0:08:44.900,0:08:48.500
+even in reinforcement learning, there
+are still all of these MDP-like things
+
+0:08:48.500,0:08:51.820
+like rewards and so on.
+
+0:08:51.820,0:08:56.880
+Offline solution is when you know what
+your actions will do, and in
+
+0:08:56.880,0:09:02.210
+computation, in simulation, in your
+head, you think about consequences,
+
+0:09:02.210,0:09:05.500
+whether that's via an expectimax
+style search or a dynamic
+
+0:09:05.500,0:09:07.330
+program like value iteration.
+
+0:09:07.330,0:09:11.630
+You realize that jumping into the pit is
+a bad idea because you know it has
+
+0:09:11.630,0:09:15.410
+a negative reward, and so you
+never actually do it.
+
+0:09:15.410,0:09:18.080
+That's offline solution.
+
+0:09:18.080,0:09:22.380
+When you're doing online learning, you
+have to actually jump into the pit
+
+0:09:22.380,0:09:24.780
+before you know it is bad.
+
+0:09:24.780,0:09:28.780
+You might imagine that over time, this
+increases the cost of the robots.
+
+0:09:28.780,0:09:30.667
+

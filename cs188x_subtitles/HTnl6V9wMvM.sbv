@@ -1,0 +1,14 @@
+0:00:00.580,0:00:03.939
+You can see it's breadth-first because
+it expands at the same rate regardless of
+
+0:00:03.939,0:00:06.759
+the color.
+
+0:00:06.759,0:00:13.759
+Also, if I run that again.
+You'll see that it comes up with a short,
+
+0:00:14.240,0:00:15.070
+but expensive solution.
+

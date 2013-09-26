@@ -1,0 +1,98 @@
+0:00:01.929,0:00:05.270
+What about that other classic AI stuff?
+We talked about theorem proving,
+
+0:00:05.270,0:00:08.759
+can we prove mathematical theorems.
+That stuff is happening too and it's also important.
+
+0:00:08.759,0:00:12.900
+So, on the logic front for
+example we can build amazing theorem provers
+
+0:00:12.900,0:00:16.330
+compared to when people started
+doing this. These provers are used for
+
+0:00:16.330,0:00:19.710
+more than just proving theorems. For
+example, NASA uses these for fault diagnosis.
+
+0:00:19.710,0:00:22.820
+There are some question
+answering systems which are no longer
+
+0:00:22.820,0:00:26.500
+purely logical, but there is a
+component of logical theorem proving. You try to
+
+0:00:26.500,0:00:28.089
+prove that the statement
+
+0:00:28.089,0:00:31.809
+that you think answers the question
+actually entails the question in the appropriate way.
+
+0:00:31.809,0:00:33.050
+
+0:00:33.050,0:00:36.860
+That's the way that logic and theorem proving
+has made its way into very different
+
+0:00:36.860,0:00:40.780
+domains like natural language processing.
+The methods people use are things like
+
+0:00:40.780,0:00:44.380
+deduction systems. The closest we'll get
+to this in this class is constraint satisfaction,
+
+0:00:44.380,0:00:47.800
+but you'll get a flavor for how this stuff works.
+
+0:00:47.800,0:00:51.170
+Also it's worth pointing out that
+satisfiability solvers have had
+
+0:00:51.170,0:00:55.580
+huge advances in the past decade and are now
+able to do really amazing things.
+
+0:00:55.580,0:01:00.920
+What's shown here on the right is a proof of something called the Robbin's conjecture.
+
+0:01:00.920,0:01:01.990
+You probably
+
+0:01:01.990,0:01:05.630
+haven't heard the Robbin's conjecture
+itself, but it was an open algebraic question,
+
+0:01:05.630,0:01:09.170
+and there is a short, human
+interpretable proof
+
+0:01:09.170,0:01:12.580
+that a theorem prover chugged out that humans have been looking for for a while. This is a case of
+
+0:01:12.580,0:01:17.140
+you see it, and you're like, yeah, that's right.
+
+0:01:17.140,0:01:20.690
+That's a case of an open question
+being proved by a computer in the way
+
+0:01:20.690,0:01:23.690
+humans would prove it, in the sense that
+the human can interpret the proof.
+
+0:01:23.690,0:01:26.810
+There's also theorem proving by computers where
+the computer does a brute force,
+
+0:01:26.810,0:01:29.800
+but the human doesn't want to check 4.7 billion cases, but the computer does,
+
+0:01:29.800,0:01:32.020
+and so the computer does it.
+

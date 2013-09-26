@@ -1,0 +1,207 @@
+0:00:00.000,0:00:01.650
+
+0:00:01.650,0:00:03.230
+DAN KLEIN: So what's a CSP?
+
+0:00:03.230,0:00:06.160
+Well, in a standard search problem,
+the state is a black box.
+
+0:00:06.160,0:00:08.180
+This is actually the beauty
+of a search algorithm like
+
+0:00:08.180,0:00:09.230
+uniform cost search.
+
+0:00:09.230,0:00:11.990
+You don't care whether your state
+is a pair of integers, or
+
+0:00:11.990,0:00:13.230
+a string, or what.
+
+0:00:13.230,0:00:14.090
+You don't care.
+
+0:00:14.090,0:00:17.370
+All you need to know is that you have
+these things called states, there's
+
+0:00:17.370,0:00:20.210
+some arbitrary data structure that
+encodes whatever that problem's doing
+
+0:00:20.210,0:00:21.380
+and you don't care.
+
+0:00:21.380,0:00:24.800
+The goal test is just some function over
+states that give you a thumbs up
+
+0:00:24.800,0:00:26.220
+when you find a goal.
+
+0:00:26.220,0:00:28.510
+And then you have a successor function,
+which is also just some
+
+0:00:28.510,0:00:31.340
+function that takes a state
+returns its neighbors.
+
+0:00:31.340,0:00:31.830
+OK.
+
+0:00:31.830,0:00:34.830
+So the idea here is really in a standard
+search problem, you've got
+
+0:00:34.830,0:00:35.850
+this judge at the end.
+
+0:00:35.850,0:00:36.750
+It's the goal test.
+
+0:00:36.750,0:00:39.940
+And it looks at a state, and it
+says yes, this is a goal, no,
+
+0:00:39.940,0:00:41.370
+this is not a goal.
+
+0:00:41.370,0:00:43.360
+OK.
+
+0:00:43.360,0:00:47.890
+A constraint satisfaction problem kind
+of peers into that black box a little.
+
+0:00:47.890,0:00:50.830
+And a constraint satisfaction problem,
+it's still a search problem, but it's
+
+0:00:50.830,0:00:54.580
+a special kind of search problem where
+we make assumptions about what exactly
+
+0:00:54.580,0:00:55.860
+goes into a state
+
+0:00:55.860,0:01:00.100
+In a CSP, the state is designed by a set
+of variables that take on values.
+
+0:01:00.100,0:01:01.700
+The values come from what's
+called a domain.
+
+0:01:01.700,0:01:04.340
+Sometimes there's one domain for all
+the variables, sometimes there's a
+
+0:01:04.340,0:01:06.040
+domain for each variable.
+
+0:01:06.040,0:01:09.060
+So a state is a set of variables
+that take on values.
+
+0:01:09.060,0:01:12.510
+And the goal test, rather than being
+some arbitrary function, is now a set
+
+0:01:12.510,0:01:16.390
+of constraints that tell you what
+combination of values are allowed on
+
+0:01:16.390,0:01:17.620
+different subsets of variables.
+
+0:01:17.620,0:01:20.240
+And we'll see a bunch of
+examples of this today.
+
+0:01:20.240,0:01:22.890
+One example we'll look at is map
+coloring, and the idea is you're
+
+0:01:22.890,0:01:26.360
+trying to find some assignment to your
+variables that obey the constraints.
+
+0:01:26.360,0:01:29.180
+And you can imagine you've got here,
+instead of just a judge at the end
+
+0:01:29.180,0:01:32.990
+that's stamping you thumbs up or thumbs
+down, you've now got a handbook
+
+0:01:32.990,0:01:35.830
+that says if you want to satisfy the
+constraints, here are the list of
+
+0:01:35.830,0:01:38.190
+rules you have to obey.
+
+0:01:38.190,0:01:40.710
+This is our first example in this
+class of what's called a formal
+
+0:01:40.710,0:01:42.110
+representation language.
+
+0:01:42.110,0:01:46.630
+So in the real world, if you have a CSP
+solver, very often the solver is
+
+0:01:46.630,0:01:50.070
+fully compiled, and you interact with
+it purely through some declarative
+
+0:01:50.070,0:01:51.790
+specification of your constraints.
+
+0:01:51.790,0:01:55.470
+So you write down your constraints, some
+computation happens, and out pops
+
+0:01:55.470,0:01:56.180
+your answer.
+
+0:01:56.180,0:01:58.500
+And that's a very powerful thing.
+
+0:01:58.500,0:02:02.330
+In addition, the fact that we can peer
+into the CSP state and it's not just
+
+0:02:02.330,0:02:05.440
+some black box that supports the goal
+function, but rather it's a collection
+
+0:02:05.440,0:02:08.440
+of variables and constraints, it
+lets us improve our algorithms.
+
+0:02:08.440,0:02:10.990
+So we have algorithms that are still
+general purpose in the sense that
+
+0:02:10.990,0:02:12.420
+they'll run on any CSP.
+
+0:02:12.420,0:02:14.700
+But they're much more powerful than
+standard search algorithms.
+
+0:02:14.700,0:02:17.640
+And in particular, we'll see today why
+a standard search algorithm is a poor
+
+0:02:17.640,0:02:19.250
+choice for the case of a CSP.
+
+0:02:19.250,0:02:20.500
+

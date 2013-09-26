@@ -1,0 +1,133 @@
+0:00:00.000,0:00:01.470
+
+0:00:01.470,0:00:06.120
+DAN KLEIN: The last thing we're going
+to talk about today is local search.
+
+0:00:06.120,0:00:10.520
+So far, the search logarithms we've
+talked about were not local.
+
+0:00:10.520,0:00:13.820
+They had a fringe where you were
+trying some particular
+
+0:00:13.820,0:00:14.550
+branch of the tree.
+
+0:00:14.550,0:00:17.780
+And if that didn't work out, you went
+back to the fringe and you tried your
+
+0:00:17.780,0:00:20.890
+other backup strategies, right?
+
+0:00:20.890,0:00:23.730
+And the search algorithms vary based on
+how you manage that fringe, but the
+
+0:00:23.730,0:00:25.970
+fringe was always there
+as a safety net.
+
+0:00:25.970,0:00:28.130
+In local search, you don't
+have this safety net.
+
+0:00:28.130,0:00:31.800
+You've got one position that you're
+currently at, and you are trying to
+
+0:00:31.800,0:00:33.540
+hill climb in some way.
+
+0:00:33.540,0:00:36.240
+And you can think about this,
+you are this robot here.
+
+0:00:36.240,0:00:41.140
+You are at some point in this space of
+possible solutions, and you're trying
+
+0:00:41.140,0:00:43.740
+to take the solution you have
+and improve it bit by bit.
+
+0:00:43.740,0:00:47.930
+And just like this robot, you might know
+that out there somewhere is the
+
+0:00:47.930,0:00:50.040
+best possible goal you could get to.
+
+0:00:50.040,0:00:56.270
+But of course all you can see is a
+couple feet forward in the mountain.
+
+0:00:56.270,0:00:57.450
+That's what local search is like.
+
+0:00:57.450,0:01:00.510
+So where tree search kept track of an
+unexplored alternative on the fringe,
+
+0:01:00.510,0:01:03.620
+and that ensured completeness, local
+search, you improve the single option
+
+0:01:03.620,0:01:06.840
+until you can't make it better.
+
+0:01:06.840,0:01:08.560
+You have a new idea of the
+successor function.
+
+0:01:08.560,0:01:13.060
+The successor function now does not
+take a plan and extend the plan.
+
+0:01:13.060,0:01:16.100
+Instead, it takes a complete
+assignment of some kind
+
+0:01:16.100,0:01:16.840
+and modifies it.
+
+0:01:16.840,0:01:18.310
+So your successor function
+is more about
+
+0:01:18.310,0:01:20.350
+modification than about extension.
+
+0:01:20.350,0:01:24.870
+So here's an example, again, of the two
+node coloring problem, and all of
+
+0:01:24.870,0:01:27.070
+its possible successors.
+
+0:01:27.070,0:01:31.070
+In general, local search is much faster
+and much more memory efficient
+
+0:01:31.070,0:01:35.590
+than a tree search, or a graph search
+that keeps track of a fringe.
+
+0:01:35.590,0:01:39.190
+But on the other hand, it's going to
+lose the completeness and optimality
+
+0:01:39.190,0:01:43.040
+guarantees that came from having a
+fringe, and operate it in a way that
+
+0:01:43.040,0:01:45.170
+was sensitive to costs.
+
+0:01:45.170,0:01:46.420
+So that's your trade off.
+
+0:01:46.420,0:01:47.360
+

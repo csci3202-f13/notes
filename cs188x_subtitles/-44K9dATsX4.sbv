@@ -1,0 +1,255 @@
+0:00:00.000,0:00:01.010
+
+0:00:01.010,0:00:02.520
+DAN KLEIN: You've all heard
+of hill climbing.
+
+0:00:02.520,0:00:04.910
+Maybe not in this particular context,
+but the general idea.
+
+0:00:04.910,0:00:06.090
+You've all heard of it.
+
+0:00:06.090,0:00:07.430
+It's a simple general idea.
+
+0:00:07.430,0:00:11.140
+You start somewhere and then you do
+the following over and over again.
+
+0:00:11.140,0:00:14.290
+Look in your local neighborhood and
+move to the best neighboring state
+
+0:00:14.290,0:00:16.770
+according to some value function.
+
+0:00:16.770,0:00:19.520
+If there are no neighbors better than
+where you are right now, then you're
+
+0:00:19.520,0:00:22.120
+standing on the top of
+a hill, and you quit.
+
+0:00:22.120,0:00:26.180
+You say, I cannot locally
+improve this hypothesis.
+
+0:00:26.180,0:00:27.600
+So what's bad about this approach?
+
+0:00:27.600,0:00:28.660
+Is it complete?
+
+0:00:28.660,0:00:29.210
+Nope.
+
+0:00:29.210,0:00:32.570
+So for example, we go up, we go up, we
+go up, and all of the sudden, we have
+
+0:00:32.570,0:00:35.730
+a robot that standing here at the top
+of the hill and it says there's no
+
+0:00:35.730,0:00:37.720
+local step I can take
+to improve things.
+
+0:00:37.720,0:00:41.380
+And maybe you imagine the robot is
+glancing wistfully at this wonderful
+
+0:00:41.380,0:00:43.720
+goal up here, but in fact, that's
+not how local search works.
+
+0:00:43.720,0:00:46.890
+All you know about the problem is that,
+from where you are, everything
+
+0:00:46.890,0:00:48.900
+looks downhill, so you stop.
+
+0:00:48.900,0:00:50.650
+And you might stop at
+a very bad place.
+
+0:00:50.650,0:00:51.970
+So it's not complete.
+
+0:00:51.970,0:00:53.570
+It's not optimal.
+
+0:00:53.570,0:00:55.890
+So what's actually good about this?
+
+0:00:55.890,0:00:59.210
+What's good about it is you can start
+anywhere, you can do the best you can,
+
+0:00:59.210,0:01:03.580
+and there are a wide range of problems
+in the real world where any solution
+
+0:01:03.580,0:01:06.250
+will work, and you'd like to make it as
+good as possible and you know you
+
+0:01:06.250,0:01:09.005
+can't get to the optimal solution, but
+you might as well start somewhere and
+
+0:01:09.005,0:01:10.255
+make it as good as you can.
+
+0:01:10.255,0:01:12.480
+
+0:01:12.480,0:01:15.060
+So here's a diagram that I think's very
+important to have in your head.
+
+0:01:15.060,0:01:20.170
+This is that same mountain in essence
+where the important terms here are,
+
+0:01:20.170,0:01:23.430
+somewhere there is a global maximum.
+
+0:01:23.430,0:01:26.480
+That is the best you can do according
+to your objective function.
+
+0:01:26.480,0:01:29.950
+Now, you don't know necessarily what the
+value of the global optimum is, if
+
+0:01:29.950,0:01:32.690
+you're there, you don't even know you're
+there, and if you're not there,
+
+0:01:32.690,0:01:34.490
+you also don't know that
+you're not there.
+
+0:01:34.490,0:01:37.720
+So in general, all you know is that
+you are at some local maximum.
+
+0:01:37.720,0:01:40.960
+So when you find that everything around
+you is worse, than you're at
+
+0:01:40.960,0:01:42.040
+some local maximum.
+
+0:01:42.040,0:01:43.230
+Is it the global maximum?
+
+0:01:43.230,0:01:45.060
+Maybe, in general, you
+won't even know.
+
+0:01:45.060,0:01:46.760
+Is it even vaguely good?
+
+0:01:46.760,0:01:47.370
+No, right?
+
+0:01:47.370,0:01:51.790
+It could be that you are down here
+on the tiniest little blip,
+
+0:01:51.790,0:01:52.770
+and you don't know.
+
+0:01:52.770,0:01:55.420
+These are problems.
+
+0:01:55.420,0:01:57.690
+There are other cases where
+things get flat.
+
+0:01:57.690,0:02:01.030
+And when things are flat, maybe they're
+flat because there's a local
+
+0:02:01.030,0:02:04.440
+plateau, or maybe they're flat just
+because you're at a region where
+
+0:02:04.440,0:02:06.540
+you've got to move sideways
+for a while before you can
+
+0:02:06.540,0:02:08.150
+start going up again.
+
+0:02:08.150,0:02:10.470
+This is difficult because these regions
+that are flat, you have no
+
+0:02:10.470,0:02:14.600
+guidance about whether you're going left
+or right or what, and you don't
+
+0:02:14.600,0:02:16.960
+really know whether there
+even is an up.
+
+0:02:16.960,0:02:20.650
+So not only are they hard to navigate,
+but you can't tell these two apart.
+
+0:02:20.650,0:02:23.546
+In general, when you're at a current
+state, if there's a way to go up, you
+
+0:02:23.546,0:02:24.090
+know what that is.
+
+0:02:24.090,0:02:26.050
+So that's not really the problem
+with local search.
+
+0:02:26.050,0:02:27.670
+Making progress isn't the problem.
+
+0:02:27.670,0:02:30.300
+The problem is, once you get to
+a local optimum, you don't
+
+0:02:30.300,0:02:31.570
+know what to do next.
+
+0:02:31.570,0:02:33.210
+Now, there are ideas
+that are powerful.
+
+0:02:33.210,0:02:36.140
+One of the ideas is simply just start
+this thing a bunch of times, and if
+
+0:02:36.140,0:02:39.800
+you're in an absolutely horrible
+state, maybe one of the
+
+0:02:39.800,0:02:41.020
+restarts does better.
+
+0:02:41.020,0:02:44.290
+But of course, the more restarts you
+do, the more time it takes, and you
+
+0:02:44.290,0:02:47.530
+might need a massive number restarts to
+make any progress if this is some
+
+0:02:47.530,0:02:49.530
+exponential space, as
+they typically are.
+
+0:02:49.530,0:02:50.780
+

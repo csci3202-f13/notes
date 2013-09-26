@@ -1,0 +1,159 @@
+CS 188 Youtube IDs
+
+Lecture 1: Introduction
+Part 1: XVPJhhQei6M (Outline)
+Part 2: EMDUx57bwc0 (Sci-Fi AI?)
+Part 3: mp0-fXhzBeE (What is AI?)
+Part 4: 2p8vzUck_Rc (What About the Brain?)
+Part 5: rlBjhD1oGQg (A (Short) History of AI)
+Part 6: QKS0Tqt4DyQ (What Can AI Do?)
+Part 7: p9aWbjl1AjY (What Can AI Do: Unintentionally Funny Stories)
+Part 8: ujo-D25FINs (What Can AI Do: Language)
+Part 9: vwizBBunFbQ (What Can AI Do: Perception)
+Part 10: cQ1-g-20VDM (What Can AI Do: Robotics)
+Part 11: alXS7grfFtk (What Can AI Do: Logic)
+Part 12: BHk1TLcs0gM (What Can AI Do: Game Playing)
+Part 13: wW-gHH9nI-U (Decision Making)
+Part 14: oX33bPdcOB4 (Designing Rational Agents)
+Part 15: E9r7MS-tv6A (Pacman as an Agent)
+Part 16: Syyg43zgzFc (Course Topics)
+
+
+Lecture 2: Uniformed Search
+Part 1: QrD7QW9K_4s (Outline)
+Part 2: m0Nn_cqYlK0 (Agents That Plan vs. Reflex Agents)
+Part 3: 5ER3ZvXhhyI (Search Problems)
+Part 4: 9L2w6CTgxyg (State Graphs and Search Trees)
+Part 5: Fq3Z14cMiAE (Tree Search)
+Part 6: Ie55079n-wM (Depth-First Tree Search)
+Part 7: Oo7oN-Tj32s (Search Algorithm Properties)
+Part 8: kpgQEyiuO8o (Depth-First Tree Search Properties)
+Part 9: OcAALeDoFX0 (Breadth-First Tree Search)
+Part 10: MsI4yi7r-Ic (Breadth-First Tree Search Properties)
+Part 11: x6TuBGOnnqE (Iterative Deepening)
+Part 12: AaKEW_mVBtg (Cost-Sensitive Search and Uniform Cost Search)
+Part 13: 0fcPKIfQ_Tc (Search and Models)
+
+
+Lecture 3: Informed Search
+Part 1: Y0Ow56DvuyI (Overview)
+Part 2: fCrPMgnDD6g (Recap: Search)
+Part 3: ZDJLfLPRmyE (Informed Search)
+Part 4: 3HVB_zm42wE (Greedy Search)
+Part 5: YGZ_EsTn7hw (A* Tree Search)
+Part 6: OW12KIXMdXY (Admissible Heuristics and A* Tree Search Optimality)
+Part 7: 7RumNumuyeA (Proof of Optimality of A* Tree Search)
+Part 8: 8vm1yODFDGg (Properties of A*)
+Part 9: -MYE7H5zIEQ (A* Applications and Demos)
+Part 10: 15bfd49ShrY (Creating Admissible Heuristics)
+Part 11: dYiVKx58SZU (Semi-Lattice of Heuristics)
+Part 12: YsE02O4GuEY (Graph Search)
+Part 13: 39pAV8550Bk (A* Search Gone Wrong)
+Part 14: hbeF2QWSJLA (Consistency and Optimality of A* Graph Search)
+Part 15: DOWqjLAFTIw (A* Optimality Summary)
+Part 16: yVCwtl_J_eo (A* Summary)
+
+
+Lecture 4: CSPs
+Part 1: OhglxRGK3xY (Today)
+Part 2: k4VnW2RVGbI (CSPs: Definition)
+Part 3: Cu9t1XxyHCQ (CSP Examples: Map Coloring and N-Queens)
+Part 4: wORBpypAt5k (Constraint Graphs)
+Part 5: eQ0lWkC0GuY (CSP Examples: Cryptarithmetic, Sudoku, and Waltz)
+Part 6: wm_CuyB6gFY (Varieties of CSPs and Constraints)
+Part 7: aSyAn-jVFRo (Real-World CSPs)
+Part 8: pe3sNVd0CHw (Solving CSPs with Standard Search)
+Part 9: P1c9-SzXEv4 (Backtracking Search)
+Part 10: zN-1IvZXBlg (Improving Backtracking: Overview)
+Part 11: _3R_BK42f1g (Filtering: Forward Checking)
+Part 12: 4AMYTfuxQME (Filtering: Constraint Propagation)
+Part 13: 1sEAPcfjtBA (Consistency of a Single Arc)
+Part 14: ndZ44aSOKHs (Arc Consistency of an Entire CSP)
+Part 15: 4ecUxs3Urns (Limitations of Arc Consistency)
+Part 16: bXQ_ZiPtbnc (Demo of Forward Checking and Arc Consistency)
+Part 17: CCbCoQHGRoY (Variable Ordering: Minimum Remaining Values)
+Part 18: oelkY9x7Lus (Value Ordering: Least Constraining Value)
+Part 19: Jk6SwQyJxmU (Demo)
+
+
+Lecture 5: CSPs II
+Part 1: tmQ6Mdcm8AQ (Today)
+Part 2: mkmlGvOPFmk (Refresher: CSPs, Backtracking Search, Ordering, Filtering)
+Part 3: YcHOHKsDiyg (Arc Consistency, Limitations, K-Consistency)
+Part 4: yJPETPSOudg (Problem Structure)
+Part 5: QzTLuXbYeSo (Tree-Structured CSPs)
+Part 6: xUgZjGU_jQw (Algorithm for Tree-Structured CSPs)
+Part 7: gHMvyGw08wI (Properties of Algorithm for Tree-Structured CSPs)
+Part 8: ih6d2dUH-P0 (Improving Structure: Cutset Conditioning)
+Part 9: NHxkJ1c8aWg (Tree Decomposition)
+Part 10: 6orLUOZ2ITk (Iterative Algorithms: Min-Conflicts)
+Part 11: 1JkPtYe_jms (Performance of Min-Conflicts)
+Part 12: lch6QD4KPxY (Summary of CSPs)
+Part 13: hi9gs8HzX6s (Local Search)
+Part 14: -44K9dATsX4 (Hill Climbing)
+Part 15: 6K8nUSV-NU4 (Simulated Annealing)
+Part 16: 4Vd916tLPZY (Genetic Algorithms)
+Part 17: OcKQbTZpz0o (Next Time)
+
+
+Lecture 6: Adversarial Search
+Part 1: kno_qqtEyMY (Today and Game Playing State of the Art)
+Part 2: 1JS7lenpkg0 (Adversarial Games)
+Part 3: S1VVtjIny5Q (Adversarial Search)
+Part 4: CG4WloOE2aY (Resource Limits) 
+Part 5: ZCrJMwsJtJg (Evaluation Functions)
+Part 6: uHQdl1OWwHU (Game Tree Pruning)
+Part 7: Xq0n7TNe7eM (Next Time)
+
+
+Lecture 7: Uncertainty and Utilities
+Part 1: f94JfoHV1Ss (Today: Search in the Presence of Uncertainty)
+Part 2: B326I1Pat-s (Expectimax Search)
+Part 3: 6bKhakA0mpo (Probabilities)
+Part 4: 8IKO56y9YTk (Modeling Assumptions)
+Part 5: B04yeDT0cwQ (Other Game Types)
+Part 6: -C9stzzDRbQ (Utilities)
+Part 7: efgUJILRjqY (Rationality)
+Part 8: Pf7rFpWOCHk (Human Utilities)
+Part 9: gWMmIdWVlS0 (Next Time: MDPs)
+
+
+Lecture 8: Markov Decision Processes
+Part 1: MMSMhU3Xy0w (Non-Deterministic Search and Markov Decision Processes)
+Part 2: 4Sf7nsM_Zp4 (Example: Racing)
+Part 3: RXG6kuYbb3w (Utilities of Sequences)
+Part 4: OKe-wRvGhA0 (Solving MDPs)
+Part 5: jQS7zxwpZXM (Value Iteration)
+Part 6: C4joGbqws8g (Next Time: Policy-Based Methods)
+
+
+Lecture 9: Markov Decision Processes II
+Part 1: 1RjzXcZB-e8 (MDPs Recap)
+Part 2: bk1vlqkV3vU (The Bellman Equations)
+Part 3: An1hFw_qF6I (Policy Methods: Policy Evaluation and Extraction)
+Part 4: lQEkt8vkC8A (Policy Methods: Policy Iteration)
+Part 5: 91F9vwzUrQ0 (Double Bandits)
+Part 6: AUouQdPx16k (Next Time: Reinforcement Learning)
+
+
+Lecture 10: Reinforcement Learning
+Part 1: H8YRZr-6RHU (Reinforcement Learning)
+Part 2: i84l-AEDpaw (Model-Based Learning)
+Part 3: ce9ACUfAX3s (Passive Reinforcement Learning)
+Part 4: eqqqwbQCaeY (Model-Free Learning: Sample Based -- Temporal Difference Learning)
+Part 5: W5IfMphITbY (Active Reinforcement Learning -- Q-Learning)
+
+
+Lecture 11: Reinforcement Learning II
+Part 1: Pw9NO9VOT8k (Reinforcement Learning Recap)
+Part 2: RBzL4dt3gR8 (Exploration vs. Exploitation and Regret)
+Part 3: 8IakYZnMdIk (Approximate Q-Learning)
+Part 4: Ee0fkgn8GTY (Policy Search)
+Part 5: AJ3Ae_9Lew4 (Conclusion)
+
+
+Step-By-Step Videos
+DFS and BFS: cXZKV7K5v3E
+A*: g0MJRpquEOk
+Alpha-Beta: jvpWtwVSvjA
+

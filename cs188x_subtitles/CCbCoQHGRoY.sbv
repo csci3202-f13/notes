@@ -1,0 +1,157 @@
+0:00:00.000,0:00:01.500
+
+0:00:01.500,0:00:03.670
+DAN KLEIN: Now that we have filtering
+in hand, we can look at another
+
+0:00:03.670,0:00:05.490
+important idea for speeding things up.
+
+0:00:05.490,0:00:08.250
+And in fact, this idea is very,
+very quick to implement once
+
+0:00:08.250,0:00:09.390
+you know about filtering.
+
+0:00:09.390,0:00:11.270
+And that is the idea of ordering.
+
+0:00:11.270,0:00:14.620
+So int he idea ordering, we've got
+choices in our backtracking search.
+
+0:00:14.620,0:00:17.330
+We've got a choice of which
+variable comes first.
+
+0:00:17.330,0:00:21.490
+And for a given variable, we have a
+choice of which value comes first.
+
+0:00:21.490,0:00:23.670
+The most important one is
+picking your variable.
+
+0:00:23.670,0:00:25.910
+Which variable should I choose next?
+
+0:00:25.910,0:00:29.140
+And the basic idea is we're going to
+choose the variable that has the
+
+0:00:29.140,0:00:31.480
+fewest legal values left
+in its domain.
+
+0:00:31.480,0:00:34.000
+How do we know how many values
+are left in its domain?
+
+0:00:34.000,0:00:38.220
+Fortunately, we're running forward
+checking, or arc consistency.
+
+0:00:38.220,0:00:41.480
+And so as a result, every unassigned
+variable has a count
+
+0:00:41.480,0:00:43.200
+associated with it.
+
+0:00:43.200,0:00:49.310
+So for example, in this Australia
+case, we might assign red here.
+
+0:00:49.310,0:00:52.840
+And then we might assign green here.
+
+0:00:52.840,0:00:54.910
+And the question is, what's next?
+
+0:00:54.910,0:00:59.320
+Well probably we should continue on with
+this heavily constrained node in
+
+0:00:59.320,0:01:02.170
+the south because it only
+has one value left.
+
+0:01:02.170,0:01:03.690
+It has to be blue.
+
+0:01:03.690,0:01:07.670
+It would've been a mistake to hop on
+over to the other side of the graph
+
+0:01:07.670,0:01:11.360
+and try to assign over here, or
+Tasmania, or something like that.
+
+0:01:11.360,0:01:14.790
+So the idea here is when you're
+confronted with a choice of variables,
+
+0:01:14.790,0:01:18.810
+and some are very, very free and some
+are very heavily constrained, you
+
+0:01:18.810,0:01:21.100
+should take the one that's most
+constrained, which the minimum
+
+0:01:21.100,0:01:22.280
+remaining values.
+
+0:01:22.280,0:01:24.830
+So the question is, why do we do
+the min rather than the max?
+
+0:01:24.830,0:01:28.250
+Why are we making our lives hard
+and going down the scary path?
+
+0:01:28.250,0:01:30.080
+You've already seen in the demo why.
+
+0:01:30.080,0:01:34.460
+But the basic idea here is you have to
+do every variable at some point.
+
+0:01:34.460,0:01:37.550
+You might as well do the hard ones right
+now at the beginning so that the
+
+0:01:37.550,0:01:41.340
+backtracking is not expensive because
+you're still near the top of the tree.
+
+0:01:41.340,0:01:44.240
+OK, that's the important idea for
+minimum remaining values.
+
+0:01:44.240,0:01:47.150
+Do the heard variables first because
+you're eventually going to have to do
+
+0:01:47.150,0:01:49.450
+them, and you shouldn't procrastinate.
+
+0:01:49.450,0:01:52.070
+This is also called fail-fast
+ordering.
+
+0:01:52.070,0:01:54.790
+Because if there's going to be a problem
+with these variables, you want
+
+0:01:54.790,0:01:57.790
+discover now at the top of the tree,
+not way at the bottom of the tree
+
+0:01:57.790,0:01:59.490
+where backtracking is
+exponentially worse.
+
+0:01:59.490,0:02:00.740
+

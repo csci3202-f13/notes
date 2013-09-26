@@ -1,0 +1,72 @@
+0:00:00.000,0:00:00.650
+
+0:00:00.650,0:00:01.600
+DAN KLEIN: OK.
+
+0:00:01.600,0:00:03.880
+So that's CSPs.
+
+0:00:03.880,0:00:07.930
+In summary, CSPs are a very special
+kind of search problem.
+
+0:00:07.930,0:00:11.490
+The states, rather than being black
+boxes, are partial assignments.
+
+0:00:11.490,0:00:14.850
+And the goal test, rather than being a
+black box, is defined by a collection
+
+0:00:14.850,0:00:16.059
+of constraints.
+
+0:00:16.059,0:00:20.630
+In short, because we can see this extra
+information, we now have smarter
+
+0:00:20.630,0:00:23.660
+algorithms that check your
+constraints as you go.
+
+0:00:23.660,0:00:27.340
+We have speed ups to the basic
+backtracking search, like ordering, go
+
+0:00:27.340,0:00:29.710
+through the variables in a smart
+way, and the values.
+
+0:00:29.710,0:00:32.509
+Filtering, think about the consequences
+of your assignments and
+
+0:00:32.509,0:00:33.740
+propagate them forward.
+
+0:00:33.740,0:00:37.300
+Structure, exploit any kind of structure
+in the constraint graph that
+
+0:00:37.300,0:00:39.760
+we know gives us an efficient
+algorithm.
+
+0:00:39.760,0:00:42.240
+And then we have this new method called
+iterative in conflicts, which
+
+0:00:42.240,0:00:44.940
+is often effective in practice,
+though it is life on the edge.
+
+0:00:44.940,0:00:47.580
+You don't have a fringe guaranteeing
+the kind of completeness that you
+
+0:00:47.580,0:00:49.500
+would have had in a standard
+graph search.
+
+0:00:49.500,0:00:51.000
+

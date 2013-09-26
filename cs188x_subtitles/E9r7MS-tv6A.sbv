@@ -1,0 +1,117 @@
+0:00:01.199,0:00:05.259
+So you may have heard of Pacman. Has anybody heard of Pacman?
+
+0:00:05.259,0:00:07.290
+No, maybe a little bit, okay.
+
+0:00:07.290,0:00:11.650
+Pacman is a great game from the
+eighties. It's a trademark of
+
+0:00:11.650,0:00:15.740
+Namco Bandai and we're going to be using
+it throughout this course to illustrate points in
+
+0:00:15.740,0:00:19.529
+this educational setting. You can think
+of Pacman as an agent.
+
+0:00:19.529,0:00:23.829
+So, here, you look at this board. That's the Pacman board. What are the percepts?
+
+0:00:23.829,0:00:27.470
+What do you have when you play Pacman? So essentially Pacman the agent is not the game,
+
+0:00:27.470,0:00:31.759
+it's not something that draws the walls. What is
+it? It's the thing behind the joystick.
+
+0:00:31.759,0:00:33.220
+What's that?
+
+0:00:33.220,0:00:36.770
+It's you. So essentially you're the agent when you play a game of Pacman. You're deciding,
+
+0:00:36.770,0:00:40.790
+do I go up down left right, and so on, and
+what is your sensation? So what is the--
+
+0:00:40.790,0:00:44.370
+for you it involves your eyes, but
+basically you see the whole board.
+
+0:00:44.370,0:00:47.600
+You know where the dots are, you know where the enemies are, you know where the walls are. What actions can you take?
+
+0:00:47.600,0:00:52.920
+Well you can go up or down or left
+or right, and so if we have an agent
+
+0:00:52.920,0:00:56.610
+which maps the state of the board to
+up-down-left-right, the question is,
+
+0:00:56.610,0:01:00.880
+what goes here in the question mark that lets
+it know when to eat a dot, when to run away
+
+0:01:00.880,0:01:04.380
+from a ghost, when to use the power
+pellet. How are these decisions all made?
+
+0:01:04.380,0:01:07.400
+And you might think, I know, if the
+dot's next to me I eat it and if the
+
+0:01:07.400,0:01:10.600
+ghost is within three squares of me,
+run away. And if you try to write this down,
+
+0:01:10.600,0:01:12.660
+first of all you would end up with the
+
+0:01:12.660,0:01:16.080
+biggest mess of if-then statements
+you've ever seen, and then it wouldn't work.
+
+0:01:16.080,0:01:20.150
+We will in our projects get a chance
+to build agents for games like this, and
+
+0:01:20.150,0:01:22.380
+you'll see why that kind of thing doesn't work.
+
+0:01:22.380,0:01:24.910
+Alright, let's take a look at
+
+0:01:24.910,0:01:26.750
+an agent
+
+0:01:26.750,0:01:28.760
+for Pacman.
+
+0:01:28.760,0:01:33.200
+So here is an agent playing the game of Pacman. This is a CS 188 
+
+0:01:33.200,0:01:34.210
+Pacman-like game
+
+0:01:34.210,0:01:37.770
+and I'll let you watch. As you watch I want you
+to think about what kinds of
+
+0:01:37.770,0:01:42.380
+computation must be going on in this agent in order to be able to
+
+0:01:42.380,0:01:49.380
+exhibit this range of behavior.
+
+0:02:10.909,0:02:17.909
+
+0:02:27.759,0:02:31.549
+So we're gonna figure out in the coming
+classes how we'll be able
+
+0:02:31.549,0:02:32.749
+to give rise to behavior like that.
+

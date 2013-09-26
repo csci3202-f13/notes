@@ -1,0 +1,571 @@
+0:00:00.000,0:00:01.260
+
+0:00:01.260,0:00:04.660
+PROFESSOR: So we're going to talk
+about the Bellman equations.
+
+0:00:04.660,0:00:08.940
+They specify in a nice recursive way
+what it means to be optimal, or more
+
+0:00:08.940,0:00:12.260
+generally, what it means to compute
+some kind of value that we're
+
+0:00:12.260,0:00:13.490
+interested in.
+
+0:00:13.490,0:00:14.590
+And they're pretty simple.
+
+0:00:14.590,0:00:18.570
+They basically say, there's going to be
+one step where you actually write
+
+0:00:18.570,0:00:19.570
+out your choice.
+
+0:00:19.570,0:00:22.250
+You actually write out the
+Expectimax recurrence.
+
+0:00:22.250,0:00:25.360
+And then they say, once you're
+done with that one step, just
+
+0:00:25.360,0:00:27.560
+keep on being optimal.
+
+0:00:27.560,0:00:28.670
+What's that actually mean?
+
+0:00:28.670,0:00:32.220
+Well, for equations, that gives
+rise to a system of equations.
+
+0:00:32.220,0:00:35.890
+But if we think about that in terms of
+implementation, it suggests a kind of
+
+0:00:35.890,0:00:40.980
+recursive procedure or some kind
+of iterative dynamic program.
+
+0:00:40.980,0:00:42.950
+So what are these Bellman equations?
+
+0:00:42.950,0:00:47.070
+Well, we'd like to write some kind
+of definition of optimal utility.
+
+0:00:47.070,0:00:50.620
+And we'd like to do it via this notion
+of Expectimax, because that's really
+
+0:00:50.620,0:00:54.450
+what grounds our idea of what
+it means to act optimally.
+
+0:00:54.450,0:00:57.225
+You max when you have a choice over
+actions, and when things are out of
+
+0:00:57.225,0:00:58.420
+your control, you average.
+
+0:00:58.420,0:01:01.250
+And if you did that computation all
+the way down, that would reflect
+
+0:01:01.250,0:01:02.720
+optimal behavior.
+
+0:01:02.720,0:01:04.120
+Now of course we can't do
+it all the way down.
+
+0:01:04.120,0:01:05.690
+We're going to do one level.
+
+0:01:05.690,0:01:06.980
+So let's write this.
+
+0:01:06.980,0:01:10.830
+Let's write down various quantities
+that are going to be optimal.
+
+0:01:10.830,0:01:14.490
+And let's write it in a way that
+encodes what Expectimax does.
+
+0:01:14.490,0:01:18.650
+So we can first start at the top of the
+tree and say, the Expectimax value
+
+0:01:18.650,0:01:19.580
+of the state--
+
+0:01:19.580,0:01:22.870
+that's V* for that state.
+
+0:01:22.870,0:01:25.720
+OK, well, what did Expectimax do?
+
+0:01:25.720,0:01:31.300
+It says that the optimal value from a
+state is achieved by looking at all of
+
+0:01:31.300,0:01:34.260
+the actions you can take.
+
+0:01:34.260,0:01:37.150
+And you're going to take a maximum
+over all those actions.
+
+0:01:37.150,0:01:38.900
+Well, what are you going to maximize?
+
+0:01:38.900,0:01:41.190
+You're going to maximize the
+values of the children.
+
+0:01:41.190,0:01:42.450
+What are the values of the children?
+
+0:01:42.450,0:01:44.500
+Well, in Expectimax we call
+them chance nodes.
+
+0:01:44.500,0:01:45.990
+Now we call them Q-states.
+
+0:01:45.990,0:01:47.880
+So we can just write
+down their values.
+
+0:01:47.880,0:01:51.350
+Their values are Q*.
+
+0:01:51.350,0:01:56.330
+The state hasn't changed yet, because
+I haven't actually taken the action.
+
+0:01:56.330,0:01:58.990
+But I'm considering a
+specific action a.
+
+0:01:58.990,0:02:00.490
+So that's a chance node.
+
+0:02:00.490,0:02:05.830
+So the value of a state is just the max
+of all the chance nodes below it,
+
+0:02:05.830,0:02:09.740
+which is the max over all of the
+Q-states that you can get to, which is
+
+0:02:09.740,0:02:13.770
+just, we look at all the actions and
+then recurse into the Q-values.
+
+0:02:13.770,0:02:16.450
+Then what happens at a chance node?
+
+0:02:16.450,0:02:20.140
+How can I write an expression
+for the optimal value at a
+
+0:02:20.140,0:02:21.840
+Q-state or a chance node?
+
+0:02:21.840,0:02:23.340
+Well, we can think about that.
+
+0:02:23.340,0:02:25.140
+What happens in Expectimax?
+
+0:02:25.140,0:02:28.610
+We look at all of the possible outcomes,
+s-prime, and we take an
+
+0:02:28.610,0:02:30.530
+average over them.
+
+0:02:30.530,0:02:32.720
+So here we're going to have
+to take an average.
+
+0:02:32.720,0:02:36.450
+So we're going to consider all values
+s-prime that can occur as a result of
+
+0:02:36.450,0:02:39.860
+this action, and then we're going to
+take an average of those, which is
+
+0:02:39.860,0:02:42.250
+going to look like a sum.
+
+0:02:42.250,0:02:44.885
+It's going to have weights which are
+given by the transition function.
+
+0:02:44.885,0:02:47.620
+
+0:02:47.620,0:02:49.710
+And then what happens in here?
+
+0:02:49.710,0:02:54.760
+Well, here we've already committed to
+action a, and we're imagining that
+
+0:02:54.760,0:02:56.580
+s-prime is the outcome.
+
+0:02:56.580,0:02:58.660
+And we're going to average
+over all the s-primes.
+
+0:02:58.660,0:02:59.960
+Well, what happens?
+
+0:02:59.960,0:03:01.920
+Well, what happens is two things.
+
+0:03:01.920,0:03:06.900
+You immediately get an
+instantaneous reward.
+
+0:03:06.900,0:03:11.530
+That's the reward you get this
+transition, this step.
+
+0:03:11.530,0:03:13.350
+And then you land.
+
+0:03:13.350,0:03:18.180
+And when you land in s-prime, in
+Expectimax you would then recurse.
+
+0:03:18.180,0:03:23.810
+And the way we write that here
+is we just plug in V* of s.
+
+0:03:23.810,0:03:27.800
+The one extra thing we had was we had
+a discount, which we didn't have in
+
+0:03:27.800,0:03:31.940
+vanilla Expectimax, which tells you,
+when you recurse, you have to multiply
+
+0:03:31.940,0:03:34.660
+in this factor of gamma so that
+everything lower than you in the tree
+
+0:03:34.660,0:03:36.580
+contributes less.
+
+0:03:36.580,0:03:40.190
+So here what we have is kind of mutual
+recurrence, if you think about this
+
+0:03:40.190,0:03:41.400
+like function calls.
+
+0:03:41.400,0:03:45.540
+But what it really is is a system of
+equations, because V* occurs on the
+
+0:03:45.540,0:03:47.560
+left and the right.
+
+0:03:47.560,0:03:52.230
+OK, so we have the system of equations
+that says optimal values are defined
+
+0:03:52.230,0:03:53.890
+in terms of optimal Q-values.
+
+0:03:53.890,0:03:57.240
+That's just the max node.
+
+0:03:57.240,0:04:00.560
+Optimal Q-values are defined in
+terms of optimal values of
+
+0:04:00.560,0:04:02.980
+the next state, s-prime.
+
+0:04:02.980,0:04:05.560
+It's a little more complicated, because
+we both have to average over
+
+0:04:05.560,0:04:06.360
+the children--
+
+0:04:06.360,0:04:09.140
+that takes more time to write
+out than just a max--
+
+0:04:09.140,0:04:12.470
+and because there's two components,
+the instantaneous reward from that
+
+0:04:12.470,0:04:16.100
+timestep and the discounted future.
+
+0:04:16.100,0:04:19.250
+Together, these are called
+the Bellman equations.
+
+0:04:19.250,0:04:23.250
+And they're usually written
+with Q inlined like this.
+
+0:04:23.250,0:04:26.190
+When you look at this, it's very
+easy to go into symbol shock.
+
+0:04:26.190,0:04:29.620
+But look at this, and whenever you see
+this, you think, oh, we're talking
+
+0:04:29.620,0:04:32.150
+about optimal values.
+
+0:04:32.150,0:04:35.730
+The optimal value of a state
+is like Expectimax.
+
+0:04:35.730,0:04:39.710
+I max over the action, I average
+over the outcomes of the
+
+0:04:39.710,0:04:43.160
+action, and then I recurse.
+
+0:04:43.160,0:04:47.540
+And what recursion means is first reward
+from the first timestep, and
+
+0:04:47.540,0:04:49.110
+discounted futures.
+
+0:04:49.110,0:04:53.000
+So whenever you see this, you
+think, oh, that's Expectimax
+
+0:04:53.000,0:04:55.010
+written one layer out.
+
+0:04:55.010,0:04:59.760
+So it's only been unrolled one layer and
+written as a system of equations.
+
+0:04:59.760,0:05:00.250
+OK.
+
+0:05:00.250,0:05:01.570
+These are the Bellman equations.
+
+0:05:01.570,0:05:02.510
+What do they do?
+
+0:05:02.510,0:05:04.930
+They characterize the optimal values.
+
+0:05:04.930,0:05:09.730
+They look a lot like Expectimax, and
+I built intuition by calling them
+
+0:05:09.730,0:05:11.520
+Expectimax-like things.
+
+0:05:11.520,0:05:13.490
+But in fact, they are not code.
+
+0:05:13.490,0:05:15.150
+They do not actually recurse.
+
+0:05:15.150,0:05:16.660
+They are a system of equations.
+
+0:05:16.660,0:05:21.350
+You plug in values, and if this system
+of equations holds, then that's an
+
+0:05:21.350,0:05:23.650
+optimal set of values.
+
+0:05:23.650,0:05:27.710
+These equations don't, at least on the
+surface, tell you how to compute the
+
+0:05:27.710,0:05:31.020
+optimal values themselves.
+
+0:05:31.020,0:05:35.190
+Now we had an algorithm that basically
+fixes that for us.
+
+0:05:35.190,0:05:37.270
+We have the algorithm
+of value iteration.
+
+0:05:37.270,0:05:40.700
+And what value iteration does is it
+basically just takes these Bellman
+
+0:05:40.700,0:05:45.600
+equations which characterize optimal
+utilities, and it turns them into a
+
+0:05:45.600,0:05:48.130
+method of computing them.
+
+0:05:48.130,0:05:53.320
+So if we think about this idea where the
+optimal values, V(s), are defined
+
+0:05:53.320,0:05:57.600
+in terms of other optimal values which
+have been unrolled one level of the
+
+0:05:57.600,0:06:01.620
+Expectimax, then we got this equation,
+where V* appeared on the
+
+0:06:01.620,0:06:03.900
+left and on the right.
+
+0:06:03.900,0:06:09.350
+Value iteration, which we talked about
+earlier, computes the values simply by
+
+0:06:09.350,0:06:13.770
+changing the equality sign
+into an assignment.
+
+0:06:13.770,0:06:18.370
+The critical change here was that the
+equations have the actual optimal
+
+0:06:18.370,0:06:22.440
+values on the left and the right, so
+there's no real notion of a base case.
+
+0:06:22.440,0:06:25.660
+For value iteration itself, you
+have to start somewhere.
+
+0:06:25.660,0:06:30.360
+And so what we had was we had a notion
+of time-limited, which corresponded to
+
+0:06:30.360,0:06:32.400
+depth-limited, values.
+
+0:06:32.400,0:06:37.440
+And so we had this notion of values, not
+the actual optimal values but the
+
+0:06:37.440,0:06:41.460
+optimal values for only k or
+k plus 1 more timesteps.
+
+0:06:41.460,0:06:45.160
+And so the optimal value-- that is, the
+score under optimal action for k
+
+0:06:45.160,0:06:47.010
+plus 1 timesteps--
+
+0:06:47.010,0:06:51.860
+has on the right-hand side optimal
+values for only k timesteps.
+
+0:06:51.860,0:06:54.960
+And because of this, this
+now is a real recursion.
+
+0:06:54.960,0:06:58.160
+It bottoms out at zero, where
+the optimal value for zero
+
+0:06:58.160,0:06:59.960
+timesteps is zero.
+
+0:06:59.960,0:07:01.110
+This we could implement.
+
+0:07:01.110,0:07:05.230
+And the two changes were equality became
+an assignment, and suddenly we
+
+0:07:05.230,0:07:08.010
+had a notion of times attached.
+
+0:07:08.010,0:07:12.060
+And as k got larger and larger, we
+proved that this approached the
+
+0:07:12.060,0:07:15.170
+optimal values, V*.
+
+0:07:15.170,0:07:17.320
+So what was value iteration?
+
+0:07:17.320,0:07:20.910
+Value iteration is just a fixed-point
+method of solving
+
+0:07:20.910,0:07:22.610
+this system of equations.
+
+0:07:22.610,0:07:26.730
+This system of equations is hard to
+solve, because it's got averages and
+
+0:07:26.730,0:07:28.060
+also maxes.
+
+0:07:28.060,0:07:30.140
+So it's not a linear thing.
+
+0:07:30.140,0:07:32.050
+And so we have to solve it somehow.
+
+0:07:32.050,0:07:34.090
+Value iteration is one way to do it.
+
+0:07:34.090,0:07:36.280
+Expectimax was really another
+way to do it.
+
+0:07:36.280,0:07:39.180
+And they have a trade-off as to which
+one is actually more efficient.
+
+0:07:39.180,0:07:44.050
+Now in value iteration, the vectors V
+sub k themselves were interpretable as
+
+0:07:44.050,0:07:45.740
+time-limited values.
+
+0:07:45.740,0:07:49.370
+But you can also view this value
+iteration process simply as searching
+
+0:07:49.370,0:07:53.120
+for a fixed point to these equations
+in an iterative way.
+
+0:07:53.120,0:07:55.570
+And that's a general way of approaching
+fixed-point methods.
+
+0:07:55.570,0:07:56.933
+

@@ -1,0 +1,333 @@
+0:00:00.000,0:00:01.390
+
+0:00:01.390,0:00:03.890
+PROFESSOR: So the first way we're
+going to speed up the basic
+
+0:00:03.890,0:00:06.820
+backtracking algorithm is with
+an approach called filtering.
+
+0:00:06.820,0:00:09.660
+And filtering's really all about
+ruling out suspects.
+
+0:00:09.660,0:00:12.740
+Now of course, the backtracking search
+eventually tries things and finds out
+
+0:00:12.740,0:00:14.440
+whether or not they work.
+
+0:00:14.440,0:00:19.600
+Filtering is about going ahead of the
+backtracking search and figuring out
+
+0:00:19.600,0:00:23.970
+elements in the domains of the
+unassigned variables, which can safely
+
+0:00:23.970,0:00:25.480
+be eliminated.
+
+0:00:25.480,0:00:28.910
+So we'll see a couple different
+approaches of filtering.
+
+0:00:28.910,0:00:31.460
+The first approach is called
+forward checking.
+
+0:00:31.460,0:00:34.280
+And in general, whenever we're doing
+filtering, we're going to have to add
+
+0:00:34.280,0:00:37.480
+one new idea in addition to this
+idea of a partial assignment.
+
+0:00:37.480,0:00:41.740
+The unassigned variables now will have
+their domains exposed, and we're going
+
+0:00:41.740,0:00:44.860
+to cross off bad options
+as we discover them.
+
+0:00:44.860,0:00:47.960
+OK, so in forward checking, things
+look like this to begin with.
+
+0:00:47.960,0:00:52.110
+We don't have anything in the partial
+assignment, so nothing's assigned, but
+
+0:00:52.110,0:00:56.380
+all of the remaining unassigned
+variables have their domains shown.
+
+0:00:56.380,0:00:59.310
+What we're going to do in forward
+checking is every time we make an
+
+0:00:59.310,0:01:03.260
+assignment in the backtracking search,
+we're going to check the unassigned
+
+0:01:03.260,0:01:08.690
+variables, and if any of their values
+would be conflicting with our existing
+
+0:01:08.690,0:01:11.930
+assignment, we're going
+to cross them off.
+
+0:01:11.930,0:01:13.700
+So here's the empty one.
+
+0:01:13.700,0:01:14.660
+Let's do an assignment.
+
+0:01:14.660,0:01:18.600
+Let's say we assign red
+to Western Australia.
+
+0:01:18.600,0:01:20.170
+What happens?
+
+0:01:20.170,0:01:24.230
+Well, Western Australia is now going to
+take on its single value red, and
+
+0:01:24.230,0:01:27.020
+so what we're going to have to do is
+we're going to have to look and see,
+
+0:01:27.020,0:01:32.510
+are there any values in the domains of
+the other variables that have to go?
+
+0:01:32.510,0:01:36.500
+Well, for example, is there going to be
+any value in the Northern Territory
+
+0:01:36.500,0:01:39.520
+variable, NT, that has to go?
+
+0:01:39.520,0:01:39.930
+Sure.
+
+0:01:39.930,0:01:42.190
+It can't be red.
+
+0:01:42.190,0:01:46.120
+All right, so things are going to look
+like this after we assign red to WA.
+
+0:01:46.120,0:01:48.360
+So WA is now assigned.
+
+0:01:48.360,0:01:55.160
+NT and SA aren't assigned, but their
+remaining domains have shrunk.
+
+0:01:55.160,0:01:55.900
+Now what do we do?
+
+0:01:55.900,0:01:57.130
+Well, we assign something else.
+
+0:01:57.130,0:01:58.830
+We're still in a backtracking search.
+
+0:01:58.830,0:02:02.860
+Let's say we assign to Queensland,
+we assign it to green.
+
+0:02:02.860,0:02:06.540
+OK, so Queensland will now be assigned
+to green, and everything adjacent to
+
+0:02:06.540,0:02:09.590
+Queensland will have to check to see
+whether or not there are now values
+
+0:02:09.590,0:02:11.250
+which are unworkable.
+
+0:02:11.250,0:02:14.180
+OK, so we're going to check everything
+adjacent, and we're going to cross off
+
+0:02:14.180,0:02:15.270
+a bunch of greens.
+
+0:02:15.270,0:02:17.410
+We'll end up in this state.
+
+0:02:17.410,0:02:21.450
+OK, so we can see that for example, New
+South Wales no longer has green
+
+0:02:21.450,0:02:25.650
+because it's no longer possible to
+assign that without violating a
+
+0:02:25.650,0:02:30.540
+constraint against our existing
+assignment at Queensland.
+
+0:02:30.540,0:02:33.570
+All right, now let's look
+at this, for example.
+
+0:02:33.570,0:02:35.350
+What might we do next?
+
+0:02:35.350,0:02:40.440
+We might assigned here to Victoria,
+to V here, we might assign blue.
+
+0:02:40.440,0:02:41.750
+Well, what will happen?
+
+0:02:41.750,0:02:45.510
+Well, a bunch of things are now going
+to lose blue from their domain, and
+
+0:02:45.510,0:02:48.500
+we're going to end up here where
+South Australia actually
+
+0:02:48.500,0:02:50.150
+has no legal values.
+
+0:02:50.150,0:02:52.620
+In terms of our assignment,
+nothing's gone wrong.
+
+0:02:52.620,0:02:55.770
+We haven't actually violated any
+constraints with our assignment.
+
+0:02:55.770,0:03:00.025
+But we know that as a consequence of
+what we've already done, some variable
+
+0:03:00.025,0:03:04.170
+that is as yet unassigned has just
+had its domain go empty.
+
+0:03:04.170,0:03:07.540
+Sooner or later we're going to get to
+that variable, and then have to
+
+0:03:07.540,0:03:10.570
+backtrack, so we might as
+well backtrack now.
+
+0:03:10.570,0:03:12.900
+This is the idea of filtering,
+and in particular the
+
+0:03:12.900,0:03:14.060
+case of forward checking.
+
+0:03:14.060,0:03:18.650
+We cross things off as we go, and as
+soon as something goes empty, we know
+
+0:03:18.650,0:03:21.890
+that no solution is possible,
+and we can backtrack early.
+
+0:03:21.890,0:03:25.850
+So let's take a look at
+this in the demo.
+
+0:03:25.850,0:03:27.540
+We're going to keep our
+backtracking search.
+
+0:03:27.540,0:03:29.970
+We are now going to add forward checking
+as filtering, and you'll
+
+0:03:29.970,0:03:32.300
+notice that as soon as we switch
+into a filtering mode, we
+
+0:03:32.300,0:03:33.330
+have an extra notion.
+
+0:03:33.330,0:03:36.260
+Even though nothing's assigned, there
+are still remaining domains.
+
+0:03:36.260,0:03:38.840
+So I'm going to do an assignment, and
+the first assignment is going to be to
+
+0:03:38.840,0:03:41.040
+the lower left, and it's
+going to assign blue.
+
+0:03:41.040,0:03:44.480
+As soon as I assign blue,
+what's going to happen?
+
+0:03:44.480,0:03:47.980
+For these three variables here next to
+it, blue is going to disappear from
+
+0:03:47.980,0:03:49.010
+their domain.
+
+0:03:49.010,0:03:51.660
+So there you go.
+
+0:03:51.660,0:03:53.470
+All right, so we still only
+have one assignment.
+
+0:03:53.470,0:03:56.000
+We're going to move on to the next
+variable in the lower center.
+
+0:03:56.000,0:03:58.620
+We're going to assign the next thing,
+which in this case will be red.
+
+0:03:58.620,0:04:02.680
+And as soon as I do that, you can see
+that in the adjacent variables, red
+
+0:04:02.680,0:04:04.450
+has disappeared.
+
+0:04:04.450,0:04:06.570
+I assign again.
+
+0:04:06.570,0:04:08.720
+I assign again.
+
+0:04:08.720,0:04:10.630
+And I sign again to green here.
+
+0:04:10.630,0:04:14.420
+Now a domain has gone empty,
+and I'll have to backtrack.
+
+0:04:14.420,0:04:15.670
+So I'll backtrack a little bit.
+
+0:04:15.670,0:04:21.000
+
+0:04:21.000,0:04:22.970
+And then I solve it.
+
+0:04:22.970,0:04:24.220
+OK.
+
+0:04:24.220,0:04:25.767
+

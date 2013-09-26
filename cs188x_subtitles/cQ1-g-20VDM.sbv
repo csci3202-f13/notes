@@ -1,0 +1,367 @@
+0:00:01.379,0:00:05.999
+Speaking of robotics, let's talk about what we can do in robotics. We cannot yet
+
+0:00:05.999,0:00:07.370
+send them through time.
+
+0:00:07.370,0:00:11.020
+But we can maybe do more than you
+may think. So what is robotics? Well to
+
+0:00:11.020,0:00:14.170
+actually build robotics there's a lot of
+say mechanical engineering,
+
+0:00:14.170,0:00:18.320
+the mechatronics, building the gears and and
+sorting out the forces and soldering things.
+
+0:00:18.320,0:00:20.639
+That's all very important,
+
+0:00:20.639,0:00:24.459
+but it's not really what we do in this class. In this class, we look at
+
+0:00:24.459,0:00:25.740
+the part of robotics which is AI.
+
+0:00:25.740,0:00:27.939
+And that's the control of the robots, figuring out,
+
+0:00:27.939,0:00:30.080
+once you've got this robotic platform,
+
+0:00:30.080,0:00:33.730
+what control signals do you send down the wire
+to do whatever you're trying to do--
+
+0:00:33.730,0:00:36.690
+pick up the cup, or sweep the floor, or whatever it is.
+
+0:00:36.690,0:00:39.960
+It turns out that simulating robots is
+much easier than actually
+
+0:00:39.960,0:00:42.740
+deploying robots. We alluded to this
+earlier were once you're in the real world,
+
+0:00:42.740,0:00:46.590
+suddenly it's not just planning
+for how you move that arm, but it's acknowledging that
+
+0:00:46.590,0:00:49.990
+maybe your sensors are a little bit
+wrong or maybe the arm will slip during
+
+0:00:49.990,0:00:53.710
+motion, and everything is much, much
+harder in reality than in simulation.
+
+0:00:53.710,0:00:57.080
+Also when you mess up it's more expensive in
+reality than in simulations. These robots
+
+0:00:57.080,0:00:58.210
+do not come cheap.
+
+0:00:58.210,0:01:01.450
+What kind of things we build? We can build
+autonomous vehicles. We'll talk about a couple kinds in this course.
+
+0:01:01.450,0:01:02.189
+
+0:01:02.189,0:01:06.500
+We can build rescue technologies, we can
+build soccer-playing robots which is
+
+0:01:06.500,0:01:10.409
+of course a critical goal of AI, and we can automate
+a bunch of stuff. I mean in some sense there's
+
+0:01:10.409,0:01:14.090
+robots all over. Your dishwasher is a
+robot for cleaning dishes. It's just,
+
+0:01:14.090,0:01:17.090
+to a first approximation you blast
+water at them and now they're clean, so we
+
+0:01:17.090,0:01:19.299
+often don't think of that as much of an AI task,
+
+0:01:19.299,0:01:21.550
+though there are control problems even in a
+dishwasher.
+
+0:01:21.550,0:01:24.720
+In this class we're going to ignore the
+mechanical and mechatronic aspect of robotics
+
+0:01:24.720,0:01:27.750
+and we're only gonna think about the planning
+and control aspects.
+
+0:01:27.750,0:01:34.210
+Let me show you for today, a kind of
+sense of what kinds of things you can do.
+
+0:01:34.210,0:01:36.990
+I love this. Does anyone know what this is?
+
+0:01:36.990,0:01:40.700
+This is RoboCup, this is the Aibo league. They're so cute.
+
+0:01:40.700,0:01:45.090
+I'm going to play a little bit of an Aibo
+soccer match.
+
+0:01:45.090,0:01:46.930
+The first thing to notice is that
+
+0:01:46.930,0:01:48.100
+
+0:01:48.100,0:01:50.220
+they're in formation,
+
+0:01:50.220,0:01:57.220
+they're going to play soccer. It's a team thing; they have to coordinate.
+
+0:01:57.340,0:02:00.430
+It's kind of like watching
+five-year olds play soccer right.
+
+0:02:00.430,0:02:02.310
+Like the white goalie, what are you doing,
+
+0:02:02.310,0:02:09.310
+what are you doing.
+
+0:02:10.019,0:02:17.019
+Fortunately you don't actually need a goalie when you're playing against these guys.
+
+0:02:24.929,0:02:27.299
+Goal!
+
+0:02:27.299,0:02:27.970
+
+0:02:27.970,0:02:31.239
+So, what to learn from here. First of all,
+multiple agents are harder to control than one--
+
+0:02:31.239,0:02:34.550
+it's actually hard to do much with an Aibo--but, multiple agents are harder to control.
+
+0:02:34.550,0:02:37.780
+You've got to coordinate.
+This this level of multi-agent control.
+
+0:02:37.780,0:02:42.420
+You also have to get the individual robot to simply walk along, and like find where the ball is,
+
+0:02:42.420,0:02:44.120
+do the vision and the calibration.
+
+0:02:44.120,0:02:45.859
+All of that stuff is hard.
+
+0:02:45.859,0:02:48.659
+Even when you're not thinking about
+soccer strategy.
+
+0:02:48.659,0:02:50.739
+And so this is an example of that.
+
+0:02:50.739,0:02:52.869
+Something else I'd like to use these
+
+0:02:52.869,0:02:56.980
+Aibos to show is that remember we talked
+about the difference between
+
+0:02:56.980,0:02:59.689
+an AI acting in an optimal way
+
+0:02:59.689,0:03:03.779
+vervus like a biomimetic kind of human-like--or in this case I guess dog-like--way?
+
+0:03:03.779,0:03:07.199
+It turns out, when you're playing soccer,
+you know, a dog might move a ball a
+
+0:03:07.199,0:03:09.349
+certain way. But if you've got an Aibo,
+
+0:03:09.349,0:03:12.159
+you don't want to move the ball
+like a dog.
+
+0:03:12.159,0:03:15.299
+You want to move the ball in the best way possible. And you'll never guess what it is.
+
+0:03:15.299,0:03:22.299
+
+0:03:24.049,0:03:26.529
+And then you've got to turn around and see what
+the heck happened. So they're all going to
+
+0:03:26.529,0:03:29.739
+go over to the ball now.
+
+0:03:29.739,0:03:31.729
+So, again, the point here is,
+
+0:03:31.729,0:03:32.809
+optimal,
+
+0:03:32.809,0:03:34.379
+sometimes you kick it the other way.
+
+0:03:34.379,0:03:37.169
+Not biomimetic.
+
+0:03:37.169,0:03:42.819
+We talked about autonomous cars. So here's
+some footage from a Google autonomous car,
+
+0:03:42.819,0:03:44.459
+and you'll notice,
+
+0:03:44.459,0:03:48.489
+it may not be Telegraph Avenue, but
+
+0:03:48.489,0:03:51.370
+these things are kind of around you driving and
+the cool thing is
+
+0:03:51.370,0:03:54.310
+you probably don't even know it. Sometimes you
+
+0:03:54.310,0:03:58.100
+look over into the next car and the robot waves back,
+
+0:03:58.100,0:04:01.489
+but you know barring that you may
+just not even know.
+
+0:04:01.489,0:04:02.869
+Fully autonomous driving.
+
+0:04:02.869,0:04:09.869
+This is showing some of the sensors that are available.
+
+0:04:09.869,0:04:12.500
+I don't know, like my palms sweat while watching this driving even
+
+0:04:12.500,0:04:13.940
+with a driver there right.
+
+0:04:13.940,0:04:15.430
+So, autonomous driving,
+
+0:04:15.430,0:04:17.699
+better than you might think.
+
+0:04:17.699,0:04:20.459
+We talked about towel folding, so
+
+0:04:20.459,0:04:23.449
+let me show you
+
+0:04:23.449,0:04:26.060
+a bit of towel folding from Pieter Abbeel's lab.
+
+0:04:26.060,0:04:27.949
+This is the PR2,
+
+0:04:27.949,0:04:29.160
+folding towels.
+
+0:04:29.160,0:04:31.550
+it turns out when you're a robot,
+
+0:04:31.550,0:04:34.730
+the hard part about folding is not the
+folding part, but in the figuring out
+
+0:04:34.730,0:04:39.400
+where the corners are in the first place.
+So you'll see the robot kinda like
+
+0:04:39.400,0:04:44.440
+twirls the towel until it finds a corner, and then once it finds a corner, boom boom boom.
+
+0:04:44.440,0:04:48.199
+well, you know, it's sped up 200x so it's not boom boom boom, but
+
+0:04:48.199,0:04:51.979
+booom, booom, booom.
+
+0:04:51.979,0:04:54.759
+So it folds them, stacks them,
+
+0:04:54.759,0:04:56.240
+beautiful.
+
+0:04:56.240,0:05:00.690
+It is currently not the most
+cost-efficient way to fold towels.
+
+0:05:00.690,0:05:04.380
+Okay now let me show you the bad boy
+here. So this is a
+
+0:05:04.380,0:05:05.630
+Boston Dynamics robot.
+
+0:05:05.630,0:05:09.090
+Basically if Terminators had really
+really tiny heads,
+
+0:05:09.090,0:05:10.399
+they'd look something like this.
+
+0:05:10.399,0:05:13.460
+So let's see what this thing can do.
+
+0:05:13.460,0:05:17.139
+It can pose.
+
+0:05:17.139,0:05:19.879
+This robot, it has kind of a big range of
+motion.
+
+0:05:19.879,0:05:22.939
+It can be stable doing these rotations
+which is amazingly hard--people do it.
+
+0:05:22.939,0:05:24.150
+It can walk.
+
+0:05:24.150,0:05:27.539
+If I saw that walking towards me I might
+be a little worried.
+
+0:05:27.539,0:05:31.509
+it can strike its pose and kneel down and do
+things. It does push ups in its spare time!
+
+0:05:31.509,0:05:35.039
+
+0:05:35.039,0:05:38.040
+Okay you know when your robot does pushups for fun,
+
+0:05:38.040,0:05:41.580
+you've got a certain kind of robot.
+
+0:05:41.580,0:05:45.680
+So, really amazing stuff. It may not be obvious from watching this but it is amazingly
+
+0:05:45.680,0:05:50.139
+hard just to get a robot to walk. That why many robots have wheels,
+
+0:05:50.139,0:05:54.800
+an easier platform of some kind. To be able to walk, like this, this is amazing stuff they have.
+
+0:05:54.800,0:05:55.349
+

@@ -1,0 +1,58 @@
+0:00:00.000,0:00:02.600
+PROFESSOR: So what has to
+go in the search space?
+
+0:00:02.600,0:00:06.260
+Well, we still need everything we
+needed for eating the dots--
+
+0:00:06.260,0:00:10.320
+Pac-Man's current position and some
+representation of what dots are left,
+
+0:00:10.320,0:00:15.090
+so, say, a Boolean list for each dot,
+whether it's still present.
+
+0:00:15.090,0:00:18.680
+Now suddenly we care about the power
+pellets, too, so we need a list of
+
+0:00:18.680,0:00:20.980
+which power pellets are present so we
+know whether or not we've already
+
+0:00:20.980,0:00:22.160
+eaten them.
+
+0:00:22.160,0:00:25.960
+And the important thing that we add in
+this problem is this notion of the
+
+0:00:25.960,0:00:27.580
+ghosts have to stay scared.
+
+0:00:27.580,0:00:30.860
+That means in the successor function we
+need to know whether or not we're
+
+0:00:30.860,0:00:31.510
+still safe.
+
+0:00:31.510,0:00:35.310
+We need to know whether or not there's
+time left on the scared timer, and so
+
+0:00:35.310,0:00:39.800
+the search state has to encode all of
+the agent position, the dot Boolean
+
+0:00:39.800,0:00:43.810
+bit vector, the power pellet Boolean bit
+vector, and the remaining scared
+
+0:00:43.810,0:00:45.060
+time on the ghost timers.
+
+0:00:45.060,0:00:46.010
+

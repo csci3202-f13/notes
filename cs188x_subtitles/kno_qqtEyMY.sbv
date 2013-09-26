@@ -1,0 +1,301 @@
+0:00:00.000,0:00:01.970
+
+0:00:01.970,0:00:05.220
+DAN KLEIN: OK, so today we're going to
+talk about Adversarial Search, which
+
+0:00:05.220,0:00:11.600
+is how to decide how to act when there
+is an adversary in your world.
+
+0:00:11.600,0:00:14.440
+So let's take a quick overview
+of what the state of the
+
+0:00:14.440,0:00:16.920
+art is in game playing.
+
+0:00:16.920,0:00:20.410
+So here's one case, checkers.
+
+0:00:20.410,0:00:23.950
+In 1950, there was the first computer
+player of checkers.
+
+0:00:23.950,0:00:26.540
+Kind of amazing, we actually saw this
+earlier in the first lecture.
+
+0:00:26.540,0:00:29.870
+In 1950, there were already having
+computers playing checkers.
+
+0:00:29.870,0:00:31.650
+They weren't actually that good.
+
+0:00:31.650,0:00:36.410
+In 1994, we had the first computer
+champion, the computer program Chinook
+
+0:00:36.410,0:00:39.700
+ended the 40-year reign of the human
+champion, Marion Tinsley.
+
+0:00:39.700,0:00:41.670
+Basically Marion Tinsley was
+the world champion in
+
+0:00:41.670,0:00:43.180
+checkers for kind of forever.
+
+0:00:43.180,0:00:46.060
+No one else was anywhere near as
+good, until there was Chinook
+
+0:00:46.060,0:00:47.570
+who dethroned him.
+
+0:00:47.570,0:00:50.710
+This was using the kinds of techniques
+we're going to talk about today, plus
+
+0:00:50.710,0:00:54.120
+an exhaustive end game database
+for kind of the last eight
+
+0:00:54.120,0:00:55.590
+pieces of the game.
+
+0:00:55.590,0:00:59.380
+In 2007, checkers was entirely solved.
+
+0:00:59.380,0:01:01.370
+And we'll talk today about
+what that means.
+
+0:01:01.370,0:01:02.880
+So checkers--
+
+0:01:02.880,0:01:05.860
+you can't actually get any better
+than solving the game.
+
+0:01:05.860,0:01:08.310
+So we're doing great.
+
+0:01:08.310,0:01:09.600
+How about chess?
+
+0:01:09.600,0:01:13.030
+The big event chess was in 1997
+when Deep Blue defeated human
+
+0:01:13.030,0:01:14.890
+champion Gary Kasparov.
+
+0:01:14.890,0:01:18.560
+This was this amazing historic event
+where Deep Blue was examining many,
+
+0:01:18.560,0:01:23.065
+many positions using custom hardware,
+custom evaluation functions, and then
+
+0:01:23.065,0:01:25.990
+some methods that we don't entirely know
+everything about that allowed it
+
+0:01:25.990,0:01:27.190
+to search much deeper into the tree.
+
+0:01:27.190,0:01:30.060
+And we'll see today why that's an
+important thing to be able to do.
+
+0:01:30.060,0:01:32.060
+So in chess, how are we doing?
+
+0:01:32.060,0:01:35.570
+Well, I'd say we're better than
+human experts at this point.
+
+0:01:35.570,0:01:37.210
+Have about Go?
+
+0:01:37.210,0:01:39.700
+So Go is a really hard
+game for computers.
+
+0:01:39.700,0:01:42.640
+The reason why it's so hard is the
+branching factor is immense.
+
+0:01:42.640,0:01:45.050
+It can be greater than 300.
+
+0:01:45.050,0:01:48.410
+So there was a very long time where even
+though computers were dominating
+
+0:01:48.410,0:01:52.820
+at chess, and humans were afraid to play
+them, humans were unwilling to
+
+0:01:52.820,0:01:56.460
+play them at Go, because it was kind
+of insulting to the human.
+
+0:01:56.460,0:01:58.590
+Here's this computer, as far as you can
+tell it's moving randomly and you
+
+0:01:58.590,0:01:59.910
+just crush it.
+
+0:01:59.910,0:02:00.890
+That's changed.
+
+0:02:00.890,0:02:04.790
+Very recently, there have been huge
+advances in Go that use Monte Carlo
+
+0:02:04.790,0:02:08.410
+which basically means randomized methods
+to expand much further into
+
+0:02:08.410,0:02:12.040
+the tree and be able to handle the fact
+that in Go sometimes you need to
+
+0:02:12.040,0:02:15.900
+really, really look forward very far
+to see the eventual consequence of
+
+0:02:15.900,0:02:19.380
+your action in a way that humans are
+very good but brute force multiply
+
+0:02:19.380,0:02:21.580
+search is very bad at.
+
+0:02:21.580,0:02:25.060
+So in Go, the best humans are
+still better, but we're
+
+0:02:25.060,0:02:27.450
+making amazing progress.
+
+0:02:27.450,0:02:31.070
+So the real question on all your
+minds is what about Pac-Man?
+
+0:02:31.070,0:02:35.110
+Well, we don't really know, but we'll
+see if we can make some progress on
+
+0:02:35.110,0:02:38.200
+that in this lecture.
+
+0:02:38.200,0:02:40.150
+So what's this all about?
+
+0:02:40.150,0:02:43.730
+Really, a general point in this course
+is that what we'd like to be able to
+
+0:02:43.730,0:02:47.210
+do is take the definition of something--
+a search problem, a game--
+
+0:02:47.210,0:02:51.950
+and be able to build a system which
+exhibits intelligent behavior, where
+
+0:02:51.950,0:02:55.720
+that behavior comes not from hard coding
+the behavior itself but from
+
+0:02:55.720,0:03:00.110
+some computation that's a general
+purpose computation that can give rise
+
+0:03:00.110,0:03:02.940
+to very adaptive behavior that
+does the right thing in
+
+0:03:02.940,0:03:04.940
+many possible scenarios.
+
+0:03:04.940,0:03:07.640
+So let's take a look at
+an example of this.
+
+0:03:07.640,0:03:10.240
+We're going to see the
+mystery Pac-Man.
+
+0:03:10.240,0:03:11.670
+So I'll run this in a second.
+
+0:03:11.670,0:03:16.480
+And what I want you to think while I run
+this is what kinds of computations
+
+0:03:16.480,0:03:21.390
+must be happening inside this Pac-Man
+playing agent in order to give rise to
+
+0:03:21.390,0:03:23.110
+the variety of behaviors that you see.
+
+0:03:23.110,0:03:47.130
+
+0:03:47.130,0:03:48.950
+OK, so pretty good.
+
+0:03:48.950,0:03:51.800
+Question is how do we do
+that kind of thing?
+
+0:03:51.800,0:03:54.410
+We'll talk about how to do
+that kind of thing today.
+
+0:03:54.410,0:03:57.670
+And the important thing is we want to
+at all costs avoid doing things like
+
+0:03:57.670,0:04:00.620
+programming "if you're within three
+squares of a power pellet, eat the
+
+0:04:00.620,0:04:01.310
+power pellet.
+
+0:04:01.310,0:04:05.930
+If there is a scared ghost and the
+scared ghost is within 10, then go
+
+0:04:05.930,0:04:06.550
+with the scared ghost."
+
+0:04:06.550,0:04:09.450
+Because things like that end up being
+very fragile, and they'll do the wrong
+
+0:04:09.450,0:04:12.140
+thing when there's a scared ghost
+and a power pellet and
+
+0:04:12.140,0:04:13.370
+two nonscared ghosts.
+
+0:04:13.370,0:04:15.380
+And we want some general
+purpose computation.
+
+0:04:15.380,0:04:16.630
+And that's the topic for today.
+
+0:04:16.630,0:04:17.759
+

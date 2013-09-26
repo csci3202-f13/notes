@@ -1,0 +1,906 @@
+0:00:00.000,0:00:01.570
+
+0:00:01.570,0:00:04.490
+PROFESSOR: Today we're going to talk
+about how reinforcement learning works
+
+0:00:04.490,0:00:07.450
+for more substantial problems.
+
+0:00:07.450,0:00:10.340
+Let's remind ourselves what's going
+on in reinforcement learning.
+
+0:00:10.340,0:00:13.010
+In reinforcement learning, we
+imagine that the world is a
+
+0:00:13.010,0:00:14.620
+Markov decision process.
+
+0:00:14.620,0:00:15.710
+Was does that mean?
+
+0:00:15.710,0:00:19.580
+It means there's a set of states, and
+we can observe what state we're in.
+
+0:00:19.580,0:00:21.890
+It means there's a set of actions
+that we can take.
+
+0:00:21.890,0:00:24.770
+And in a given state, we know
+what actions we can take.
+
+0:00:24.770,0:00:28.930
+We imagine that each action has some
+non-deterministic result, so there's
+
+0:00:28.930,0:00:32.840
+some transition function that, for a
+given state in action, tells me what
+
+0:00:32.840,0:00:34.850
+can happen and with what probability.
+
+0:00:34.850,0:00:38.040
+The problem is I don't actually
+know the transition function.
+
+0:00:38.040,0:00:41.380
+There's also a reward function-- that
+for any given transition, meaning I
+
+0:00:41.380,0:00:45.080
+was in state S, I took action
+A, and I landed in S prime.
+
+0:00:45.080,0:00:47.920
+There's some reward, which
+we also don't know.
+
+0:00:47.920,0:00:49.800
+In reinforcement learning, we're
+looking for a policy.
+
+0:00:49.800,0:00:51.840
+In particular, we're looking
+for an optimal policy.
+
+0:00:51.840,0:00:55.920
+And the problem is, unlike for a known
+MDP, we don't know the transitions or
+
+0:00:55.920,0:00:58.290
+the rewards until we experience them.
+
+0:00:58.290,0:00:59.380
+So how's this going to work?
+
+0:00:59.380,0:01:02.520
+Well, because we don't know what the
+actions do, we actually have to try
+
+0:01:02.520,0:01:04.140
+various things out.
+
+0:01:04.140,0:01:07.630
+And that's going to commit us to a
+certain amount of trial and error,
+
+0:01:07.630,0:01:11.060
+because there's just no way to know how
+to act until you've experimented.
+
+0:01:11.060,0:01:14.780
+The big idea for reinforcement learning,
+for solving these problems
+
+0:01:14.780,0:01:18.210
+and learning to act optimally, is to
+look back to the things we used to do
+
+0:01:18.210,0:01:21.500
+with Markov decision processes when
+we knew the transition function.
+
+0:01:21.500,0:01:25.250
+And everywhere where we have an average
+over the outcomes, which in
+
+0:01:25.250,0:01:30.320
+order to compute requires knowing the
+transition probabilities, T, we're
+
+0:01:30.320,0:01:34.180
+going to instead approximate those
+with samples of outcomes.
+
+0:01:34.180,0:01:37.300
+So everywhere we saw an average over T,
+we're going to try to find a way to
+
+0:01:37.300,0:01:41.110
+change our algorithm to compute that
+average with samples rather than known
+
+0:01:41.110,0:01:43.290
+probabilities.
+
+0:01:43.290,0:01:47.360
+By now, you've seen a lot of things
+that qualify as Bellman equations,
+
+0:01:47.360,0:01:51.700
+equations that relate the value at one
+state to the value one state later,
+
+0:01:51.700,0:01:53.640
+after one action.
+
+0:01:53.640,0:01:56.020
+You've seen Q values in
+terms of Q values.
+
+0:01:56.020,0:01:58.010
+You've seen values in
+terms of Q values.
+
+0:01:58.010,0:02:00.360
+Some things had pi's, some
+things had stars.
+
+0:02:00.360,0:02:03.630
+By now, you're probably in Bellman
+equation overload.
+
+0:02:03.630,0:02:06.940
+All these things, when you aren't
+used to them, look the same.
+
+0:02:06.940,0:02:10.775
+The good news is when you're really used
+to these equations, they still
+
+0:02:10.775,0:02:12.140
+all look the same.
+
+0:02:12.140,0:02:15.040
+And that's because eventually, you'll
+realize, it's all just expectimax
+
+0:02:15.040,0:02:16.470
+written out in various ways.
+
+0:02:16.470,0:02:19.425
+Sometimes there's a max when I'm acting
+optimally, sometimes there's a
+
+0:02:19.425,0:02:21.050
+pi when I'm fixed to a policy.
+
+0:02:21.050,0:02:24.630
+And I can do anything I do for values
+or Q values, because it's just a
+
+0:02:24.630,0:02:27.600
+matter of where I start my
+recurrence in expectimax.
+
+0:02:27.600,0:02:31.600
+Do I start at a state, which evaluates
+a state, or do I start at a Q state,
+
+0:02:31.600,0:02:34.270
+which evaluates an action?
+
+0:02:34.270,0:02:36.160
+So how do we solve an MDP?
+
+0:02:36.160,0:02:40.910
+If we know the MDP, we can solve it
+offline without actually taking action
+
+0:02:40.910,0:02:43.090
+in the world, and we can compute
+anything we want.
+
+0:02:43.090,0:02:45.770
+We can compute the optimal
+values V star, optimal Q
+
+0:02:45.770,0:02:47.340
+values, optimal policies.
+
+0:02:47.340,0:02:50.200
+We can do that with value iteration,
+or policy iteration,
+
+0:02:50.200,0:02:51.810
+which we also saw.
+
+0:02:51.810,0:02:55.330
+We can also evaluate any given fixed
+policy, whether it's optimal or not,
+
+0:02:55.330,0:02:58.180
+and that was an algorithm called policy
+evaluation, where you basically
+
+0:02:58.180,0:03:01.460
+compute what happens if you follow
+this policy and not worry about
+
+0:03:01.460,0:03:03.650
+whether or not it's a good one.
+
+0:03:03.650,0:03:06.550
+For reinforcement learning,
+we don't know the MDP.
+
+0:03:06.550,0:03:10.720
+And we saw last time two different ways
+of dealing with the fact that
+
+0:03:10.720,0:03:13.580
+this critical quantity-- the transition
+probabilities that tells us
+
+0:03:13.580,0:03:14.860
+what the actions do--
+
+0:03:14.860,0:03:16.430
+was missing.
+
+0:03:16.430,0:03:19.070
+So one thing we could do that we didn't
+spend much time on, and we
+
+0:03:19.070,0:03:22.370
+won't come back to until much later in
+the second part of this class, is we
+
+0:03:22.370,0:03:23.540
+could build a model.
+
+0:03:23.540,0:03:26.910
+We could try to figure out what the
+transitions are by watching them.
+
+0:03:26.910,0:03:29.980
+Once we have approximate transitions,
+we can then reduce it to
+
+0:03:29.980,0:03:31.550
+the known MDP case.
+
+0:03:31.550,0:03:35.320
+And while that's appealing, that's
+not usually what people do.
+
+0:03:35.320,0:03:38.630
+Usually what people do is they take
+what's called the Model-Free Approach.
+
+0:03:38.630,0:03:41.740
+And in t he Model-Free Approach, we can
+still actually compute everything
+
+0:03:41.740,0:03:44.210
+of interest in a Markov
+decision problem.
+
+0:03:44.210,0:03:47.170
+What we do is we look for all of the
+averages and replace them with
+
+0:03:47.170,0:03:52.170
+samples, and that gives us analogs to
+value iteration and policy evaluation.
+
+0:03:52.170,0:03:55.210
+The analog to the policy evaluation
+was called value learning.
+
+0:03:55.210,0:03:56.340
+We saw that before.
+
+0:03:56.340,0:04:00.240
+And in that case, you basically just
+watch some agent, possibly yourself,
+
+0:04:00.240,0:04:04.220
+execute the policy and figure out how
+good it is based on observation.
+
+0:04:04.220,0:04:07.610
+What we're going to spend most of our
+time on today is a very important
+
+0:04:07.610,0:04:10.720
+algorithm, the central logarithm for
+reinforcement learning, really, called
+
+0:04:10.720,0:04:14.160
+Q learning, which enables you to compute
+optimal qualities just by
+
+0:04:14.160,0:04:18.820
+watching the outcomes of your own
+actions, even though you don't know
+
+0:04:18.820,0:04:20.550
+how to act optimally yet.
+
+0:04:20.550,0:04:21.800
+It's an amazing algorithm.
+
+0:04:21.800,0:04:23.700
+
+0:04:23.700,0:04:26.760
+So for today, we're in the paradigm
+of Model-Free Learning.
+
+0:04:26.760,0:04:28.060
+What's that mean?
+
+0:04:28.060,0:04:30.850
+Well, on the surface, we know it means
+we're not actually going to compute a
+
+0:04:30.850,0:04:32.990
+model and then solve with
+respect to that model.
+
+0:04:32.990,0:04:36.980
+But in practice what it means is that
+your agent experiences the world as a
+
+0:04:36.980,0:04:41.130
+stream of what are called transitions
+that form episodes.
+
+0:04:41.130,0:04:43.730
+So, for example, you start
+in some state, s.
+
+0:04:43.730,0:04:44.950
+You take an action.
+
+0:04:44.950,0:04:48.410
+Forget for a second where that action
+came from and how we knew to take it.
+
+0:04:48.410,0:04:52.240
+You receiver a reward r and then
+you land in the state s prime.
+
+0:04:52.240,0:04:54.420
+From s prime, you take
+action, a prime.
+
+0:04:54.420,0:04:57.450
+You receiver reward r prime and land
+s double prime, and so on.
+
+0:04:57.450,0:05:01.590
+And so there's a stream of states and
+actions and rewards that represents
+
+0:05:01.590,0:05:03.790
+your experience.
+
+0:05:03.790,0:05:07.350
+All of the Model-Free methods we are
+going to talk about in this class,
+
+0:05:07.350,0:05:11.190
+though there are others, update
+one transition at a time.
+
+0:05:11.190,0:05:15.200
+So every time you observe yourself going
+from some state, s, taking an
+
+0:05:15.200,0:05:19.450
+action, a, and getting a reward and an
+outcome, s, a, r, s prime, that's a
+
+0:05:19.450,0:05:20.280
+transition.
+
+0:05:20.280,0:05:22.950
+And every transition is going
+to cause you to improve your
+
+0:05:22.950,0:05:25.240
+knowledge and do an update.
+
+0:05:25.240,0:05:29.730
+The design of these updates is so that
+over time they will implement the
+
+0:05:29.730,0:05:33.280
+Bellman updates that we would have done
+with a known MDP in an algorithm
+
+0:05:33.280,0:05:34.530
+like value iteration.
+
+0:05:34.530,0:05:36.950
+
+0:05:36.950,0:05:39.260
+So most important algorithm and the one
+we're going to build on today is
+
+0:05:39.260,0:05:40.780
+called Q-Learning.
+
+0:05:40.780,0:05:43.710
+And Q-Learning has some amazing
+properties, but it took people a long
+
+0:05:43.710,0:05:44.960
+time to figure it out.
+
+0:05:44.960,0:05:48.610
+Essentially, people were held up for
+decades in reinforcement learning
+
+0:05:48.610,0:05:52.490
+because they were staring at value
+functions and trying to figure out how
+
+0:05:52.490,0:05:56.440
+to replace the value iteration update,
+which starts with a max, with a
+
+0:05:56.440,0:05:57.830
+sampling process.
+
+0:05:57.830,0:06:00.522
+And we don't know how to sample maxes.
+
+0:06:00.522,0:06:03.550
+But then, the key breakthrough was that
+what we should really do is not
+
+0:06:03.550,0:06:06.110
+be evaluating values, because
+that's not really what we're
+
+0:06:06.110,0:06:07.140
+interested in any way.
+
+0:06:07.140,0:06:09.260
+We should be evaluating actions.
+
+0:06:09.260,0:06:12.070
+The value of an action is its Q value.
+
+0:06:12.070,0:06:13.710
+So here's how that works.
+
+0:06:13.710,0:06:16.120
+It's that same equation we've
+seen over and over again.
+
+0:06:16.120,0:06:19.420
+In this case, this is
+Q value iteration.
+
+0:06:19.420,0:06:24.300
+And so we get this equation, which says
+if we knew the MDP, we would take
+
+0:06:24.300,0:06:27.380
+our Q values, which, in that algorithm,
+would have been to a
+
+0:06:27.380,0:06:29.100
+certain depth, k.
+
+0:06:29.100,0:06:33.230
+We take them and we use them to compute
+new Q values that are better.
+
+0:06:33.230,0:06:34.210
+Why are they better?
+
+0:06:34.210,0:06:37.670
+They're better because they have
+an extra layer of expectimax.
+
+0:06:37.670,0:06:40.990
+And the way we do that is we write down
+what expectimax would have done
+
+0:06:40.990,0:06:45.480
+for one layer if we started it,
+evaluating action a from state s.
+
+0:06:45.480,0:06:46.680
+Well, what would it have done?
+
+0:06:46.680,0:06:49.270
+It would have had to average all the
+outcomes, which we can't do in
+
+0:06:49.270,0:06:51.350
+reinforcement learning.
+
+0:06:51.350,0:06:54.900
+And then, for each outcome, s prime,
+we would have added together the
+
+0:06:54.900,0:06:59.810
+instantaneous reward for that outcome
+plus the discounted future, which
+
+0:06:59.810,0:07:03.070
+recurses into our current
+approximation, Q sub k.
+
+0:07:03.070,0:07:04.960
+So here's Q value iteration.
+
+0:07:04.960,0:07:08.110
+It basically does the same thing as
+value iteration, but it's shifted.
+
+0:07:08.110,0:07:12.680
+And what's cool about this is
+essentially this update is an average.
+
+0:07:12.680,0:07:15.500
+Now, instead of having a max on the
+outside, there's an average on the
+
+0:07:15.500,0:07:18.560
+outside, and we know how to
+do averages and samples.
+
+0:07:18.560,0:07:20.350
+So here's how it goes in Q-Learning.
+
+0:07:20.350,0:07:23.470
+We're going to receive sample
+transitions, so we're in some state,
+
+0:07:23.470,0:07:27.770
+s, we're in some action, a, we get a
+reward, r, and we land in s prime.
+
+0:07:27.770,0:07:30.660
+And, of course, that reward and outcome
+aren't the only possibility,
+
+0:07:30.660,0:07:32.690
+that's just what happened this time.
+
+0:07:32.690,0:07:34.350
+So what do we do?
+
+0:07:34.350,0:07:37.870
+Well we want to have the same idea of a
+one-step look ahead, but we've only
+
+0:07:37.870,0:07:38.970
+got one sample.
+
+0:07:38.970,0:07:42.930
+We think, what can I conclude
+about the Q state sa?
+
+0:07:42.930,0:07:44.930
+First of all, what is the Q state sa?
+
+0:07:44.930,0:07:48.150
+It's the value of action
+a from the state.
+
+0:07:48.150,0:07:49.500
+So we're evaluating action a.
+
+0:07:49.500,0:07:54.040
+We just took action, a, and we received
+a reward, r, and as far as we
+
+0:07:54.040,0:07:58.030
+can tell, to the best of our
+approximation, the reward r we just
+
+0:07:58.030,0:08:03.500
+received is going to be followed in the
+future by the maximum Q value for
+
+0:08:03.500,0:08:05.310
+the state s prime we land in.
+
+0:08:05.310,0:08:06.430
+Now why is it a maximum?
+
+0:08:06.430,0:08:10.070
+We assume that wherever we just landed,
+we will now behave optimally.
+
+0:08:10.070,0:08:14.660
+So that maximum right there essentially
+encodes optimal action in
+
+0:08:14.660,0:08:17.240
+the future in the right way.
+
+0:08:17.240,0:08:21.670
+So, according to this sample, it looks
+like we are on track to receive r,
+
+0:08:21.670,0:08:26.420
+what we just received, plus our
+discounted future estimate.
+
+0:08:26.420,0:08:30.430
+But then at the same time, we want to
+average these samples together.
+
+0:08:30.430,0:08:33.190
+And the reason we want to average the
+samples together is because this one
+
+0:08:33.190,0:08:34.490
+sample could be misleading.
+
+0:08:34.490,0:08:37.090
+It needs to kind of take its
+place with all the others.
+
+0:08:37.090,0:08:39.890
+And so what we do is we keep
+a running average.
+
+0:08:39.890,0:08:45.090
+And so this running average is going to
+be constantly maintaining Q of sa,
+
+0:08:45.090,0:08:48.720
+and every time we get one of these
+instantaneous one-step look ahead
+
+0:08:48.720,0:08:53.410
+samples, we're going to roll it into the
+running average with weight alpha.
+
+0:08:53.410,0:08:54.690
+Alpha here is the learning rate.
+
+0:08:54.690,0:08:58.000
+The bigger alpha is, the more importance
+we place on new samples,
+
+0:08:58.000,0:09:01.840
+which means we learn faster but less
+stably, because we give a lot of
+
+0:09:01.840,0:09:05.000
+weight to each sample.
+
+0:09:05.000,0:09:06.450
+Now, Q-Learning is amazing.
+
+0:09:06.450,0:09:10.250
+The reason why Q-Learning is amazing
+is you learn the optimal policy.
+
+0:09:10.250,0:09:11.220
+And you think, OK, fine.
+
+0:09:11.220,0:09:13.340
+We should have algorithms that
+learn the optimal policy.
+
+0:09:13.340,0:09:17.590
+Q-Learning learns the optimal policy
+even though you don't follow it.
+
+0:09:17.590,0:09:20.930
+So whereas value learning watched what
+you did, and it said, well, it looks
+
+0:09:20.930,0:09:23.330
+like you're getting about 10
+points from this state.
+
+0:09:23.330,0:09:24.100
+Well, that seems reasonable.
+
+0:09:24.100,0:09:27.540
+It doesn't seem like magic because of
+course we can figure out how well our
+
+0:09:27.540,0:09:30.560
+algorithm is working for the policy
+we're already following.
+
+0:09:30.560,0:09:33.140
+Q-Learning tells you how well you would
+do optimally even though you're
+
+0:09:33.140,0:09:34.510
+messing up left and right.
+
+0:09:34.510,0:09:36.470
+This is what's called
+Off-Policy Learning.
+
+0:09:36.470,0:09:37.720
+Let's take a look.
+
+0:09:37.720,0:09:41.280
+
+0:09:41.280,0:09:42.190
+So what do we see here?
+
+0:09:42.190,0:09:45.880
+First of all, remember this is a table
+of Q values, which means for each
+
+0:09:45.880,0:09:49.930
+state that has multiple actions, we
+evaluate each action separately.
+
+0:09:49.930,0:09:52.220
+Because just because a state may
+be good doesn't mean all of
+
+0:09:52.220,0:09:53.320
+its actions are good.
+
+0:09:53.320,0:09:57.670
+For example, you can see here that the
+right thing to do is to walk straight
+
+0:09:57.670,0:10:00.970
+towards the plus 10, even though all of
+the squares, in fact, on the cliff
+
+0:10:00.970,0:10:02.890
+have a bad action available.
+
+0:10:02.890,0:10:03.725
+You shouldn't take it.
+
+0:10:03.725,0:10:06.070
+You shouldn't jump off the cliff.
+
+0:10:06.070,0:10:08.280
+Now, of course, this agent jumps off
+the cliff every now and then.
+
+0:10:08.280,0:10:12.170
+
+0:10:12.170,0:10:15.350
+This agent is not following
+the optimal policy.
+
+0:10:15.350,0:10:17.220
+In the optimal policy, you don't
+occasionally jump off
+
+0:10:17.220,0:10:20.060
+the cliff for kicks.
+
+0:10:20.060,0:10:23.890
+But if you look at the Q Values, the
+Q Value, for example, in this state
+
+0:10:23.890,0:10:26.220
+here, in the middle on the left--
+
+0:10:26.220,0:10:33.220
+the Q value to the right encodes what
+you will receive under optimal action.
+
+0:10:33.220,0:10:36.060
+It doesn't encode what you would
+receive given that you have a
+
+0:10:36.060,0:10:39.660
+propensity for jumping into the cliff.
+
+0:10:39.660,0:10:40.380
+And that's amazing.
+
+0:10:40.380,0:10:43.490
+It's not telling me how well I have
+been doing, it tells me how
+
+0:10:43.490,0:10:44.700
+well I could do.
+
+0:10:44.700,0:10:47.740
+That's off-policy learning.
+
+0:10:47.740,0:10:51.010
+Even though you aren't following the
+optimal policy, you still compute its
+
+0:10:51.010,0:10:54.970
+Q values, which means that any time I
+could stop bumbling around and just do
+
+0:10:54.970,0:10:57.620
+the optimal thing once I've done
+this process long enough to
+
+0:10:57.620,0:11:00.104
+have learned it.
+
+0:11:00.104,0:11:02.030
+A Couple other things to note.
+
+0:11:02.030,0:11:05.430
+First of all, I have no idea what this
+square does because I can't get there.
+
+0:11:05.430,0:11:07.580
+Of course in reinforcement learning,
+you're not going to learn about things
+
+0:11:07.580,0:11:08.910
+you can't try out.
+
+0:11:08.910,0:11:12.360
+Secondly, there's some stuff up here
+that I have never really been in a
+
+0:11:12.360,0:11:14.790
+position to try.
+
+0:11:14.790,0:11:16.150
+So maybe they're great.
+
+0:11:16.150,0:11:17.460
+I don't know.
+
+0:11:17.460,0:11:20.010
+We'll talk about these
+issues in a bit.
+
+0:11:20.010,0:11:23.240
+So for basic Q-Learning, what does
+it required to accomplish
+
+0:11:23.240,0:11:24.590
+this off-policy magic?
+
+0:11:24.590,0:11:26.360
+It requires that you explore enough.
+
+0:11:26.360,0:11:27.870
+You have to try everything.
+
+0:11:27.870,0:11:30.440
+It also requires that you make the
+learning rate small enough so that you
+
+0:11:30.440,0:11:32.770
+can construct a good average.
+
+0:11:32.770,0:11:34.690
+Of course, it can't decrease too
+quickly, because once the learning
+
+0:11:34.690,0:11:38.050
+rate hits zero or close enough
+to it, you stop learning.
+
+0:11:38.050,0:11:41.120
+In the limit, it doesn't matter how
+you select actions, as long as you
+
+0:11:41.120,0:11:42.670
+basically try everything all the time.
+
+0:11:42.670,0:11:43.920
+

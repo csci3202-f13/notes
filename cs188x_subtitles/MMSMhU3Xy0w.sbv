@@ -1,0 +1,1140 @@
+0:00:00.000,0:00:01.648
+
+0:00:01.648,0:00:04.070
+PROFESSOR: OK, today we're going to
+be talking about Markov decision
+
+0:00:04.070,0:00:06.990
+processes, which are a way of
+formalizing the idea of
+
+0:00:06.990,0:00:10.280
+non-deterministic search, which
+is search when your action's
+
+0:00:10.280,0:00:12.750
+outcomes are uncertain.
+
+0:00:12.750,0:00:16.640
+Why would we be unsure what the outcome
+of our actions is going to be?
+
+0:00:16.640,0:00:20.030
+Well, maybe we've got a robot on
+a ledge, and we take the action
+
+0:00:20.030,0:00:21.570
+to cross the ledge.
+
+0:00:21.570,0:00:22.610
+What's going to happen?
+
+0:00:22.610,0:00:24.190
+Well, maybe we'll cross the ledge.
+
+0:00:24.190,0:00:25.705
+Maybe we'll fall into the fire pit.
+
+0:00:25.705,0:00:26.770
+We're not really sure.
+
+0:00:26.770,0:00:30.170
+We can commit to the action, but of
+course the outcome isn't entirely
+
+0:00:30.170,0:00:31.420
+under our control.
+
+0:00:31.420,0:00:33.500
+
+0:00:33.500,0:00:34.890
+That's going to happen in general.
+
+0:00:34.890,0:00:37.590
+There's just all kinds of times
+where you take some action--
+
+0:00:37.590,0:00:39.150
+maybe, you're a can opener robot.
+
+0:00:39.150,0:00:41.010
+And you take the can and you open it.
+
+0:00:41.010,0:00:42.290
+And what's underneath?
+
+0:00:42.290,0:00:44.900
+More can, right?
+
+0:00:44.900,0:00:46.490
+So let's try to formalize this.
+
+0:00:46.490,0:00:49.510
+Our running example is going
+to be this grid world.
+
+0:00:49.510,0:00:51.750
+You're going to see this as
+well on your projects.
+
+0:00:51.750,0:00:54.360
+So grid world is a maze-like problem.
+
+0:00:54.360,0:00:58.090
+You've got an agent living in a grid,
+just like we did for project one.
+
+0:00:58.090,0:01:00.830
+There are going to be walls that
+block the agent's path.
+
+0:01:00.830,0:01:02.880
+And then there are going
+to various rewards.
+
+0:01:02.880,0:01:07.380
+The tricky thing is going to be that the
+actions of the agent can now fail,
+
+0:01:07.380,0:01:09.890
+and in particular, movement
+is going to be noisy.
+
+0:01:09.890,0:01:11.320
+So if I take an action--
+
+0:01:11.320,0:01:13.470
+for example, north is an action--
+
+0:01:13.470,0:01:15.150
+I can attempt to go north.
+
+0:01:15.150,0:01:16.840
+It doesn't mean that I actually will.
+
+0:01:16.840,0:01:20.780
+In this particular instance of grid
+world, 80% of the time, the action you
+
+0:01:20.780,0:01:22.850
+take has the expected result.
+
+0:01:22.850,0:01:27.070
+For example, the action north actually
+moves you 1 square to the north.
+
+0:01:27.070,0:01:30.510
+10% of the time, however, an action
+will take you clockwise--
+
+0:01:30.510,0:01:32.820
+and then 10% of the time,
+counterclockwise--
+
+0:01:32.820,0:01:34.320
+from the intended direction.
+
+0:01:34.320,0:01:38.300
+So in this particular case, if I try
+to go north, 80% chance of going
+
+0:01:38.300,0:01:41.760
+north, but I've also got a 10% chance
+of going west and a 10% chance of
+
+0:01:41.760,0:01:42.980
+going east.
+
+0:01:42.980,0:01:46.330
+If for any reason there's a wall in
+the way of the direction this rule
+
+0:01:46.330,0:01:49.990
+would take you, you stay put.
+
+0:01:49.990,0:01:53.710
+Like I said, there are rewards in this
+maze, and the whole point is to gather
+
+0:01:53.710,0:01:54.950
+the rewards.
+
+0:01:54.950,0:01:57.720
+There are two kinds of rewards
+in the grid world.
+
+0:01:57.720,0:02:00.020
+One are the terminal utilities.
+
+0:02:00.020,0:02:02.900
+And here these are shown as plus
+1 and minus 1, and they're
+
+0:02:02.900,0:02:04.480
+visualized here as a gem.
+
+0:02:04.480,0:02:05.760
+That's a plus 1.
+
+0:02:05.760,0:02:09.910
+If you get to that gem and you take the
+action "exit," the game ends and
+
+0:02:09.910,0:02:11.670
+you get a plus 1.
+
+0:02:11.670,0:02:14.230
+The red fire pit is shown
+as a minus 1.
+
+0:02:14.230,0:02:17.180
+If you get into that square, you
+take the action "exit," and you
+
+0:02:17.180,0:02:18.850
+receive a minus 1.
+
+0:02:18.850,0:02:22.860
+There's another kind of reward in grid
+world, which is every step you take
+
+0:02:22.860,0:02:25.450
+comes along with a little tiny reward.
+
+0:02:25.450,0:02:28.190
+And this is sometimes called a living
+reward or a living penalty, based on
+
+0:02:28.190,0:02:29.820
+whether it's positive or negative.
+
+0:02:29.820,0:02:33.200
+And if it's positive, well, you
+walk around and get happier.
+
+0:02:33.200,0:02:36.630
+If it's negative, then it costs a little
+bit of pain every step, and you
+
+0:02:36.630,0:02:38.600
+want things to end quickly.
+
+0:02:38.600,0:02:41.450
+The big rewards are, in general,
+going to be at the end.
+
+0:02:41.450,0:02:42.980
+So what should the agents goal be?
+
+0:02:42.980,0:02:46.320
+Well, the simplest goal and the one
+we'll take for now is the agent should
+
+0:02:46.320,0:02:48.220
+maximize the sum of its rewards.
+
+0:02:48.220,0:02:54.040
+In general, that's going to involve
+getting to a big reward and taking it.
+
+0:02:54.040,0:02:58.040
+If this were deterministic search in
+a normal maze, this is what your
+
+0:02:58.040,0:03:00.770
+successor function and your
+actions would do, right?
+
+0:03:00.770,0:03:04.260
+You're in some state, you take the
+action north, and the result of that
+
+0:03:04.260,0:03:07.420
+is you are now one square
+to the north.
+
+0:03:07.420,0:03:11.590
+In grid world, because it's noisy, you
+can still take the action north, but
+
+0:03:11.590,0:03:13.730
+now you're not sure what the
+result's going to be.
+
+0:03:13.730,0:03:16.550
+So in this particular case, when
+the agent tries to go north,
+
+0:03:16.550,0:03:17.700
+maybe it goes north.
+
+0:03:17.700,0:03:20.330
+In fact, that's the 80%
+outcome in this case.
+
+0:03:20.330,0:03:22.980
+But there's a 10% chance of going
+to the left or the right.
+
+0:03:22.980,0:03:25.120
+And if you end up going to
+the right, that's OK.
+
+0:03:25.120,0:03:27.550
+If you end up going to the
+left, that's pretty bad.
+
+0:03:27.550,0:03:29.760
+And so when you plan, you're
+going to have to take these
+
+0:03:29.760,0:03:31.010
+outcomes into account.
+
+0:03:31.010,0:03:35.030
+
+0:03:35.030,0:03:37.770
+Formally speaking, this
+kind of problem--
+
+0:03:37.770,0:03:39.300
+grid world in this case--
+
+0:03:39.300,0:03:40.960
+is a Markov decision process.
+
+0:03:40.960,0:03:44.980
+A Markov decision process is a
+lot like a search problem.
+
+0:03:44.980,0:03:47.370
+It's got a set of states,
+just like search did.
+
+0:03:47.370,0:03:50.240
+And it's kind of got a successor
+function like search did.
+
+0:03:50.240,0:03:52.640
+Unlike in search, we're going to take
+the successor function and break it
+
+0:03:52.640,0:03:54.150
+into a few pieces.
+
+0:03:54.150,0:03:57.250
+We're going to have an idea of actions,
+which are the actions you
+
+0:03:57.250,0:03:59.040
+take, like north, south,
+east, or west.
+
+0:03:59.040,0:04:01.310
+We're then going to have
+a transition function.
+
+0:04:01.310,0:04:04.160
+And this notation is important because
+we're going to see it over and over
+
+0:04:04.160,0:04:05.800
+again in the next few lectures.
+
+0:04:05.800,0:04:07.800
+So let's look at the transition
+function.
+
+0:04:07.800,0:04:13.130
+The transition function here we
+write T of s, a, s-prime.
+
+0:04:13.130,0:04:14.280
+What is that?
+
+0:04:14.280,0:04:16.579
+You are in some states s.
+
+0:04:16.579,0:04:19.104
+You take some action a.
+
+0:04:19.104,0:04:22.520
+s-prime is a possible result.
+
+0:04:22.520,0:04:27.920
+The function T(s, a, s-prime) tells
+you how likely that result is.
+
+0:04:27.920,0:04:30.760
+And in that sense, it's a
+conditional probability.
+
+0:04:30.760,0:04:33.830
+So when you see the transition function,
+you think, oh, that's the
+
+0:04:33.830,0:04:40.190
+probability that I end up in s-prime,
+if from state s I take action a.
+
+0:04:40.190,0:04:42.020
+This is called the transition
+function.
+
+0:04:42.020,0:04:44.770
+It's also sometimes called the model,
+because it's your way of representing
+
+0:04:44.770,0:04:47.990
+what actually happens in the world,
+and sometimes called the dynamics,
+
+0:04:47.990,0:04:51.960
+because it represents how the world
+evolves in response to your actions.
+
+0:04:51.960,0:04:55.380
+This transition function is basically
+the successor function.
+
+0:04:55.380,0:04:58.990
+The difference is now there are lots of
+different s-primes that can happen.
+
+0:04:58.990,0:05:00.710
+And they all have various
+probabilities, T,
+
+0:05:00.710,0:05:02.500
+associated with them.
+
+0:05:02.500,0:05:05.860
+Also very much like search, but slightly
+different, is this idea of a
+
+0:05:05.860,0:05:07.250
+reward function.
+
+0:05:07.250,0:05:12.400
+The reward function is R of s, a,
+s-prime, meaning you get a reward that
+
+0:05:12.400,0:05:16.890
+depends on the state you were in, the
+action you took, and the outcome.
+
+0:05:16.890,0:05:20.010
+You might not know your actual reward
+until you see whether or not you fell
+
+0:05:20.010,0:05:21.630
+into the pit.
+
+0:05:21.630,0:05:26.800
+In some formulations, R will only
+depend on s or s-prime.
+
+0:05:26.800,0:05:27.740
+What's this?
+
+0:05:27.740,0:05:30.990
+This is basically the cost function from
+search, except in search, we want
+
+0:05:30.990,0:05:32.250
+the cost to be small.
+
+0:05:32.250,0:05:36.110
+In the case of MDPs, in general,
+we want the rewards to be big.
+
+0:05:36.110,0:05:38.230
+Of course, we've also got this
+idea of a start state.
+
+0:05:38.230,0:05:40.150
+We might have a terminal state.
+
+0:05:40.150,0:05:43.180
+Here's another important difference
+between MDPs and search problems,
+
+0:05:43.180,0:05:46.000
+because MDPs very often go on forever.
+
+0:05:46.000,0:05:48.490
+And we'll see an example of that soon.
+
+0:05:48.490,0:05:49.780
+So what are MDPs?
+
+0:05:49.780,0:05:51.600
+They're non-deterministic
+search problems.
+
+0:05:51.600,0:05:54.340
+They're basically taking search that
+we know and love and adding the
+
+0:05:54.340,0:05:57.230
+necessary machinery to support
+the idea that actions can
+
+0:05:57.230,0:05:58.920
+have multiple outcomes.
+
+0:05:58.920,0:06:02.510
+In fact, this is the class of problems
+that Expectimax search solved.
+
+0:06:02.510,0:06:06.450
+We'll actually get a new tool very soon
+that can solve them in sometimes
+
+0:06:06.450,0:06:08.190
+a better way than Expectimax.
+
+0:06:08.190,0:06:11.760
+But to a first approximation, when you
+see an MDP, you think, oh, that's a
+
+0:06:11.760,0:06:13.660
+lot like what Expectimax did.
+
+0:06:13.660,0:06:18.170
+I have a choices at a state, but then
+my actions have uncertain outcomes.
+
+0:06:18.170,0:06:21.010
+Let's take a look at grid world
+actually happening.
+
+0:06:21.010,0:06:23.470
+So here's grid world.
+
+0:06:23.470,0:06:24.520
+For now, ignore the numbers.
+
+0:06:24.520,0:06:26.380
+They'll become important later.
+
+0:06:26.380,0:06:29.160
+And you can also watch down here at
+the bottom, which is going to echo
+
+0:06:29.160,0:06:30.750
+what I press.
+
+0:06:30.750,0:06:34.460
+So what I'm going to try to do is I'm
+going to try to get the agent, which
+
+0:06:34.460,0:06:40.250
+here is the blue dot, into the good
+reward square, which is up here.
+
+0:06:40.250,0:06:42.310
+Remember, there's a plus 1 there.
+
+0:06:42.310,0:06:44.110
+And I'm going to walk it step by step.
+
+0:06:44.110,0:06:45.980
+And I'm going to go to
+the right and up.
+
+0:06:45.980,0:06:48.940
+You won't be able to see what I press
+except when it echoes below.
+
+0:06:48.940,0:06:51.830
+The important thing is usually
+the key I press happens.
+
+0:06:51.830,0:06:54.610
+But sometimes the agent slips.
+
+0:06:54.610,0:06:56.710
+So I'm going to press east.
+
+0:06:56.710,0:06:59.400
+And look, you can see I took
+the action east, but I
+
+0:06:59.400,0:07:01.180
+ended up where I started.
+
+0:07:01.180,0:07:02.940
+I'm going to take it again.
+
+0:07:02.940,0:07:04.230
+I went east.
+
+0:07:04.230,0:07:05.420
+I'm going to try east again.
+
+0:07:05.420,0:07:05.930
+It worked.
+
+0:07:05.930,0:07:07.730
+I'm going to try north.
+
+0:07:07.730,0:07:10.940
+Now this is a little tricky, because if
+you think about this square here,
+
+0:07:10.940,0:07:12.620
+I'm taking a little bit of a risk.
+
+0:07:12.620,0:07:16.870
+Because this lower exit here
+is actually a pit.
+
+0:07:16.870,0:07:18.170
+Hopefully I won't fall into it.
+
+0:07:18.170,0:07:20.620
+90% chance.
+
+0:07:20.620,0:07:21.600
+It worked out.
+
+0:07:21.600,0:07:24.450
+I'm going to go east again
+and that succeeded.
+
+0:07:24.450,0:07:25.690
+I end up in this square.
+
+0:07:25.690,0:07:30.000
+Now in the exact formulation of grid
+world here that we have, when you get
+
+0:07:30.000,0:07:32.590
+into one of these exit squares,
+you're not done yet.
+
+0:07:32.590,0:07:34.060
+You don't receive your reward yet.
+
+0:07:34.060,0:07:35.390
+You have to take a special action.
+
+0:07:35.390,0:07:36.930
+It's the only action you can take.
+
+0:07:36.930,0:07:38.040
+It's called exit.
+
+0:07:38.040,0:07:40.510
+And so now I'll be forced to take
+the exit action, and I will
+
+0:07:40.510,0:07:42.080
+receive my plus 1.
+
+0:07:42.080,0:07:45.400
+And if I scroll through the rewards,
+you'll see I got a bunch of little
+
+0:07:45.400,0:07:46.600
+negative 0.1's.
+
+0:07:46.600,0:07:49.280
+That was the living reward, or in
+this case, a living penalty.
+
+0:07:49.280,0:07:52.860
+And then at the very end, I
+ended in the exit state.
+
+0:07:52.860,0:07:55.860
+I took the action to exit,
+and I got a reward of 1.
+
+0:07:55.860,0:07:58.630
+That's how it works in grid world.
+
+0:07:58.630,0:08:01.320
+OK, Markov decision problems.
+
+0:08:01.320,0:08:03.980
+Who's this Markov guy and what's
+he doing in my search problem?
+
+0:08:03.980,0:08:07.120
+In general in this course, Markov
+is going to mean the same thing.
+
+0:08:07.120,0:08:11.045
+It's going to mean that, given the
+present state, the future and the past
+
+0:08:11.045,0:08:13.690
+are independent in the
+appropriate way.
+
+0:08:13.690,0:08:17.540
+For a Markov decision process, what that
+specifically means is that the
+
+0:08:17.540,0:08:21.580
+probability distribution over your
+outcomes depends only on the current
+
+0:08:21.580,0:08:25.940
+state and action, not on the whole
+history of how you got there.
+
+0:08:25.940,0:08:27.430
+This is actually just like search.
+
+0:08:27.430,0:08:31.300
+If you remember, for search, we had to
+make sure our state was appropriate
+
+0:08:31.300,0:08:34.780
+such that the successor function only
+depended on the state and not the
+
+0:08:34.780,0:08:36.409
+history of how I got there.
+
+0:08:36.409,0:08:40.030
+And so sometimes we had to encode things
+into our state like which food
+
+0:08:40.030,0:08:43.710
+pellets were left and so on, in
+order to get that property.
+
+0:08:43.710,0:08:46.870
+An important property in an MDP is
+to make sure that you define your
+
+0:08:46.870,0:08:49.950
+transition function and your state
+in such a way that the transition
+
+0:08:49.950,0:08:54.890
+probabilities depend only on the
+current state and action.
+
+0:08:54.890,0:08:57.980
+If we remember back to single-agent
+search problems, what did we do?
+
+0:08:57.980,0:08:59.320
+We input a problem.
+
+0:08:59.320,0:09:02.090
+Some solution method like
+A star search ran.
+
+0:09:02.090,0:09:03.700
+And the output was a plan.
+
+0:09:03.700,0:09:06.420
+The plan was a sequence of actions
+to transform the start
+
+0:09:06.420,0:09:08.280
+state into a goal state.
+
+0:09:08.280,0:09:11.280
+That's not going to work here, because
+for example, if you remember, when I
+
+0:09:11.280,0:09:15.410
+was doing the grid world by hand, that
+first step I tried to go east, but it
+
+0:09:15.410,0:09:16.430
+didn't happen.
+
+0:09:16.430,0:09:19.820
+So if I just blindly executed east,
+east, east, north, north,
+
+0:09:19.820,0:09:21.910
+north, east, exit--
+
+0:09:21.910,0:09:23.960
+well, it wouldn't have
+worked in that case.
+
+0:09:23.960,0:09:26.780
+And in general, I'm not going to know
+what sequence of actions to take,
+
+0:09:26.780,0:09:29.930
+because I don't know what those
+actions are going to do.
+
+0:09:29.930,0:09:34.350
+The relevant idea is not a
+plan now but a policy.
+
+0:09:34.350,0:09:37.940
+And what a policy is, is a mapping
+from states to actions.
+
+0:09:37.940,0:09:41.030
+And it tells me in each state
+what action to take.
+
+0:09:41.030,0:09:43.370
+So actually, you can see here
+in the illustration--
+
+0:09:43.370,0:09:47.540
+you can see an example of a policy for
+that same grid world that in every
+
+0:09:47.540,0:09:49.190
+state tells you what to do.
+
+0:09:49.190,0:09:50.590
+So it might tell you to go north.
+
+0:09:50.590,0:09:52.160
+It might tell you to go east.
+
+0:09:52.160,0:09:54.860
+If you end up trying to go east and
+you end up in the state where you
+
+0:09:54.860,0:09:58.170
+started, it just tells you, go east
+again, because that's what you do in
+
+0:09:58.170,0:09:59.500
+that state.
+
+0:09:59.500,0:10:01.910
+So a policy gives an action
+for each state.
+
+0:10:01.910,0:10:06.700
+An optimal policy is the one that
+maximizes the agent's expected utility
+
+0:10:06.700,0:10:07.880
+if followed.
+
+0:10:07.880,0:10:09.920
+So there are good policies
+and bad policies.
+
+0:10:09.920,0:10:12.170
+We're going to want to be able
+to find the best ones, which
+
+0:10:12.170,0:10:13.830
+are the optimal policies.
+
+0:10:13.830,0:10:18.300
+If we actually wrote the policy out
+explicitly, meaning we wrote down for
+
+0:10:18.300,0:10:20.290
+every single state what to do--
+
+0:10:20.290,0:10:22.200
+like what's shown here on the map--
+
+0:10:22.200,0:10:24.170
+then in fact this defines
+a reflex agent.
+
+0:10:24.170,0:10:26.130
+You look at your state,
+you do your action.
+
+0:10:26.130,0:10:27.780
+No more thinking is required.
+
+0:10:27.780,0:10:30.600
+All the thinking went into coming
+up with the policy.
+
+0:10:30.600,0:10:35.130
+Now Expectimax didn't really compute
+an explicit policy in this sense.
+
+0:10:35.130,0:10:39.560
+What Expectimax did for these kinds of
+problems is, from a given state, it
+
+0:10:39.560,0:10:45.330
+did a forward-thinking computation that
+produced one entry of the policy,
+
+0:10:45.330,0:10:46.330
+which you then took.
+
+0:10:46.330,0:10:48.860
+And wherever you landed, you
+ran Expectimax again.
+
+0:10:48.860,0:10:52.520
+So on one hand, Expectimax is a
+way of solving these problems.
+
+0:10:52.520,0:10:56.040
+And on the other hand, it doesn't
+compute an explicit policy.
+
+0:10:56.040,0:10:57.860
+That can be a good thing
+or a bad thing.
+
+0:10:57.860,0:11:00.800
+It can be bad because you might have
+to redo a lot of work if you keep
+
+0:11:00.800,0:11:02.240
+ending up in the same states.
+
+0:11:02.240,0:11:04.680
+It can be good because sometimes you
+have so many states you couldn't write
+
+0:11:04.680,0:11:07.220
+down an explicit policy anyway.
+
+0:11:07.220,0:11:09.080
+Let's see some optimal policies.
+
+0:11:09.080,0:11:11.050
+These are all instances of grid world.
+
+0:11:11.050,0:11:13.290
+They all have a plus
+1 and minus 1 exit.
+
+0:11:13.290,0:11:17.290
+Where they differ is the reward
+you receive on every step.
+
+0:11:17.290,0:11:20.690
+So what's shown here is the optimal
+policy if the living reward--
+
+0:11:20.690,0:11:22.150
+in this case, living penalty--
+
+0:11:22.150,0:11:25.030
+is very, very mild.
+
+0:11:25.030,0:11:28.760
+So there's not a lot of pressure
+to hurry up and end the game.
+
+0:11:28.760,0:11:31.060
+So let's look and see what
+this policy does.
+
+0:11:31.060,0:11:34.020
+Well, mostly it's pretty
+interpretable.
+
+0:11:34.020,0:11:38.030
+For example, from here, we're
+going to go up and around.
+
+0:11:38.030,0:11:39.030
+Let's see what else it does.
+
+0:11:39.030,0:11:43.600
+Well, it kind of does this funny
+thing in this square here.
+
+0:11:43.600,0:11:45.240
+What's it doing there?
+
+0:11:45.240,0:11:47.850
+It's going into the wall.
+
+0:11:47.850,0:11:49.930
+Why does it go into the wall?
+
+0:11:49.930,0:11:53.990
+This is an example of, we feed the rules
+of the game in, we compute the
+
+0:11:53.990,0:11:55.790
+optimal behavior, and maybe--
+
+0:11:55.790,0:12:00.480
+like that AIBO that likes to poop the
+soccer ball out in order to shoot--
+
+0:12:00.480,0:12:04.060
+sometimes the behavior isn't what we
+expected, but it's still optimal.
+
+0:12:04.060,0:12:06.190
+So in this case, what
+is this position?
+
+0:12:06.190,0:12:09.050
+Essentially you've got this
+pit right behind you.
+
+0:12:09.050,0:12:11.850
+You really, really do not want
+to fall into the pit.
+
+0:12:11.850,0:12:16.500
+Rather than trying to move north or
+south, you move into the wall.
+
+0:12:16.500,0:12:17.950
+What can happen?
+
+0:12:17.950,0:12:19.800
+Well, you're probably
+going to stay put.
+
+0:12:19.800,0:12:22.420
+That's not too bad, because the
+living penalty is small.
+
+0:12:22.420,0:12:26.310
+But you might go north or south,
+both of which are safe.
+
+0:12:26.310,0:12:29.290
+If you did anything else,
+you would risk the pit.
+
+0:12:29.290,0:12:33.030
+So in fact, this is the agent pressing
+its chest against the wall and just
+
+0:12:33.030,0:12:35.560
+waiting, waiting, waiting,
+until it gets out of this
+
+0:12:35.560,0:12:37.430
+scary situation safely.
+
+0:12:37.430,0:12:39.940
+This agent is very conservative,
+because each
+
+0:12:39.940,0:12:42.810
+timestep costs very little.
+
+0:12:42.810,0:12:42.956
+All right.
+
+0:12:42.956,0:12:46.660
+What happens if we make this
+living penalty more severe?
+
+0:12:46.660,0:12:49.250
+So we're putting a little bit of
+pressure on the agent, that if it just
+
+0:12:49.250,0:12:52.310
+wanders around, it starts
+losing points.
+
+0:12:52.310,0:12:54.800
+Well, here now it's minus 0.03.
+
+0:12:54.800,0:12:59.180
+And you can see it's still the case
+that we go around to the exit.
+
+0:12:59.180,0:13:03.420
+Something that's changed here is from
+that scary position we now go straight
+
+0:13:03.420,0:13:07.360
+towards the exit, and we risk the pit,
+because that small chance of falling
+
+0:13:07.360,0:13:10.830
+into the pit is not worth the time it's
+going to take to shimmy our way
+
+0:13:10.830,0:13:13.550
+out by trying to bang into the wall.
+
+0:13:13.550,0:13:17.830
+However life is still cheap enough that
+we go the long way around from
+
+0:13:17.830,0:13:20.980
+the bottom squares.
+
+0:13:20.980,0:13:24.440
+What happens if we make the
+living reward even worse?
+
+0:13:24.440,0:13:29.770
+Well, again, from some squares we
+head towards the positive exit.
+
+0:13:29.770,0:13:33.340
+But now we're willing to
+take the shortcut.
+
+0:13:33.340,0:13:35.120
+We're not going to take
+the long way around.
+
+0:13:35.120,0:13:38.550
+Yes, the shortcut risks the pit.
+
+0:13:38.550,0:13:41.590
+What happens if we make the living
+reward extremely severe?
+
+0:13:41.590,0:13:43.470
+What happens if we make it minus 2?
+
+0:13:43.470,0:13:46.900
+It costs you minus 2 every step
+regardless, of what you do?
+
+0:13:46.900,0:13:48.620
+What do you want to do?
+
+0:13:48.620,0:13:51.960
+You want to end the game, which
+means straight into the exit.
+
+0:13:51.960,0:13:53.120
+Any exit will do.
+
+0:13:53.120,0:13:56.700
+The pit looks bad, but it's
+not as bad as moving.
+
+0:13:56.700,0:14:00.360
+So you get a slightly depressed agent
+when the living rewards are negative.
+
+0:14:00.360,0:14:03.090
+And maybe that's not surprising,
+given what we've input
+
+0:14:03.090,0:14:05.600
+as a utility function.
+
+0:14:05.600,0:14:06.180
+OK.
+
+0:14:06.180,0:14:09.910
+So this is another example of, we input
+the utilities and the behavior
+
+0:14:09.910,0:14:11.530
+emerges from a unified computation.
+
+0:14:11.530,0:14:12.780
+

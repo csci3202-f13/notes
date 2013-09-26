@@ -1,0 +1,412 @@
+0:00:00.000,0:00:01.560
+
+0:00:01.560,0:00:04.460
+DAN KLEIN: So we've just talked
+about what a CSP is.
+
+0:00:04.460,0:00:08.520
+We've seen various kinds of CSPs and how
+to formulate them, and now we're
+
+0:00:08.520,0:00:11.540
+going to talk about methods
+for solving them.
+
+0:00:11.540,0:00:15.060
+The first thing you might think of is,
+well, it's a sub case of search.
+
+0:00:15.060,0:00:16.990
+Let's just use search.
+
+0:00:16.990,0:00:20.050
+And there is a standard way of solving
+CSPs with search that is going to be
+
+0:00:20.050,0:00:22.230
+the primary method we solve them.
+
+0:00:22.230,0:00:26.010
+So in the standard search formulation,
+we still have states.
+
+0:00:26.010,0:00:27.680
+We still goal tests and so on.
+
+0:00:27.680,0:00:29.510
+What are the states?
+
+0:00:29.510,0:00:32.820
+The states are defined by the values
+that are assigned so far, and that
+
+0:00:32.820,0:00:35.140
+means a state is a partial assignment.
+
+0:00:35.140,0:00:37.890
+The initial state in the search problem
+is the empty assignment, where
+
+0:00:37.890,0:00:40.390
+no values have been assigned
+to any variables.
+
+0:00:40.390,0:00:45.460
+The successor function for a given
+partial assignment assigns a value to
+
+0:00:45.460,0:00:47.760
+a single unassigned variable,
+so it extends that
+
+0:00:47.760,0:00:49.380
+assignment by one variable.
+
+0:00:49.380,0:00:52.730
+And the goal test is, is the current
+assignment complete?
+
+0:00:52.730,0:00:55.870
+That is, do all variables have
+values assigned to them?
+
+0:00:55.870,0:00:58.130
+And are all constraints satisfied?
+
+0:00:58.130,0:01:01.420
+So if we do, this will be our first
+straightforward approach.
+
+0:01:01.420,0:01:04.090
+It's not going to work very well
+by itself, but we'll improve it
+
+0:01:04.090,0:01:06.910
+incrementally.
+
+0:01:06.910,0:01:09.720
+So let's test and make sure we
+understand this search problem.
+
+0:01:09.720,0:01:12.490
+So here's the case of Australia
+shown in the applet.
+
+0:01:12.490,0:01:15.360
+I'm going to show you a different graph
+in a demo, but first let's think
+
+0:01:15.360,0:01:16.670
+for the case of Australia.
+
+0:01:16.670,0:01:19.520
+What would breadth first search do?
+
+0:01:19.520,0:01:20.170
+Let's think about it.
+
+0:01:20.170,0:01:22.000
+What's at the root of the tree?
+
+0:01:22.000,0:01:25.730
+The root of the tree is some state,
+which is nothing assigned.
+
+0:01:25.730,0:01:28.470
+What are the children of that state?
+
+0:01:28.470,0:01:29.110
+Right.
+
+0:01:29.110,0:01:31.060
+They're all single assignments, right?
+
+0:01:31.060,0:01:35.680
+Each of these has one assignment,
+like V equals red.
+
+0:01:35.680,0:01:36.180
+Right.
+
+0:01:36.180,0:01:37.100
+And there's a bunch of them.
+
+0:01:37.100,0:01:39.940
+And the children of V equals red are
+a bunch of other assignments, which
+
+0:01:39.940,0:01:42.150
+include V equals red and one more.
+
+0:01:42.150,0:01:44.790
+What's breadth first search
+going to do in this tree?
+
+0:01:44.790,0:01:47.220
+It's going to try the top layer.
+
+0:01:47.220,0:01:49.200
+And then the second layer.
+
+0:01:49.200,0:01:51.620
+Is it going to find anything
+the second layer?
+
+0:01:51.620,0:01:52.450
+No.
+
+0:01:52.450,0:01:54.560
+It's going to try the third layer,
+and the fourth layer.
+
+0:01:54.560,0:01:57.170
+And where are all the solutions?
+
+0:01:57.170,0:01:58.570
+They're all at the bottom.
+
+0:01:58.570,0:02:01.560
+Breadth first search stays up at night,
+kind of worrying about cases
+
+0:02:01.560,0:02:05.200
+like this, where the solutions are all
+at the bottom, meaning it has to
+
+0:02:05.200,0:02:08.389
+search the entire tree before it even
+has a chance of finding that last
+
+0:02:08.389,0:02:09.930
+layer with the solutions in it.
+
+0:02:09.930,0:02:12.320
+All right, so breadth first search
+is kind of in trouble here.
+
+0:02:12.320,0:02:15.280
+It's kind of the worst possible
+case for breadth first search.
+
+0:02:15.280,0:02:19.550
+So, what would depth first search do?
+
+0:02:19.550,0:02:21.350
+Starts at the top, right?
+
+0:02:21.350,0:02:22.050
+Empty assignment.
+
+0:02:22.050,0:02:23.020
+It goes down.
+
+0:02:23.020,0:02:24.150
+It assigns something.
+
+0:02:24.150,0:02:26.870
+From there, it's going to take that
+deeper assignment, and assign
+
+0:02:26.870,0:02:28.640
+something else, and then something
+else, and something else.
+
+0:02:28.640,0:02:31.130
+And it's going to zip straight down
+the tree, and it's going to very
+
+0:02:31.130,0:02:33.465
+quickly find a complete assignment.
+
+0:02:33.465,0:02:36.280
+Now, who knows whether that assignment's
+in fact going to pass the
+
+0:02:36.280,0:02:37.020
+goal test, right?
+
+0:02:37.020,0:02:39.000
+It may not actually satisfy
+the constraints.
+
+0:02:39.000,0:02:41.630
+But at least depth first search is
+making an effort towards getting where
+
+0:02:41.630,0:02:42.870
+the solutions are.
+
+0:02:42.870,0:02:46.460
+So we mocked depth first search in the
+last unit, but now suddenly we're
+
+0:02:46.460,0:02:48.220
+seeing why we cover it at all.
+
+0:02:48.220,0:02:50.680
+In the case where all the solutions are
+at the bottom, and you're going to
+
+0:02:50.680,0:02:56.500
+spend most of your time managing that,
+depth first search is a great choice.
+
+0:02:56.500,0:03:00.320
+So let's see depth first search, this
+wonderful choice in action.
+
+0:03:00.320,0:03:02.490
+Again, this is a map coloring case.
+
+0:03:02.490,0:03:06.500
+So right now this is the empty
+assignment, and in depth first search,
+
+0:03:06.500,0:03:08.920
+we're going to start assigning
+one variable.
+
+0:03:08.920,0:03:13.870
+And then the next, and then the next,
+according to our exploration strategy.
+
+0:03:13.870,0:03:15.440
+And so what gets assigned first?
+
+0:03:15.440,0:03:18.000
+Well, let's say we start
+in the lower left.
+
+0:03:18.000,0:03:20.270
+So first we would assign,
+for example, blue.
+
+0:03:20.270,0:03:23.500
+Now, remember in depth first search,
+there are still other options that are
+
+0:03:23.500,0:03:26.430
+on the stack, or on the fringe.
+
+0:03:26.430,0:03:30.170
+But this is the one we're going
+to recurse into first.
+
+0:03:30.170,0:03:31.675
+All right, so what do we assign next?
+
+0:03:31.675,0:03:34.490
+Well, let's say it's the middle
+one on the bottom.
+
+0:03:34.490,0:03:36.670
+And what will we assign it?
+
+0:03:36.670,0:03:39.680
+Well, you know, we're going to call the
+successor function, and behold,
+
+0:03:39.680,0:03:41.170
+we'll assign it blue.
+
+0:03:41.170,0:03:41.640
+OK.
+
+0:03:41.640,0:03:44.000
+What happens next?
+
+0:03:44.000,0:03:45.650
+You think, oh, maybe we backtrack.
+
+0:03:45.650,0:03:46.380
+Wrong.
+
+0:03:46.380,0:03:46.860
+Right.
+
+0:03:46.860,0:03:49.790
+What happens in depth first search is
+you call the successor function.
+
+0:03:49.790,0:03:51.390
+And guess who has successors?
+
+0:03:51.390,0:03:51.980
+Successors.
+
+0:03:51.980,0:03:52.730
+Successors.
+
+0:03:52.730,0:03:55.420
+And so, depth first search is going
+to all the way to the end.
+
+0:03:55.420,0:03:57.460
+It's going to realize this doesn't
+have any successors.
+
+0:03:57.460,0:03:59.390
+It's going to pull the next thing off,
+and then the next thing, and then the
+
+0:03:59.390,0:04:00.190
+next thing.
+
+0:04:00.190,0:04:01.240
+And so you can keep this up.
+
+0:04:01.240,0:04:02.740
+I'll speed this thing up, and
+it's going to kind of
+
+0:04:02.740,0:04:04.530
+explore a bunch of stuff.
+
+0:04:04.530,0:04:06.740
+And you know, depth first search is
+going to spend a lot of time.
+
+0:04:06.740,0:04:09.090
+And in some sense, this is all
+just wasted, because when
+
+0:04:09.090,0:04:10.910
+did it make its mistake?
+
+0:04:10.910,0:04:12.580
+Like instantly, right?
+
+0:04:12.580,0:04:14.750
+So depth first research is going
+to spend a lot of time.
+
+0:04:14.750,0:04:16.910
+I'm not even going to
+let this continue.
+
+0:04:16.910,0:04:18.190
+So that's that.
+
+0:04:18.190,0:04:19.620
+OK, so something's wrong here.
+
+0:04:19.620,0:04:21.279
+There's actually a couple
+things wrong here.
+
+0:04:21.279,0:04:23.050
+And let's fix it.
+
+0:04:23.050,0:04:26.110
+So for naive search, there's actually a
+couple problems we're going to have
+
+0:04:26.110,0:04:28.640
+to fix before we're even going to have
+a hope of applying this to any
+
+0:04:28.640,0:04:29.890
+reasonable problem.
+
+0:04:29.890,0:04:32.567
+

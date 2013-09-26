@@ -1,0 +1,212 @@
+0:00:00.000,0:00:01.620
+
+0:00:01.620,0:00:04.350
+PROFESSOR: So, what does
+this algorithm do?
+
+0:00:04.350,0:00:05.300
+Is a complete?
+
+0:00:05.300,0:00:11.070
+That is, if a solution exists, is
+it guaranteed to return one?
+
+0:00:11.070,0:00:13.250
+Well, it's a little tricky.
+
+0:00:13.250,0:00:16.379
+But we're going to have to answer
+this for each of the problems.
+
+0:00:16.379,0:00:17.190
+Is it optimal?
+
+0:00:17.190,0:00:19.790
+Is it guaranteed to find
+the least cost path?
+
+0:00:19.790,0:00:20.420
+OK.
+
+0:00:20.420,0:00:21.500
+Think about it for breadth
+for a search.
+
+0:00:21.500,0:00:23.140
+We're going to answer
+it for all of them.
+
+0:00:23.140,0:00:26.020
+In general, we're going to also think
+about the time complexity and the
+
+0:00:26.020,0:00:27.060
+space complexity.
+
+0:00:27.060,0:00:30.390
+Time complexity is, basically,
+how many nodes get expanded.
+
+0:00:30.390,0:00:33.780
+Space complexity is, basically,
+how big can the fringe get.
+
+0:00:33.780,0:00:35.540
+OK?
+
+0:00:35.540,0:00:38.110
+We're going to answer all these
+questions with the following cartoon
+
+0:00:38.110,0:00:38.670
+of a search tree.
+
+0:00:38.670,0:00:39.330
+These are my cartoons.
+
+0:00:39.330,0:00:41.810
+So they're not brilliant like
+Katrina's cartoons.
+
+0:00:41.810,0:00:45.190
+But here's what they're
+going to look like.
+
+0:00:45.190,0:00:46.740
+OK?
+
+0:00:46.740,0:00:48.130
+All right, that's the mountain.
+
+0:00:48.130,0:00:49.620
+You can see the resemble, I hope.
+
+0:00:49.620,0:00:52.110
+All right, so this is
+your search tree.
+
+0:00:52.110,0:00:54.220
+At the top of the search
+tree is the start node.
+
+0:00:54.220,0:00:55.600
+What's right below it?
+
+0:00:55.600,0:00:58.050
+Some other nodes that you
+can get to in one step.
+
+0:00:58.050,0:01:00.350
+They're going to be b of them.
+b the branching factor
+
+0:01:00.350,0:01:00.970
+of the search problem.
+
+0:01:00.970,0:01:04.910
+It's, kind of, the average or the
+maximum number of actions available
+
+0:01:04.910,0:01:06.760
+from a state.
+
+0:01:06.760,0:01:08.100
+So there's one node at the top.
+
+0:01:08.100,0:01:09.730
+The next layer has b nodes.
+
+0:01:09.730,0:01:13.070
+If I go two steps in the forward,
+that's b squared nodes.
+
+0:01:13.070,0:01:15.840
+And so, if I go all the way down
+to the bottom, well how
+
+0:01:15.840,0:01:16.430
+deep is this tree?
+
+0:01:16.430,0:01:18.320
+Well, it's however deep
+it can possibly be.
+
+0:01:18.320,0:01:20.570
+So M is the maximum depth.
+
+0:01:20.570,0:01:21.510
+OK?
+
+0:01:21.510,0:01:24.320
+How many nodes are on
+the bottom layer?
+
+0:01:24.320,0:01:24.870
+b to the m, right?
+
+0:01:24.870,0:01:26.620
+We could figure out whether or not
+there's a plus one or something.
+
+0:01:26.620,0:01:28.690
+But it's b to the M.
+
+0:01:28.690,0:01:32.120
+And that means that if there are
+solutions at various depths.
+
+0:01:32.120,0:01:35.950
+OK, so I'm going to-- in red-- draw
+these solutions at various depths.
+
+0:01:35.950,0:01:38.200
+And how many nodes are
+in the entire tree?
+
+0:01:38.200,0:01:39.870
+Well there's b to the m at the bottom.
+
+0:01:39.870,0:01:41.770
+But then there's all that
+stuff above it.
+
+0:01:41.770,0:01:42.460
+Well how many are there?
+
+0:01:42.460,0:01:44.820
+Well, there's one plus b, plus b square,
+plus blah, blah, blah, blah.
+
+0:01:44.820,0:01:46.740
+All the way to b of the m.
+
+0:01:46.740,0:01:49.810
+And really that's just, actually,
+b to the m, right?
+
+0:01:49.810,0:01:51.810
+B is usually bigger than two.
+
+0:01:51.810,0:01:55.850
+OK, so basically this thing is
+exponential, where the base is the
+
+0:01:55.850,0:01:56.570
+branching factor.
+
+0:01:56.570,0:01:58.090
+That's how quickly it grows.
+
+0:01:58.090,0:02:02.020
+And the exponent is how did
+you might go on this tree.
+
+0:02:02.020,0:02:04.630
+That's going to help us think about how
+much work we do in these various
+
+0:02:04.630,0:02:05.880
+algorithms.
+
+0:02:05.880,0:02:06.180
+

@@ -1,0 +1,256 @@
+0:00:00.000,0:00:00.740
+
+0:00:00.740,0:00:02.550
+PROFESSOR: So now let's answer
+it for depth-first search.
+
+0:00:02.550,0:00:03.960
+Well, what does depth-first search do?
+
+0:00:03.960,0:00:07.170
+Well, remember we saw it kind of stripes
+from left to right, so it
+
+0:00:07.170,0:00:08.690
+expands everything on the left.
+
+0:00:08.690,0:00:11.890
+And if it doesn't find a goal, it kind
+of keeps trucking rightward until it
+
+0:00:11.890,0:00:12.970
+hits a goal.
+
+0:00:12.970,0:00:15.150
+Which goal does it hit?
+
+0:00:15.150,0:00:19.030
+It hits kind of the leftmost goal, if
+you consider left to be whatever order
+
+0:00:19.030,0:00:21.663
+the successors get prioritized
+by the implementation.
+
+0:00:21.663,0:00:26.460
+OK, so it expands some left
+prefix of the tree.
+
+0:00:26.460,0:00:29.080
+It means we could do the whole tree,
+like what's our worst depth-first
+
+0:00:29.080,0:00:29.830
+search nightmare?
+
+0:00:29.830,0:00:32.280
+Where is the goal?
+
+0:00:32.280,0:00:33.300
+It's like, over here.
+
+0:00:33.300,0:00:35.460
+And we process the whole tree, right?
+
+0:00:35.460,0:00:37.230
+Remember, processing the
+whole tree is bad news.
+
+0:00:37.230,0:00:40.200
+Processing half of the tree is half bad
+news, which means it's bad news
+
+0:00:40.200,0:00:41.660
+because everything's exponential here.
+
+0:00:41.660,0:00:46.920
+And so if m is finite, this thing's
+going to take time, b to the m to find
+
+0:00:46.920,0:00:48.250
+the solution in general.
+
+0:00:48.250,0:00:50.200
+Or you might luck out, it might be on
+the left, but in general, you should
+
+0:00:50.200,0:00:51.970
+expect to process a chunk of the tree.
+
+0:00:51.970,0:00:54.060
+And the tree is extremely big.
+
+0:00:54.060,0:00:58.420
+All right, how much space does my fringe
+take up while I do this order b
+
+0:00:58.420,0:01:00.190
+to the m work?
+
+0:01:00.190,0:01:02.400
+Well, what's on my fringe?
+
+0:01:02.400,0:01:05.489
+It's all these other things at the
+top level that we didn't do yet.
+
+0:01:05.489,0:01:08.650
+And then below that, it's all the things
+we didn't do at that level, and
+
+0:01:08.650,0:01:09.630
+all the things we didn't do.
+
+0:01:09.630,0:01:13.970
+So it's basically along this path
+to wherever I am right now.
+
+0:01:13.970,0:01:17.720
+It's all of the other successors
+on the path to the root.
+
+0:01:17.720,0:01:19.960
+Well, there's b successors
+at every level.
+
+0:01:19.960,0:01:21.740
+I can be at most m deep.
+
+0:01:21.740,0:01:26.310
+And so since we only have siblings on
+the path to the root, it's b times m.
+
+0:01:26.310,0:01:27.590
+The fringe is small.
+
+0:01:27.590,0:01:31.251
+OK, that's something in depth-first
+search's favor.
+
+0:01:31.251,0:01:32.840
+OK, is this algorithm complete?
+
+0:01:32.840,0:01:34.330
+Now we can finally answer
+the question.
+
+0:01:34.330,0:01:35.290
+We've got our tree.
+
+0:01:35.290,0:01:36.120
+We can answer the question.
+
+0:01:36.120,0:01:38.920
+If there is a solution, am
+I guaranteed to find
+
+0:01:38.920,0:01:40.860
+it with this algorithm?
+
+0:01:40.860,0:01:43.790
+The rub is how big can m get?
+
+0:01:43.790,0:01:46.580
+Think back to the other quiz
+with the four state graph.
+
+0:01:46.580,0:01:49.000
+M could be, say, infinite.
+
+0:01:49.000,0:01:52.180
+OK, b to the m is bad enough
+when m is finite, right?
+
+0:01:52.180,0:01:53.780
+So b to the m can be very big.
+
+0:01:53.780,0:01:56.930
+If m is infinite, then this is
+in fact will not be complete.
+
+0:01:56.930,0:02:00.340
+We could spin our wheels just going
+downward to the left, kind of, and
+
+0:02:00.340,0:02:01.520
+never stop.
+
+0:02:01.520,0:02:02.410
+So what could we do?
+
+0:02:02.410,0:02:03.640
+We could prevent cycles somehow.
+
+0:02:03.640,0:02:04.870
+There are various ways of doing these.
+
+0:02:04.870,0:02:08.650
+We'll find out one way next class, which
+will have to do with removing
+
+0:02:08.650,0:02:10.210
+redundant work in general.
+
+0:02:10.210,0:02:14.220
+So if m is finite, either because you've
+eliminated cycles in some way,
+
+0:02:14.220,0:02:17.920
+or because the graph is finite to begin
+with, then this may be complete.
+
+0:02:17.920,0:02:21.110
+But only in cases where
+you won't get cycles.
+
+0:02:21.110,0:02:22.270
+Is it optimal?
+
+0:02:22.270,0:02:24.650
+That is, if there are multiple
+solutions, am I guaranteed to find the
+
+0:02:24.650,0:02:25.590
+cheapest one?
+
+0:02:25.590,0:02:27.700
+I haven't really even told you what
+costs are, but imagine everything has
+
+0:02:27.700,0:02:29.160
+cost one for the moment.
+
+0:02:29.160,0:02:30.980
+Am I guaranteed to find the
+shallowest solution?
+
+0:02:30.980,0:02:33.600
+
+0:02:33.600,0:02:35.370
+Here's the shallowest solution.
+
+0:02:35.370,0:02:37.060
+We're sad because we don't find it.
+
+0:02:37.060,0:02:38.180
+OK, so it doesn't.
+
+0:02:38.180,0:02:39.455
+It finds the leftmost solution.
+
+0:02:39.455,0:02:41.650
+In general, people could
+not care less about the
+
+0:02:41.650,0:02:43.030
+leftmostness of the solution.
+
+0:02:43.030,0:02:45.900
+You want to find the cheapest one in
+some way, and that's a disadvantage to
+
+0:02:45.900,0:02:47.150
+depth-first search.
+
+0:02:47.150,0:02:47.630
+

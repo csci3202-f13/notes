@@ -1,0 +1,401 @@
+0:00:00.000,0:00:01.590
+
+0:00:01.590,0:00:02.690
+DAN KLEIN: So what's rationality?
+
+0:00:02.690,0:00:05.760
+We have this idea that we
+want rational agents.
+
+0:00:05.760,0:00:07.450
+We want utilities.
+
+0:00:07.450,0:00:10.420
+We know we have to have preferences.
+
+0:00:10.420,0:00:12.730
+Are there kind of good preferences
+and bad preferences?
+
+0:00:12.730,0:00:14.260
+Are there always utility functions?
+
+0:00:14.260,0:00:18.900
+It all gets down to what exactly we
+mean when we say rationality.
+
+0:00:18.900,0:00:21.390
+So preferences are the starting point.
+
+0:00:21.390,0:00:24.580
+Agents have preferences, and we're going
+to try to figure out under what
+
+0:00:24.580,0:00:30.310
+circumstances those preferences can be
+boiled down to a utility function.
+
+0:00:30.310,0:00:32.520
+So we'd like some constraints
+on these preferences before
+
+0:00:32.520,0:00:34.300
+we call them rational.
+
+0:00:34.300,0:00:36.670
+There's a wide variety of
+preferences that are OK.
+
+0:00:36.670,0:00:38.250
+Maybe the agent wants to make money.
+
+0:00:38.250,0:00:39.810
+Maybe the agent wants to spend money.
+
+0:00:39.810,0:00:41.595
+Maybe the agent likes ice cream.
+
+0:00:41.595,0:00:42.800
+Maybe the agent hates ice cream.
+
+0:00:42.800,0:00:45.770
+These are all perfectly good
+preferences, but there are certain
+
+0:00:45.770,0:00:48.770
+kinds of preference that just make
+no sense, and so we need some
+
+0:00:48.770,0:00:50.260
+constraints.
+
+0:00:50.260,0:00:51.310
+Here's one constraint.
+
+0:00:51.310,0:00:52.920
+The axiom of transitivity.
+
+0:00:52.920,0:00:56.490
+This says if you prefer a to b,
+and you prefer b to c, you
+
+0:00:56.490,0:00:58.035
+better prefer a to c.
+
+0:00:58.035,0:01:00.060
+Well, that seems reasonable.
+
+0:01:00.060,0:01:01.710
+Why should we have this?
+
+0:01:01.710,0:01:04.700
+Well, if an agent has preferences
+which do not obey
+
+0:01:04.700,0:01:06.560
+this, it has some flaws.
+
+0:01:06.560,0:01:09.700
+Like you can make it give away all
+of its money, or anything else.
+
+0:01:09.700,0:01:13.690
+Because if, for example, if I likes b
+better than c and it's got c, you can
+
+0:01:13.690,0:01:17.200
+give it b in return for,
+maybe a penny.
+
+0:01:17.200,0:01:21.260
+But if it likes a better, you can now
+give it a in return for a penny.
+
+0:01:21.260,0:01:23.060
+Oh, but wait, it likes
+c better than a.
+
+0:01:23.060,0:01:26.290
+So now you give it c, which is where
+it started, in return for a penny.
+
+0:01:26.290,0:01:29.270
+So it's back where it started, except
+now you have three of its pennies.
+
+0:01:29.270,0:01:31.540
+And you keep doing this until
+it has no more money.
+
+0:01:31.540,0:01:34.380
+This seems like a defect in behavior.
+
+0:01:34.380,0:01:38.300
+And so we're going to say we require
+this axiom in order to declare
+
+0:01:38.300,0:01:39.825
+preferences rational.
+
+0:01:39.825,0:01:41.750
+That seems pretty reasonable.
+
+0:01:41.750,0:01:42.600
+There are more of them.
+
+0:01:42.600,0:01:45.370
+These are the actions of rationality.
+
+0:01:45.370,0:01:46.060
+So what do these say?
+
+0:01:46.060,0:01:47.750
+Let's look at them.
+
+0:01:47.750,0:01:50.670
+Orderability says given two things, you
+either have to like a better, or
+
+0:01:50.670,0:01:52.550
+you have to like b better, or
+you have to be indifferent.
+
+0:01:52.550,0:01:54.740
+It's kind of hard to argue with that.
+
+0:01:54.740,0:01:55.990
+Transitivity, we just saw.
+
+0:01:55.990,0:01:58.570
+It says if a is better than b, and b
+is better than c, then a should be
+
+0:01:58.570,0:01:59.670
+better than c.
+
+0:01:59.670,0:02:02.950
+We've already seen what can happen
+when that goes wrong.
+
+0:02:02.950,0:02:05.650
+The other ones are a little more subtle,
+but they're pretty plausible.
+
+0:02:05.650,0:02:06.780
+So here's continuity.
+
+0:02:06.780,0:02:10.539
+Continuity says if you like a better
+than c, and b is somewhere in the
+
+0:02:10.539,0:02:14.710
+middle, then there has to be some
+lottery between a and c for which you
+
+0:02:14.710,0:02:17.000
+are indifferent between
+the lottery and b.
+
+0:02:17.000,0:02:19.650
+And essentially, this means
+you can interpolate.
+
+0:02:19.650,0:02:23.340
+If b is in between a and c, then
+it's equivalent to some lottery
+
+0:02:23.340,0:02:26.440
+between a and c.
+
+0:02:26.440,0:02:27.040
+Substitutability.
+
+0:02:27.040,0:02:29.690
+This says if you're indifferent
+between a and b, then you're
+
+0:02:29.690,0:02:32.350
+indifferent whenever they're
+plugged into lotteries.
+
+0:02:32.350,0:02:32.820
+That makes sense.
+
+0:02:32.820,0:02:34.200
+If they're exchangeable on
+their own, they should be
+
+0:02:34.200,0:02:36.010
+exchangeable in a lottery.
+
+0:02:36.010,0:02:38.190
+Monotonicity, also pretty reasonable.
+
+0:02:38.190,0:02:42.650
+This says that if a is better than b,
+and you have a lottery between a and
+
+0:02:42.650,0:02:46.400
+b, then you'd prefer
+more a in the mix.
+
+0:02:46.400,0:02:47.700
+That seems to make sense.
+
+0:02:47.700,0:02:49.110
+So here's a bunch of axioms.
+
+0:02:49.110,0:02:53.260
+There's a theorem that says rational
+preferences that they obey these
+
+0:02:53.260,0:02:57.390
+axioms can be described as maximization
+of expected utility.
+
+0:02:57.390,0:03:02.750
+Basically, if you accept these axioms,
+there's a theorem that says all of
+
+0:03:02.750,0:03:06.820
+your preferences can be described
+with the utility function.
+
+0:03:06.820,0:03:10.730
+So if you obey these axioms, we give
+you the stamp of rationality.
+
+0:03:10.730,0:03:14.890
+And that means that preferences that
+violate this are irrational.
+
+0:03:14.890,0:03:18.380
+Preferences that meet this are rational,
+but there's still a lot of
+
+0:03:18.380,0:03:18.860
+wiggle room.
+
+0:03:18.860,0:03:21.740
+Lots of different preferences
+meet this.
+
+0:03:21.740,0:03:22.890
+Here's the theorem.
+
+0:03:22.890,0:03:28.290
+The theorem says given any preferences
+satisfying the axioms of rationality,
+
+0:03:28.290,0:03:34.350
+there exists a real valued function u
+that has the following properties.
+
+0:03:34.350,0:03:37.150
+If you prefer a to b, it
+has a higher utility.
+
+0:03:37.150,0:03:41.210
+So this utility function captures
+your ordinal preferences.
+
+0:03:41.210,0:03:43.550
+And here's the amazing part.
+
+0:03:43.550,0:03:49.430
+The utility of a lottery is the
+expectation of the utilities of the
+
+0:03:49.430,0:03:51.080
+elements of the lottery.
+
+0:03:51.080,0:03:54.340
+This means that this utility function
+not only captures your ordinal
+
+0:03:54.340,0:03:57.420
+preferences amongst prizes,
+but it captures your
+
+0:03:57.420,0:03:59.080
+preferences between lotteries.
+
+0:03:59.080,0:03:59.635
+It's amazing.
+
+0:03:59.635,0:04:02.255
+It means your utilities are preserved
+under expectation.
+
+0:04:02.255,0:04:05.250
+
+0:04:05.250,0:04:08.070
+Now we're back to the maximum
+expected utility principal.
+
+0:04:08.070,0:04:11.880
+The principal says choose the action
+that maximizes your expected utility.
+
+0:04:11.880,0:04:14.770
+And this is now well defined, because
+the theorem says that if our
+
+0:04:14.770,0:04:19.170
+preferences were actually rational in
+the first place, there is some such
+
+0:04:19.170,0:04:21.360
+utility function.
+
+0:04:21.360,0:04:24.910
+Now, an agent can be rational, meaning
+consistent with the MEU principle
+
+0:04:24.910,0:04:28.270
+without ever actually representing
+a utility, or manipulating a
+
+0:04:28.270,0:04:29.080
+probability.
+
+0:04:29.080,0:04:32.080
+For example, you can have a look
+up table for tic-tac-toe.
+
+0:04:32.080,0:04:35.700
+You can have a reflex vacuum cleaner
+that in a given configuration, just
+
+0:04:35.700,0:04:38.740
+goes after the closest dirt, and
+that turns out to be optimal.
+
+0:04:38.740,0:04:44.070
+But still, you want your behaviors to be
+consistent with the MEU principle.
+
+0:04:44.070,0:04:47.220
+And also what this theorem means is even
+though you are human and you are
+
+0:04:47.220,0:04:50.630
+individual, and you have all these
+subtle preferences that are nuanced
+
+0:04:50.630,0:04:55.750
+and reflect your innermost workings,
+sorry, you can in fact be reduced to a
+
+0:04:55.750,0:04:56.920
+utility function.
+
+0:04:56.920,0:04:58.910
+It's just the way it is.
+
+0:04:58.910,0:05:03.020
+Unless you violate the axioms of
+rationality, and hopefully you don't.
+
+0:05:03.020,0:05:04.300
+

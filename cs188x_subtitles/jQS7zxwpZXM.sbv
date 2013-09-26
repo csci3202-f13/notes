@@ -1,0 +1,832 @@
+0:00:00.000,0:00:00.692
+
+0:00:00.692,0:00:03.150
+PROFESSOR: That's an algorithm
+called value iteration.
+
+0:00:03.150,0:00:06.340
+You can think of this as basically
+building your computation from the
+
+0:00:06.340,0:00:10.600
+bottom up, all the way up to the top,
+where you will receive the computation
+
+0:00:10.600,0:00:15.060
+that expectimax would have done, but
+with a whole lot less work, assuming
+
+0:00:15.060,0:00:18.870
+we have a small number of states.
+
+0:00:18.870,0:00:21.210
+So what does value iteration do?
+
+0:00:21.210,0:00:21.945
+Here's the algorithm.
+
+0:00:21.945,0:00:23.760
+It's like building that cake.
+
+0:00:23.760,0:00:25.860
+You begin at the bottom with V0.
+
+0:00:25.860,0:00:29.180
+And for every state, V0 is 0.
+
+0:00:29.180,0:00:30.820
+There are no time steps left.
+
+0:00:30.820,0:00:33.100
+And that means there are
+no rewards left.
+
+0:00:33.100,0:00:35.170
+So what does this actually
+look like in code?
+
+0:00:35.170,0:00:36.780
+It is a vector.
+
+0:00:36.780,0:00:39.630
+There's a 0 for every state
+in this vector.
+
+0:00:39.630,0:00:41.890
+So this is different than expectimax,
+which you think about as
+
+0:00:41.890,0:00:43.120
+computing for one state.
+
+0:00:43.120,0:00:44.150
+This is all states.
+
+0:00:44.150,0:00:48.460
+It's a vector of 0's.
+
+0:00:48.460,0:00:50.410
+Let's say we've computed V sub k.
+
+0:00:50.410,0:00:52.840
+And at the beginning, that's V0.
+
+0:00:52.840,0:00:56.830
+So at any point we know, you tell me
+any state, and I will tell you what
+
+0:00:56.830,0:00:59.570
+happens if you run a depth
+k expectimax search.
+
+0:00:59.570,0:01:00.730
+We have that cached.
+
+0:01:00.730,0:01:01.880
+It's in a vector.
+
+0:01:01.880,0:01:04.239
+What we're going to do is we're
+going to do one ply of
+
+0:01:04.239,0:01:07.170
+expectimax from each state.
+
+0:01:07.170,0:01:10.010
+So we're going to visit state
+by state and run a tiny
+
+0:01:10.010,0:01:11.940
+little expectimax search.
+
+0:01:11.940,0:01:14.850
+Except this expectimax search
+is going to be super fast.
+
+0:01:14.850,0:01:16.490
+Let's see what it does.
+
+0:01:16.490,0:01:20.670
+What it's going to do
+is start at state s.
+
+0:01:20.670,0:01:26.380
+It's going to consider all actions a,
+just like a max node always does.
+
+0:01:26.380,0:01:28.390
+That's reflected in this
+equation right here.
+
+0:01:28.390,0:01:30.980
+We're going to max over all values a.
+
+0:01:30.980,0:01:36.710
+Then for each of the chance nodes s
+comma a, the queue states, we're going
+
+0:01:36.710,0:01:40.060
+to now have to consider
+every result s prime.
+
+0:01:40.060,0:01:41.580
+That's reflected here.
+
+0:01:41.580,0:01:47.160
+Again, it's this average over all of the
+s prime outcomes of the action a.
+
+0:01:47.160,0:01:52.030
+And for each s prime, it has some
+weight, T s, a, s prime.
+
+0:01:52.030,0:01:57.080
+For each of these s primes, we then look
+up the instantaneous reward for
+
+0:01:57.080,0:01:58.430
+that one step.
+
+0:01:58.430,0:01:59.690
+And then we recurse.
+
+0:01:59.690,0:02:03.910
+But the recursion is into
+an expectimax tree that
+
+0:02:03.910,0:02:06.150
+we've already computed.
+
+0:02:06.150,0:02:09.500
+So we'll add in the instantaneous
+reward and the recursion.
+
+0:02:09.500,0:02:11.370
+But the recursion won't
+actually happen.
+
+0:02:11.370,0:02:15.460
+Because the recursion has already been
+computed, and that's V sub k.
+
+0:02:15.460,0:02:18.420
+We already have that entire
+vector for every state.
+
+0:02:18.420,0:02:21.190
+And so what does this actually do?
+
+0:02:21.190,0:02:23.300
+It goes from 0 to 1 to 2.
+
+0:02:23.300,0:02:25.590
+And we keep going until
+we decide to stop.
+
+0:02:25.590,0:02:26.570
+When are we going to stop?
+
+0:02:26.570,0:02:28.400
+What is that magic value of k?
+
+0:02:28.400,0:02:31.950
+We can either know that our goal is
+100, and we're going to stop.
+
+0:02:31.950,0:02:33.090
+That would be fine.
+
+0:02:33.090,0:02:34.390
+But we can do something
+even better now.
+
+0:02:34.390,0:02:38.850
+Because we're going bottom up, we can
+keep doing this until it converges.
+
+0:02:38.850,0:02:41.460
+And if this is the kind of MDP where
+you have to go very deeply into the
+
+0:02:41.460,0:02:43.350
+tree, we just run it for longer.
+
+0:02:43.350,0:02:45.840
+And we can tell convergence
+when we see it.
+
+0:02:45.840,0:02:48.720
+We'll talk about that in a second.
+
+0:02:48.720,0:02:49.520
+So we have this algorithm.
+
+0:02:49.520,0:02:50.560
+We start with V0.
+
+0:02:50.560,0:02:53.100
+We do this update for every level.
+
+0:02:53.100,0:02:56.470
+How expensive is each iteration
+of this update?
+
+0:02:56.470,0:02:58.610
+Well, what do we do?
+
+0:02:58.610,0:03:02.880
+Well, we need to compute a
+quantity for each state.
+
+0:03:02.880,0:03:03.960
+So that's a factor of s.
+
+0:03:03.960,0:03:07.860
+We're going to do this update
+for each state s.
+
+0:03:07.860,0:03:11.110
+Then for each state, we
+do a mini expectimax.
+
+0:03:11.110,0:03:12.650
+We have to consider every a.
+
+0:03:12.650,0:03:16.320
+So there's going to be some for-loop
+over actions, just like a max node
+
+0:03:16.320,0:03:17.450
+always has.
+
+0:03:17.450,0:03:20.690
+Then there's going to be a sum
+over resulting states.
+
+0:03:20.690,0:03:24.460
+Which in the worst case, any possible
+state could result, though it's often
+
+0:03:24.460,0:03:25.950
+much sparser than that.
+
+0:03:25.950,0:03:31.160
+And so we get another for-loop over
+states, which is another factor of s.
+
+0:03:31.160,0:03:36.570
+So every iteration of this costs s
+squared times the number of actions.
+
+0:03:36.570,0:03:37.460
+Is that good or bad?
+
+0:03:37.460,0:03:41.080
+Well, it's good in that it doesn't grow
+with the number of iterations
+
+0:03:41.080,0:03:43.850
+like expectimax grows with the depth.
+
+0:03:43.850,0:03:47.810
+It's bad in that expectimax doesn't
+have to touch every state if it
+
+0:03:47.810,0:03:48.910
+doesn't go too deep.
+
+0:03:48.910,0:03:50.770
+This always touches every state.
+
+0:03:50.770,0:03:54.900
+So it's all about the trade-off of how
+many states you have and how connected
+
+0:03:54.900,0:03:58.990
+they are and how deep you need
+to go into the tree.
+
+0:03:58.990,0:04:03.650
+We have a theorem that says that this
+process, value iteration starting at
+
+0:04:03.650,0:04:08.730
+V0 and working your way up to larger
+time-limited V sub k, will converge to
+
+0:04:08.730,0:04:11.020
+unique optimal values.
+
+0:04:11.020,0:04:14.680
+And the basic idea of this is that the
+approximations get better and better
+
+0:04:14.680,0:04:16.860
+as you go deeper into the tree.
+
+0:04:16.860,0:04:20.950
+And in particular, the policy may
+converge long before the values do.
+
+0:04:20.950,0:04:23.670
+
+0:04:23.670,0:04:26.980
+Let's see an example that will show
+us both that issue of the policies
+
+0:04:26.980,0:04:30.480
+converging fast and what
+this actually does.
+
+0:04:30.480,0:04:31.530
+Let's take a look.
+
+0:04:31.530,0:04:32.280
+We start at the bottom.
+
+0:04:32.280,0:04:33.390
+We start with V sub 0.
+
+0:04:33.390,0:04:34.470
+That's our base case.
+
+0:04:34.470,0:04:38.180
+And we always know that if there's no
+rewards left, then for every state, we
+
+0:04:38.180,0:04:41.900
+can put in a big 0 for the value.
+
+0:04:41.900,0:04:44.980
+Whatever policy you have, you're going
+to get 0 from that point on because
+
+0:04:44.980,0:04:47.260
+there is no "that point on."
+
+0:04:47.260,0:04:48.870
+Let's think about V sub 1.
+
+0:04:48.870,0:04:51.720
+We have to visit each of
+the possible states.
+
+0:04:51.720,0:04:53.160
+So we're going to do this three times.
+
+0:04:53.160,0:04:56.960
+And for each one, we're going to
+do a little expectimax search.
+
+0:04:56.960,0:05:02.320
+Except only one more time step will
+happen, and then we'll plug in V0.
+
+0:05:02.320,0:05:05.280
+So let's do blue, the
+cool state, first.
+
+0:05:05.280,0:05:06.600
+So let's think about this.
+
+0:05:06.600,0:05:11.250
+You are in this state here,
+the cool state.
+
+0:05:11.250,0:05:13.250
+And we do a little expectimax search.
+
+0:05:13.250,0:05:16.110
+Again, as an equation, that's this.
+
+0:05:16.110,0:05:19.100
+In practice, it means we think,
+all right, we have to
+
+0:05:19.100,0:05:20.780
+consider the two actions.
+
+0:05:20.780,0:05:23.420
+It could be the best thing
+to do is go slow.
+
+0:05:23.420,0:05:25.290
+Or the best thing to do is go fast.
+
+0:05:25.290,0:05:27.860
+If I go slow, what score will I get?
+
+0:05:27.860,0:05:33.480
+I'll get a plus 1 in the next time
+step, and then V0, which is 0.
+
+0:05:33.480,0:05:38.300
+If I go fast, I'll get a plus
+2 for either outcome.
+
+0:05:38.300,0:05:40.710
+And then the various
+states will be 0's.
+
+0:05:40.710,0:05:41.580
+So what should I do?
+
+0:05:41.580,0:05:42.600
+I should go fast.
+
+0:05:42.600,0:05:43.720
+I'll get a 2 there.
+
+0:05:43.720,0:05:47.610
+Similarly from the warm state, in one
+more step I've got the choice of going
+
+0:05:47.610,0:05:52.100
+slow and receiving a plus 1 or going
+fast and receiving a minus 10.
+
+0:05:52.100,0:05:53.980
+Simple choice there.
+
+0:05:53.980,0:05:55.740
+You go slow and you receive a plus 1.
+
+0:05:55.740,0:05:58.080
+And from overheated, you have
+no actions available.
+
+0:05:58.080,0:06:01.290
+So we can just say that
+that's still 0.
+
+0:06:01.290,0:06:04.170
+All of the interesting
+action comes at V2.
+
+0:06:04.170,0:06:04.980
+And it's not over here.
+
+0:06:04.980,0:06:08.150
+Because for overheated,
+you still have 0.
+
+0:06:08.150,0:06:10.940
+So let's think about how
+we fill these in.
+
+0:06:10.940,0:06:13.810
+Let's do the cool state first.
+
+0:06:13.810,0:06:16.840
+I've got two possibilities
+from this expectimax.
+
+0:06:16.840,0:06:21.810
+Either the best thing to do is to
+go slow and then act optimally
+
+0:06:21.810,0:06:24.210
+thereafter, meaning plug in V1.
+
+0:06:24.210,0:06:25.660
+Let's figure out that.
+
+0:06:25.660,0:06:28.030
+So I break out this computation.
+
+0:06:28.030,0:06:32.400
+If I go slow, then what
+am I going to get?
+
+0:06:32.400,0:06:35.310
+I'm going to get a 1 as an
+instantaneous reward.
+
+0:06:35.310,0:06:40.490
+And if there's no discount, then
+I'm going to land back at cool.
+
+0:06:40.490,0:06:46.890
+And then I'm going to plug in
+V1 of cool, which is 2.
+
+0:06:46.890,0:06:49.690
+And I get 3.
+
+0:06:49.690,0:06:51.850
+Or I could go fast.
+
+0:06:51.850,0:06:56.560
+If I go fast, I receive
+a 2 instantaneously.
+
+0:06:56.560,0:06:58.620
+But what happens after that?
+
+0:06:58.620,0:07:03.570
+Well, I have a 50/50 chance of plugging
+in this number, because I got
+
+0:07:03.570,0:07:07.410
+sent back to cool, and a 50/50 chance
+of plugging in this number.
+
+0:07:07.410,0:07:11.266
+And so what I end up with
+here is plus 1.5.
+
+0:07:11.266,0:07:17.770
+And if I work all of that
+out, now I have 3.5.
+
+0:07:17.770,0:07:22.150
+And if I work that out for the warm
+state, it'll come out to 2.5.
+
+0:07:22.150,0:07:23.440
+And so what do we see?
+
+0:07:23.440,0:07:27.420
+We see, one, that as I go further
+up, the numbers are increasing.
+
+0:07:27.420,0:07:30.560
+And that makes sense because as I have
+more time steps in this MDP, I can get
+
+0:07:30.560,0:07:31.900
+more rewards.
+
+0:07:31.900,0:07:36.080
+I also see that at every layer, it's
+better to be in the cool state than to
+
+0:07:36.080,0:07:37.010
+be in the warm state.
+
+0:07:37.010,0:07:38.420
+And of course it's better.
+
+0:07:38.420,0:07:41.240
+Because you can then safely go fast.
+
+0:07:41.240,0:07:42.880
+Now, you can look at this, and
+you can probably figure
+
+0:07:42.880,0:07:44.420
+out the optimal policy.
+
+0:07:44.420,0:07:48.750
+This is designed so the optimal policy
+is if you're cool, go fast.
+
+0:07:48.750,0:07:50.680
+And once you warm up, you go slow.
+
+0:07:50.680,0:07:53.040
+And you never risk overheating.
+
+0:07:53.040,0:07:58.410
+Now, that optimal policy of from cool
+go fast, from warm go slow, at what
+
+0:07:58.410,0:08:00.040
+point did we find it?
+
+0:08:00.040,0:08:02.550
+We actually found it already at V1.
+
+0:08:02.550,0:08:06.850
+These numbers 2 and 1 already reflect
+when you're cool go fast and when
+
+0:08:06.850,0:08:08.490
+you're warm go slow.
+
+0:08:08.490,0:08:14.230
+But it takes longer for the values to
+actually figure out how good that is.
+
+0:08:14.230,0:08:17.990
+Now, in general, V1 is not enough
+to find the best policy.
+
+0:08:17.990,0:08:22.250
+And in particular, this MDP, because
+there's no discount, the Vs aren't
+
+0:08:22.250,0:08:24.130
+going to converge.
+
+0:08:24.130,0:08:25.655
+So how do we know this thing
+is going to converge?
+
+0:08:25.655,0:08:28.015
+We're computing these V sub k
+vectors, and how do we know
+
+0:08:28.015,0:08:28.900
+they're going to converge?
+
+0:08:28.900,0:08:31.330
+Well first of all, we don't.
+
+0:08:31.330,0:08:34.919
+Because if there's no discount, and the
+rewards are all positive, and the
+
+0:08:34.919,0:08:38.750
+game's never going to end, like for
+racing, the values are infinite.
+
+0:08:38.750,0:08:41.350
+And you're never going to get there.
+
+0:08:41.350,0:08:44.330
+But there are cases where we can
+show that it will converge.
+
+0:08:44.330,0:08:48.920
+One case is when the underlying tree
+has maximum depth M. That means for
+
+0:08:48.920,0:08:54.060
+some reason, for some knowledge about
+this particular MDP, you can say that
+
+0:08:54.060,0:08:55.760
+it will end after M steps.
+
+0:08:55.760,0:08:59.950
+There's no possible sequence of actions
+and outcomes that lasts longer
+
+0:08:59.950,0:09:02.880
+than M. Well, then it seems reasonable
+that this should converge, because
+
+0:09:02.880,0:09:07.000
+once I hit VM, I've done the full
+expectimax search, and any further
+
+0:09:07.000,0:09:09.010
+iterations will do nothing.
+
+0:09:09.010,0:09:11.380
+But that's easy case.
+
+0:09:11.380,0:09:15.230
+The general case about why this usually
+converges is because usually
+
+0:09:15.230,0:09:18.820
+the discount is less than 1 And all I'm
+going to do is sketch this proof.
+
+0:09:18.820,0:09:20.740
+But it goes something like this.
+
+0:09:20.740,0:09:23.330
+In value iteration, we
+compute V sub k.
+
+0:09:23.330,0:09:26.360
+And then in the next step, we
+compute V sub k plus 1.
+
+0:09:26.360,0:09:30.620
+So we can think of that here as we're
+going from V sub k to V sub k plus 1.
+
+0:09:30.620,0:09:31.990
+And we're doing this for all states.
+
+0:09:31.990,0:09:35.220
+But let's think about
+a specific state.
+
+0:09:35.220,0:09:40.320
+V sub k and V sub k plus 1 both
+represent expectimax searches, except
+
+0:09:40.320,0:09:44.740
+the V sub k plus 1 search goes
+deeper by one layer.
+
+0:09:44.740,0:09:49.220
+Now, I can imagine the V sub k1 also
+goes deeper by one layer, except that
+
+0:09:49.220,0:09:51.240
+bottom layers filled with 0's.
+
+0:09:51.240,0:09:53.730
+That will give me the equivalent
+computation.
+
+0:09:53.730,0:09:54.950
+So I've got these two things.
+
+0:09:54.950,0:09:59.830
+And I can imagine they're both of depth
+k plus 1, except for V sub k,
+
+0:09:59.830,0:10:02.480
+that last layer is just 0.
+
+0:10:02.480,0:10:03.650
+So how can you be different?
+
+0:10:03.650,0:10:07.080
+We're doing some computation
+along these trees.
+
+0:10:07.080,0:10:10.080
+Well, what's the difference?
+
+0:10:10.080,0:10:11.610
+What's down here?
+
+0:10:11.610,0:10:15.300
+Well, what's down here is a mix
+of stuff that's the actual
+
+0:10:15.300,0:10:16.760
+rewards from the MDP.
+
+0:10:16.760,0:10:20.710
+But at best, they're all the
+maximum reward possible.
+
+0:10:20.710,0:10:23.240
+At worst, it's all the minimum
+reward possible.
+
+0:10:23.240,0:10:29.450
+And that means that V sub k, which
+plugged in 0, we could imagine it
+
+0:10:29.450,0:10:33.100
+either having R MIN or R MAX down
+there, and V sub k plus 1 is in
+
+0:10:33.100,0:10:35.460
+between those things.
+
+0:10:35.460,0:10:39.220
+And because of that, we know that the
+difference from that last layer is
+
+0:10:39.220,0:10:41.310
+really the maximum reward.
+
+0:10:41.310,0:10:45.510
+And because you're buried k plus 1
+layers down, everything down there's
+
+0:10:45.510,0:10:47.940
+discounted by gamma to the k.
+
+0:10:47.940,0:10:50.460
+And that means V sub k and
+V sub k plus 1 can't
+
+0:10:50.460,0:10:52.120
+actually be all that different.
+
+0:10:52.120,0:10:54.590
+Because that last layer can
+only be so big or small.
+
+0:10:54.590,0:10:57.600
+And it's squashed down by
+the discount anyway.
+
+0:10:57.600,0:11:02.270
+What this means is that as k increases,
+for any given state, the
+
+0:11:02.270,0:11:07.490
+difference between V k and V k plus 1
+has to shrink exponentially fast.
+
+0:11:07.490,0:11:11.390
+And that means it's going to converge,
+provided gamma is less than 1.
+
+0:11:11.390,0:11:14.720
+How fast it converges depends
+on the effect of depth.
+
+0:11:14.720,0:11:18.570
+And the effect of depth is either the
+actual depth of the tree or, as gamma
+
+0:11:18.570,0:11:22.030
+gets closer to one, the effect of depth,
+or the horizon, increases.
+
+0:11:22.030,0:11:23.280
+

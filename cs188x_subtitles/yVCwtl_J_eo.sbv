@@ -1,0 +1,26 @@
+0:00:00.000,0:00:00.630
+
+0:00:00.630,0:00:04.490
+DAN KLEIN: Here's the summary, A star
+uses both backward costs and estimates
+
+0:00:04.490,0:00:06.410
+of forward costs.
+
+0:00:06.410,0:00:09.390
+A star is optimal if you have the
+appropriate constraints on your
+
+0:00:09.390,0:00:13.450
+heuristics, which both boil down to
+saying that the heuristic is cheaper
+
+0:00:13.450,0:00:16.550
+than reality, and when you use
+these things in practice,
+
+0:00:16.550,0:00:17.800
+heuristic design is key.
+
+0:00:17.800,0:00:19.020
+

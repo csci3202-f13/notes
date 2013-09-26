@@ -1,0 +1,17 @@
+0:00:00.900,0:00:02.400
+Breadth-first search. How do we know?
+
+0:00:02.400,0:00:05.850
+It expands outward in every direction,
+and how do we know it's not uniform cost?
+
+0:00:05.850,0:00:09.059
+Yeah, it's like the expansion isn't sensitive
+to
+
+0:00:09.059,0:00:10.700
+the cost. It doesn't speed up when it gets
+
+0:00:10.700,0:00:11.840
+to the shallow water.
+

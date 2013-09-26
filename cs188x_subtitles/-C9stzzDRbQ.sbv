@@ -1,0 +1,661 @@
+0:00:00.000,0:00:00.890
+
+0:00:00.890,0:00:03.720
+PROFESSOR: Everything in minimax and
+expectimax search has made reference
+
+0:00:03.720,0:00:06.870
+to the idea that there are utilities
+that you can go around, either
+
+0:00:06.870,0:00:09.200
+maximizing or taking averages of.
+
+0:00:09.200,0:00:10.250
+What are these numbers?
+
+0:00:10.250,0:00:11.100
+Where do they come from?
+
+0:00:11.100,0:00:13.580
+And how do we know they even exist?
+
+0:00:13.580,0:00:17.440
+If we had numbers that represented
+our preferences, why are we
+
+0:00:17.440,0:00:18.530
+even averaging them?
+
+0:00:18.530,0:00:22.150
+So before we compute what these
+utilities are, why did we ever talk
+
+0:00:22.150,0:00:26.020
+about anything other than minimax I
+mean, after all, we understand minimax
+
+0:00:26.020,0:00:28.900
+pretty well, and it gives us some
+pretty good worst case bounds.
+
+0:00:28.900,0:00:32.000
+Why don't we always run around
+doing minimax search?
+
+0:00:32.000,0:00:34.200
+The answer is vampire bunnies.
+
+0:00:34.200,0:00:34.580
+Right?
+
+0:00:34.580,0:00:38.400
+There are things that your model might
+imagine but have such small
+
+0:00:38.400,0:00:39.270
+probability.
+
+0:00:39.270,0:00:40.550
+But they're really bad.
+
+0:00:40.550,0:00:44.000
+And maybe you don't worry so much about
+vampire bunnies, but you imagine
+
+0:00:44.000,0:00:49.310
+things like well, should I go to eat
+Thai food or should I go to eat
+
+0:00:49.310,0:00:50.570
+Italian food?
+
+0:00:50.570,0:00:54.800
+Well, if I go to eat Thai food, it
+might be a little too spicy.
+
+0:00:54.800,0:00:56.670
+I might get hit by a meteor.
+
+0:00:56.670,0:00:58.550
+STUDENTS: [LAUGHTER].
+
+0:00:58.550,0:01:01.410
+PROFESSOR: And then you think about in
+the Italian food, well, let's see, it
+
+0:01:01.410,0:01:03.440
+might be very greasy.
+
+0:01:03.440,0:01:05.239
+Or I might get hit by a meteor.
+
+0:01:05.239,0:01:09.390
+And you go around and all of your
+computations are dominated by these
+
+0:01:09.390,0:01:11.570
+events which are very bad
+and very unlikely.
+
+0:01:11.570,0:01:15.640
+Worst case reasoning only works to the
+extent that your model is sufficiently
+
+0:01:15.640,0:01:19.590
+simple, that the really bad, really
+rare stuff isn't even considered.
+
+0:01:19.590,0:01:22.810
+If you want to be robust to the fact
+that bad things can happen but usually
+
+0:01:22.810,0:01:25.150
+don't, you need average
+case reasoning.
+
+0:01:25.150,0:01:27.560
+You really have no choice.
+
+0:01:27.560,0:01:31.660
+And what that leads us to is the
+principle of maximum expected utility.
+
+0:01:31.660,0:01:35.390
+This principle states that a rational
+agent should choose the action that
+
+0:01:35.390,0:01:38.330
+maximizes its expected utility
+given its knowledge.
+
+0:01:38.330,0:01:40.660
+We've already seen a lot
+of this definition.
+
+0:01:40.660,0:01:43.340
+We already know what it means to take
+the best choice, to maximize.
+
+0:01:43.340,0:01:45.640
+We've seen a lot of that kind
+of [? tree-search. ?]
+
+0:01:45.640,0:01:49.640
+We now know what expectations
+are and what expectimax is.
+
+0:01:49.640,0:01:52.140
+And that really tells you about
+expected utilities.
+
+0:01:52.140,0:01:54.590
+And for the rest of the course, we're
+going to spend a lot of energy
+
+0:01:54.590,0:01:58.260
+unpacking this idea of what is the
+expectation, given our knowledge?
+
+0:01:58.260,0:02:01.470
+And that's going to lead us to
+probabilistic inference.
+
+0:02:01.470,0:02:04.100
+So that's the principle of
+maximum expected utility.
+
+0:02:04.100,0:02:06.000
+But where do these utilities
+come from?
+
+0:02:06.000,0:02:09.729
+How do we know there are utilities that
+represent our preferences at all?
+
+0:02:09.729,0:02:12.790
+How do we know that averaging
+even makes sense?
+
+0:02:12.790,0:02:13.440
+Right?
+
+0:02:13.440,0:02:17.040
+Maybe you don't think that averaging
+these numbers actually still preserves
+
+0:02:17.040,0:02:18.600
+your preferences.
+
+0:02:18.600,0:02:21.330
+What if our behavior is
+so complex and subtle?
+
+0:02:21.330,0:02:22.320
+We're humans, right?
+
+0:02:22.320,0:02:26.240
+Our behavior is so complex and subtle,
+we cannot possibly be reduced to a
+
+0:02:26.240,0:02:28.200
+real valued function.
+
+0:02:28.200,0:02:30.280
+So what are these utilities?
+
+0:02:30.280,0:02:34.650
+Utilities are functions from outcomes,
+which are states of the world, to real
+
+0:02:34.650,0:02:38.590
+numbers that encode an
+agent's preferences.
+
+0:02:38.590,0:02:39.700
+Where do these come from?
+
+0:02:39.700,0:02:40.710
+Well, in a game, it's easy.
+
+0:02:40.710,0:02:41.840
+It's part of the definition.
+
+0:02:41.840,0:02:43.750
+Plus one if you win, minus
+one if you lose.
+
+0:02:43.750,0:02:45.980
+Your score, whatever it is.
+
+0:02:45.980,0:02:48.940
+The utilities have to summarize
+the agent's goals.
+
+0:02:48.940,0:02:51.950
+And there's a theorem that says if
+your preferences are basically
+
+0:02:51.950,0:02:55.600
+reasonable, they can be summarized
+by a utility function.
+
+0:02:55.600,0:02:59.720
+In general, the approach we take with
+utilities is to think of the utilities
+
+0:02:59.720,0:03:01.190
+as the input--
+
+0:03:01.190,0:03:03.290
+we hard-wire utilities--
+
+0:03:03.290,0:03:06.040
+and the behavior, the action
+selection, as the output.
+
+0:03:06.040,0:03:08.690
+The behaviors emerge through
+computation.
+
+0:03:08.690,0:03:09.680
+And why do we want this?
+
+0:03:09.680,0:03:14.330
+Why do we want the goals to be the input
+and the optimal behavior to be
+
+0:03:14.330,0:03:15.630
+the output of the computation?
+
+0:03:15.630,0:03:19.230
+Why don't we just let agents
+pick their own utilities?
+
+0:03:19.230,0:03:22.950
+What would happen if we let a vacuum
+cleaner agent pick its own utility?
+
+0:03:22.950,0:03:26.200
+And it wanted to then maximize
+that utility?
+
+0:03:26.200,0:03:30.760
+It sits, and it thinks and it thinks
+ah, I would like to do nothing.
+
+0:03:30.760,0:03:31.500
+Right?
+
+0:03:31.500,0:03:33.040
+And it's so easy to do nothing.
+
+0:03:33.040,0:03:34.890
+And now it's happy because
+it picked its utility.
+
+0:03:34.890,0:03:36.450
+And it's so happy with its utility.
+
+0:03:36.450,0:03:37.780
+But it's not what we wanted.
+
+0:03:37.780,0:03:41.910
+What we say is no, your utility
+is picking up dirt.
+
+0:03:41.910,0:03:44.830
+And now the vacuum cleaner does whatever
+it does to maximize that.
+
+0:03:44.830,0:03:48.040
+We don't want to dictate the behavior,
+because we don't want to get into like
+
+0:03:48.040,0:03:51.330
+drawing the particular pattern it
+should trace out on the floor.
+
+0:03:51.330,0:03:53.800
+The search procedure should
+do all that for us.
+
+0:03:53.800,0:03:55.690
+So we don't want to prescribe
+the behavior.
+
+0:03:55.690,0:03:58.530
+It's very hard to write down behavior,
+because behavior is complicated and
+
+0:03:58.530,0:04:00.590
+context-dependent.
+
+0:04:00.590,0:04:01.540
+So that's the idea.
+
+0:04:01.540,0:04:02.430
+Utilities go in.
+
+0:04:02.430,0:04:03.750
+Behavior comes out.
+
+0:04:03.750,0:04:06.210
+Now we got to be careful about this,
+because if you just tell the vacuum
+
+0:04:06.210,0:04:09.360
+cleaner your goal is to pick up dirt,
+maybe it gets this idea that the best
+
+0:04:09.360,0:04:13.080
+way to pick up dirt is to pick up dirt,
+dump the dirt, pick it up again,
+
+0:04:13.080,0:04:13.880
+and dump it again.
+
+0:04:13.880,0:04:16.540
+And so you need to make sure when you
+encode these things, you actually mean
+
+0:04:16.540,0:04:17.300
+what you say.
+
+0:04:17.300,0:04:19.050
+But you know, that's your problem.
+
+0:04:19.050,0:04:19.260
+Right?
+
+0:04:19.260,0:04:21.899
+The vacuum cleaner's just doing
+what you told it to do.
+
+0:04:21.899,0:04:22.530
+All right.
+
+0:04:22.530,0:04:23.820
+So, utilities.
+
+0:04:23.820,0:04:26.550
+Let's imagine we have an
+ice cream eating robot.
+
+0:04:26.550,0:04:29.900
+And it looks at these various outcomes
+and it says well, you know an ice
+
+0:04:29.900,0:04:31.100
+cream cone is good.
+
+0:04:31.100,0:04:32.810
+It's better if it has a scoop in it.
+
+0:04:32.810,0:04:34.810
+And two scoops is great.
+
+0:04:34.810,0:04:36.550
+So over these outcomes--
+
+0:04:36.550,0:04:38.480
+zero, one, or two scoops--
+
+0:04:38.480,0:04:42.400
+maybe we agree that a reasonable ice
+cream cone robot might order
+
+0:04:42.400,0:04:43.600
+them in this way.
+
+0:04:43.600,0:04:47.790
+That one is better than zero,
+and two is better than one.
+
+0:04:47.790,0:04:52.570
+However, we're actually going to ask
+the robot, in reality, to make
+
+0:04:52.570,0:04:57.480
+decisions not just amongst number of
+scoops, which is easy, but amongst
+
+0:04:57.480,0:04:58.930
+uncertain outcomes.
+
+0:04:58.930,0:05:01.460
+So, for example, you imagine
+the robot has a choice.
+
+0:05:01.460,0:05:02.340
+It's getting ice cream.
+
+0:05:02.340,0:05:05.670
+And it can order a single scoop or
+it could order a double scoop.
+
+0:05:05.670,0:05:08.860
+And if it orders a single scoop, well,
+it ends up with a single scoop of ice
+
+0:05:08.860,0:05:12.060
+cream, which we decided was
+kind of in the middle.
+
+0:05:12.060,0:05:13.990
+What happens if it orders
+a double scoop?
+
+0:05:13.990,0:05:16.730
+Well, the problem with ordering a double
+scoop is that's a lot of ice
+
+0:05:16.730,0:05:18.020
+cream piled high.
+
+0:05:18.020,0:05:18.440
+Right?
+
+0:05:18.440,0:05:20.020
+Something bad could happen.
+
+0:05:20.020,0:05:22.700
+You know, oops, your ice cream is on
+the floor, and you have no scoops.
+
+0:05:22.700,0:05:25.400
+But most of the time, everything's
+fine, and you get to
+
+0:05:25.400,0:05:26.670
+enjoy your yummy scoops.
+
+0:05:26.670,0:05:29.850
+The agent is going to have to have a
+preference between these two outcomes.
+
+0:05:29.850,0:05:35.170
+Does it prefer the guaranteed single
+scoop or does it prefer this uncertain
+
+0:05:35.170,0:05:38.010
+mix of zero or two?
+
+0:05:38.010,0:05:39.230
+Well, it's actually OK.
+
+0:05:39.230,0:05:42.270
+Different utilities are going to make
+different choices here, but the point
+
+0:05:42.270,0:05:46.730
+is the agent's preferences need to
+encode whether or not it would choose
+
+0:05:46.730,0:05:48.850
+single or double in this case.
+
+0:05:48.850,0:05:52.280
+And the specific numbers we assign are
+going to make that determination when
+
+0:05:52.280,0:05:56.030
+we run an expectimax search.
+
+0:05:56.030,0:05:57.700
+So what are these preferences?
+
+0:05:57.700,0:06:01.840
+Well, an agent has to have preferences
+among various things.
+
+0:06:01.840,0:06:05.050
+We know, for example, zero, one,
+and two ice cream scoops--
+
+0:06:05.050,0:06:07.050
+it has to have preferences
+amongst what are called
+
+0:06:07.050,0:06:08.805
+prizes, specific outcomes.
+
+0:06:08.805,0:06:09.710
+They're called prizes.
+
+0:06:09.710,0:06:12.190
+They don't have to be wrapped up as
+a present or anything like that.
+
+0:06:12.190,0:06:13.480
+That's just the technical term.
+
+0:06:13.480,0:06:14.900
+A prize is a specific outcome.
+
+0:06:14.900,0:06:18.120
+So you have A and B which might
+be various numbers of scoops.
+
+0:06:18.120,0:06:21.410
+We have to have preference among the
+prizes, but we also have to be able to
+
+0:06:21.410,0:06:25.760
+order our preferences amongst lotteries,
+which are situations where
+
+0:06:25.760,0:06:28.390
+you're not sure which prize
+you're going to get.
+
+0:06:28.390,0:06:29.630
+And that's shown here.
+
+0:06:29.630,0:06:33.000
+So you have prizes, which are atomic
+outcomes, and you have lotteries,
+
+0:06:33.000,0:06:35.660
+which are mixtures with
+a certain probability.
+
+0:06:35.660,0:06:38.280
+And if you look at that, you think
+that's exactly what a chance note is.
+
+0:06:38.280,0:06:40.110
+It creates a little lottery.
+
+0:06:40.110,0:06:43.430
+And an expectimax tree is really
+just a bigger cursive lottery.
+
+0:06:43.430,0:06:45.990
+So these lotteries and these prizes--
+
+0:06:45.990,0:06:49.260
+we have to have preferences,
+meaning, an agent has to
+
+0:06:49.260,0:06:50.580
+prefer one or the other.
+
+0:06:50.580,0:06:53.530
+And the question is just are there
+utilities that reflect those
+
+0:06:53.530,0:06:55.470
+preferences?
+
+0:06:55.470,0:06:58.170
+So when I say lottery, there
+are real lotteries.
+
+0:06:58.170,0:07:00.900
+There are real lotteries where
+you pay your money.
+
+0:07:00.900,0:07:01.760
+You get your ticket.
+
+0:07:01.760,0:07:02.660
+You scratch it off.
+
+0:07:02.660,0:07:04.610
+And you hope it's the right number.
+
+0:07:04.610,0:07:05.520
+Right?
+
+0:07:05.520,0:07:09.260
+When we say lottery here, we do
+not mean the actual act of
+
+0:07:09.260,0:07:11.850
+gambling in a lottery.
+
+0:07:11.850,0:07:12.840
+That's fine.
+
+0:07:12.840,0:07:14.920
+But that introduces a
+lot of complexity.
+
+0:07:14.920,0:07:18.170
+For example, when you actually play
+the lottery, sometimes you win and
+
+0:07:18.170,0:07:19.260
+sometimes you lose.
+
+0:07:19.260,0:07:21.610
+But win or lose, you played.
+
+0:07:21.610,0:07:21.910
+Right?
+
+0:07:21.910,0:07:24.310
+And that's important, because part of
+the reason why people play lotteries
+
+0:07:24.310,0:07:26.630
+is they like to play lotteries.
+
+0:07:26.630,0:07:30.880
+When we say lottery here, and we say 50%
+chance of A and 50% chance of B,
+
+0:07:30.880,0:07:35.100
+we do not mean "and the fun of playing."
+We simply mean you are not
+
+0:07:35.100,0:07:36.550
+sure which one's going to happen.
+
+0:07:36.550,0:07:38.490
+For example, rolling the dice
+in a sense is a lottery.
+
+0:07:38.490,0:07:39.900
+

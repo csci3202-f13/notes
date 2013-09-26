@@ -1,0 +1,666 @@
+0:00:00.000,0:00:00.480
+
+0:00:00.480,0:00:03.270
+PROFESSOR: So why do we
+want agents that plan?
+
+0:00:03.270,0:00:04.050
+Well, think about it.
+
+0:00:04.050,0:00:04.930
+You're building an agent.
+
+0:00:04.930,0:00:07.500
+Let's say, you have an agent like the
+one from last time, that's trying to
+
+0:00:07.500,0:00:09.820
+get an apple off of a tree.
+
+0:00:09.820,0:00:15.170
+Well, you could write down code that
+says, if detect apple, then move
+
+0:00:15.170,0:00:16.420
+towards apple.
+
+0:00:16.420,0:00:18.420
+Right.
+
+0:00:18.420,0:00:20.960
+Or this could be a Pac-Man playing
+agent, where you say, if
+
+0:00:20.960,0:00:22.450
+next to dot, eat dot.
+
+0:00:22.450,0:00:24.130
+If near ghost, run away from ghost.
+
+0:00:24.130,0:00:28.160
+And if you try to write down a simple
+function which maps directly from what
+
+0:00:28.160,0:00:33.150
+you observe to what you do, turns out
+that you can make bad decisions.
+
+0:00:33.150,0:00:34.910
+It's very hard to write these agents.
+
+0:00:34.910,0:00:36.580
+And then, they do something
+crazy, right.
+
+0:00:36.580,0:00:38.010
+You move towards the apple.
+
+0:00:38.010,0:00:41.660
+And it turns out, moving towards
+the apple is not such a bad
+
+0:00:41.660,0:00:43.390
+rule of thumb, right.
+
+0:00:43.390,0:00:45.280
+In general, that's how you get apples.
+
+0:00:45.280,0:00:48.430
+In some contexts, it's a bad idea.
+
+0:00:48.430,0:00:51.050
+And in order to know it's a bad idea,
+you either have to write a
+
+0:00:51.050,0:00:56.980
+ridiculously complex function that says,
+if apple and not cliff and blah,
+
+0:00:56.980,0:01:00.100
+blah, blah, blah, then jump.
+
+0:01:00.100,0:01:04.629
+Or what you can do is, instead, have a
+much more simple and elegant system,
+
+0:01:04.629,0:01:07.760
+which considers that that's a bad idea,
+considers the alternative, and
+
+0:01:07.760,0:01:11.160
+comes to the conclusion that some other
+plan that may be more complex--
+
+0:01:11.160,0:01:13.400
+it may take several steps
+to achieve your goals--
+
+0:01:13.400,0:01:15.320
+still achieves them in a better way.
+
+0:01:15.320,0:01:18.110
+So we'd like to be able to write agents
+like the one on the right, that
+
+0:01:18.110,0:01:21.280
+plan ahead and are therefore able to
+do the contextually appropriate
+
+0:01:21.280,0:01:25.350
+action, where you don't have to write
+down the very complicated relationship
+
+0:01:25.350,0:01:27.020
+between the context and the action.
+
+0:01:27.020,0:01:30.570
+Instead, that should come
+out of your model.
+
+0:01:30.570,0:01:31.990
+That's the key idea here.
+
+0:01:31.990,0:01:34.820
+So on one hand, the first kind of
+agent, where you just write,
+
+0:01:34.820,0:01:36.440
+basically, if-then statements.
+
+0:01:36.440,0:01:38.510
+Where you say, if you
+see this, do this.
+
+0:01:38.510,0:01:41.040
+That's technically called
+a Reflex Agent.
+
+0:01:41.040,0:01:44.510
+A Reflex Agent is an agent whose
+action is chosen based
+
+0:01:44.510,0:01:45.620
+on the current percept.
+
+0:01:45.620,0:01:46.760
+So you see the apple.
+
+0:01:46.760,0:01:47.660
+Or you see the dot.
+
+0:01:47.660,0:01:48.820
+Or you see the ghost.
+
+0:01:48.820,0:01:52.400
+And based on what you're perceiving
+right now, you basically have some
+
+0:01:52.400,0:01:53.520
+kind of lookup table.
+
+0:01:53.520,0:01:55.160
+And you do your thing.
+
+0:01:55.160,0:01:58.990
+There's a direct and relatively simple,
+in the sense of computation,
+
+0:01:58.990,0:02:01.610
+mapping between inputs and actions.
+
+0:02:01.610,0:02:02.520
+Now, it could be complex.
+
+0:02:02.520,0:02:05.420
+And that lookup table could
+be very, very big.
+
+0:02:05.420,0:02:09.030
+Reflex agents are entirely allowed to
+have memory or a model of the world's
+
+0:02:09.030,0:02:09.570
+current state.
+
+0:02:09.570,0:02:10.860
+So there may be things you can't see.
+
+0:02:10.860,0:02:13.070
+And you're keeping track of what
+you've done in the past.
+
+0:02:13.070,0:02:15.970
+You can have state and still
+be a Reflex Agent.
+
+0:02:15.970,0:02:19.010
+Reflex Agents refer to the fact that
+you don't consider the future
+
+0:02:19.010,0:02:21.700
+consequence of your actions.
+
+0:02:21.700,0:02:25.130
+Instead, you only consider how
+the world is right now.
+
+0:02:25.130,0:02:27.480
+And how the world is may
+relate to your memory.
+
+0:02:27.480,0:02:29.160
+But you don't consider the future.
+
+0:02:29.160,0:02:30.320
+So there's this question.
+
+0:02:30.320,0:02:33.140
+Can a reflex agent actually
+be a rational agent?
+
+0:02:33.140,0:02:34.430
+Why are we even talking
+about these things?
+
+0:02:34.430,0:02:37.220
+Aside from the fact, that if you just
+sat down before this class to write an
+
+0:02:37.220,0:02:40.020
+agent function, you'd probably
+write a Reflex Agent.
+
+0:02:40.020,0:02:41.690
+Well, let's see some demos.
+
+0:02:41.690,0:02:45.260
+Here is a Reflex Agent for
+the game of Pac-Man.
+
+0:02:45.260,0:02:47.860
+
+0:02:47.860,0:02:50.910
+Its program is, if you are
+next to a dot, eat it.
+
+0:02:50.910,0:02:53.750
+Or more generally, move towards
+the closest dot.
+
+0:02:53.750,0:02:53.970
+OK.
+
+0:02:53.970,0:02:57.410
+Now, if I execute it, it will,
+in a beautiful, rational
+
+0:02:57.410,0:03:00.540
+way, clear the board.
+
+0:03:00.540,0:03:02.550
+You can think ahead all you like.
+
+0:03:02.550,0:03:04.560
+You've still got to go around the
+circle and eat all the dots, in
+
+0:03:04.560,0:03:05.650
+basically that way.
+
+0:03:05.650,0:03:09.360
+So in this case, reflex
+can be rational.
+
+0:03:09.360,0:03:12.230
+It can also have problems.
+
+0:03:12.230,0:03:15.940
+So let's take a look at a reflex agent,
+in a slightly more complex
+
+0:03:15.940,0:03:17.190
+environment.
+
+0:03:17.190,0:03:21.230
+
+0:03:21.230,0:03:21.690
+All right.
+
+0:03:21.690,0:03:25.730
+So it's going towards the
+closest dot, until now.
+
+0:03:25.730,0:03:27.000
+OK, so what happened?
+
+0:03:27.000,0:03:28.470
+What went wrong here?
+
+0:03:28.470,0:03:31.910
+Well, what went wrong here is, in order
+to step towards the closest dot,
+
+0:03:31.910,0:03:33.190
+you choose the action east.
+
+0:03:33.190,0:03:35.410
+That turns out to not
+be very effective.
+
+0:03:35.410,0:03:37.880
+Once you take the action east, you're
+back where you started.
+
+0:03:37.880,0:03:39.880
+And you do it all over again.
+
+0:03:39.880,0:03:42.530
+This is kind of classic Reflex
+Agent shenanigans.
+
+0:03:42.530,0:03:46.410
+So Reflex Agents, we love them.
+
+0:03:46.410,0:03:48.100
+So back to the question,
+can they be rational?
+
+0:03:48.100,0:03:49.380
+Of course, they can be rational.
+
+0:03:49.380,0:03:52.090
+Rationality is a function of the actions
+you take, not the computation
+
+0:03:52.090,0:03:52.890
+that led to them.
+
+0:03:52.890,0:03:55.480
+So if you had a big enough, good enough
+lookup table, and you're taking
+
+0:03:55.480,0:03:56.930
+the right actions.
+
+0:03:56.930,0:04:00.700
+Rationality doesn't care what
+process led to them.
+
+0:04:00.700,0:04:04.040
+Reflex is a comment on
+the thought process.
+
+0:04:04.040,0:04:07.290
+On the other side, you have Planning
+Agents, which, by the way, could fail
+
+0:04:07.290,0:04:09.060
+to be rational, depending
+on how they work.
+
+0:04:09.060,0:04:12.710
+A Planning Agent, unlike a Reflex
+Agent, asks what if.
+
+0:04:12.710,0:04:16.160
+In order to make its decisions, it
+thinks about what the consequences of
+
+0:04:16.160,0:04:17.360
+its actions will be.
+
+0:04:17.360,0:04:20.440
+Now, of course, one way to find out the
+consequences of your actions is to
+
+0:04:20.440,0:04:22.700
+do them, to execute them
+in the real world.
+
+0:04:22.700,0:04:24.570
+We'll come back to this point much
+later, when we talk about
+
+0:04:24.570,0:04:25.630
+Reinforcement Learning.
+
+0:04:25.630,0:04:28.920
+But right now, a Planning Agent does
+not actually figure out the
+
+0:04:28.920,0:04:30.950
+consequences of its actions
+by doing them.
+
+0:04:30.950,0:04:32.950
+It doesn't realize that it's going
+to fall off the cliff by
+
+0:04:32.950,0:04:34.270
+jumping off the cliff.
+
+0:04:34.270,0:04:38.660
+Instead, it computes the consequences
+in simulation, in a model.
+
+0:04:38.660,0:04:41.870
+So in order to have a Planning Agent,
+you must have a model of the world.
+
+0:04:41.870,0:04:45.140
+And instead of trying things in the
+world and seeing their consequences,
+
+0:04:45.140,0:04:47.870
+you try them in the model and
+find out their consequences.
+
+0:04:47.870,0:04:51.490
+Now that, of course, means that
+you have to formulate a model.
+
+0:04:51.490,0:04:53.620
+And then, you also have to formulate
+a notion of what you're trying to
+
+0:04:53.620,0:04:55.370
+achieve, within that model.
+
+0:04:55.370,0:04:56.670
+And that's going to be
+called your goal.
+
+0:04:56.670,0:04:58.070
+Or in general, it'll be a goal test.
+
+0:04:58.070,0:04:59.985
+Because there may be a lot of
+ways the world could be that
+
+0:04:59.985,0:05:00.750
+you'd be happy with.
+
+0:05:00.750,0:05:03.710
+Like you might want an apple, but
+you don't care which apple.
+
+0:05:03.710,0:05:06.670
+The hallmark of a Planning Agent is that
+it considers how the world would
+
+0:05:06.670,0:05:09.580
+be, if it did a certain thing.
+
+0:05:09.580,0:05:12.610
+Some ideas that are important here are
+the distinction between optimal and
+
+0:05:12.610,0:05:13.740
+complete planning.
+
+0:05:13.740,0:05:17.060
+A complete Planning Agent finds
+a solution, finds a way of
+
+0:05:17.060,0:05:18.510
+achieving its goals.
+
+0:05:18.510,0:05:23.060
+An optimal agent, instead, not only
+finds a way to achieve its goals, but
+
+0:05:23.060,0:05:25.350
+also finds the best way, according
+to some cost function.
+
+0:05:25.350,0:05:28.090
+So we'll constantly be talking, in this
+lecture and the next, about a
+
+0:05:28.090,0:05:31.700
+distinction between being able to find
+a solution versus being able to find
+
+0:05:31.700,0:05:33.870
+the best one, two different criteria.
+
+0:05:33.870,0:05:37.930
+In addition, a Planning Agent can either
+be kind of entire Planning
+
+0:05:37.930,0:05:40.730
+Agent that comes up an entire
+plan and then executes it.
+
+0:05:40.730,0:05:43.430
+Or it comes up with many plans,
+one after the other.
+
+0:05:43.430,0:05:47.240
+The agent that comes up with many plans
+and continues to re-plan is
+
+0:05:47.240,0:05:48.620
+called a Replanning Agent.
+
+0:05:48.620,0:05:50.120
+Let me show you the distinction
+between these.
+
+0:05:50.120,0:05:53.850
+
+0:05:53.850,0:05:54.380
+All right.
+
+0:05:54.380,0:05:57.060
+So here's a configuration again.
+
+0:05:57.060,0:05:59.160
+This is the one where the
+Reflex Agent got stuck.
+
+0:05:59.160,0:06:02.010
+Remember, it got stuck in the
+upper left hand corner.
+
+0:06:02.010,0:06:04.040
+And this is going to be
+a Replanning Agent.
+
+0:06:04.040,0:06:06.010
+So it finds a path to a dot.
+
+0:06:06.010,0:06:07.310
+It doesn't care which one.
+
+0:06:07.310,0:06:09.360
+And then it executes that plan.
+
+0:06:09.360,0:06:11.290
+At which point, it will have
+eaten at least one dot.
+
+0:06:11.290,0:06:12.200
+And then, it repeats that.
+
+0:06:12.200,0:06:15.760
+So it's going to do a bunch of plans, to
+get a dot after a dot, after a dot.
+
+0:06:15.760,0:06:18.850
+And as a result, let's
+see what it does.
+
+0:06:18.850,0:06:21.790
+You can see at the bottom, actually,
+its thought process flashing by.
+
+0:06:21.790,0:06:24.790
+It's doing search after
+search after search.
+
+0:06:24.790,0:06:29.705
+And you know, maybe not the most
+efficient way, but sooner or later, it
+
+0:06:29.705,0:06:35.160
+gets all of the dots,
+and lightning fast.
+
+0:06:35.160,0:06:36.780
+Here's a different agent.
+
+0:06:36.780,0:06:38.190
+This is the Mastermind Agent.
+
+0:06:38.190,0:06:39.750
+This is Mastermind Pac-Man.
+
+0:06:39.750,0:06:44.770
+This agent does not just come up with
+a mini plan and then go off.
+
+0:06:44.770,0:06:45.960
+It sits, and it thinks.
+
+0:06:45.960,0:06:46.460
+And it thinks.
+
+0:06:46.460,0:06:46.870
+And it thinks.
+
+0:06:46.870,0:06:47.270
+And it thinks.
+
+0:06:47.270,0:06:50.450
+And it finds the best way to
+clear all of the dots.
+
+0:06:50.450,0:06:53.840
+Its goal is not getting one step closer
+to to clearing the board.
+
+0:06:53.840,0:06:58.670
+Its goal is to clear the entire board,
+in an evil genius kind of way.
+
+0:06:58.670,0:07:00.940
+So let's see what it does.
+
+0:07:00.940,0:07:05.410
+Well, the most important thing
+it does is it thinks.
+
+0:07:05.410,0:07:06.690
+So it's setting up its thinking.
+
+0:07:06.690,0:07:07.900
+It's not even thinking yet.
+
+0:07:07.900,0:07:09.120
+OK, now it's it's thinking.
+
+0:07:09.120,0:07:10.170
+It's doing something.
+
+0:07:10.170,0:07:11.500
+We're going to find out
+today what it's doing.
+
+0:07:11.500,0:07:13.550
+It's still doing it.
+
+0:07:13.550,0:07:15.010
+And what it's doing is search.
+
+0:07:15.010,0:07:17.480
+And so it's expanding a lot of
+nodes, thousands of nodes.
+
+0:07:17.480,0:07:19.210
+It's thinking very, very
+deep thoughts.
+
+0:07:19.210,0:07:23.000
+Because this is, in fact,
+a tricky problem.
+
+0:07:23.000,0:07:23.930
+And it's still thinking.
+
+0:07:23.930,0:07:29.135
+But now, when it finishes thinking,
+behold the evil genius.
+
+0:07:29.135,0:07:32.010
+
+0:07:32.010,0:07:36.360
+Not a millisecond of waste, it knows
+to end with the dead end.
+
+0:07:36.360,0:07:38.100
+So it doesn't have to backtrack,
+brilliant.
+
+0:07:38.100,0:07:42.767
+

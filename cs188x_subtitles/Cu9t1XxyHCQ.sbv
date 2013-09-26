@@ -1,0 +1,656 @@
+0:00:00.000,0:00:01.930
+
+0:00:01.930,0:00:04.670
+DAN KLEIN: So here's that example of
+map coloring that I promised you.
+
+0:00:04.670,0:00:06.980
+In map coloring, we've got some map.
+
+0:00:06.980,0:00:08.860
+And what we'd like to do
+is make it colorful.
+
+0:00:08.860,0:00:12.010
+So we're going to assign a color to
+different countries on the map.
+
+0:00:12.010,0:00:16.940
+And we want to make sure that adjacent
+countries don't have the same color.
+
+0:00:16.940,0:00:22.010
+So in the recurring example we'll have
+for today, the variables in this are
+
+0:00:22.010,0:00:23.620
+going to be the countries in the map.
+
+0:00:23.620,0:00:26.230
+And in this case, we're going
+to be coloring in Australia.
+
+0:00:26.230,0:00:28.200
+And so they're actually called states.
+
+0:00:28.200,0:00:30.390
+So here are the states of Australia.
+
+0:00:30.390,0:00:33.260
+There's Western Australian in the west,
+the Northern Territory in the
+
+0:00:33.260,0:00:37.370
+north, South Australia in the south,
+Queensland up in the northeast, New
+
+0:00:37.370,0:00:41.130
+South Wales over in the east, Victoria
+in the southeast, and then Tasmania is
+
+0:00:41.130,0:00:43.900
+some island that's disconnected
+from the rest.
+
+0:00:43.900,0:00:45.160
+So here are our variables.
+
+0:00:45.160,0:00:48.490
+Make sure you kind of eyeball this for
+a second now because we're going to
+
+0:00:48.490,0:00:50.020
+see this example over and over.
+
+0:00:50.020,0:00:51.800
+So here are our variables
+in the problem.
+
+0:00:51.800,0:00:52.720
+What are the domains?
+
+0:00:52.720,0:00:54.090
+Well, they all have the same domain.
+
+0:00:54.090,0:00:56.890
+They can all take on either red,
+green, or blue, if this is a
+
+0:00:56.890,0:00:59.660
+three-coloring problem here, and our
+colors are red, green, and blue.
+
+0:00:59.660,0:01:01.690
+So this is going to be our
+recurring example.
+
+0:01:01.690,0:01:02.790
+So what are the constraints?
+
+0:01:02.790,0:01:06.050
+If we just had variables and domains,
+we could just color everything red.
+
+0:01:06.050,0:01:07.030
+And then we'd be happy.
+
+0:01:07.030,0:01:10.660
+But this wouldn't satisfy the constraint
+that adjacent states have
+
+0:01:10.660,0:01:12.010
+to be different colors.
+
+0:01:12.010,0:01:15.100
+So if we want to have this constraint,
+we need to write it down.
+
+0:01:15.100,0:01:17.940
+One way to write it down is what's
+called an implicit constraint.
+
+0:01:17.940,0:01:20.450
+In an implicit constraint, we write
+down a little snippet of what
+
+0:01:20.450,0:01:22.020
+basically amounts to code.
+
+0:01:22.020,0:01:25.130
+We write down some procedural way
+of checking a constraint.
+
+0:01:25.130,0:01:28.780
+So one constraint-- for example, the
+constraint on Western Australia and
+
+0:01:28.780,0:01:31.470
+the Northern Territory, which
+are touching in the map--
+
+0:01:31.470,0:01:33.270
+we can write down that
+they're not equal.
+
+0:01:33.270,0:01:36.210
+OK, this isn't a very heavy-duty
+code snippet.
+
+0:01:36.210,0:01:39.280
+But this is something you would have to
+evaluate to check to see whether or
+
+0:01:39.280,0:01:43.210
+not Western Australia and the Northern
+Territory have a happy combination of
+
+0:01:43.210,0:01:44.710
+assignments.
+
+0:01:44.710,0:01:47.800
+We could also take this implicit
+constraint, which is a constraint
+
+0:01:47.800,0:01:49.370
+between WA and NT.
+
+0:01:49.370,0:01:50.940
+And we could write it out explicitly.
+
+0:01:50.940,0:01:55.620
+So we could write down that the pair
+WA, NT has to be contained in-- and
+
+0:01:55.620,0:02:00.110
+then we list a set of allowable values
+in the cross-product of the domains.
+
+0:02:00.110,0:02:04.480
+So implicit means it's described
+implicitly by a code snippet.
+
+0:02:04.480,0:02:07.550
+Explicit means we actually list
+all of the allowed pairs
+
+0:02:07.550,0:02:10.240
+or triples or whatever.
+
+0:02:10.240,0:02:12.130
+What's a solution to this problem?
+
+0:02:12.130,0:02:15.690
+A solution is just an assignment that
+satisfies all of the constraints.
+
+0:02:15.690,0:02:16.460
+So here's one.
+
+0:02:16.460,0:02:18.130
+This is the one that's shown.
+
+0:02:18.130,0:02:21.590
+Western Australia's red, the Northern
+Territory's green, and so on.
+
+0:02:21.590,0:02:25.390
+So in order to be a solution, you have
+to assign a value to every variable.
+
+0:02:25.390,0:02:27.930
+And all the constraints
+need to be met.
+
+0:02:27.930,0:02:28.870
+That's map coloring.
+
+0:02:28.870,0:02:30.730
+Here's another example we'll
+see a lot today.
+
+0:02:30.730,0:02:32.380
+This is the N-Queens problem.
+
+0:02:32.380,0:02:34.750
+So in the N-Queens problem,
+we have a chessboard.
+
+0:02:34.750,0:02:36.530
+In this case, it's a four
+by four chessboard.
+
+0:02:36.530,0:02:39.730
+And what we'd like to do is we'd like
+to place N-- in this case, four--
+
+0:02:39.730,0:02:41.850
+queens on that chessboard in
+a way that they aren't
+
+0:02:41.850,0:02:42.950
+threatening each other.
+
+0:02:42.950,0:02:46.275
+So if you know anything about chess, you
+know that queens in the same row
+
+0:02:46.275,0:02:47.510
+can attack each other.
+
+0:02:47.510,0:02:49.730
+Queens in the same diagonal
+can attack each other.
+
+0:02:49.730,0:02:52.860
+And we'd like to be able to find a
+configuration like the one shown where
+
+0:02:52.860,0:02:54.300
+nobody's threatening anybody else.
+
+0:02:54.300,0:02:57.820
+And it's all a wonderful,
+peaceful kingdom.
+
+0:02:57.820,0:02:59.010
+So how are we going to do this?
+
+0:02:59.010,0:03:00.780
+Well, here's one formulation.
+
+0:03:00.780,0:03:02.910
+One formulation is we
+need some variables.
+
+0:03:02.910,0:03:07.490
+So let's make the variables be each
+square on the chessboard is going to
+
+0:03:07.490,0:03:08.310
+have a variable.
+
+0:03:08.310,0:03:10.380
+So we'll call those Xij.
+
+0:03:10.380,0:03:12.350
+And each of those variables is
+going to indicate what's
+
+0:03:12.350,0:03:14.240
+happening on that square.
+
+0:03:14.240,0:03:16.010
+So what can be happening on a square?
+
+0:03:16.010,0:03:19.270
+It can either be queened or empty.
+
+0:03:19.270,0:03:20.240
+So we'll write that down.
+
+0:03:20.240,0:03:21.160
+0 will mean empty.
+
+0:03:21.160,0:03:23.100
+And 1 will mean that there's
+a queen there.
+
+0:03:23.100,0:03:24.340
+OK, so there's variables.
+
+0:03:24.340,0:03:25.480
+There's the domains.
+
+0:03:25.480,0:03:29.390
+And an assignment can specify what's
+going on on the board.
+
+0:03:29.390,0:03:32.110
+So far, we could just stick queens
+everywhere, or nowhere.
+
+0:03:32.110,0:03:33.690
+So we need some constraints.
+
+0:03:33.690,0:03:36.750
+What are the constraints
+in this problem?
+
+0:03:36.750,0:03:38.710
+Well, we know what they
+mean intuitively.
+
+0:03:38.710,0:03:42.340
+Intuitively they mean that we
+can't have any threatening
+
+0:03:42.340,0:03:43.790
+between a pair of queens.
+
+0:03:43.790,0:03:47.020
+So what we could do is we could pick
+all of the squares that exist in a
+
+0:03:47.020,0:03:48.470
+threatening configuration.
+
+0:03:48.470,0:03:51.540
+For example, take any two squares
+in the same row or column.
+
+0:03:51.540,0:03:53.870
+And we could write down a bunch of
+constraints that look like this.
+
+0:03:53.870,0:03:59.130
+So for example, for a given i-- so
+that's, say, in a fixed row--
+
+0:03:59.130,0:04:01.310
+we look at all columns j and k.
+
+0:04:01.310,0:04:06.670
+And we say for Xij and Xik, that pair
+can only be assigned 0, 0--
+
+0:04:06.670,0:04:08.750
+meaning there's not a queen
+in either square--
+
+0:04:08.750,0:04:12.570
+0, 1 or 1, 0, meaning exactly
+one of them has a queen.
+
+0:04:12.570,0:04:14.690
+And you'll notice that what's
+missing is 1, 1.
+
+0:04:14.690,0:04:17.970
+And that's because for one
+value of i, j, and k--
+
+0:04:17.970,0:04:19.480
+that would be here and here.
+
+0:04:19.480,0:04:23.030
+And if they were both assigned 1, then
+we would have a threatening pair.
+
+0:04:23.030,0:04:26.730
+And that would be invalid according
+to our constraints.
+
+0:04:26.730,0:04:28.530
+So this set of constraints-- and
+there's a bunch of them.
+
+0:04:28.530,0:04:29.620
+I wrote them-- there's
+a quantifier there.
+
+0:04:29.620,0:04:31.420
+There's actually a bunch
+of constraints.
+
+0:04:31.420,0:04:34.020
+This takes care of threatening
+across rows.
+
+0:04:34.020,0:04:36.970
+We also need threatening across columns
+and threatening across left
+
+0:04:36.970,0:04:37.720
+and right diagonals.
+
+0:04:37.720,0:04:40.680
+So we would get a bunch of
+similar-looking constraints.
+
+0:04:40.680,0:04:43.490
+Basically, for any pair that can
+threaten, we get a constraint on that
+
+0:04:43.490,0:04:45.320
+pair saying, you both can't be on.
+
+0:04:45.320,0:04:49.070
+This constraints are simple, but
+there are a bunch of them.
+
+0:04:49.070,0:04:51.060
+OK, am I done?
+
+0:04:51.060,0:04:53.280
+Does satisfying these constraints
+solve my problem?
+
+0:04:53.280,0:04:54.070
+I heard a no.
+
+0:04:54.070,0:04:55.750
+Why not?
+
+0:04:55.750,0:04:59.640
+For example, right now with these
+constraints, we have a problem, which
+
+0:04:59.640,0:05:02.830
+is assigning 0 everywhere-- an empty
+board-- satisfies the constraints.
+
+0:05:02.830,0:05:04.310
+We prevented threatening queens.
+
+0:05:04.310,0:05:06.730
+But we haven't made sure that
+there are actually queens
+
+0:05:06.730,0:05:07.710
+anywhere on the board.
+
+0:05:07.710,0:05:09.750
+In particular, we haven't made sure
+that there are N of them.
+
+0:05:09.750,0:05:12.100
+So we could also write down a constraint
+that looks like this.
+
+0:05:12.100,0:05:16.150
+Over all i and j, the sum of Xij equals
+N. Now, notice the constraints
+
+0:05:16.150,0:05:19.470
+on the left as I've written them
+are explicit constraints.
+
+0:05:19.470,0:05:21.620
+The constraint on the right
+is an implicit constraint.
+
+0:05:21.620,0:05:23.630
+You evaluate a snippet of code
+in order to figure out
+
+0:05:23.630,0:05:24.880
+whether it's passed.
+
+0:05:24.880,0:05:27.260
+The constraint on the right would be
+a pretty hard thing to write out
+
+0:05:27.260,0:05:29.750
+explicitly.
+
+0:05:29.750,0:05:31.610
+Here's another formulation
+of N-Queens.
+
+0:05:31.610,0:05:33.490
+We'll see which one we like better.
+
+0:05:33.490,0:05:34.610
+So here's another formulation.
+
+0:05:34.610,0:05:37.930
+In this formulation, we
+say, wait a minute.
+
+0:05:37.930,0:05:41.390
+Actually, we know, based on the
+structure of the problem, that every
+
+0:05:41.390,0:05:43.450
+row has a queen somewhere.
+
+0:05:43.450,0:05:45.220
+So let's make a variable for each row.
+
+0:05:45.220,0:05:48.820
+So Q sub k will be where
+the queen is in row k.
+
+0:05:48.820,0:05:52.270
+So for example, Q sub 1 here is
+where the queen is in row one.
+
+0:05:52.270,0:05:54.260
+And it would take on the value
+2 to indicate it's in the
+
+0:05:54.260,0:05:56.390
+column number two.
+
+0:05:56.390,0:05:58.770
+Here, the domains now are not 0 and 1.
+
+0:05:58.770,0:05:59.415
+They're not binary.
+
+0:05:59.415,0:06:01.200
+Or rather, they indicate a column.
+
+0:06:01.200,0:06:06.250
+So they'll go from 1 to N. We can
+still represent a solution.
+
+0:06:06.250,0:06:07.720
+What about the constraints?
+
+0:06:07.720,0:06:10.240
+Well, constraints actually get
+a little more difficult here.
+
+0:06:10.240,0:06:12.670
+For constraints, we could write out some
+implicit constraints that say,
+
+0:06:12.670,0:06:16.170
+for example, for all i and j--
+so for all pairs of rows--
+
+0:06:16.170,0:06:17.630
+we would look at those two rows.
+
+0:06:17.630,0:06:19.110
+And we'd figure out the non-threatening
+
+0:06:19.110,0:06:21.070
+constraint between them--
+
+0:06:21.070,0:06:23.930
+basically says, queen i and
+queen j can't threaten.
+
+0:06:23.930,0:06:27.410
+And so we'd have to write that out and
+say, OK, well, for rows one and two,
+
+0:06:27.410,0:06:30.920
+that means they can be in positions one
+and three respectively, one and
+
+0:06:30.920,0:06:32.300
+four respectively, and so on.
+
+0:06:32.300,0:06:33.770
+And we could just list them.
+
+0:06:33.770,0:06:36.760
+So again, the implicit constraint here--
+in this particular case, it's
+
+0:06:36.760,0:06:38.370
+probably easier to write
+it out explicitly.
+
+0:06:38.370,0:06:40.090
+Because you know exactly what
+the configurations are.
+
+0:06:40.090,0:06:43.160
+And there aren't that many
+of them for a pair.
+
+0:06:43.160,0:06:45.570
+So two very different formulations.
+
+0:06:45.570,0:06:48.940
+The first one had more variables
+but simpler domains.
+
+0:06:48.940,0:06:52.300
+The first one had more constraints
+but simpler constraints.
+
+0:06:52.300,0:06:55.140
+Which one do you think is better?
+
+0:06:55.140,0:06:58.450
+So first of all, there are a lot
+of ways to formulate constraint
+
+0:06:58.450,0:07:00.420
+satisfaction problems.
+
+0:07:00.420,0:07:02.590
+And in some cases, you don't actually
+know which one's going to be better
+
+0:07:02.590,0:07:04.190
+until you try.
+
+0:07:04.190,0:07:07.000
+In this particular case, we would expect
+formulation two to be better.
+
+0:07:07.000,0:07:10.280
+Because it encodes knowledge of the
+problem, kind of by the structure of
+
+0:07:10.280,0:07:11.250
+the variables and constraints.
+
+0:07:11.250,0:07:12.650
+We know we're going to get
+a queen in every row.
+
+0:07:12.650,0:07:14.060
+We're not going to get
+two in every row.
+
+0:07:14.060,0:07:16.510
+And there are lot of things the other
+problem is trying to enforce via
+
+0:07:16.510,0:07:20.490
+constraints and assignments that here
+is just baked into the formulation.
+
+0:07:20.490,0:07:21.970
+And in general, that's going
+to be an advantage.
+
+0:07:21.970,0:07:23.220
+

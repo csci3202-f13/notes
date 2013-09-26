@@ -1,0 +1,166 @@
+0:00:00.000,0:00:01.380
+
+0:00:01.380,0:00:03.570
+PROFESSOR: So what tree
+search should I use?
+
+0:00:03.570,0:00:06.410
+So here's my suggested answer.
+
+0:00:06.410,0:00:06.940
+What should you do?
+
+0:00:06.940,0:00:08.520
+You should use Expectimax.
+
+0:00:08.520,0:00:11.480
+Expectimax is the more general
+search procedure.
+
+0:00:11.480,0:00:15.390
+You should basically always, in
+principle, use Expectimax.
+
+0:00:15.390,0:00:16.430
+But how do we use Expectimax?
+
+0:00:16.430,0:00:18.590
+Well, here's the Expectimax tree.
+
+0:00:18.590,0:00:22.350
+I take an action in the tree, then my
+opponent does their opponent thing,
+
+0:00:22.350,0:00:24.680
+and then I take an action again.
+
+0:00:24.680,0:00:28.470
+All of the value in Expectimax,
+in this case, is knowing what
+
+0:00:28.470,0:00:30.820
+probabilities to associate
+with the outcomes.
+
+0:00:30.820,0:00:34.180
+And so when I get to the node that
+represents my opponent, and I need to
+
+0:00:34.180,0:00:38.000
+decide how likely they are to do various
+things, I need to figure out
+
+0:00:38.000,0:00:39.150
+the probabilities.
+
+0:00:39.150,0:00:44.040
+And the way I do that is I set up a
+little side computation where I'd
+
+0:00:44.040,0:00:45.900
+simulate the opponent--
+
+0:00:45.900,0:00:47.260
+they do their thing--
+
+0:00:47.260,0:00:49.180
+and I figure out what the
+opponent is going to do.
+
+0:00:49.180,0:00:52.610
+The opponent is going to go to the right
+if it uses the minimax action
+
+0:00:52.610,0:00:54.660
+according to its tree.
+
+0:00:54.660,0:00:56.480
+So with some probability,
+it's going to do that.
+
+0:00:56.480,0:00:58.510
+With some probability, it's
+going to move at random.
+
+0:00:58.510,0:00:59.955
+And that lets me compute these values.
+
+0:00:59.955,0:01:02.550
+
+0:01:02.550,0:01:04.420
+So that's cool.
+
+0:01:04.420,0:01:06.310
+Expectimax is the general case.
+
+0:01:06.310,0:01:09.760
+In this case, it's kind of bad news
+computationally, because every single
+
+0:01:09.760,0:01:12.200
+chance node triggers a minimax
+computation that
+
+0:01:12.200,0:01:13.190
+simulates your opponent.
+
+0:01:13.190,0:01:14.320
+You say, that's not too bad.
+
+0:01:14.320,0:01:17.140
+My opponent's only going to depth 2.
+
+0:01:17.140,0:01:17.510
+All right.
+
+0:01:17.510,0:01:20.870
+Well, what if your opponent had some
+model of you, and you knew that?
+
+0:01:20.870,0:01:23.950
+Well, now when you do your opponent's
+tree, inside your opponent's tree, you
+
+0:01:23.950,0:01:27.180
+need to simulate your opponent
+simulating you.
+
+0:01:27.180,0:01:32.320
+This gets unmanageable very, very
+quickly, except for one case, which is
+
+0:01:32.320,0:01:36.480
+minimax, where this thought process
+of your opponent simulating you
+
+0:01:36.480,0:01:40.320
+stimulating it stimulating you
+is just the game tree itself.
+
+0:01:40.320,0:01:44.000
+So in the minimax case, this all folds
+down nicely, and you only have one
+
+0:01:44.000,0:01:45.240
+game tree to worry about.
+
+0:01:45.240,0:01:48.740
+And for this reason, it's very often the
+case that if you go too far down
+
+0:01:48.740,0:01:51.940
+this embedded belief process, eventually
+you'll just want to use
+
+0:01:51.940,0:01:53.790
+minimax for computational reasons.
+
+0:01:53.790,0:01:56.810
+But in this particular case that we've
+set up, Expectimax lets us do the
+
+0:01:56.810,0:01:58.060
+right thing.
+
+0:01:58.060,0:01:58.570
+

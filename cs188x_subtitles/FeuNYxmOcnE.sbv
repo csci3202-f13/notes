@@ -1,0 +1,410 @@
+0:00:00.000,0:00:00.750
+
+0:00:00.750,0:00:03.320
+PROFESSOR: So now we're going to talk
+about what exactly is this object
+
+0:00:03.320,0:00:06.430
+mathematically, and what are some
+algorithms for solving this problem
+
+0:00:06.430,0:00:07.470
+that we've formulated?
+
+0:00:07.470,0:00:09.700
+And one nice thing is there's
+this line here.
+
+0:00:09.700,0:00:13.230
+You formulate the search problem, and
+that's very problem specific.
+
+0:00:13.230,0:00:14.250
+And then you solve it.
+
+0:00:14.250,0:00:17.910
+Solving the search problem does not
+actually require knowledge of whether
+
+0:00:17.910,0:00:19.860
+or not there are power pellets
+or how they work.
+
+0:00:19.860,0:00:23.540
+All that's encoded in an abstracted
+way in the start state and the
+
+0:00:23.540,0:00:24.970
+successor function, and so on.
+
+0:00:24.970,0:00:28.190
+So all our algorithms for solution are
+going to reference things like the
+
+0:00:28.190,0:00:33.580
+successor function and the goal test,
+not things like scared timers.
+
+0:00:33.580,0:00:33.910
+All right.
+
+0:00:33.910,0:00:35.380
+So what is a state space?
+
+0:00:35.380,0:00:36.910
+Well, it's basically a graph.
+
+0:00:36.910,0:00:39.510
+And we can draw this state space
+graph, which is a mathematical
+
+0:00:39.510,0:00:41.270
+representation of our search problem.
+
+0:00:41.270,0:00:44.600
+So for the case of Pac-Man eating dots,
+it might look like this, right?
+
+0:00:44.600,0:00:46.780
+There's a bunch of different states you
+can be in, and they're connected
+
+0:00:46.780,0:00:47.440
+by actions.
+
+0:00:47.440,0:00:49.100
+These actions have labels,
+north, south, east, and
+
+0:00:49.100,0:00:50.220
+west that I've omitted.
+
+0:00:50.220,0:00:54.010
+This graph is quite big, even for a
+modest size board, because different
+
+0:00:54.010,0:00:57.060
+dot configurations for this search
+problem are different.
+
+0:00:57.060,0:01:01.140
+And so here's a very large
+search state space graph.
+
+0:01:01.140,0:01:04.170
+The nodes are going to be some
+abstraction of world configurations.
+
+0:01:04.170,0:01:07.170
+The more you can abstract, all else
+equal, the more efficient
+
+0:01:07.170,0:01:09.060
+your search will be.
+
+0:01:09.060,0:01:12.820
+The arcs represent the successors, so
+the successor function here is encoded
+
+0:01:12.820,0:01:13.320
+in the arts.
+
+0:01:13.320,0:01:17.010
+From any given state, my successor
+function returns my neighbors in the
+
+0:01:17.010,0:01:19.700
+graph in a directed sense.
+
+0:01:19.700,0:01:22.700
+The goal test isn't shown
+in the graph, right?
+
+0:01:22.700,0:01:25.880
+Graphs have nodes and arcs, and
+weights and things like that.
+
+0:01:25.880,0:01:27.370
+The goal test isn't shown
+on the graph.
+
+0:01:27.370,0:01:30.540
+It's another thing you have to get to
+have a search problem, and it's a set
+
+0:01:30.540,0:01:35.390
+of goal nodes, or a function over goal
+nodes that tell you when you're done.
+
+0:01:35.390,0:01:36.740
+Similarly, you need to know the start.
+
+0:01:36.740,0:01:39.270
+
+0:01:39.270,0:01:42.850
+So an important point that will become
+more important and confusable later.
+
+0:01:42.850,0:01:46.230
+In this search graph, each
+state occurs only once.
+
+0:01:46.230,0:01:49.770
+So for example, let's say this
+is your start state here.
+
+0:01:49.770,0:01:51.720
+And let's say we're considering
+this state here.
+
+0:01:51.720,0:01:53.730
+There are a couple ways to get there.
+
+0:01:53.730,0:01:57.380
+Actually, for this state up here there
+are kind of infinitely many ways to
+
+0:01:57.380,0:01:58.160
+get there, right?
+
+0:01:58.160,0:01:59.630
+Just walk back and forth.
+
+0:01:59.630,0:02:03.400
+OK, there are a lot of different ways to
+get to these states, but the state
+
+0:02:03.400,0:02:05.860
+occurs only once in this graph.
+
+0:02:05.860,0:02:07.490
+Very, very critical distinction.
+
+0:02:07.490,0:02:11.270
+In a search graph, each state occurs
+once, regardless of the number of
+
+0:02:11.270,0:02:13.490
+paths through the graph
+that can get to it.
+
+0:02:13.490,0:02:16.540
+
+0:02:16.540,0:02:19.530
+In general, this graph is a
+nice mathematical object.
+
+0:02:19.530,0:02:21.980
+We can think about it, but
+we don't build it, right?
+
+0:02:21.980,0:02:23.280
+Because it's exponentially big.
+
+0:02:23.280,0:02:25.720
+We try to avoid building things
+that are exponentially big.
+
+0:02:25.720,0:02:28.420
+And in general we can't build it, we
+can't fit it in memory, we don't have
+
+0:02:28.420,0:02:29.390
+enough time to build it.
+
+0:02:29.390,0:02:32.470
+It's a useful idea, but
+it is just an idea.
+
+0:02:32.470,0:02:35.360
+We don't actually build the whole thing
+and then search it, for example.
+
+0:02:35.360,0:02:37.900
+
+0:02:37.900,0:02:40.670
+For the purposes of this lecture next,
+we're going to be playing with this
+
+0:02:40.670,0:02:42.100
+tiny little search problem.
+
+0:02:42.100,0:02:44.820
+When you see a search problem that fits
+on a PowerPoint slide, in general
+
+0:02:44.820,0:02:47.510
+you should laugh inside at the tiny
+little funny search problem.
+
+0:02:47.510,0:02:51.310
+Because a real search problem never
+fits on a PowerPoint slide.
+
+0:02:51.310,0:02:53.270
+If they were like this, there
+would be no lecture here.
+
+0:02:53.270,0:02:56.150
+It would be just enumerate everything
+and whatever, right?
+
+0:02:56.150,0:03:00.010
+The idea is we have this graph, and
+we'd like to somehow find paths in
+
+0:03:00.010,0:03:05.500
+this graph, optimal solutions without
+ever writing most of the graph down.
+
+0:03:05.500,0:03:06.750
+That's the trick.
+
+0:03:06.750,0:03:07.400
+
+0:03:06.840,0:03:08.040
+So what do we do?
+
+0:03:08.040,0:03:10.560
+Well, we don't want to write down the
+whole graph, because most of it's not
+
+0:03:10.560,0:03:11.500
+relevant to us.
+
+0:03:11.500,0:03:12.580
+What is relevant to us?
+
+0:03:12.580,0:03:15.730
+The start state's relevant to us, and
+the things that can happen from here
+
+0:03:15.730,0:03:16.700
+are relevant to us.
+
+0:03:16.700,0:03:19.950
+So the object that we work with is
+what's called a search tree.
+
+0:03:19.950,0:03:22.010
+And this object will
+also have problems.
+
+0:03:22.010,0:03:23.440
+What is a search tree?
+
+0:03:23.440,0:03:25.910
+Well, at the top of the tree
+is the current state.
+
+0:03:25.910,0:03:27.230
+This is now.
+
+0:03:27.230,0:03:28.560
+This is the start state.
+
+0:03:28.560,0:03:30.130
+What can happen next?
+
+0:03:30.130,0:03:33.340
+Well, we have our actions, and below
+that we have possible futures.
+
+0:03:33.340,0:03:36.340
+Right below the start state is what can
+happen in one step, and that just
+
+0:03:36.340,0:03:37.270
+continues on down.
+
+0:03:37.270,0:03:40.120
+And the deeper you go, you're just
+traveling into the future.
+
+0:03:40.120,0:03:41.530
+It's like science fiction.
+
+0:03:41.530,0:03:45.880
+So this is essentially
+the tree of what if.
+
+0:03:45.880,0:03:51.780
+Every plan you could possibly execute
+is in this tree somewhere.
+
+0:03:51.780,0:03:52.950
+The start state is the root.
+
+0:03:52.950,0:03:54.820
+Children correspond to successors.
+
+0:03:54.820,0:03:59.250
+Each node in this graph has a state
+that it corresponds to.
+
+0:03:59.250,0:04:01.700
+But it's really a plan.
+
+0:04:01.700,0:04:05.680
+So this node here, although it looks
+a lot like this search state, it's
+
+0:04:05.680,0:04:06.980
+actually more than that.
+
+0:04:06.980,0:04:10.380
+It's the plan of being in the
+start state and going north,
+
+0:04:10.380,0:04:11.810
+and ending up there.
+
+0:04:11.810,0:04:13.800
+There are other ways
+to end up in this.
+
+0:04:13.800,0:04:16.750
+For example, you could go north and then
+south and then north, and that's
+
+0:04:16.750,0:04:18.300
+down here somewhere.
+
+0:04:18.300,0:04:21.430
+It has the same state, but it's
+elsewhere in the tree, because nodes
+
+0:04:21.430,0:04:25.500
+in this tree correspond
+to plans, not states.
+
+0:04:25.500,0:04:27.870
+Critical distinction.
+
+0:04:27.870,0:04:30.040
+Again, I told you we don't
+build the graph.
+
+0:04:30.040,0:04:31.600
+Well, we don't build the tree either.
+
+0:04:31.600,0:04:35.170
+Tree is at least as bad as the graph.
+
+0:04:35.170,0:04:36.660
+So what's the point?
+
+0:04:36.660,0:04:40.200
+The point is, we try to just build a
+tiny little piece of this tree, and we
+
+0:04:40.200,0:04:42.710
+try to have algorithms that guarantee we
+did the right thing even though we
+
+0:04:42.710,0:04:44.090
+ignored most of the tree.
+
+0:04:44.090,0:04:45.340
+That's going to be the tree.
+

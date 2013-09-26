@@ -1,0 +1,716 @@
+0:00:00.000,0:00:00.730
+
+0:00:00.730,0:00:03.650
+PROFESSOR: So where are we so far?
+
+0:00:03.650,0:00:05.890
+Last lecture we defined
+a search problem.
+
+0:00:05.890,0:00:10.070
+A search problem is defined by the
+states in the search abstraction.
+
+0:00:10.070,0:00:12.790
+These are the configurations
+of the world as relevant
+
+0:00:12.790,0:00:14.400
+to your search problem.
+
+0:00:14.400,0:00:17.280
+There are actions, which
+come along with costs.
+
+0:00:17.280,0:00:21.410
+And there's a successor function which
+says how the states evolve in response
+
+0:00:21.410,0:00:22.460
+your action.
+
+0:00:22.460,0:00:25.220
+In essence, the successor function
+is your knowledge about
+
+0:00:25.220,0:00:26.590
+how the world works.
+
+0:00:26.590,0:00:30.420
+If I do this, what will
+happen in my model?
+
+0:00:30.420,0:00:34.560
+In addition, for a search problem,
+there's a start state and a goal test.
+
+0:00:34.560,0:00:38.680
+We then talked about a search tree,
+which is this mathematical object
+
+0:00:38.680,0:00:42.970
+where at the top is your start state and
+the nodes in this tree correspond
+
+0:00:42.970,0:00:46.570
+to all the possible plans
+you could execute.
+
+0:00:46.570,0:00:49.940
+And as you get deeper into the tree this
+corresponds to plans with more
+
+0:00:49.940,0:00:52.270
+and more steps.
+
+0:00:52.270,0:00:56.480
+Plans have costs, which are the sum of
+the action costs that lead into them.
+
+0:00:56.480,0:00:59.880
+And what we want to do with a search
+algorithm is systematically build this
+
+0:00:59.880,0:01:05.019
+search tree starting at the top,
+building towards a goal, and we'd like
+
+0:01:05.019,0:01:08.880
+to do this in a way that one, doesn't
+expand too much of the tree because
+
+0:01:08.880,0:01:10.460
+these trees are huge.
+
+0:01:10.460,0:01:13.420
+Actually, in general, a lot of the
+things we care about in AI, in
+
+0:01:13.420,0:01:17.020
+principle, are exponential in the worst
+case and we want, in practice,
+
+0:01:17.020,0:01:19.860
+do as little work as possible.
+
+0:01:19.860,0:01:22.520
+And these search algorithms primarily
+differed in their ordering of the
+
+0:01:22.520,0:01:27.330
+fringe, so how we decided which
+partial plan to expand next.
+
+0:01:27.330,0:01:31.120
+In addition, we started at the end of
+last class talking about optimality,
+
+0:01:31.120,0:01:34.620
+which is this notion of not just finding
+a way of achieving my goal,
+
+0:01:34.620,0:01:39.000
+but doing it in the lowest cost where
+the costs are encoded in the successor
+
+0:01:39.000,0:01:40.250
+functions costs.
+
+0:01:40.250,0:01:40.950
+
+0:01:41.110,0:01:43.010
+PROFESSOR: So here's an example
+of a search that has
+
+0:01:43.010,0:01:44.510
+nothing to do with pathing.
+
+0:01:44.510,0:01:47.980
+Lots of people like to latch onto this
+idea that search is moving from one
+
+0:01:47.980,0:01:49.590
+place in a maze to an exit.
+
+0:01:49.590,0:01:53.830
+Lots of search problems look nothing
+like positional planning.
+
+0:01:53.830,0:01:57.970
+So in the pancake problem, you have a
+stack of pancakes and you would like
+
+0:01:57.970,0:02:01.320
+to get them in order where the biggest
+pancake is on the bottom, and the
+
+0:02:01.320,0:02:03.150
+smallest pancake is on top.
+
+0:02:03.150,0:02:06.260
+But the only way you can do this as
+you're cooking the pancakes is to
+
+0:02:06.260,0:02:09.920
+insert your spatula at some point
+in the stack and do a flip.
+
+0:02:09.920,0:02:14.950
+So if I insert here and I do a flip,
+the top two will switch positions.
+
+0:02:14.950,0:02:19.530
+If I flip below that, I'll actually
+get to the goal state here.
+
+0:02:19.530,0:02:22.120
+And if I flip even further, I'll
+just flip the entire stack.
+
+0:02:22.120,0:02:27.230
+So at any given point, my state is
+some ordering of the pancakes.
+
+0:02:27.230,0:02:30.960
+My actions are the places
+I can insert my spatula.
+
+0:02:30.960,0:02:34.990
+And the successor function does the
+appropriate flipping of the prefixes
+
+0:02:34.990,0:02:36.420
+of these orders.
+
+0:02:36.420,0:02:37.980
+OK, that's a search problem.
+
+0:02:37.980,0:02:40.770
+It's perfectly well defined, and
+it has nothing to do with x, y
+
+0:02:40.770,0:02:43.530
+coordinates or positions.
+
+0:02:43.530,0:02:47.510
+So if we wanted to have a cost for
+this, one thing we could do is we
+
+0:02:47.510,0:02:49.420
+could just say minimize
+the number of flips.
+
+0:02:49.420,0:02:50.850
+Then the cost would all be one.
+
+0:02:50.850,0:02:54.850
+But it takes more energy to flip more
+pancakes, and so maybe we could say
+
+0:02:54.850,0:02:57.380
+the cost is the number
+of pancakes flipped.
+
+0:02:57.380,0:03:00.100
+Who cares about this kind of
+pancake flipping problem?
+
+0:03:00.100,0:03:03.880
+You might think this is only for some
+pancake flipping robot, but you'd be
+
+0:03:03.880,0:03:06.150
+surprised who has thought
+about this problem.
+
+0:03:06.150,0:03:10.160
+In fact, probably the last two people
+you'd ever think of, and particularly
+
+0:03:10.160,0:03:12.660
+the last two people you'd ever think
+would be working together on the
+
+0:03:12.660,0:03:15.560
+pancake problem, which is Bill Gates
+and Christos Papadimitriou.
+
+0:03:19.140,0:03:21.230
+They like pancakes.
+
+0:03:21.230,0:03:26.020
+OK, so what does this look like
+as a state space search graph?
+
+0:03:26.020,0:03:27.450
+Well, it looks something like this.
+
+0:03:27.450,0:03:29.940
+Remember, the nodes of this
+configuration of the world, which in
+
+0:03:29.940,0:03:33.160
+this case are just pancake orderings,
+in this case the arcs are
+
+0:03:33.160,0:03:34.650
+bi-directional and they have a cost.
+
+0:03:34.650,0:03:36.650
+That cost depends on how many
+pancakes I flipped.
+
+0:03:36.650,0:03:40.190
+And here is a way to graph that
+encodes the search problem.
+
+0:03:40.190,0:03:41.570
+Now again, this fits on the slide.
+
+0:03:41.570,0:03:43.610
+For a big problem, this wouldn't
+fit on the slide.
+
+0:03:43.610,0:03:46.890
+And we somehow need to be able to find
+our goal in this kind of a graph
+
+0:03:46.890,0:03:49.720
+without building the entire graph.
+
+0:03:49.720,0:03:53.060
+All right, so in particular for this
+graph, here is your goal state, and
+
+0:03:53.060,0:03:53.870
+you start somewhere.
+
+0:03:53.870,0:03:54.600
+Who knows where you start.
+
+0:03:54.600,0:03:55.680
+Maybe you start here.
+
+0:03:55.680,0:03:58.330
+And you have to find some way of getting
+through this graph of least
+
+0:03:58.330,0:03:59.770
+cost that gets to your goal.
+
+0:04:00.550,0:04:01.620
+PROFESSOR: How did we do this?
+
+0:04:01.620,0:04:05.040
+We have this general algorithm that
+we're going to continue using today,
+
+0:04:05.040,0:04:07.130
+and we're going to improve
+it in two ways.
+
+0:04:07.130,0:04:11.570
+The general algorithm involved the key
+idea of a search tree and a fringe.
+
+0:04:11.570,0:04:15.420
+At the beginning, you start with the
+start state, which is the empty plan
+
+0:04:15.420,0:04:17.650
+where you've done nothing and you're
+just sitting at the start.
+
+0:04:17.650,0:04:21.710
+That's the root of the tree, and it is
+the initial thing on your fringe.
+
+0:04:21.710,0:04:24.990
+As you execute this algorithm, it's
+a very simple, short cycle.
+
+0:04:24.990,0:04:30.060
+You take something off the fringe, you
+put its children from the successor
+
+0:04:30.060,0:04:34.660
+function on the fringe, and those
+actions that generated the children
+
+0:04:34.660,0:04:38.790
+have costs as well as result states.
+
+0:04:38.790,0:04:41.600
+You stick all of that onto the fringe,
+and then you continue going.
+
+0:04:41.600,0:04:44.020
+You take something off the fringe and
+put its children on, you take
+
+0:04:44.020,0:04:46.900
+something else off the fringe and put
+its children on, and this frontier,
+
+0:04:46.900,0:04:50.740
+the fringe, moves more or less
+downward in the tree.
+
+0:04:50.740,0:04:54.630
+And whether it goes uniformly downward
+or mostly on the left, that's going to
+
+0:04:54.630,0:04:56.740
+be the difference between the algorithms
+like depth-first search and
+
+0:04:56.740,0:04:58.090
+breadth-first search.
+
+0:04:58.090,0:05:00.620
+As we go, we add up the costs.
+
+0:05:00.620,0:05:04.280
+Some search algorithms are sensitive to
+that cumulative cost, some of them
+
+0:05:04.280,0:05:06.760
+aren't, but each plan has a cost.
+
+0:05:06.760,0:05:08.610
+Here, this plan has cost 7.
+
+0:05:08.610,0:05:10.300
+It happens to be the optimal cost.
+
+0:05:10.300,0:05:13.180
+And this particular plan
+achieves the goal.
+
+0:05:13.180,0:05:16.870
+We keep taking things off the fringe
+and putting their children on until
+
+0:05:16.870,0:05:19.600
+something removed from the fringe
+satisfies the goal, at which
+
+0:05:19.600,0:05:20.690
+point, we return it.
+
+0:05:20.690,0:05:21.730
+Super critical.
+
+0:05:21.730,0:05:26.390
+You return the first plan removed from
+the fringe that achieves your goal,
+
+0:05:26.390,0:05:29.420
+not the first plan put into
+the fringe, and we'll see
+
+0:05:29.420,0:05:32.590
+today why that's important.
+
+0:05:32.590,0:05:36.750
+All right, so we saw depth-first search,
+we saw breadth-first search,
+
+0:05:36.750,0:05:37.920
+we saw uniform-cost search.
+
+0:05:37.920,0:05:39.730
+We're going to see two more today.
+
+0:05:39.730,0:05:42.950
+And I talked about them as if they're
+all basically the same thing except
+
+0:05:42.950,0:05:45.100
+for how you decide what
+comes off the fringe.
+
+0:05:45.100,0:05:47.140
+What does that mean in terms
+of implementation?
+
+0:05:47.140,0:05:50.570
+Well, in terms of implementation, it
+actually means that you can literally
+
+0:05:50.570,0:05:54.750
+implement one search algorithm, feel
+free to do this in your project ones,
+
+0:05:54.750,0:05:57.920
+you can implement one time and
+simply pass in variable
+
+0:05:57.920,0:05:59.950
+strategies in some way.
+
+0:05:59.950,0:06:03.320
+Conceptually, all the fringes we've
+talked about are priority queues.
+
+0:06:03.320,0:06:06.630
+There's a bunch of plans that are yet
+to be expanded on on the fringe, and
+
+0:06:06.630,0:06:09.230
+each one has some number that
+represents its priority.
+
+0:06:09.230,0:06:13.170
+In breadth-first, the priority is take
+off from the fringe the thing that has
+
+0:06:13.170,0:06:16.980
+the shallowest, the shortest, plan so
+far in terms of number of steps.
+
+0:06:16.980,0:06:20.770
+Uniform cost was the cheapest
+in terms of total path cost.
+
+0:06:20.770,0:06:25.110
+Depth-first was the deepest, so the
+opposite of breadth-first search.
+
+0:06:25.110,0:06:27.900
+Now, in practice for depth-first search
+and breadth-first search, you
+
+0:06:27.900,0:06:30.940
+don't actually need a priority
+queue to get their behaviors.
+
+0:06:30.940,0:06:34.540
+So if you want a depth-first search,
+you basically want to expand next
+
+0:06:34.540,0:06:37.430
+whatever you put on most recently,
+because it's the deepest.
+
+0:06:37.430,0:06:40.690
+And so you can just use a stack and
+take whatever's off the stack.
+
+0:06:40.690,0:06:43.270
+That means you don't need to have the
+overhead for a priority queue.
+
+0:06:43.270,0:06:46.840
+A general priority queue, putting things
+on and taking things off incurs
+
+0:06:46.840,0:06:48.470
+a login penalty.
+
+0:06:48.470,0:06:51.680
+So in general, with a priority queue, if
+you have a certain number of knows
+
+0:06:51.680,0:06:55.330
+that you're putting on the queue and
+taking off of the queue, then you're
+
+0:06:55.330,0:06:58.920
+going to get a log that many factor to
+represent the fact that really the
+
+0:06:58.920,0:07:00.410
+queue is capable of sorting.
+
+0:07:00.410,0:07:01.900
+You put everything on, you
+take everything off, now
+
+0:07:01.900,0:07:02.940
+they're in sorted order.
+
+0:07:02.940,0:07:05.850
+You don't want to pay that if you don't
+have to, so you'll see that
+
+0:07:05.850,0:07:09.020
+depth-first search and breadth-first
+search are usually implemented using
+
+0:07:09.020,0:07:12.280
+stacks and queues, but in principle,
+it's all just priority queues.
+
+0:07:12.280,0:07:15.140
+That is the one queue, it solves
+all search problems,
+
+0:07:15.140,0:07:18.180
+sometimes you can optimize.
+
+0:07:18.180,0:07:19.050
+All right.
+
+0:07:19.050,0:07:21.370
+So last time we finished
+out uninformed search.
+
+0:07:21.370,0:07:24.850
+In uninformed search, we explore this
+tree in some sense from the top down.
+
+0:07:24.850,0:07:27.260
+Depth-first search is more like
+from the left to the right.
+
+0:07:27.260,0:07:30.110
+We explore this tree in some
+way that is systematic.
+
+0:07:30.110,0:07:33.700
+Left to right or top down,
+or cheapest things first.
+
+0:07:33.700,0:07:36.240
+Systematic but unaware of
+where the goals are.
+
+0:07:36.240,0:07:39.940
+So even if the goal is down and to the
+right, breadth-first search will still
+
+0:07:39.940,0:07:41.760
+do the first layer then the second
+than the third layer.
+
+0:07:41.760,0:07:42.880
+It doesn't know where it's going.
+
+0:07:42.880,0:07:44.130
+It just does its thing.
+
+0:07:45.320,0:07:48.100
+PROFESSOR: Particularly in uniform
+cost search, the strategy was to
+
+0:07:48.100,0:07:51.730
+expand the lowest path cost, and we'd
+convinced ourselves that uniform cost
+
+0:07:51.730,0:07:55.040
+search is both complete and optimal
+under certain conditions.
+
+0:07:55.040,0:07:58.400
+And so the reason why it works is
+because you start at the top and you
+
+0:07:58.400,0:08:00.440
+basically work your way
+systematically down.
+
+0:08:00.440,0:08:03.800
+And when you find a goal, you find the
+cheapest goal in terms of cost.
+
+0:08:03.800,0:08:06.900
+And when you do that, you've
+expanded all plans that are
+
+0:08:06.900,0:08:10.670
+that cheap or cheaper.
+
+0:08:10.670,0:08:13.010
+So the good is uniform cost search
+is complete and optimal.
+
+0:08:13.010,0:08:16.730
+The bad was it kind of explored
+outward in every direction.
+
+0:08:16.730,0:08:18.400
+And let's see that in a
+couple different ways.
+
+0:08:22.010,0:08:27.960
+So one way I can show you that
+happening is to look
+
+0:08:27.960,0:08:29.270
+at this search demo.
+
+0:08:29.270,0:08:33.050
+Here is just a bunch of open water,
+green is the start state, red is the
+
+0:08:33.050,0:08:35.880
+stop state.
+
+0:08:35.880,0:08:39.900
+If I execute a uniform cost search, the
+dots will show the order in which
+
+0:08:39.900,0:08:41.650
+states are first expanded.
+
+0:08:41.650,0:08:43.090
+And you can see it just
+radiates outward.
+
+0:08:43.090,0:08:47.330
+It's checking all of the things that
+it can do in say, seven steps until
+
+0:08:47.330,0:08:49.680
+finally, it finds a plan
+that hits the goal.
+
+0:08:49.680,0:08:52.530
+Which means, in addition to going right,
+it's also going left, which
+
+0:08:52.530,0:08:55.100
+isn't very useful.
+
+0:08:55.100,0:08:56.350
+Let's see this in a different way.
+
+0:09:01.030,0:09:05.900
+OK here is in a Pac-Man configuration
+here, red indicates something expanded
+
+0:09:05.900,0:09:09.750
+earlier, and closer to black indicates
+something that was expanded later.
+
+0:09:09.750,0:09:12.180
+Black is the things that
+weren't expanded all.
+
+0:09:12.180,0:09:15.900
+You can see we considered all the
+states nearby the Pac-Man.
+
+0:09:15.900,0:09:19.310
+And basically, we had to consider the
+entire board because in the cost it
+
+0:09:19.310,0:09:23.260
+takes you to get to the goal, the dot
+in the lower left, you can basically
+
+0:09:23.260,0:09:25.680
+get anywhere and so you expand
+the whole board.
+
+0:09:25.680,0:09:28.820
+It's optimal, but you kind of did almost
+everything you could possibly
+
+0:09:28.820,0:09:31.290
+do in terms of work.
+
+0:09:31.290,0:09:32.540
+So we'd like to improve on that.
+

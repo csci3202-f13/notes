@@ -1,0 +1,358 @@
+0:00:00.000,0:00:01.450
+
+0:00:01.450,0:00:04.170
+DAN KLEIN: So let's think about
+adversarial games and how we're going
+
+0:00:04.170,0:00:08.620
+to formalize this idea of a search
+problem, where you're not the only
+
+0:00:08.620,0:00:11.300
+person acting in the environment.
+
+0:00:11.300,0:00:13.330
+There are a lot of different
+kinds of games.
+
+0:00:13.330,0:00:16.140
+So, in particular, the kinds of
+techniques we're going to talk about
+
+0:00:16.140,0:00:19.560
+today are going to apply to a very
+specific class of games.
+
+0:00:19.560,0:00:22.840
+You'll notice when I did an overview
+of game technology, I was talking
+
+0:00:22.840,0:00:24.505
+about a very narrow class of games.
+
+0:00:24.505,0:00:26.040
+I didn't talk about poker.
+
+0:00:26.040,0:00:27.940
+That's a game of imperfect
+information.
+
+0:00:27.940,0:00:29.540
+We're not going to talk
+about that today.
+
+0:00:29.540,0:00:32.820
+I didn't talk about things like Star
+Craft, which is another example of
+
+0:00:32.820,0:00:34.120
+imperfect information.
+
+0:00:34.120,0:00:36.040
+I didn't talk about anything
+stochastic.
+
+0:00:36.040,0:00:38.270
+Poker also has a stochastic
+element to it.
+
+0:00:38.270,0:00:42.180
+And I didn't talk about cases where
+there are multiple players beyond two.
+
+0:00:42.180,0:00:44.800
+So what are we going to
+talk about today?
+
+0:00:44.800,0:00:48.640
+Well, it's going to be zero-sum games,
+and they're going to be deterministic
+
+0:00:48.640,0:00:51.580
+games, and they're going to be
+games of perfect information.
+
+0:00:51.580,0:00:55.330
+What we want is we want an algorithm,
+which allows us to calculate a
+
+0:00:55.330,0:00:57.990
+strategy which tells us what
+to do in each state.
+
+0:00:57.990,0:00:59.870
+Now think about how this is
+different from Search.
+
+0:00:59.870,0:01:03.240
+In Search, I gave you the search
+problem, and what you gave me back was
+
+0:01:03.240,0:01:04.690
+a plan or a path.
+
+0:01:04.690,0:01:07.150
+It was a sequence of actions
+that executed and it was
+
+0:01:07.150,0:01:08.730
+guaranteed to succeed.
+
+0:01:08.730,0:01:11.570
+That's not going to work here, because
+we don't control our opponent.
+
+0:01:11.570,0:01:14.200
+So we can't just give a plan that's
+guaranteed to succeed.
+
+0:01:14.200,0:01:17.400
+What we need to do is we need to give a
+function which tells us in any given
+
+0:01:17.400,0:01:18.360
+say what to do.
+
+0:01:18.360,0:01:19.460
+That's this policy.
+
+0:01:19.460,0:01:23.010
+In the game case, it's often
+called a strategy.
+
+0:01:23.010,0:01:24.840
+So we can formalize games.
+
+0:01:24.840,0:01:27.840
+If we wanted to formalize this, we
+could do it in multiple ways.
+
+0:01:27.840,0:01:31.690
+There's less consensus on exactly what
+the formalization is and what notation
+
+0:01:31.690,0:01:35.440
+to use, but you would have a set of
+states just like in a search case.
+
+0:01:35.440,0:01:39.030
+Now there are multiple players and they
+typically take turns in the way
+
+0:01:39.030,0:01:41.010
+we formalize these games.
+
+0:01:41.010,0:01:42.920
+There's a set of actions and
+maybe different players
+
+0:01:42.920,0:01:44.110
+have different actions.
+
+0:01:44.110,0:01:47.520
+And then the analogy to a successor
+function is something we can call a
+
+0:01:47.520,0:01:50.260
+transition function, though today
+we're actually going to continue
+
+0:01:50.260,0:01:53.530
+calling a successor function, because
+it won't be ambiguous today.
+
+0:01:53.530,0:01:56.890
+And what this does is this tells us how
+the state evolves in response to
+
+0:01:56.890,0:01:58.680
+the various actions.
+
+0:01:58.680,0:02:01.910
+There's a terminal test which tells
+us when the game is over.
+
+0:02:01.910,0:02:04.990
+So it's kind of like the goal past
+fr a search, and now there
+
+0:02:04.990,0:02:06.510
+are terminal utilities.
+
+0:02:06.510,0:02:11.030
+This tells us for an end state,
+how much of this is worth
+
+0:02:11.030,0:02:13.150
+to each of the players.
+
+0:02:13.150,0:02:14.300
+OK.
+
+0:02:14.300,0:02:18.330
+The solution to a game like this is a
+policy which maps states to actions.
+
+0:02:18.330,0:02:21.560
+
+0:02:21.560,0:02:24.240
+As I said before, we're going to be
+interested in zero-sum games.
+
+0:02:24.240,0:02:25.430
+You've probably heard that term.
+
+0:02:25.430,0:02:26.820
+What does that mean?
+
+0:02:26.820,0:02:30.620
+In a zero-sum game, like what's
+shown on the left, we do
+
+0:02:30.620,0:02:32.000
+have adversarial agents.
+
+0:02:32.000,0:02:35.020
+So in this case, we're going to imagine
+we have two agents, except
+
+0:02:35.020,0:02:36.930
+they have opposite utilities.
+
+0:02:36.930,0:02:40.040
+So when we think about a terminal
+state, if one likes it,
+
+0:02:40.040,0:02:41.670
+the other hates it.
+
+0:02:41.670,0:02:44.740
+Because they have opposite values on the
+outcomes, we don't have to think
+
+0:02:44.740,0:02:48.080
+about the blue players utility
+and the red players utility.
+
+0:02:48.080,0:02:52.650
+There's just one function, except the
+blue player wants to maximize it and
+
+0:02:52.650,0:02:54.780
+the red player wants to minimize it
+
+0:02:54.780,0:02:56.880
+And this is a really nice thing that
+we can think about there being a
+
+0:02:56.880,0:02:58.280
+single function.
+
+0:02:58.280,0:03:02.370
+Because this lets us reason about the
+extreme case of pure competition and
+
+0:03:02.370,0:03:04.460
+adversarial search.
+
+0:03:04.460,0:03:05.440
+But what about in general.
+
+0:03:05.440,0:03:06.940
+In general, this won't be true.
+
+0:03:06.940,0:03:10.530
+In general, when you have multiple
+agents acting, you don't imagine that
+
+0:03:10.530,0:03:12.590
+they're purely adversarial.
+
+0:03:12.590,0:03:15.520
+They simply have their own utility
+functions which sometimes align and
+
+0:03:15.520,0:03:16.760
+sometimes don't.
+
+0:03:16.760,0:03:19.170
+So, for example, if you imagine
+you have these two agents.
+
+0:03:19.170,0:03:22.050
+And they're picking out their own colors
+from the gem file, well, they
+
+0:03:22.050,0:03:23.090
+both be happy.
+
+0:03:23.090,0:03:25.740
+And in fact, one making progress
+actually helps the other by getting
+
+0:03:25.740,0:03:28.290
+rid of some of the things
+it doesn't care about.
+
+0:03:28.290,0:03:31.110
+So the case of a general game, the
+agents are going to have utilities
+
+0:03:31.110,0:03:32.100
+that are going to be independent.
+
+0:03:32.100,0:03:33.130
+They can both like an outcome.
+
+0:03:33.130,0:03:34.370
+They come both hate the outcome.
+
+0:03:34.370,0:03:37.240
+Or they could also have opposite
+preferences just like
+
+0:03:37.240,0:03:38.690
+the zero-sum case.
+
+0:03:38.690,0:03:42.450
+Because of this general flexibility,
+you can have cooperation.
+
+0:03:42.450,0:03:45.250
+You could have indifference, and you
+could have competition, between the
+
+0:03:45.250,0:03:47.820
+agents, and also subtle combinations
+of these things.
+
+0:03:47.820,0:03:50.170
+All of these things are possible
+in the general case.
+
+0:03:50.170,0:03:53.250
+And in fact, will fall out of
+computational reasoning
+
+0:03:53.250,0:03:54.420
+in the general case.
+
+0:03:54.420,0:03:56.650
+We're going to talk about non-zero-sum
+games later.
+
+0:03:56.650,0:03:58.295
+Today we're going to talk
+about pure competition.
+
+0:03:58.295,0:03:59.830
+So there's one function.
+
+0:03:59.830,0:04:01.280
+One agent maximizes it.
+
+0:04:01.280,0:04:02.530
+The other minimizes.
+
+0:04:02.530,0:04:03.600
+

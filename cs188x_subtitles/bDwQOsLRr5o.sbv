@@ -1,0 +1,279 @@
+0:00:00.000,0:00:01.410
+
+0:00:01.410,0:00:04.120
+PROFESSOR: OK, so let's talk
+about why A* works.
+
+0:00:04.120,0:00:07.450
+I claimed A* was optimal, and
+let's see why that is.
+
+0:00:07.450,0:00:10.290
+Well, let's make some assumptions.
+
+0:00:10.290,0:00:14.130
+So, here's a diagram that reflects
+some point in the
+
+0:00:14.130,0:00:15.770
+execution of a search.
+
+0:00:15.770,0:00:18.460
+So here's a search tree, the
+start state's at top.
+
+0:00:18.460,0:00:23.450
+We hear some note n, and this thing is
+going to have some cumulative path
+
+0:00:23.450,0:00:27.690
+class G of have n, and then an estimate
+of this forward cost here to
+
+0:00:27.690,0:00:29.370
+the goal is going to be H of n.
+
+0:00:29.370,0:00:32.729
+OK, so you can think about those.
+
+0:00:32.729,0:00:37.100
+And on this, we're going to imagine
+that B here is a bad goal.
+
+0:00:37.100,0:00:38.680
+So this is a goal.
+
+0:00:38.680,0:00:41.140
+It passes the goal test,
+but it's suboptimal.
+
+0:00:41.140,0:00:43.380
+G is an optimal goal node.
+
+0:00:43.380,0:00:45.450
+So it's a goal node with least cost.
+
+0:00:45.450,0:00:49.510
+And the claim is that if G is an
+optimal goal node, and B is a
+
+0:00:49.510,0:00:54.560
+suboptimal goal node, and H is
+admissible, then under A* tree search,
+
+0:00:54.560,0:00:57.180
+G will be removed from
+the fringe before B.
+
+0:00:57.180,0:00:58.610
+That's the claim.
+
+0:00:58.610,0:01:00.080
+That's enough to give optimality.
+
+0:01:00.080,0:01:03.490
+If we know that the optimal goals will
+be removed before the bad suboptimal
+
+0:01:03.490,0:01:04.300
+goals, we're done.
+
+0:01:04.300,0:01:06.440
+That's optimality.
+
+0:01:06.440,0:01:12.040
+So let's prove that G is going to come
+off the fringe before B. Proof's
+
+0:01:12.040,0:01:14.610
+actually pretty easy, and
+it's got one key idea.
+
+0:01:14.610,0:01:18.230
+We imagine we're at some point
+that B is on the fringe.
+
+0:01:18.230,0:01:19.960
+If B's not on the fringe,
+we don't have to worry.
+
+0:01:19.960,0:01:21.546
+There's no chance of it coming
+off the fringe if it
+
+0:01:21.546,0:01:22.800
+hasn't gone on the fringe.
+
+0:01:22.800,0:01:24.920
+So we imagine we have some point
+where b is on the fringe.
+
+0:01:24.920,0:01:27.260
+And so this dotted line here represents
+the things that are on the
+
+0:01:27.260,0:01:30.200
+fringe, and it cuts through
+the tree in some way.
+
+0:01:30.200,0:01:34.910
+So B is on the French, and were afraid
+it might pop off before G does.
+
+0:01:34.910,0:01:38.430
+So G may not be on the fringe, right?
+
+0:01:38.430,0:01:41.630
+But some ancestor n of G is.
+
+0:01:41.630,0:01:42.950
+How do I know?
+
+0:01:42.950,0:01:45.190
+Well, at the start of the algorithm,
+the root was on the fringe.
+
+0:01:45.190,0:01:50.100
+That's an ancestor of G. When the root
+comes off, its children go on.
+
+0:01:50.100,0:01:54.390
+And if you think about this path from
+the root down to G, at the beginning,
+
+0:01:54.390,0:01:58.580
+the first node, the start
+state, is on.
+
+0:01:58.580,0:02:02.920
+After I pop that start node, one of its
+children, whatever its descendant
+
+0:02:02.920,0:02:04.360
+is on this path, is on.
+
+0:02:04.360,0:02:08.419
+When I pop that, the next one down on
+the path will be on, and at all times,
+
+0:02:08.419,0:02:13.350
+we're making a certain amount of
+progress along this optimal path to G.
+
+0:02:13.350,0:02:16.720
+So we know that maybe G's on the fringe,
+but even if it's not, some
+
+0:02:16.720,0:02:19.560
+ancestor G of N is on the fringe.
+
+0:02:19.560,0:02:20.860
+Right, so now we've got a race.
+
+0:02:20.860,0:02:23.350
+We've got B on the fringe, and we're
+afraid B is going to pop off, and
+
+0:02:23.350,0:02:26.870
+we've got n, which may be G or it
+may be an ancestor of G. Right.
+
+0:02:26.870,0:02:31.630
+The claim is, n will be expanded
+before B is expanded.
+
+0:02:31.630,0:02:34.610
+And if that's true, then we're fine
+because n will be expanded, and then
+
+0:02:34.610,0:02:37.700
+its child will be another such n, and it
+will be expanded, and eventually G
+
+0:02:37.700,0:02:39.030
+will be expanded before B.
+
+0:02:39.030,0:02:42.310
+So I need to argue to you that, if we're
+in this configuration where B is
+
+0:02:42.310,0:02:44.600
+on the fringe and n is on the fringe,
+that n is going to come
+
+0:02:44.600,0:02:46.010
+off first in A*.
+
+0:02:46.010,0:02:51.680
+Well, that's actually pretty easy
+because the priority of n is less than
+
+0:02:51.680,0:02:58.470
+or equal to the priority of G. So if you
+consider n to G, n's f cost, which
+
+0:02:58.470,0:03:05.450
+includes true costs up here and lower
+bound costs H to get to G is less than
+
+0:03:05.450,0:03:06.000
+actually
+
+0:03:06.000,0:03:10.550
+getting to G. Why?
+
+0:03:10.550,0:03:12.730
+That's because of admissibility.
+
+0:03:12.730,0:03:17.340
+So n will off before G. And we
+also that G has a better
+
+0:03:17.340,0:03:20.330
+priority f than B. Why?
+
+0:03:20.330,0:03:23.750
+That's what suboptimality of B means,
+because H is zero at the goal.
+
+0:03:23.750,0:03:26.550
+
+0:03:26.550,0:03:31.170
+What this means is that all ancestors of
+G are going to be expanded before B
+
+0:03:31.170,0:03:32.420
+ever comes off the fringe.
+
+0:03:32.420,0:03:34.800
+And so what you'll see is, even if B
+gets on the fringe, it's going to sit
+
+0:03:34.800,0:03:39.740
+there blocking until every node along
+the path to G takes its turn.
+
+0:03:39.740,0:03:44.130
+So even though B may end up on the
+fringe easily, G will come off first,
+
+0:03:44.130,0:03:45.570
+and that means we have optimality.
+
+0:03:45.570,0:03:48.730
+It also echoes what we saw before, that
+the important thing is not when
+
+0:03:48.730,0:03:51.190
+you find a goal and put it on
+the fringe, but when you
+
+0:03:51.190,0:03:52.270
+remove from the fringe.
+
+0:03:52.270,0:03:53.620
+That's when you know it's
+safe to declare.
+
+0:03:53.620,0:03:55.033
+

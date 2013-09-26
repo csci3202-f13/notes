@@ -1,0 +1,39 @@
+0:00:00.000,0:00:01.720
+
+0:00:01.720,0:00:03.490
+PROFESSOR: Let's take a quick quiz.
+
+0:00:03.490,0:00:07.945
+Let's say you're playing a game, and you
+know what your opponent's doing.
+
+0:00:07.945,0:00:12.010
+Your opponent runs depth 2 minimax,
+and 80% of the time, your
+
+0:00:12.010,0:00:13.300
+opponent does that.
+
+0:00:13.300,0:00:16.560
+But your opponent wants to shake it up
+a little bit, and thinks minimax is
+
+0:00:16.560,0:00:20.740
+too predictable, and so 20% of the time,
+your opponent moves randomly to
+
+0:00:20.740,0:00:22.262
+throw you off.
+
+0:00:22.262,0:00:23.830
+You know this.
+
+0:00:23.830,0:00:28.720
+What three should you use to represent
+the planning problem to
+
+0:00:28.720,0:00:29.970
+compute your next move?
+
+0:00:29.970,0:00:31.040
+

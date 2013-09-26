@@ -1,0 +1,250 @@
+0:00:00.000,0:00:00.490
+
+0:00:00.490,0:00:01.340
+What is available?
+
+0:00:01.340,0:00:03.440
+Well, depth-first search
+you may have heard of.
+
+0:00:03.440,0:00:05.490
+Depth-first search is
+available to you.
+
+0:00:05.490,0:00:07.660
+So I like to think of the search tree,
+you can think of it like a big
+
+0:00:07.660,0:00:08.990
+mountain, right?
+
+0:00:08.990,0:00:10.230
+And in a way, this is misleading.
+
+0:00:10.230,0:00:12.530
+Because the mountain, it's not
+like a normal mountain.
+
+0:00:12.530,0:00:15.450
+It's exponentially larger the deeper
+you go into this mountain, right?
+
+0:00:15.450,0:00:17.940
+So in general, the bottom of this
+mountain is very, very wide.
+
+0:00:17.940,0:00:20.870
+And depth-first search basically starts
+at the top and goes straight
+
+0:00:20.870,0:00:22.790
+down, but in a very particular way.
+
+0:00:22.790,0:00:26.610
+So let's take this example, and let's
+try depth-first search, straight to
+
+0:00:26.610,0:00:28.640
+the bottom.
+
+0:00:28.640,0:00:29.670
+Well, here's the tree.
+
+0:00:29.670,0:00:31.250
+So in this case I'm, going
+to speed this up.
+
+0:00:31.250,0:00:35.450
+I'm not going to draw the fringe and
+cross things off manually, but what
+
+0:00:35.450,0:00:37.560
+you're going to see here is
+on the top is the graph.
+
+0:00:37.560,0:00:41.260
+On the bottom is the tree, and when I
+highlight something in the tree, I'll
+
+0:00:41.260,0:00:44.060
+also highlight which path it corresponds
+to in the graph.
+
+0:00:44.060,0:00:48.190
+Just remember, nodes in the tree are
+paths or plans in the graph.
+
+0:00:48.190,0:00:51.870
+So the strategy in depth-first search
+is expand some deepest node first.
+
+0:00:51.870,0:00:54.340
+So we've only got one node on our
+fringe to begin with, it's s.
+
+0:00:54.340,0:00:56.410
+So we expand it first.
+
+0:00:56.410,0:01:00.320
+Now on our fringe is these nodes
+that correspond to d, e, and
+
+0:01:00.320,0:01:01.760
+p, just like before.
+
+0:01:01.760,0:01:03.960
+Which one does depth-first
+search want?
+
+0:01:03.960,0:01:05.600
+As I've described it, it doesn't care.
+
+0:01:05.600,0:01:06.680
+They're all equally deep.
+
+0:01:06.680,0:01:07.810
+They're all equally good.
+
+0:01:07.810,0:01:10.270
+Specific implementations
+will make a choice.
+
+0:01:10.270,0:01:13.400
+So let's imagine the implementation is
+always choosing the one on the left,
+
+0:01:13.400,0:01:16.920
+and goes through these in
+order to break ties.
+
+0:01:16.920,0:01:18.800
+Well, we take off d.
+
+0:01:18.800,0:01:20.050
+And now what's on our fringe?
+
+0:01:20.050,0:01:22.870
+We've got this b, c, and e paths.
+
+0:01:22.870,0:01:26.320
+We've got another e path that's
+shorter, and a p path.
+
+0:01:26.320,0:01:27.490
+So these five things.
+
+0:01:27.490,0:01:29.770
+What does depth-first
+search want next?
+
+0:01:29.770,0:01:31.140
+Well, b, c, or e.
+
+0:01:31.140,0:01:33.430
+And because we're going through
+successors in order in this
+
+0:01:33.430,0:01:36.550
+implementation, we're going
+to take the one through b.
+
+0:01:36.550,0:01:39.160
+And you can see now we'll
+go down to a.
+
+0:01:39.160,0:01:40.710
+Now, we hit the bottom.
+
+0:01:40.710,0:01:43.810
+You can't go any further from a, and
+it's not like we declare failure.
+
+0:01:43.810,0:01:45.580
+We've still got our fringe, right?
+
+0:01:45.580,0:01:49.320
+It's still sitting there, and now the
+next deepest thing that's left is
+
+0:01:49.320,0:01:50.220
+this path to c.
+
+0:01:50.220,0:01:51.100
+So we'll go there.
+
+0:01:51.100,0:01:52.040
+We'll try again.
+
+0:01:52.040,0:01:53.030
+That didn't work.
+
+0:01:53.030,0:01:54.130
+Now we'll go to e.
+
+0:01:54.130,0:01:57.960
+Notice we're going to be deeper path
+to e, not the shallower one.
+
+0:01:57.960,0:02:01.040
+Because that happens to be the one
+we hit first in this order.
+
+0:02:01.040,0:02:03.020
+Now what's next?
+
+0:02:03.020,0:02:04.740
+H, then p, then q.
+
+0:02:04.740,0:02:07.825
+And we kind of continue through until
+here we're getting to the goal, so
+
+0:02:07.825,0:02:09.050
+I'll slow down.
+
+0:02:09.050,0:02:13.200
+You get here, you see this is not a
+goal, and it has no successors.
+
+0:02:13.200,0:02:16.170
+The next deepest thing on the
+fringe, you pop it off.
+
+0:02:16.170,0:02:17.240
+It's a goal path.
+
+0:02:17.240,0:02:20.330
+You declare victory, and this
+is the path you found.
+
+0:02:20.330,0:02:22.210
+So let's think about what we just did.
+
+0:02:22.210,0:02:23.040
+What did we just do?
+
+0:02:23.040,0:02:25.980
+We basically went straight down
+the left of the tree.
+
+0:02:25.980,0:02:28.190
+Let's just watch the colors.
+
+0:02:28.190,0:02:29.870
+Don't watch the specific letters.
+
+0:02:29.870,0:02:31.540
+So just watch how it works.
+
+0:02:31.540,0:02:35.170
+From left to right.
+
+0:02:35.170,0:02:38.870
+We're kind of going across this graph,
+starting on the left and striping
+
+0:02:38.870,0:02:40.120
+across kind of vertically.
+
+0:02:40.120,0:02:41.090
+

@@ -1,0 +1,149 @@
+0:00:00.000,0:00:00.650
+
+0:00:00.650,0:00:01.500
+So what does A* do?
+
+0:00:01.500,0:00:03.410
+There's this algorithm,
+I talked it up.
+
+0:00:03.410,0:00:06.610
+And it's kind of like Uniform-cost, but
+it's kind of like Greedy, what's
+
+0:00:06.610,0:00:08.119
+it actually going to do?
+
+0:00:08.119,0:00:11.240
+Uniform-cost, we know on this search
+tree diagram what it's going to do.
+
+0:00:11.240,0:00:13.190
+It's going to start at the top and
+it's going to work downward.
+
+0:00:13.190,0:00:16.230
+It's going to be ragged because it's
+going to go deeper in terms of number
+
+0:00:16.230,0:00:19.700
+of steps, where the actions are cheap,
+but it's going to basically go from
+
+0:00:19.700,0:00:20.670
+top to bottom.
+
+0:00:20.670,0:00:24.550
+A* is going to go deep near the goals,
+and shallower away from the goals.
+
+0:00:24.550,0:00:28.270
+But because it's hedging its bets and
+because the heuristic is imperfect,
+
+0:00:28.270,0:00:30.800
+near the top of the tree it
+will still do everything.
+
+0:00:30.800,0:00:31.010
+OK.
+
+0:00:31.010,0:00:32.960
+That's the shape of A* search.
+
+0:00:32.960,0:00:36.450
+And if you think about this, the way
+we were looking at going in every
+
+0:00:36.450,0:00:39.660
+direction for a Uniform-cost search,
+Uniform-cost search will expand
+
+0:00:39.660,0:00:41.220
+equally in all directions.
+
+0:00:41.220,0:00:43.940
+A*, however, is going to expand
+mainly towards the goal.
+
+0:00:43.940,0:00:45.140
+It's not going to be like Greedy.
+
+0:00:45.140,0:00:46.390
+Let's take a look.
+
+0:00:46.390,0:00:49.070
+
+0:00:49.070,0:00:49.790
+We go back to the empty maze.
+
+0:00:49.790,0:00:50.840
+Remember this is Greedy.
+
+0:00:50.840,0:00:52.460
+That was great.
+
+0:00:52.460,0:00:54.310
+I mean it's great when works, right?
+
+0:00:54.310,0:00:56.450
+Uniform-cost goes in every direction.
+
+0:00:56.450,0:00:58.700
+A* is going to do something
+in between.
+
+0:00:58.700,0:01:00.160
+Here's A*.
+
+0:01:00.160,0:01:02.510
+It goes towards the goal but
+it also goes a little bit
+
+0:01:02.510,0:01:03.380
+in the other direction.
+
+0:01:03.380,0:01:03.840
+Why?
+
+0:01:03.840,0:01:05.900
+The heuristic is saying you're
+getting farther.
+
+0:01:05.900,0:01:08.650
+But the heuristic underestimates
+the true distance.
+
+0:01:08.650,0:01:11.930
+So when you're almost to the goal in
+one direction, the heuristic leaves
+
+0:01:11.930,0:01:15.540
+open the possibility that going to the
+left is going to hit some wormhole or
+
+0:01:15.540,0:01:18.620
+something, and that going to the
+left may actually be good.
+
+0:01:18.620,0:01:21.470
+Now, in this particular case it's not,
+and that's because this heuristic is
+
+0:01:21.470,0:01:25.730
+imperfect, but A* hedges its bets to
+the extent that the heuristic is a
+
+0:01:25.730,0:01:26.720
+lower bound.
+
+0:01:26.720,0:01:31.200
+So the worse the heuristic, the lower it
+is as a lower bound, the more work
+
+0:01:31.200,0:01:35.380
+you're going to do just in order to
+guarantee that you'll have optimality.
+
+0:01:35.380,0:01:36.630
+

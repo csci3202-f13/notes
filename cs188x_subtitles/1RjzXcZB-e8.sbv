@@ -1,0 +1,860 @@
+0:00:00.000,0:00:01.864
+
+0:00:01.864,0:00:03.600
+PROFESSOR: Today we're going
+to continue talking about
+
+0:00:03.600,0:00:05.930
+Markov decision processes.
+
+0:00:05.930,0:00:08.140
+Our running example was grid world.
+
+0:00:08.140,0:00:11.070
+And grid world was basically
+an agent stuck in a maze.
+
+0:00:11.070,0:00:13.790
+There were squares, and the agent
+was in some square in the grid.
+
+0:00:13.790,0:00:16.420
+And there were walls that you
+couldn't move through.
+
+0:00:16.420,0:00:19.770
+The main thing about grid world is
+that the movement was noisy.
+
+0:00:19.770,0:00:23.070
+That is, we didn't really know
+the outcome of an action.
+
+0:00:23.070,0:00:27.110
+So an action like north probably would
+move you one square north,
+
+0:00:27.110,0:00:28.160
+but it might not.
+
+0:00:28.160,0:00:32.140
+So 80% of the time, you go where you
+expect, and 10% of the time, you
+
+0:00:32.140,0:00:34.720
+either go west or east, if you're
+trying to go north.
+
+0:00:34.720,0:00:36.410
+You'll never actually go south.
+
+0:00:36.410,0:00:39.990
+And that was important in some of the
+weird edge cases that we saw.
+
+0:00:39.990,0:00:42.680
+Any movement that would have put
+you into a wall instead leaves
+
+0:00:42.680,0:00:44.430
+you where you are.
+
+0:00:44.430,0:00:48.430
+The other thing about grid world, in
+addition to the fact that the actions
+
+0:00:48.430,0:00:52.910
+were non-deterministic, is that there
+were rewards at each timestep.
+
+0:00:52.910,0:00:55.760
+There are two kinds of rewards
+in grid world.
+
+0:00:55.760,0:00:58.400
+This is just one of many, many MDPs.
+
+0:00:58.400,0:01:01.930
+In this particular MDP, the big
+rewards come at the end when
+
+0:01:01.930,0:01:03.210
+you exit the grid.
+
+0:01:03.210,0:01:05.800
+And in this particular grid, you either
+get a plus 1 or a minus 1,
+
+0:01:05.800,0:01:08.200
+depending on which exit you take.
+
+0:01:08.200,0:01:11.470
+And there's also a living reward
+that you receive each step.
+
+0:01:11.470,0:01:13.760
+And that living reward could
+be zero, it could be
+
+0:01:13.760,0:01:15.720
+positive, it could be negative.
+
+0:01:15.720,0:01:18.170
+This distinction between big rewards
+at the end and a living
+
+0:01:18.170,0:01:19.580
+reward along the way--
+
+0:01:19.580,0:01:24.150
+this is the reward structure for grid
+world, not for MDPs in general.
+
+0:01:24.150,0:01:28.650
+The goal of an agent in an MDP is
+to maximize its sum of rewards.
+
+0:01:28.650,0:01:32.390
+And there was one tricky part, which
+was we had this notion of discount,
+
+0:01:32.390,0:01:36.620
+that if we chose, we could set rewards
+in the future to be worth less than
+
+0:01:36.620,0:01:37.890
+rewards in the present.
+
+0:01:37.890,0:01:40.840
+And that was a factor gamma that could
+be anywhere between zero and one.
+
+0:01:40.840,0:01:43.340
+
+0:01:43.340,0:01:46.030
+There were a bunch of important
+quantities in MDPs.
+
+0:01:46.030,0:01:50.260
+Most of them line up to something we
+know from search or from Expectimax.
+
+0:01:50.260,0:01:52.670
+But it's very important that we keep
+these quantities straight, because
+
+0:01:52.670,0:01:54.750
+some of them are very
+subtly different.
+
+0:01:54.750,0:01:56.880
+And especially today we're going
+to see lots of subtle
+
+0:01:56.880,0:01:59.330
+variations of these things.
+
+0:01:59.330,0:02:02.340
+These quantities are also important
+because we'll need them next week for
+
+0:02:02.340,0:02:03.610
+reinforcement learning.
+
+0:02:03.610,0:02:06.640
+So let's make sure we're totally
+clear on what these things are.
+
+0:02:06.640,0:02:10.470
+For the Markov decision process itself,
+whenever you see an MDP you
+
+0:02:10.470,0:02:13.190
+think non-deterministic
+search problem.
+
+0:02:13.190,0:02:15.650
+So just like a search problem,
+it's got states.
+
+0:02:15.650,0:02:18.180
+It's got actions that you can
+take in those states.
+
+0:02:18.180,0:02:21.200
+And the critical new bit is
+the transition function.
+
+0:02:21.200,0:02:22.120
+And this is important.
+
+0:02:22.120,0:02:24.560
+We're going to be seeing the transition
+function in equations all
+
+0:02:24.560,0:02:25.760
+over today.
+
+0:02:25.760,0:02:29.050
+The transition function tells
+you what your actions do.
+
+0:02:29.050,0:02:33.840
+That is, for any state s and action a,
+the transition function looks at an
+
+0:02:33.840,0:02:37.800
+outcome, s-prime, and it tells you
+whether it's possible, meaning its
+
+0:02:37.800,0:02:42.150
+probability is non-zero, and if it's
+possible, how likely it is.
+
+0:02:42.150,0:02:47.440
+And that's the probability of s-prime,
+the outcome state, given your action.
+
+0:02:47.440,0:02:50.750
+And we write that as
+T of s, a, s-prime.
+
+0:02:50.750,0:02:55.000
+Whenever you see T of s, a, s-prime, you
+think, oh, that's the probability
+
+0:02:55.000,0:02:57.630
+of landing in s-prime.
+
+0:02:57.630,0:03:04.290
+Similarly, each transition from s, a to
+s-prime comes along with a reward
+
+0:03:04.290,0:03:06.800
+that is part of the definition
+of the MDP.
+
+0:03:06.800,0:03:09.360
+These rewards can be positive,
+they can be negative.
+
+0:03:09.360,0:03:12.950
+And in addition to having a reward each
+timestep, there's also a discount
+
+0:03:12.950,0:03:17.840
+gamma that tells you whether or not
+the future rewards are worth less.
+
+0:03:17.840,0:03:19.930
+There's also a start state.
+
+0:03:19.930,0:03:21.380
+So what are the quantities?
+
+0:03:21.380,0:03:23.660
+Some of the quantities are pretty
+straightforward, because we've had
+
+0:03:23.660,0:03:24.960
+them around for a while.
+
+0:03:24.960,0:03:28.070
+So for example, there's
+a notion of a policy.
+
+0:03:28.070,0:03:31.080
+A policy is a map of
+states to actions.
+
+0:03:31.080,0:03:34.220
+You can think of it as a lookup
+table, and sometimes it is.
+
+0:03:34.220,0:03:36.940
+It takes a state and it
+tells you what to do.
+
+0:03:36.940,0:03:39.640
+Of course, there's good policies and
+bad policies, And we'll think about
+
+0:03:39.640,0:03:41.250
+that idea today.
+
+0:03:41.250,0:03:43.450
+There's this notion of the utility.
+
+0:03:43.450,0:03:48.200
+The utility for the agent is more or
+less the sum of the rewards it gets.
+
+0:03:48.200,0:03:50.650
+So each timestep, you get a reward.
+
+0:03:50.650,0:03:53.590
+But the utility is over
+an entire sequence.
+
+0:03:53.590,0:03:58.060
+It's more or less the sum, but future
+rewards may be discounted.
+
+0:03:58.060,0:04:02.650
+Now a critical difference is between the
+utility of a sequence of rewards,
+
+0:04:02.650,0:04:07.550
+or to a first approximation you add
+them up, and the value of a state.
+
+0:04:07.550,0:04:12.560
+The value of a state is what you expect
+your future utility to be under
+
+0:04:12.560,0:04:14.590
+optimal action.
+
+0:04:14.590,0:04:15.390
+So remember that.
+
+0:04:15.390,0:04:18.410
+When we talk about the value of the
+state, it's not the next reward you're
+
+0:04:18.410,0:04:19.450
+going to receive.
+
+0:04:19.450,0:04:20.950
+It's not a certain number--
+
+0:04:20.950,0:04:23.790
+I know I'm going to get 10 points--
+because you don't know what your
+
+0:04:23.790,0:04:25.000
+actions will do.
+
+0:04:25.000,0:04:29.990
+This is an average outcome
+under optimal action.
+
+0:04:29.990,0:04:33.600
+And whenever you think about that
+average outcome over optimal action,
+
+0:04:33.600,0:04:38.010
+what should pop into your head is an
+Expectimax tree that looks like this.
+
+0:04:38.010,0:04:41.520
+And what you want to think about is,
+well, from any given state s, what is
+
+0:04:41.520,0:04:42.920
+this notion of a value?
+
+0:04:42.920,0:04:44.660
+It's not what I'm definitely
+going to achieve.
+
+0:04:44.660,0:04:47.350
+It can't be that, because I don't
+control my actions perfectly.
+
+0:04:47.350,0:04:51.890
+What it is is it's the average outcome
+under optimal action, meaning
+
+0:04:51.890,0:04:54.650
+essentially I do Expectimax
+computations.
+
+0:04:54.650,0:04:59.350
+I think, when I have an action that I
+control, I'm going to take a max.
+
+0:04:59.350,0:05:03.100
+And whenever I hit a chance node in my
+evaluation of this tree, I'm going to
+
+0:05:03.100,0:05:05.930
+have to take an average of the children,
+where the weights and the
+
+0:05:05.930,0:05:08.550
+average are the transition function.
+
+0:05:08.550,0:05:13.630
+So when you see value, you think, oh,
+that's what Expectimax gives if I run
+
+0:05:13.630,0:05:14.330
+it from a state.
+
+0:05:14.330,0:05:16.860
+It's an Expectimax value.
+
+0:05:16.860,0:05:20.480
+The critical other quantity
+that's new is a Q-value.
+
+0:05:20.480,0:05:21.970
+What's a Q-value?
+
+0:05:21.970,0:05:23.770
+It's just like a value.
+
+0:05:23.770,0:05:27.020
+It is what you would get in an
+Expectimax tree if you ran the
+
+0:05:27.020,0:05:28.640
+Expectimax computation--
+
+0:05:28.640,0:05:31.650
+that is, maxing when you max and
+averaging when you average.
+
+0:05:31.650,0:05:36.550
+The difference is values are what you
+get when you ask, what happens from
+
+0:05:36.550,0:05:37.300
+this state?
+
+0:05:37.300,0:05:40.030
+Well, I choose the best action and
+something happens, then I choose the
+
+0:05:40.030,0:05:40.890
+best action.
+
+0:05:40.890,0:05:42.500
+That's Expectimax.
+
+0:05:42.500,0:05:44.410
+So this is values here.
+
+0:05:44.410,0:05:51.640
+That's V. Q-values, Q, are what
+you get at a chance node.
+
+0:05:51.640,0:05:54.540
+At a chance node, it's too late
+to change the action a
+
+0:05:54.540,0:05:55.510
+that you just took.
+
+0:05:55.510,0:05:59.410
+A chance node is a state and you've
+committed to an action.
+
+0:05:59.410,0:06:02.080
+The first thing that's going to
+happen from a chance node is
+
+0:06:02.080,0:06:03.530
+the action will resolve.
+
+0:06:03.530,0:06:04.620
+Who knows what will happen?
+
+0:06:04.620,0:06:07.490
+Your transition function tells
+you what the likelihoods are.
+
+0:06:07.490,0:06:11.320
+But whenever you see a Q-value, you
+think, oh, that's what Expectimax
+
+0:06:11.320,0:06:15.150
+would give if I started it at a chance
+node, meaning first it would average
+
+0:06:15.150,0:06:18.200
+and then thereafter it would
+take maximal actions.
+
+0:06:18.200,0:06:21.280
+When we think about an MDP,
+we think about optimal
+
+0:06:21.280,0:06:23.070
+quantities most of the time.
+
+0:06:23.070,0:06:27.090
+So in general, we want to know for a
+state what is the optimal value?
+
+0:06:27.090,0:06:30.030
+That is, what is the value
+if I act optimally?
+
+0:06:30.030,0:06:33.240
+I take all the right decisions, and then
+I average over the things that
+
+0:06:33.240,0:06:34.860
+are out of my control.
+
+0:06:34.860,0:06:38.080
+Whenever I mean something optimal
+and I want to be explicit, I
+
+0:06:38.080,0:06:39.560
+add this star here.
+
+0:06:39.560,0:06:42.850
+This star is always going
+to mean optimal for us.
+
+0:06:42.850,0:06:47.540
+So V* is the value that we get starting
+in s and acting optimally.
+
+0:06:47.540,0:06:49.890
+That's just what Expectimax computes.
+
+0:06:49.890,0:06:53.870
+Q* is the value of the Q-state
+acting optimally.
+
+0:06:53.870,0:06:55.300
+Again, same thing.
+
+0:06:55.300,0:06:57.960
+Just what Expectimax computes.
+
+0:06:57.960,0:07:01.000
+Finally, there are many policies.
+
+0:07:01.000,0:07:02.500
+Some are good, some are bad.
+
+0:07:02.500,0:07:05.680
+An optimal policy can
+be written as pi*.
+
+0:07:05.680,0:07:09.770
+A lot of what we do with MDPs is we
+take in the problem specification,
+
+0:07:09.770,0:07:14.520
+which has transitions and rewards and
+discounts, and we compute various
+
+0:07:14.520,0:07:15.890
+quantities like this.
+
+0:07:15.890,0:07:18.770
+Sometimes we're interested in the
+values, but usually we're interested
+
+0:07:18.770,0:07:20.370
+in the policies.
+
+0:07:20.370,0:07:24.050
+Just like before, when we did, say,
+min, max, or Expectimax, we had an
+
+0:07:24.050,0:07:26.440
+algorithm for computing the values.
+
+0:07:26.440,0:07:29.760
+The reason that we ran this algorithm
+was because we wanted to use it to
+
+0:07:29.760,0:07:31.240
+figure out the policies.
+
+0:07:31.240,0:07:34.270
+And so at the very top of the
+computation, you do something special
+
+0:07:34.270,0:07:38.450
+to figure out which policy gave
+rise to that optimal value.
+
+0:07:38.450,0:07:41.980
+Let's take a look at what the values
+look like in grid world.
+
+0:07:41.980,0:07:43.700
+So here is a grid world.
+
+0:07:43.700,0:07:46.230
+Remember, grid world has
+lots of parameters.
+
+0:07:46.230,0:07:49.010
+In addition to the maze layout,
+we can vary the discount.
+
+0:07:49.010,0:07:50.920
+We can vary the living penalty.
+
+0:07:50.920,0:07:54.380
+And as we vary these things, the shape
+of the policy and the values
+
+0:07:54.380,0:07:55.500
+are going to change.
+
+0:07:55.500,0:07:59.170
+We saw last time that for some values
+of the living reward, you're very
+
+0:07:59.170,0:08:00.940
+cautious and take your time.
+
+0:08:00.940,0:08:03.020
+For other values, you jump
+straight into the pit.
+
+0:08:03.020,0:08:05.340
+And in between, you get other
+kinds of actions.
+
+0:08:05.340,0:08:07.180
+Here's one particular setting.
+
+0:08:07.180,0:08:10.920
+And the important point here is what
+you're looking at is values.
+
+0:08:10.920,0:08:12.450
+The numbers here are the values.
+
+0:08:12.450,0:08:16.290
+And that is that if you are in this
+square, where the only action
+
+0:08:16.290,0:08:17.540
+available to you is exit--
+
+0:08:17.540,0:08:20.910
+upon which you immediately receive
+a reward of plus 1--
+
+0:08:20.910,0:08:23.740
+your value is plus 1.
+
+0:08:23.740,0:08:29.050
+Down here, in the start state in the
+lower left, your value is 0.49.
+
+0:08:29.050,0:08:30.450
+What's that mean?
+
+0:08:30.450,0:08:32.539
+You're not usually going to get 0.49.
+
+0:08:32.539,0:08:33.770
+Sometimes you're going to get more.
+
+0:08:33.770,0:08:35.350
+Sometimes you're going to get less.
+
+0:08:35.350,0:08:38.090
+This is the long-term average
+you're going to get.
+
+0:08:38.090,0:08:40.570
+And that average bakes
+in a lot of things.
+
+0:08:40.570,0:08:44.420
+It bakes in the fact that you're going
+to get a small penalty each step until
+
+0:08:44.420,0:08:45.950
+you get to the exit.
+
+0:08:45.950,0:08:49.700
+And if your actions mess up, you
+might get that penalty more.
+
+0:08:49.700,0:08:54.150
+It bakes in the fact that the plus 1 is
+far away, and by the time you get
+
+0:08:54.150,0:08:55.900
+there it will be discounted.
+
+0:08:55.900,0:08:59.480
+It bakes in all of the probabilities
+in the transition function.
+
+0:08:59.480,0:09:00.700
+All of that's in the value.
+
+0:09:00.700,0:09:05.620
+If you act optimally, you'll get
+0.49 as your average score.
+
+0:09:05.620,0:09:07.110
+Now what do I mean by act optimally?
+
+0:09:07.110,0:09:10.340
+Well, the optimal policy for this
+particular setting is also shown.
+
+0:09:10.340,0:09:11.780
+That's these arrows.
+
+0:09:11.780,0:09:14.490
+So when you look at these arrows,
+they're basically a lookup table.
+
+0:09:14.490,0:09:17.290
+From this state, take
+the action north.
+
+0:09:17.290,0:09:18.250
+It doesn't mean you're
+going to go north.
+
+0:09:18.250,0:09:19.960
+You'll probably go north,
+but you might not.
+
+0:09:19.960,0:09:21.660
+You might slip.
+
+0:09:21.660,0:09:24.510
+From this square here-- this is the
+interesting tricky square, where
+
+0:09:24.510,0:09:26.910
+you're on the ledge between
+the wall and the pit--
+
+0:09:26.910,0:09:28.580
+it says go north.
+
+0:09:28.580,0:09:30.870
+And with some probability, yeah, you're
+going to fall in the pit.
+
+0:09:30.870,0:09:33.670
+But for these particular settings,
+that's the risk you take in the
+
+0:09:33.670,0:09:35.540
+optimal policy.
+
+0:09:35.540,0:09:39.050
+So here you see a policy and values.
+
+0:09:39.050,0:09:40.040
+What about Q-values?
+
+0:09:40.040,0:09:41.050
+What do those look like?
+
+0:09:41.050,0:09:42.630
+There's a value for every state.
+
+0:09:42.630,0:09:45.250
+There's a Q-value for every
+state/action pair.
+
+0:09:45.250,0:09:47.750
+And for each of these states,
+there are four actions.
+
+0:09:47.750,0:09:48.950
+So here they are.
+
+0:09:48.950,0:09:50.025
+So let's look at the tricky case.
+
+0:09:50.025,0:09:51.160
+It's the interesting one.
+
+0:09:51.160,0:09:55.430
+That's the square here, where you're
+between the wall and the pit.
+
+0:09:55.430,0:09:58.780
+And what you can see here
+is for the action east--
+
+0:09:58.780,0:10:02.600
+so the Q-state being on the
+ledge and going east--
+
+0:10:02.600,0:10:05.020
+the Q-value is pretty low.
+
+0:10:05.020,0:10:09.390
+It's an optimal Q-value, but it
+represents being committed to going
+
+0:10:09.390,0:10:13.190
+east, so you're in that chance node,
+and then acting optimally.
+
+0:10:13.190,0:10:16.110
+Well, you can only do so much
+from there, so the value is
+
+0:10:16.110,0:10:18.070
+low for that Q-state.
+
+0:10:18.070,0:10:21.400
+The value for the Q-state going north,
+which you'll remember was the optimal
+
+0:10:21.400,0:10:24.900
+action from this state, is 0.57,
+which was the value of that
+
+0:10:24.900,0:10:25.730
+state to begin with.
+
+0:10:25.730,0:10:27.510
+So this is what Q-values look like.
+
+0:10:27.510,0:10:30.760
+They're kind of like values but
+partitioned, where there's a value for
+
+0:10:30.760,0:10:32.140
+each action.
+
+0:10:32.140,0:10:34.700
+And that's nice, because among other
+things, you can tell which option was
+
+0:10:34.700,0:10:38.920
+good by looking at the Q-values
+and comparing them.
+
+0:10:38.920,0:10:42.500
+A very important point about
+these values and rewards.
+
+0:10:42.500,0:10:44.690
+Rewards are for one timestep.
+
+0:10:44.690,0:10:48.130
+Values are from that point forward until
+the end of the game, or forever
+
+0:10:48.130,0:10:49.530
+if the game doesn't end.
+
+0:10:49.530,0:10:51.250
+Rewards are instantaneous.
+
+0:10:51.250,0:10:53.020
+Values are cumulative.
+
+0:10:53.020,0:10:54.270
+It's a very important distinction.
+
+0:10:54.270,0:10:55.320
+

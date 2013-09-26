@@ -1,0 +1,129 @@
+0:00:00.000,0:00:01.570
+
+0:00:01.570,0:00:05.210
+DAN KLEIN: So the last thing for today
+is we're going to see the effect of
+
+0:00:05.210,0:00:06.950
+this in the demo.
+
+0:00:06.950,0:00:08.770
+Here is our big graph.
+
+0:00:08.770,0:00:10.650
+Let's say we're doing just
+forward checking.
+
+0:00:10.650,0:00:14.320
+This graph is too easy already if
+we're doing arc consistency.
+
+0:00:14.320,0:00:16.580
+When we do no ordering, what happens?
+
+0:00:16.580,0:00:19.320
+Well, we assign the first
+four variables and
+
+0:00:19.320,0:00:21.000
+suddenly we have a problem.
+
+0:00:21.000,0:00:23.900
+Arc consistency detects this,
+forward checking does not.
+
+0:00:23.900,0:00:26.800
+With forward checking, we now have to
+kind of mess around with all these
+
+0:00:26.800,0:00:30.640
+other variables first before
+we discover our mistake.
+
+0:00:30.640,0:00:34.170
+What if we stick with forward checking,
+but we switch so that now
+
+0:00:34.170,0:00:37.400
+we're doing ordering with minimum
+remaining values?
+
+0:00:37.400,0:00:40.930
+Well, we'll still assign
+blue in the lower left.
+
+0:00:40.930,0:00:42.320
+Then we'll still assign red.
+
+0:00:42.320,0:00:46.250
+Except now we see that this variable
+appears very constrained.
+
+0:00:46.250,0:00:49.010
+Rather than just marching to the
+right, we should probably go do
+
+0:00:49.010,0:00:49.980
+something about it.
+
+0:00:49.980,0:00:51.600
+And so we're going to assign it next.
+
+0:00:51.600,0:00:53.130
+So we'll go and assign up there.
+
+0:00:53.130,0:00:56.720
+Now we see this variable down here that
+used to be kind of the other half
+
+0:00:56.720,0:01:00.300
+of the tricky configuration, it's
+now the constrained variable.
+
+0:01:00.300,0:01:03.510
+So we might go down there
+now and then continue.
+
+0:01:03.510,0:01:06.570
+
+0:01:06.570,0:01:11.200
+And we kind of follow the consequences
+of our assignments along the graph.
+
+0:01:11.200,0:01:15.260
+So even though this is just forward
+checking, we're able to do much
+
+0:01:15.260,0:01:17.940
+better, straight through.
+
+0:01:17.940,0:01:19.620
+So all of these ideas are important.
+
+0:01:19.620,0:01:22.870
+And on small problem instances, it's
+actually hard to show all of them
+
+0:01:22.870,0:01:24.240
+being necessary.
+
+0:01:24.240,0:01:28.350
+But when you have all of these things,
+you have ordering, you have filtering,
+
+0:01:28.350,0:01:31.870
+and next time we'll see structure, you
+can often speed up things greatly in a
+
+0:01:31.870,0:01:33.500
+general case.
+
+0:01:33.500,0:01:34.770
+I think we're done for today.
+
+0:01:34.770,0:01:37.910
+Next time, we'll pick up with other
+methods for speeding up CSPs.
+
+0:01:37.910,0:01:39.300
+
